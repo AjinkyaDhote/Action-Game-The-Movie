@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WeaponSystem : MonoBehaviour {
-    List<GameObject> weaponsGOList;
+    Dictionary<string, GameObject> weapons;
     List<string> weaponNames;
     string previousWeapon, currentWeapon, nextWeapon;
     int weaponIndex;
@@ -14,14 +14,14 @@ public class WeaponSystem : MonoBehaviour {
     {
         playerShootingScript = GetComponent<PlayerShooting>();
         GameObject[] weaponsGO = GameObject.FindGameObjectsWithTag("Gun");
-        weaponsGOList = new List<GameObject>();
+        weaponNames = new List<string> { "MachineGun", "GravityGun", "ShotGun" };
+        weapons = new Dictionary<string, GameObject>();
         for (int i = 0; i < weaponsGO.Length; i++)
         {
             weaponsGO[i].SetActive(false);
-            weaponsGOList.Add(weaponsGO[i]);
+            weapons.Add(weaponsGO[i].name, weaponsGO[i]);
         }
         weaponIndex = 0;
-        weaponNames = new List<string> { "MachineGun", "GravityGun", "ShotGun" };
         weaponCount = weaponNames.Count - 1;
         previousWeapon = weaponNames[weaponIndex];
         currentWeapon = weaponNames[++weaponIndex];
@@ -65,30 +65,32 @@ public class WeaponSystem : MonoBehaviour {
     }
     void UpdateWeaponInHand()
     {
-        for (int i = 0; i < weaponsGOList.Count; i++)
+        foreach (KeyValuePair<string, GameObject> weapon in weapons)
         {
-            if (weaponsGOList[i].name == currentWeapon)
+            if (weapon.Key == currentWeapon)
             {
-                weaponsGOList[i].SetActive(true);
-				ParticleSystem[] pS = weaponsGOList [i].GetComponentsInChildren<ParticleSystem> ();
-				for (int j = 0; j < pS.Length; j++) {
-					if (pS [j].name == "MuzzleFlash") {
-						playerShootingScript.muzzleFlash = pS [j];
-					} else if (pS [j].name == "WallCollision") {
-						playerShootingScript.impacts [0] = pS [j];
-					} else {
-						//playerShootingScript.impacts [1] = pS [j];
-					}
-				}
-				/*playerShootingScript.muzzleFlash = weaponsGOList [i].GetComponentInChildren<ParticleSystem> ();
-				Debug.Log (weaponsGOList [i].GetComponentInChildren<ParticleSystem> ().name );
-                playerShootingScript.anim = weaponsGOList[i].GetComponent<Animator>();
-				playerShootingScript.impacts[0] = weaponsGOList[i].GetComponentInChildren<ParticleSystem> ();
-				//playerShootingScript.impacts[1] = weaponsGOList[i].GetComponentInChildren<ParticleSystem>();*/
+                weapon.Value.SetActive(true);
+                ParticleSystem[] pS = weapon.Value.GetComponentsInChildren<ParticleSystem>();
+                for (int i = 0; i < pS.Length; i++)
+                {
+                    if (pS[i].name == "MuzzleFlash")
+                    {
+                        playerShootingScript.muzzleFlash = pS[i];
+                    }
+                    else if (pS[i].name == "WallCollision")
+                    {
+                        playerShootingScript.impacts[0] = pS[i];
+                    }
+                    else
+                    {
+                        //playerShootingScript.impacts [1] = pS [j];
+                    }
+                }
+                playerShootingScript.anim = weapon.Value.GetComponent<Animator>();
             }
-            else if (weaponsGOList[i].name == nextWeapon || weaponsGOList[i].name == previousWeapon)
+            else if (weapon.Key == nextWeapon || weapon.Key == previousWeapon)
             {
-                weaponsGOList[i].SetActive(false);
+               weapon.Value.SetActive(false);
             }
         }
     }
