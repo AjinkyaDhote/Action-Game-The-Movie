@@ -17,11 +17,11 @@ public class PlayerMovement : MonoBehaviour
         public bool smooth;
         [Range(1.0f, 10.0f)]
         public float smoothTime = 5.0f;
-        public bool lockCursor = true;
+        //public bool lockCursor = true;
 
         Quaternion m_CharacterTargetRot;
         Quaternion m_CameraTargetRot;
-        bool m_cursorIsLocked = true;
+        //bool m_cursorIsLocked = true;
 
         public void LookRotation(Transform character, Transform camera)
         {
@@ -48,10 +48,10 @@ public class PlayerMovement : MonoBehaviour
                 camera.localRotation = m_CameraTargetRot;
             }
 
-            UpdateCursorLock();
+            //UpdateCursorLock();
         }
 
-        void UpdateCursorLock()
+        /*void UpdateCursorLock()
         {
             //if the user set "lockCursor" we check & properly lock the cursos
             if (lockCursor)
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
 				Cursor.visible = true;
             }
-        }
+        }*/
 
         Quaternion ClampRotationAroundXAxis(Quaternion q)
         {
@@ -105,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
     int wayPointNumber;
     public MouseLook mouseLook;
 	wasdMovement WASDmovement;
+    PauseMenu pauseMenuScript;
 
     float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
     Vector3 convertPoint(Vector2 relativePoint)
@@ -118,6 +119,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+
         width2DPlane = GameManager.Instance.width2DPlane;
         height2DPlane = GameManager.Instance.height2DPlane;
         width3DPlane = GameManager.Instance.width3DPlane;
@@ -140,12 +145,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        mouseLook.LookRotation(transform, mainCamera.transform);
-		if (Input.GetMouseButton (1)) {
-			Time.timeScale = 0.2f;
-		} else {
-			Time.timeScale = 1.0f;
-		}
+        if(!pauseMenuScript.isPaused)
+        {
+            mouseLook.LookRotation(transform, mainCamera.transform);
+        } 
     }
 
     void FixedUpdate()

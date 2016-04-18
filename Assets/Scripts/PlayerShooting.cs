@@ -12,9 +12,9 @@ public class PlayerShooting : MonoBehaviour {
     private GameObject laserPrefab;
     private GameObject laser;
 
-	//public int bulletSpeed;
-
-	PlayerWithEnemy pScript;
+    //public int bulletSpeed;
+    PauseMenu pauseMenuScript;
+    PlayerWithEnemy pScript;
 	bool shooting = false;
     private int bulletCount = 0;
 	//GameObject bulletPrefab;
@@ -26,7 +26,7 @@ public class PlayerShooting : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
         pScript = transform.parent.parent.GetComponent<PlayerWithEnemy>();
 		anim = GetComponentInChildren<Animator> ();
         //cam = GetComponentInParent<Camera>();
@@ -37,7 +37,7 @@ public class PlayerShooting : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (Input.GetButtonDown ("Fire1")) 
+		if (Input.GetButtonDown ("Fire1") && !pauseMenuScript.isPaused) 
 		{
 			muzzleFlash.Play ();
 			anim.SetTrigger ("Fire");
@@ -70,7 +70,7 @@ public class PlayerShooting : MonoBehaviour {
                 //bullet.GetComponent<BulletScript> ().GetCorrectEnemy (hit.transform);
 
 
-                laser = (GameObject)Instantiate(laserPrefab);
+                laser = Instantiate(laserPrefab);
                 laser.transform.SetParent(transform);
                 laser.transform.localPosition = new Vector3(0.827f, -0.896f, 4.481f);
                 laser.transform.localRotation = Quaternion.identity;

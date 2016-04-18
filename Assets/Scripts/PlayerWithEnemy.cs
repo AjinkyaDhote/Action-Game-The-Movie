@@ -14,7 +14,7 @@ public class PlayerWithEnemy : MonoBehaviour {
     string bulletsString;
     string batteryString;
     string healthString;
-
+    PauseMenu pauseMenuScript;
     // Use this for initialization
     void Start () {
         /*HealthBar = transform.FindChild("Main Camera").transform.FindChild("FPS UI Canvas").FindChild("healthBar").GetComponent<Image>();
@@ -29,6 +29,7 @@ public class PlayerWithEnemy : MonoBehaviour {
         AmmoText.color = Color.red;
         HealthText.text = healthString;
         BatteryText.text = batteryString;
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
     }
     int counterForBatteryDrain = 0;
 
@@ -43,7 +44,7 @@ public class PlayerWithEnemy : MonoBehaviour {
 
         counterForBatteryDrain++;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !pauseMenuScript.isPaused)
         {
             if (bulletCount > 0)
             {
