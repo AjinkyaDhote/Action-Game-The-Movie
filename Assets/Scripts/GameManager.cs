@@ -20,10 +20,15 @@ public class GameManager : MonoBehaviour
 
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
+    [HideInInspector]
+    public bool win_Lose = false;
+    [HideInInspector]
+    public string win_Lose_Message = null;
+
     // private variables
     private static GameManager _instance = null;
-    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1 };
-    private enum GameStates { MENU, PLAN_GAME, PLAY_GAME };
+    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, GameWinLose };
+    private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentState = GameStates.MENU;
 
     public static GameManager Instance
@@ -57,15 +62,20 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene((int)Levels.Scene2D_1);
     }
 
-    public void goToMenu()
+    public void GoToMenu()
     {
         currentState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
     }
 
+    public void GoToWinLoseScene()
+    {
+        currentState = GameStates.GAME_OVER;
+        SceneManager.LoadScene((int)Levels.GameWinLose);
+    }
+
     public void ExitGame()
     {
-        Debug.Log("Exit the game.");
         Application.Quit();
     }
 
@@ -73,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown("a"))
         {
-            if (currentState != GameStates.MENU)
+            if (currentState != GameStates.MENU && currentState != GameStates.PLAY_GAME)
             {
                 currentState = GameStates.MENU;
                 SceneManager.LoadScene((int)Levels.MENU);

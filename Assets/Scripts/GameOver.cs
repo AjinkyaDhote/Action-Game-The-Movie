@@ -3,30 +3,43 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
-	Image redScreenImageScript;
-	Text gameOverTextScript;
-	[HideInInspector]
-	public bool isGameOver;
+	Image backgroundImageScript;
+	Text messageScript;
 	[Range(1.0f,5.0f)]
 	public float speedSplashScreen;
 
 	void Start()
 	{
-		isGameOver = false;
-		redScreenImageScript = transform.GetChild (0).GetComponent<Image>();
-		gameOverTextScript = transform.GetChild (1).GetComponent<Text>();
-	}
+		backgroundImageScript = transform.GetChild (0).GetComponent<Image>();
+		messageScript = transform.GetChild (1).GetComponent<Text>();
+        messageScript.text = GameManager.Instance.win_Lose_Message;
+        if (GameManager.Instance.win_Lose)
+        {
+            backgroundImageScript.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+            messageScript.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        }
+        else
+        {
+            backgroundImageScript.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+            messageScript.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        }
+    }
 
 	void Update()
 	{
-		if (isGameOver) 
+        backgroundImageScript.color += new Color (0.0f, 0.0f, 0.0f, Time.deltaTime / speedSplashScreen);
+		messageScript.color += new Color (0.0f, 0.0f, 0.0f, Time.deltaTime / speedSplashScreen);		
+		if (backgroundImageScript.color.a >= 0.99f) 
 		{
-			redScreenImageScript.color += new Color (0.0f, 0.0f, 0.0f, Time.deltaTime / speedSplashScreen);
-			gameOverTextScript.color += new Color (0.0f, 0.0f, 0.0f, Time.deltaTime / speedSplashScreen);
+            GameManager.Instance.GoToMenu();
 		}
-		if (redScreenImageScript.color.a >= 0.99f) 
-		{
-            GameManager.Instance.goToMenu();
-		}
-	}
+        if (backgroundImageScript.color.a >= 0.5f)
+        {
+            transform.GetChild(2).gameObject.SetActive(true);
+        }
+    }
+    public void GoBackToMainMenu()
+    {
+        GameManager.Instance.GoToMenu();
+    }
 }
