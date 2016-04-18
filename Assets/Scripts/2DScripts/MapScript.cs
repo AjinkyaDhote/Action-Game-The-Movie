@@ -6,14 +6,15 @@ public class MapScript : MonoBehaviour
 {
     public Transform PlayerShadowPrefab;
     public Transform LinePrefab;
+    //public Transform LinePrefabDynamic;
     public Texture2D cursorGreen;
     public Texture2D cursorRed;
     public Player2D player2D;
     public List<Vector3> playerPosList;
     public Text batteryText;
-    public RaycastHit hit;
     public RaycastHit[] hits;
 
+    private RaycastHit hit;
     private List<Vector2> mapPoints;
     private Vector3 prevShadowPos;
     private Vector2 cursorGreenHotspot, cursorRedHotspot;
@@ -23,7 +24,7 @@ public class MapScript : MonoBehaviour
     private List<int> batteryUsedList;
     private List<int> batteryPickups; private List<int> ammoPickups;
     private List<int> batteryPickupsCount; private List<int> ammoPickupsCount;
-
+    private Transform lineDynamic;
     public Vector2 convertToPixels(Vector3 worldPos)
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -93,6 +94,8 @@ public class MapScript : MonoBehaviour
         playerPosList.Add(prevShadowPos);
         Instantiate(PlayerShadowPrefab, prevShadowPos, Quaternion.identity);
 
+        lineDynamic = Instantiate(LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
+
         cursorGreenHotspot.x = cursorGreen.width / 2;
         cursorGreenHotspot.y = cursorGreen.height / 2;
 
@@ -136,15 +139,33 @@ public class MapScript : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0.0f;
+        //...........................
 
+        LineRenderer LineR = lineDynamic.GetComponent<LineRenderer>();
+        LineR.SetPosition(0, prevShadowPos);
+        
+        
+        //.....................
         if (countObjects(mousePos, "wallColliders") > 0)//if (checkForObstruction(mousePos))//if(checkForObject(mousePos) && (hit.transform.parent.name == "wallColliders"))//
         {
             Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
+            LineR.SetColors(Color.red, Color.red);
+            /*for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i].transform.parent.name == "wallColliders")
+                {
+                    hit = hits[i];
+                    break;
+                }
+            }*/
+            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit);
+            LineR.SetPosition(1, hit.point);
+            Debug.Log(hit.transform.name);
         }
         else
         {
             Cursor.SetCursor(cursorGreen, cursorGreenHotspot, CursorMode.Auto);
-
+            LineR.SetColors(Color.black, Color.black);
             // show red cursor if we cannot have battery to move there
             int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
             int currentBattery = System.Int32.Parse(batteryText.text);
@@ -152,7 +173,10 @@ public class MapScript : MonoBehaviour
             if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
             {
                 Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
+                LineR.SetColors(Color.red, Color.red);
             }
+            LineR.SetPosition(1, mousePos);
+            Debug.Log(mousePos);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
