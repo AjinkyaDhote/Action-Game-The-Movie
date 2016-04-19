@@ -7,47 +7,49 @@ public class CountdownTimerScript : MonoBehaviour {
     Camera gunCamera;
     [HideInInspector]
     public bool hasGameStarted = false;
-    //bool countdownStarted = false;
-    //Text countdownText;
-    //float countdown = 3;
-    //float initialTime;
-    //float elapsedTime = 0.0f;
+    bool countdownStarted = false;
+    Text countdownText;
+    int countdown;
+    float initialTime;
 
-	void Start () {
+    void Start () {
 
+        countdown = 3;
         gunCamera = transform.parent.GetComponent<Canvas>().worldCamera;
         gunCamera.cullingMask = gunCamera.cullingMask & 0x800;
         Time.timeScale = 0.0f;
-        //countdownText = GetComponent<Text>();
+        countdownText = GetComponent<Text>();
     }
 	
 
 	void Update ()
     {
-	// if(countdownStarted)
-        //{
-        //    countdown -= Time.deltaTime;
-        //    countdownText.text = ((int)countdown).ToString();
-        //    if(countdown <= 0)
-        //    {
-        //        gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
-        //        gameObject.SetActive(false);
-        //        hasGameStarted = true;         
-        //    }
-
-        //}
-	}
+        if (countdownStarted)
+        {
+            if (Time.realtimeSinceStartup - initialTime >= 1.0f)
+            {
+                countdown--;
+                countdownText.text = countdown.ToString();
+                initialTime = Time.realtimeSinceStartup;
+            }            
+            if (countdown == 0)
+            {
+                gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
+                countdownText.enabled = false;
+                hasGameStarted = true;
+                Time.timeScale = 1.0f;
+                countdownStarted = false;
+            }
+        }
+    }
 
     public void ContinueClicked()
     {
-        gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
-        transform.GetChild(0).gameObject.SetActive(false);
-        // countdownStarted = true;
-        // countdownText.text = ((int)countdown).ToString();
-        hasGameStarted = true;
-        Time.timeScale = 1.0f;
+        transform.GetChild(0).gameObject.SetActive(false);       
+        countdownText.text = countdown.ToString();       
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Destroy(gameObject);
+        initialTime = Time.realtimeSinceStartup;
+        countdownStarted = true;
     }
 }
