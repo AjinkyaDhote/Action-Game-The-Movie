@@ -28,6 +28,7 @@ public class MapScript : MonoBehaviour
     private Transform lineDynamic;
     private Transform cross;
     private int layerMask;
+    private int thresholdDistance;
     public Vector2 convertToPixels(Vector3 worldPos)
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -176,15 +177,19 @@ public class MapScript : MonoBehaviour
             // show red cursor if we cannot have battery to move there
             int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
             int currentBattery = System.Int32.Parse(batteryText.text);
-
+            LineR.SetPosition(1, mousePos);
+            cross.gameObject.SetActive(false);
             if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
             {
                 Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
                 LineR.SetColors(Color.red, Color.red);
+
+                
+                LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized)* thresholdDistance) + prevShadowPos);
+                cross.gameObject.SetActive(true);
+                cross.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
             }
-            LineR.SetPosition(1, mousePos);
-            cross.gameObject.SetActive(false);
-            Debug.Log(mousePos);
+            //Debug.Log(mousePos);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -293,7 +298,6 @@ public class MapScript : MonoBehaviour
             // reduce batteryzz
             int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, worldPos));
             int currentBattery = System.Int32.Parse(batteryText.text);
-
             if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0)
             {
                 int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
@@ -387,6 +391,8 @@ public class MapScript : MonoBehaviour
                 LineR.SetPosition(1, worldPos);
 
                 prevShadowPos = worldPos;
+                currentBattery = System.Int32.Parse(batteryText.text);
+                thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
             }
         }
     }
