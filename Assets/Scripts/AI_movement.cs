@@ -10,7 +10,8 @@ public class AI_movement : MonoBehaviour
     Animator anim;
 
     NavMeshAgent agent;
-    bool isPlayerSeen;
+    [HideInInspector]
+    public bool isPlayerSeen;
     bool isPlayerInRange;
 
     Collider enemyCollider, playerCollider;

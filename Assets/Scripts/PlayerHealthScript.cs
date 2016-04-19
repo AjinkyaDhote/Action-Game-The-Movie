@@ -5,14 +5,15 @@ using UnityEngine.UI;
 public class PlayerHealthScript : MonoBehaviour
 {
     Text HealthText;
-    private int healthCount = 10;
+    private int healthCount = 50;
     string healthString;
 
     void Start()
     {
         HealthText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("HealthText").GetComponent<Text>();
         healthString = " " + healthCount;
-        //isPlayerDead = false;
+        HealthText.color = Color.green;
+        HealthText.text = healthString;
     }
 
     public void PlayerDamage()

@@ -4,6 +4,7 @@ using System.Collections;
 public class PauseMenu : MonoBehaviour {
     [HideInInspector]
     public bool isPaused;
+    CountdownTimerScript countdownTimer;
 
     Camera gunCamera;
     void Start()
@@ -11,10 +12,11 @@ public class PauseMenu : MonoBehaviour {
         isPaused = false;
         gunCamera = transform.GetComponent<Canvas>().worldCamera;
         gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
+        countdownTimer = GameObject.Find("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
     }
 	void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && countdownTimer.hasGameStarted)
         {
             isPaused = !isPaused;
             ChangePauseState();
