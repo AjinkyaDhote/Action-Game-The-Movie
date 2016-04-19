@@ -152,31 +152,14 @@ public class MapScript : MonoBehaviour
         LineRenderer LineR = lineDynamic.GetComponent<LineRenderer>();
         LineR.SetPosition(0, prevShadowPos);
 
-        if (countObjects(mousePos, "wallColliders") > 0)//if (checkForObstruction(mousePos))//if(checkForObject(mousePos) && (hit.transform.parent.name == "wallColliders"))//
-        {
-            Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
-            LineR.SetColors(Color.red, Color.red);
-            /*for (int i = 0; i < hits.Length; i++)
-            {
-                if (hits[i].transform.parent.name == "wallColliders")
-                {
-                    hit = hits[i];
-                    break;
-                }
-            }*/
-            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude,layerMask);
-            LineR.SetPosition(1, hit.point);
-            cross.gameObject.SetActive(true);
-            cross.position = hit.point;
-            Debug.Log(hit.transform.name);
-        }
-        else
+        int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
+        int currentBattery = System.Int32.Parse(batteryText.text);
+
+        if ((countObjects(mousePos, "wallColliders") == 0))                                        //green                    //if (checkForObstruction(mousePos))//if(checkForObject(mousePos) && (hit.transform.parent.name == "wallColliders"))//
         {
             Cursor.SetCursor(cursorGreen, cursorGreenHotspot, CursorMode.Auto);
             LineR.SetColors(Color.black, Color.black);
             // show red cursor if we cannot have battery to move there
-            int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
-            int currentBattery = System.Int32.Parse(batteryText.text);
             LineR.SetPosition(1, mousePos);
             cross.gameObject.SetActive(false);
             if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
@@ -184,12 +167,33 @@ public class MapScript : MonoBehaviour
                 Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
                 LineR.SetColors(Color.red, Color.red);
 
-                
-                LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized)* thresholdDistance) + prevShadowPos);
+
+                LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
                 cross.gameObject.SetActive(true);
                 cross.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
             }
-            //Debug.Log(mousePos);
+            //Debug.Log(mousePos); 
+        }
+        else                                                                                        //red cuz of wall
+        {
+            Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
+            LineR.SetColors(Color.red, Color.red);
+            cross.gameObject.SetActive(true);
+
+            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude, layerMask);
+            LineR.SetPosition(1, hit.point);
+            cross.position = hit.point;
+
+            if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
+            {
+                if ((hit.point-prevShadowPos).magnitude > thresholdDistance)
+                {
+                    LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+                    cross.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+                }
+            }
+
+            //Debug.Log(hit.transform.name);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
