@@ -13,6 +13,7 @@ public class MapScript : MonoBehaviour
     public List<Vector3> playerPosList;
     public Text batteryText;
     public RaycastHit[] hits;
+    public Transform CrossPrefab;
 
     private RaycastHit hit;
     private List<Vector2> mapPoints;
@@ -25,6 +26,8 @@ public class MapScript : MonoBehaviour
     private List<int> batteryPickups; private List<int> ammoPickups;
     private List<int> batteryPickupsCount; private List<int> ammoPickupsCount;
     private Transform lineDynamic;
+    private Transform cross;
+    private int layerMask;
     public Vector2 convertToPixels(Vector3 worldPos)
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -96,6 +99,11 @@ public class MapScript : MonoBehaviour
 
         lineDynamic = Instantiate(LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
 
+        layerMask = 1 << 11;
+
+        cross = Instantiate(CrossPrefab, hit.point, Quaternion.identity) as Transform;
+        cross.gameObject.SetActive(false);
+
         cursorGreenHotspot.x = cursorGreen.width / 2;
         cursorGreenHotspot.y = cursorGreen.height / 2;
 
@@ -139,13 +147,10 @@ public class MapScript : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0.0f;
-        //...........................
 
         LineRenderer LineR = lineDynamic.GetComponent<LineRenderer>();
         LineR.SetPosition(0, prevShadowPos);
-        
-        
-        //.....................
+
         if (countObjects(mousePos, "wallColliders") > 0)//if (checkForObstruction(mousePos))//if(checkForObject(mousePos) && (hit.transform.parent.name == "wallColliders"))//
         {
             Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
@@ -158,8 +163,10 @@ public class MapScript : MonoBehaviour
                     break;
                 }
             }*/
-            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit);
+            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude,layerMask);
             LineR.SetPosition(1, hit.point);
+            cross.gameObject.SetActive(true);
+            cross.position = hit.point;
             Debug.Log(hit.transform.name);
         }
         else
@@ -176,6 +183,7 @@ public class MapScript : MonoBehaviour
                 LineR.SetColors(Color.red, Color.red);
             }
             LineR.SetPosition(1, mousePos);
+            cross.gameObject.SetActive(false);
             Debug.Log(mousePos);
         }
 
