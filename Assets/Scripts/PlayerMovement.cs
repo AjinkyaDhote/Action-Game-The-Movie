@@ -119,8 +119,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
 
         width2DPlane = GameManager.Instance.width2DPlane;

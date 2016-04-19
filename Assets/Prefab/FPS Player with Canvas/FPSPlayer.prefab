@@ -39,7 +39,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &107884
 GameObject:
   m_ObjectHideFlags: 1
@@ -407,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &401680
 Transform:
   m_ObjectHideFlags: 1
@@ -482,7 +482,7 @@ Transform:
   - {fileID: 415192}
   - {fileID: 449538}
   m_Father: {fileID: 475752}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &447796
 Transform:
   m_ObjectHideFlags: 1
@@ -536,7 +536,7 @@ Transform:
   - {fileID: 401680}
   - {fileID: 474810}
   m_Father: {fileID: 475752}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &472858
 Transform:
   m_ObjectHideFlags: 1
@@ -585,8 +585,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 472262}
   - {fileID: 443548}
+  - {fileID: 472262}
   - {fileID: 447796}
   - {fileID: 22443032}
   m_Father: {fileID: 474688}
@@ -922,7 +922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94d14dd54e907e48bdda4af4a0f76e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletCount: 300
 --- !u!114 &11416672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1035,9 +1034,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e8d4270fff4d46841fe4ae642b797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoNeeded: 4
-  damageDealt: 4
-  coolDownTimer: 2
+  ammoNeeded: 5
+  damageDealt: 5
+  coolDownTimer: 3
 --- !u!114 &11437942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1049,9 +1048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e8d4270fff4d46841fe4ae642b797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoNeeded: 5
-  damageDealt: 5
-  coolDownTimer: 3
+  ammoNeeded: 3
+  damageDealt: 3
+  coolDownTimer: 2
 --- !u!114 &11438462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1117,6 +1116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10456752347bd24b813af2633ecddba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeaponInfo: {fileID: 0}
 --- !u!114 &11463262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1181,7 +1181,6 @@ MonoBehaviour:
   impacts:
   - {fileID: 19816780}
   - {fileID: 19884476}
-  damage: 1
 --- !u!114 &11496296
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
 
-	public int startingHealth = 3;
+    public int startingHealth;
 	private Animator anim;
 	private NavMeshAgent agent;
 
@@ -24,8 +24,8 @@ public class EnemyHealth : MonoBehaviour {
 
 	public void Damage(int damage)
 	{
-		currentHealth -= damage;
-		//Debug.Log ("enemy dead");
+        currentHealth -= damage;
+		Debug.Log (currentHealth);
 		if (currentHealth <= 0) 
 		{
 			Defeated ();

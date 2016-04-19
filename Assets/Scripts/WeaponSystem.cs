@@ -3,95 +3,88 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WeaponSystem : MonoBehaviour {
-    Dictionary<string, GameObject> weapons;
-    List<string> weaponNames;
-    string previousWeapon, currentWeapon, nextWeapon;
-    int weaponIndex;
-    int weaponCount;
+    bool moveForward;
+    LinkedList<GameObject> weapons;
+    [HideInInspector]
+    public WeaponInfo currentWeaponInfo;
+    [HideInInspector]
+    public LinkedListNode<GameObject> currentWeaponInHand;
     PlayerShooting playerShootingScript;
-
+  
     void Start()
     {
+        moveForward = false;
         playerShootingScript = GetComponent<PlayerShooting>();
         GameObject[] weaponsGO = GameObject.FindGameObjectsWithTag("Gun");
-        weaponNames = new List<string> { "MachineGun", "GravityGun", "ShotGun" };
-        weapons = new Dictionary<string, GameObject>();
-        for (int i = 0; i < weaponsGO.Length; i++)
+        foreach(GameObject weapon in weaponsGO)
         {
-            weaponsGO[i].SetActive(false);
-            weapons.Add(weaponsGO[i].name, weaponsGO[i]);
+            weapon.SetActive(false);
         }
-        weaponIndex = 0;
-        weaponCount = weaponNames.Count - 1;
-        previousWeapon = weaponNames[weaponIndex];
-        currentWeapon = weaponNames[++weaponIndex];
-        nextWeapon = weaponNames[++weaponIndex];
-        UpdateWeaponInHand();
+        weapons = new LinkedList<GameObject>(weaponsGO);      
+        currentWeaponInHand = weapons.First;
+        currentWeaponInHand.Value.SetActive(true);
+        currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
     }
 
     void Update()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetKeyDown(KeyCode.Z))
         {
-			currentWeapon = previousWeapon;
-			previousWeapon = nextWeapon;
-
-            if (weaponIndex > 0)
-            {
-                nextWeapon = weaponNames[--weaponIndex];
-            }
-            else
-            {
-				weaponIndex = weaponCount;
-                nextWeapon = weaponNames[weaponIndex];
-            }
+            moveForward = true;
             UpdateWeaponInHand();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f || Input.GetKeyDown(KeyCode.X)) 
         {
-			previousWeapon = currentWeapon;
-            currentWeapon = nextWeapon;
-			if (weaponIndex < weaponCount)
-            {
-                nextWeapon = weaponNames[++weaponIndex];
-            }
-            else
-            {
-				weaponIndex = 0;
-				nextWeapon = weaponNames[weaponIndex];
-            }
+            moveForward = false;
             UpdateWeaponInHand();
         }
     }
     void UpdateWeaponInHand()
     {
-        foreach (KeyValuePair<string, GameObject> weapon in weapons)
-        {
-            if (weapon.Key == currentWeapon)
+        currentWeaponInHand.Value.SetActive(false);
+        if (moveForward)
+        {        
+            currentWeaponInHand = currentWeaponInHand.Next;
+            if (currentWeaponInHand != null)
             {
-                weapon.Value.SetActive(true);
-                ParticleSystem[] pS = weapon.Value.GetComponentsInChildren<ParticleSystem>();
-                for (int i = 0; i < pS.Length; i++)
-                {
-                    if (pS[i].name == "MuzzleFlash")
-                    {
-                        playerShootingScript.muzzleFlash = pS[i];
-                    }
-                    else if (pS[i].name == "WallCollision")
-                    {
-                        playerShootingScript.impacts[0] = pS[i];
-                    }
-                    else
-                    {
-                        //playerShootingScript.impacts [1] = pS [j];
-                    }
-                }
-                playerShootingScript.anim = weapon.Value.GetComponent<Animator>();
+                currentWeaponInHand.Value.SetActive(true);
             }
-            else if (weapon.Key == nextWeapon || weapon.Key == previousWeapon)
+            else
             {
-               weapon.Value.SetActive(false);
+                currentWeaponInHand = weapons.First;
+                currentWeaponInHand.Value.SetActive(true);
             }
         }
+        else
+        {
+            currentWeaponInHand = currentWeaponInHand.Previous;
+            if (currentWeaponInHand != null)
+            {
+                currentWeaponInHand.Value.SetActive(true);
+            }
+            else
+            {
+                currentWeaponInHand = weapons.Last;
+                currentWeaponInHand.Value.SetActive(true);
+            }
+        }
+        currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
+        ParticleSystem[] pS = currentWeaponInHand.Value.GetComponentsInChildren<ParticleSystem>();
+        for (int i = 0; i < pS.Length; i++)
+        {
+            if (pS[i].name == "MuzzleFlash")
+            {
+                playerShootingScript.muzzleFlash = pS[i];
+            }
+            else if (pS[i].name == "WallCollision")
+            {
+                playerShootingScript.impacts[0] = pS[i];
+            }
+            else
+            {
+                //playerShootingScript.impacts [1] = pS [i];
+            }
+        }
+        playerShootingScript.anim = currentWeaponInHand.Value.GetComponent<Animator>();
     }
 }
