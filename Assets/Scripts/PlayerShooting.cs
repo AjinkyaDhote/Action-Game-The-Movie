@@ -71,12 +71,14 @@ public class PlayerShooting : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, 50f))
             {
-                laser = Instantiate(laserPrefab);
-                laser.transform.SetParent(transform);
-                laser.transform.localPosition = new Vector3(0.827f, -0.896f, 4.481f);
-                laser.transform.localRotation = Quaternion.identity;
-                laser.GetComponent<Laser>().GetCorrectEnemy(hit.point);
-
+				if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun") 
+				{
+                	laser = Instantiate(laserPrefab);
+                	laser.transform.SetParent(transform);
+                	laser.transform.localPosition = new Vector3(0.695f, -0.809f, 2.805f);
+                	laser.transform.localRotation = Quaternion.identity;
+                	laser.GetComponent<Laser>().GetCorrectEnemy(hit.point);
+				}
                 if (hit.collider.tag == "Wall")
                 {
                     impacts[0].transform.position = hit.point;

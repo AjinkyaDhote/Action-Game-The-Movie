@@ -82,7 +82,7 @@ public class WeaponSystem : MonoBehaviour {
             }
             else
             {
-                //playerShootingScript.impacts [1] = pS [i];
+                playerShootingScript.impacts [1] = pS [i];
             }
         }
         playerShootingScript.anim = currentWeaponInHand.Value.GetComponent<Animator>();
