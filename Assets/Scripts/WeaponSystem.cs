@@ -10,10 +10,15 @@ public class WeaponSystem : MonoBehaviour {
     int weaponCount;
     PlayerShooting playerShootingScript;
 
+	Animator anim;
+
     void Start()
     {
         playerShootingScript = GetComponent<PlayerShooting>();
         GameObject[] weaponsGO = GameObject.FindGameObjectsWithTag("Gun");
+
+		//anim = GetComponentInChildren<Animator> ();
+
         weaponsGOList = new List<GameObject>();
         for (int i = 0; i < weaponsGO.Length; i++)
         {
@@ -33,6 +38,7 @@ public class WeaponSystem : MonoBehaviour {
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetKeyDown(KeyCode.Z))
         {
+			anim.SetBool("Switch",true);
 			currentWeapon = previousWeapon;
 			previousWeapon = nextWeapon;
 
