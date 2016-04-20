@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour
     [System.Serializable]
     public class MouseLook
     {
-        [Range(1.0f, 10.0f)]
-        public float XSensitivity = 2.0f;
-        [Range(1.0f, 10.0f)]
-        public float YSensitivity = 2.0f;
+        [Range(0.1f, 2.0f)]
+        public float XSensitivity = 1.0f;
+        [Range(0.1f, 2.0f)]
+        public float YSensitivity = 1.0f;
         public bool clampVerticalRotation = true;
         public float MinimumX = -90.0F;
         public float MaximumX = 90.0F;
