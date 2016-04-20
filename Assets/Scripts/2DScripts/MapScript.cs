@@ -14,6 +14,8 @@ public class MapScript : MonoBehaviour
     public Text batteryText;
     public RaycastHit[] hits;
     public Transform CrossPrefab;
+    public Transform LowBatteryPrefab;
+    
 
     private RaycastHit hit;
     private List<Vector2> mapPoints;
@@ -27,6 +29,7 @@ public class MapScript : MonoBehaviour
     private List<int> batteryPickupsCount; private List<int> ammoPickupsCount;
     private Transform lineDynamic;
     private Transform cross;
+    private Transform LowBattery;
     private int layerMask;
     private int thresholdDistance;
     public Vector2 convertToPixels(Vector3 worldPos)
@@ -100,10 +103,13 @@ public class MapScript : MonoBehaviour
 
         lineDynamic = Instantiate(LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
 
-        layerMask = 1 << 11;
+        layerMask = 1 << 12;
 
         cross = Instantiate(CrossPrefab, hit.point, Quaternion.identity) as Transform;
         cross.gameObject.SetActive(false);
+
+        LowBattery = Instantiate(LowBatteryPrefab, hit.point, Quaternion.identity) as Transform;
+        LowBattery.gameObject.SetActive(false);
 
         cursorGreenHotspot.x = cursorGreen.width / 2;
         cursorGreenHotspot.y = cursorGreen.height / 2;
@@ -113,6 +119,9 @@ public class MapScript : MonoBehaviour
 
         GameManager.Instance.width2DPlane = gameObject.GetComponent<SpriteRenderer>().sprite.textureRect.width;
         GameManager.Instance.height2DPlane = gameObject.GetComponent<SpriteRenderer>().sprite.textureRect.height;
+
+        int currentBattery = System.Int32.Parse(batteryText.text);
+        thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
 
     }
 
@@ -140,7 +149,6 @@ public class MapScript : MonoBehaviour
             }
         }
         return count;
-        //return Physics.Raycast(prevShadowPos, object_vector.normalized, out hit, object_vector.magnitude);
     }
 
 
@@ -155,12 +163,13 @@ public class MapScript : MonoBehaviour
         int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
         int currentBattery = System.Int32.Parse(batteryText.text);
 
-        if ((countObjects(mousePos, "wallColliders") == 0))                                        //green                    //if (checkForObstruction(mousePos))//if(checkForObject(mousePos) && (hit.transform.parent.name == "wallColliders"))//
+        if ((countObjects(mousePos, "wallColliders") == 0))                                        //green
         {
             Cursor.SetCursor(cursorGreen, cursorGreenHotspot, CursorMode.Auto);
             LineR.SetColors(Color.black, Color.black);
             // show red cursor if we cannot have battery to move there
             LineR.SetPosition(1, mousePos);
+            LowBattery.gameObject.SetActive(false);
             cross.gameObject.SetActive(false);
             if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
             {
@@ -169,8 +178,8 @@ public class MapScript : MonoBehaviour
 
 
                 LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
-                cross.gameObject.SetActive(true);
-                cross.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+                LowBattery.gameObject.SetActive(true);
+                LowBattery.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
             }
             //Debug.Log(mousePos); 
         }
@@ -178,6 +187,7 @@ public class MapScript : MonoBehaviour
         {
             Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
             LineR.SetColors(Color.red, Color.red);
+            LowBattery.gameObject.SetActive(false);
             cross.gameObject.SetActive(true);
 
             Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude, layerMask);
@@ -188,8 +198,10 @@ public class MapScript : MonoBehaviour
             {
                 if ((hit.point-prevShadowPos).magnitude > thresholdDistance)
                 {
+                    cross.gameObject.SetActive(false);
+                    LowBattery.gameObject.SetActive(true);
+                    LowBattery.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
                     LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
-                    cross.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
                 }
             }
 
@@ -249,6 +261,8 @@ public class MapScript : MonoBehaviour
             int batteryLeft = currentBattery + batteryUsed - batteryAmtToRemove;
             batteryText.text = batteryLeft.ToString();
 
+            currentBattery = System.Int32.Parse(batteryText.text);
+            thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
             //----------------------------------------------------------------------------------------------
 
             //----------------------------------------------------------------------------------------------
