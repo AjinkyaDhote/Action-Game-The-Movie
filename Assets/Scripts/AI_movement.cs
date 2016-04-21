@@ -14,7 +14,7 @@ public class AI_movement : MonoBehaviour
     public bool isPlayerSeen;
     bool isPlayerInRange;
 
-    Collider enemyCollider, playerCollider;
+    Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
 
     void Start()
     {
@@ -24,7 +24,8 @@ public class AI_movement : MonoBehaviour
         
         agent = GetComponent<NavMeshAgent>();        
         anim = GetComponent<Animator>();          
-        enemyCollider = GetComponent<Collider>();
+        enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
+        enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerCollider = player.GetComponent<Collider>();
 
@@ -39,9 +40,10 @@ public class AI_movement : MonoBehaviour
 			agent.speed = 0;
 		} 
 		else {
-			Physics.IgnoreCollision(enemyCollider, playerCollider);
+			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
+            Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
-			if (isPlayerSeen)
+            if (isPlayerSeen)
 			{
 				transform.LookAt(player.transform);
 				if (isPlayerInRange)
