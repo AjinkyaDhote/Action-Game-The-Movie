@@ -28,16 +28,20 @@ public class WeaponSystem : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetKeyDown(KeyCode.Z))
-        {
-            moveForward = true;
-            UpdateWeaponInHand();
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f || Input.GetKeyDown(KeyCode.X)) 
-        {
-            moveForward = false;
-            UpdateWeaponInHand();
-        }
+		Debug.Log (playerShootingScript.anim.GetCurrentAnimatorStateInfo (0).IsName ("ShotGunAnimation"));
+		if (!(playerShootingScript.anim.GetCurrentAnimatorStateInfo (0).IsName ("ShotGunAnimation"))) {
+
+			if (Input.GetAxis ("Mouse ScrollWheel") > 0f || Input.GetKeyDown (KeyCode.Z)) {
+				moveForward = true;
+				UpdateWeaponInHand ();
+			} else if (Input.GetAxis ("Mouse ScrollWheel") < 0f || Input.GetKeyDown (KeyCode.X)) {
+				moveForward = false;
+				UpdateWeaponInHand ();
+			}
+		} else 
+		{
+			Debug.Log ("Not Switching");
+		}
     }
     void UpdateWeaponInHand()
     {
@@ -68,6 +72,17 @@ public class WeaponSystem : MonoBehaviour {
                 currentWeaponInHand.Value.SetActive(true);
             }
         }
+
+//		if (currentWeaponInHand.Value.name == "ShotGun") 
+//		{
+//			Debug.Log ("Position Reset");
+//			currentWeaponInHand.Value.transform.position = new Vector3 (0.359f, -0.31f, 0.254f);
+//			Debug.Log (currentWeaponInHand.Value.transform.position);
+//			currentWeaponInHand.Value.transform.localRotation = Quaternion.Euler (270f, 89.9996f, 0f);
+//			Debug.Log (currentWeaponInHand.Value.transform.localRotation);
+//			playerShootingScript.anim.ResetTrigger("ShotGun");
+//		}
+
         currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
         ParticleSystem[] pS = currentWeaponInHand.Value.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < pS.Length; i++)
