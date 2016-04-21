@@ -39,9 +39,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486572}
+  - 136: {fileID: 13668218}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: HeadCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,9 +177,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 453072}
+  - 136: {fileID: 13628962}
+  - 114: {fileID: 11497868}
   m_Layer: 0
   m_Name: Spine
-  m_TagString: Untagged
+  m_TagString: BodyCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,7 +438,6 @@ GameObject:
   - 136: {fileID: 13680836}
   - 195: {fileID: 19518624}
   - 114: {fileID: 11459400}
-  - 114: {fileID: 11462344}
   m_Layer: 0
   m_Name: Warzombie_F_Pedroso
   m_TagString: Enemy
@@ -800,7 +802,7 @@ GameObject:
   - 4: {fileID: 492414}
   m_Layer: 0
   m_Name: Neck
-  m_TagString: Untagged
+  m_TagString: HeadCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1721,7 +1723,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34, y: -0.29399872, z: -21.3}
+  m_LocalPosition: {x: -34, y: 0.683, z: -21.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 445300}
@@ -1977,18 +1979,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isPlayerSeen: 0
---- !u!114 &11462344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
 --- !u!114 &11464560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2011,6 +2001,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65fda9a84dd45e545a9d650aeaed2c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11497868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 500
+  currentHealth: 0
 --- !u!135 &13501644
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -2035,6 +2038,32 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &13628962
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.4, z: 0}
+--- !u!136 &13668218
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 0.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13680836
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2043,7 +2072,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 145624}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2.350666
   m_Direction: 1

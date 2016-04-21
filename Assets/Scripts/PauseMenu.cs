@@ -27,14 +27,14 @@ public class PauseMenu : MonoBehaviour {
         if(isPaused)
         {
             gunCamera.cullingMask = gunCamera.cullingMask | 0x400;
-            gunCamera.cullingMask = gunCamera.cullingMask & 0xfdf;
+            gunCamera.cullingMask = gunCamera.cullingMask & 0xddf;
             Time.timeScale = 0.0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
         else
         {
-            gunCamera.cullingMask = gunCamera.cullingMask | 0x20;
+            gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
             gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
             Time.timeScale = 1.0f;
             Cursor.lockState = CursorLockMode.Locked;
