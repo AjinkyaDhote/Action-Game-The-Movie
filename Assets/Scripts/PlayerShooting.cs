@@ -41,8 +41,12 @@ public class PlayerShooting : MonoBehaviour
         {
             if (Input.GetButton("Fire1") && !pauseMenuScript.isPaused && countdownTimer.hasGameStarted)
             {
-                muzzleFlash.Play();
-                anim.SetTrigger("Fire");
+				if (bulletCount > 0) 
+				{
+					muzzleFlash.Play ();
+					anim.SetTrigger("Fire");
+				}
+                
                 shooting = true;
             }
         }
@@ -50,23 +54,46 @@ public class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
             muzzleFlash.Play();
-            anim.SetTrigger("Fire");
+            //anim.SetTrigger("Fire");
             shooting = true;
         }
     }
 
 
     void FixedUpdate()
+	{      
+		if (shooting && (bulletCount > 0))
     {
         if (shooting && bulletCount > 0)
         {
-            bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
-            bulletsString = " " + bulletCount;
-            AmmoText.text = bulletsString;
-            if (bulletCount <= 10)
-            {
-                AmmoText.color = Color.red;
-            }
+			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
+			{
+				Debug.Log ("Shotgun");
+				anim.SetTrigger("ShotGun");
+				bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
+				bulletsString = " " + bulletCount;
+				AmmoText.text = bulletsString;
+				if (bulletCount <= 10)
+				{
+					AmmoText.color = Color.red;
+				}
+				Debug.Log ("I am here");
+				//if((this.anim.GetCurrentAnimatorStateInfo (0).IsName("ShotGunAnimation")));
+					
+
+			}
+			else if(weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
+			{
+				anim.SetTrigger("Fire");
+				bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
+				bulletsString = " " + bulletCount;
+				AmmoText.text = bulletsString;
+				if (bulletCount <= 10)
+				{
+					AmmoText.color = Color.red;
+				}
+			}
+
             shooting = false;
             RaycastHit hit;
 
