@@ -3,13 +3,13 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public int startingHealth;
-	private Animator anim;
-	private NavMeshAgent agent;
+	public int startingHealth = 3;
+    private Animator anim;
+    private NavMeshAgent agent;
+   
+	int delayTime = 6;
 
-	int delayTime = 5;
-
-	private int currentHealth;
+	public int currentHealth;
 	//public GameObject hitParticles;
 
 
@@ -17,15 +17,21 @@ public class EnemyHealth : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
-
-		currentHealth = startingHealth;
-		anim = GetComponent<Animator> ();
-	}
+      
+        
+        currentHealth = startingHealth;
+       
+        if(gameObject.name == "Spine")
+            anim = transform.parent.parent.GetComponent<Animator> ();
+        else
+            anim = transform.GetComponent<Animator>();
+        anim.SetBool("isPlayerDead", false);
+    }
 
 	public void Damage(int damage)
 	{
-        currentHealth -= damage;
-		Debug.Log (currentHealth);
+		currentHealth -= damage;
+
 		if (currentHealth <= 0) 
 		{
 			Defeated ();
@@ -35,12 +41,20 @@ public class EnemyHealth : MonoBehaviour {
 
 	void Defeated()
 	{
-		Debug.Log ("PlayerDead");
-		agent.speed = 0;
-		agent.angularSpeed = 0;
-		anim.SetBool ("isPlayerDead", true);
+        Debug.Log("Enemy dead");
+        Debug.Log(anim);
+        if (!(gameObject.name == "Spine"))
+            agent.speed = 0;
 
-		Destroy(gameObject, delayTime);
+            anim.SetBool("isPlayerDead", true);
+        //animS.SetBool("isPlayerDead", true);
 
-	}
+
+        //Play animation dying animation;
+        if (!(gameObject.name == "Spine"))
+            Destroy(gameObject, delayTime);
+        else
+            Destroy(transform.parent.parent.gameObject, delayTime);
+
+    }
 }
