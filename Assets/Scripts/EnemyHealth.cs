@@ -5,14 +5,14 @@ public class EnemyHealth : MonoBehaviour {
 
 	public int startingHealth = 3;
     private Animator anim;
-    private NavMeshAgent agent;
+    //private NavMeshAgent agent;
     public Material deadMaterial;
 
     int delayTime = 6;
 	public int currentHealth;
 	void Start ()
     {
-		agent = GetComponent<NavMeshAgent>();        
+		//agent = GetComponent<NavMeshAgent>();        
         currentHealth = startingHealth;
         anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
