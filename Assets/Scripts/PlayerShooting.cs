@@ -62,8 +62,6 @@ public class PlayerShooting : MonoBehaviour
 
     void FixedUpdate()
 	{      
-		if (shooting && (bulletCount > 0))
-    {
         if (shooting && bulletCount > 0)
         {
 			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
