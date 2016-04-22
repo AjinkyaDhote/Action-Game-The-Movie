@@ -21,7 +21,7 @@ public class WeaponSystem : MonoBehaviour {
             weapon.SetActive(false);
         }
         weapons = new LinkedList<GameObject>(weaponsGO);      
-        currentWeaponInHand = weapons.First;
+		currentWeaponInHand = weapons.First;
         currentWeaponInHand.Value.SetActive(true);
         currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
     }
