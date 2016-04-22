@@ -178,6 +178,10 @@ Prefab:
       propertyPath: patrolWayPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1112407868}
+    - target: {fileID: 11462344, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: startingHealth
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
   m_IsPrefabParent: 0
@@ -249,6 +253,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1 &962545449 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 102468, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
+  m_PrefabInternal: {fileID: 1536877524}
+--- !u!114 &962545450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962545449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4414113c288b1c47a43cf9545719e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitImage: {fileID: 11434356, guid: 3fc897fc694dbd747b0b0c57f90ca5e4, type: 2}
 --- !u!1 &1048591714
 GameObject:
   m_ObjectHideFlags: 0

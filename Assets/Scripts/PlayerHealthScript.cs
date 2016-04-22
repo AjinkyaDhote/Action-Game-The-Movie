@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealthScript : MonoBehaviour
 {
     Text HealthText;
-    private int healthCount = 50;
+    private int healthCount = 500;
     string healthString;
 
     void Start()
