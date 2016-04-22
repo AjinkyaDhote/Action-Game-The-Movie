@@ -6,8 +6,9 @@ public class EnemyHealth : MonoBehaviour {
 	public int startingHealth = 3;
     private Animator anim;
     private NavMeshAgent agent;
-   
-	int delayTime = 6;
+    public Material deadMaterial;
+
+    int delayTime = 6;
 
 	public int currentHealth;
 	//public GameObject hitParticles;
@@ -36,6 +37,19 @@ public class EnemyHealth : MonoBehaviour {
 		{
 			Defeated ();
 		}
+        if (currentHealth < 2)
+        {
+            foreach (Transform child in this.transform.parent.transform.parent)
+            {
+                if (child.name == "WorldWar_zombie")
+                {
+                    child.GetComponent<Renderer>().material = deadMaterial;
+                }
+
+            }
+
+
+        }
 
 	}
 

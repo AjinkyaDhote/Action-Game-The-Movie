@@ -69,6 +69,7 @@ public class AI_movement : MonoBehaviour
     void DamagePlayer()
     {
         player.GetComponent<PlayerHealthScript>().PlayerDamage();
+        player.GetComponent<HitRadial>().createNewRadial(this.gameObject);
     }
     public void Detection()
     {
