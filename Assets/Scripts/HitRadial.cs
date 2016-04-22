@@ -20,7 +20,7 @@ public class HitRadial : MonoBehaviour {
     {
         enemy = AttackingEnemy;
         HitRadialImage = (Image)Instantiate(HitImage, new Vector3(0, 0, 0), Quaternion.identity);
-        HitRadialImage.transform.parent = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas");
+        HitRadialImage.transform.SetParent(transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas"));
         Destroy(HitRadialImage.gameObject, 2.0f);
         HitRadialImage.GetComponent<HitRadialPrefab>().startRotation(enemy, HitRadialImage);
 
