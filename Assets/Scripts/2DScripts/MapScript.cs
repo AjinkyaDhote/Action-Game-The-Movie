@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -32,6 +33,10 @@ public class MapScript : MonoBehaviour
     private Transform LowBattery;
     private int layerMask;
     private int thresholdDistance;
+    //int batteryCount;
+    int ammoCount;
+    int distanceTravelled;
+
     public Vector2 convertToPixels(Vector3 worldPos)
     {
         SpriteRenderer sp = GetComponent<SpriteRenderer>();
@@ -123,6 +128,8 @@ public class MapScript : MonoBehaviour
         int currentBattery = System.Int32.Parse(batteryText.text);
         thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
 
+        //batteryCount = 0;
+
     }
 
     public void setPlayerInitialPos(Vector3 playerInitialPos)
@@ -156,6 +163,8 @@ public class MapScript : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0.0f;
+
+        //Handles.DrawWireArc(prevShadowPos, Vector3.back, mousePos, 360, thresholdDistance);
 
         LineRenderer LineR = lineDynamic.GetComponent<LineRenderer>();
         LineR.SetPosition(0, prevShadowPos);
@@ -411,6 +420,9 @@ public class MapScript : MonoBehaviour
                 prevShadowPos = worldPos;
                 currentBattery = System.Int32.Parse(batteryText.text);
                 thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
+
+                
+                
             }
         }
     }
