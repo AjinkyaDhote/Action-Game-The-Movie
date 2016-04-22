@@ -9,23 +9,12 @@ public class EnemyHealth : MonoBehaviour {
     public Material deadMaterial;
 
     int delayTime = 6;
-
 	public int currentHealth;
-	//public GameObject hitParticles;
-
-
-
-	// Use this for initialization
-	void Start () {
-		agent = GetComponent<NavMeshAgent>();
-      
-        
+	void Start ()
+    {
+		agent = GetComponent<NavMeshAgent>();        
         currentHealth = startingHealth;
-       
-        if(gameObject.name == "Spine")
-            anim = transform.parent.parent.GetComponent<Animator> ();
-        else
-            anim = transform.GetComponent<Animator>();
+        anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
     }
 
@@ -45,30 +34,13 @@ public class EnemyHealth : MonoBehaviour {
                 {
                     child.GetComponent<Renderer>().material = deadMaterial;
                 }
-
             }
-
-
         }
-
 	}
 
 	void Defeated()
 	{
-        Debug.Log("Enemy dead");
-        Debug.Log(anim);
-        if (!(gameObject.name == "Spine"))
-            agent.speed = 0;
-
-            anim.SetBool("isPlayerDead", true);
-        //animS.SetBool("isPlayerDead", true);
-
-
-        //Play animation dying animation;
-        if (!(gameObject.name == "Spine"))
-            Destroy(gameObject, delayTime);
-        else
-            Destroy(transform.parent.parent.gameObject, delayTime);
-
+        anim.SetBool("isPlayerDead", true);
+        Destroy(transform.parent.parent.gameObject, delayTime);
     }
 }
