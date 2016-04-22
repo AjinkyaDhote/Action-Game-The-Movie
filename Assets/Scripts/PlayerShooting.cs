@@ -22,76 +22,71 @@ public class PlayerShooting : MonoBehaviour
     string bulletsString;
 
     void Start()
-    {
-        weaponSystemScript = GetComponent<WeaponSystem>();
-        AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
-        bulletsString = " " + bulletCount;
-        AmmoText.text = bulletsString;
-        AmmoText.color = Color.green;
-        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
-        anim = GetComponentInChildren<Animator>();
-        laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
-        countdownTimer = GameObject.Find("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
+	{
+		weaponSystemScript = GetComponent<WeaponSystem> ();
+		AmmoText = transform.FindChild ("FPS UI Canvas").FindChild ("AmmoText").GetComponent<Text> ();
+		bulletsString = " " + bulletCount;
+		AmmoText.text = bulletsString;
+		AmmoText.color = Color.green;
+		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
+		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
+		countdownTimer = GameObject.Find ("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
+		Component[] animators;
 
-    }
-
+		animators = GetComponentsInChildren<Animator> ();
+		foreach (Animator i in animators) {
+			if (i.gameObject.name == "ShotGun") {
+				anim = i;
+				break;
+			}
+		}
+	}
     void Update()
     {
         if(weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
         {
             if (Input.GetButton("Fire1") && !pauseMenuScript.isPaused && countdownTimer.hasGameStarted)
-            {
-				if (bulletCount > 0) 
-				{
-					muzzleFlash.Play ();
-					anim.SetTrigger("Fire");
-				}
-                
+            {  
                 shooting = true;
             }
         }
         else if (Input.GetButtonDown("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
-            muzzleFlash.Play();
-            //anim.SetTrigger("Fire");
             shooting = true;
         }
     }
 
 
     void FixedUpdate()
-	{      
+	{     
+
         if (shooting && bulletCount > 0)
         {
+			muzzleFlash.Play();
 			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
 			{
-				Debug.Log ("Shotgun");
+				Debug.Log ("First ShotGun Animation");
 				anim.SetTrigger("ShotGun");
-				bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
-				bulletsString = " " + bulletCount;
-				AmmoText.text = bulletsString;
-				if (bulletCount <= 10)
-				{
-					AmmoText.color = Color.red;
-				}
-				Debug.Log ("I am here");
-				//if((this.anim.GetCurrentAnimatorStateInfo (0).IsName("ShotGunAnimation")));
-					
-
 			}
-			else if(weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
+			else if(weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun" )
 			{
 				anim.SetTrigger("Fire");
+			}
+
+			if (bulletCount > 0) 
+			{
 				bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
 				bulletsString = " " + bulletCount;
 				AmmoText.text = bulletsString;
-				if (bulletCount <= 10)
-				{
-					AmmoText.color = Color.red;
-				}
 			}
 
+			if (bulletCount <= 10)
+			{
+				AmmoText.color = Color.red;
+			}
+
+				
             shooting = false;
             RaycastHit hit;
 
