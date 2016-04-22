@@ -48,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
                 camera.localRotation = m_CameraTargetRot;
             }
 
+            if (Input.GetMouseButtonUp(0) && countdownTimer.hasGameStarted)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
             //UpdateCursorLock();
         }
 
@@ -106,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
     public MouseLook mouseLook;
 	wasdMovement WASDmovement;
     PauseMenu pauseMenuScript;
+    static CountdownTimerScript countdownTimer;
 
     float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
     Vector3 convertPoint(Vector2 relativePoint)
@@ -120,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
 
         width2DPlane = GameManager.Instance.width2DPlane;
         height2DPlane = GameManager.Instance.height2DPlane;

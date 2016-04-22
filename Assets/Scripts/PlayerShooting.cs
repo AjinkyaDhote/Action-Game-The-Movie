@@ -14,7 +14,7 @@ public class PlayerShooting : MonoBehaviour
     WeaponSystem weaponSystemScript;
     PauseMenu pauseMenuScript;
     CountdownTimerScript countdownTimer;
-    private EnemyHealth damageScript;
+    EnemyHealth damageScript;
     bool shooting = false;
     int bulletCount = 300;
 
@@ -30,23 +30,15 @@ public class PlayerShooting : MonoBehaviour
 		AmmoText.color = Color.green;
 		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
 		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
-		countdownTimer = GameObject.Find ("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
-		Component[] animators;
-
-		animators = GetComponentsInChildren<Animator> ();
-		foreach (Animator i in animators) {
-			if (i.gameObject.name == "ShotGun") {
-				anim = i;
-				break;
-			}
-		}
+		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
 	}
     void Update()
     {
         if(weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
         {
-            if (Input.GetButton("Fire1") && !pauseMenuScript.isPaused && countdownTimer.hasGameStarted)
-            {  
+            if (Input.GetButton("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
+            {
+                nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                 shooting = true;
             }
         }
@@ -60,13 +52,11 @@ public class PlayerShooting : MonoBehaviour
 
     void FixedUpdate()
 	{     
-
         if (shooting && bulletCount > 0)
         {
 			muzzleFlash.Play();
 			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
 			{
-				Debug.Log ("First ShotGun Animation");
 				anim.SetTrigger("ShotGun");
 			}
 			else if(weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun" )
@@ -84,9 +74,7 @@ public class PlayerShooting : MonoBehaviour
 			if (bulletCount <= 10)
 			{
 				AmmoText.color = Color.red;
-			}
-
-				
+			}	
             shooting = false;
             RaycastHit hit;
 
@@ -100,7 +88,6 @@ public class PlayerShooting : MonoBehaviour
                     laser.transform.localRotation = Quaternion.identity;
                     laser.GetComponent<Laser>().GetCorrectEnemy(hit.point);
                 }
-                print(hit.collider.tag);
                 if (hit.collider.tag == "Wall")
                 {
                     impacts[0].transform.position = hit.point;
@@ -123,32 +110,19 @@ public class PlayerShooting : MonoBehaviour
                      damageScript = hit.collider.GetComponent<EnemyHealth>();
                     if (damageScript != null)
                     {
-                        Debug.Log("DamageDealt");
                         damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
                     }
                 }
-
                 else if ((hit.collider.tag == "HeadCollider"))
                 {
                     impacts[1].transform.position = hit.point;
                     impacts[1].Play();
-                    AI_movement aiMovementScript = hit.collider.GetComponent<AI_movement>();
-                    if (aiMovementScript != null)
-                    {
-                        if (!aiMovementScript.isPlayerSeen)
-                        {
-                            aiMovementScript.Detection();
-                        }
-                    }
                      damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
                     if (damageScript != null)
                     {
-                        Debug.Log("DamageDealt");
                         damageScript.Damage(10000);
                     }
-
                 }
-
             }
         }
     }

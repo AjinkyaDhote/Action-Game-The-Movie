@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour {
         isPaused = false;
         gunCamera = transform.GetComponent<Canvas>().worldCamera;
         gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
-        countdownTimer = GameObject.Find("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
+        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
     }
 	void Update ()
     {
