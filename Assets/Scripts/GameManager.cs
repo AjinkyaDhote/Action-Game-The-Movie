@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, GameWinLose };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentState = GameStates.MENU;
+    int batteryCount;
 
     public static GameManager Instance
     {
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         currentState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
+        batteryCount = 0;
     }
 
     public void PlayGame()
@@ -87,6 +89,11 @@ public class GameManager : MonoBehaviour
             {
                 currentState = GameStates.MENU;
                 SceneManager.LoadScene((int)Levels.MENU);
+                for (int i = 0; i < batteryPickupsCount.Count; i++)
+                {
+                    batteryCount += batteryPickupsCount[i];
+                }
+                Debug.Log(batteryCount);
             }
         }
     }
