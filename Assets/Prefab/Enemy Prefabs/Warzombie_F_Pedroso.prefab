@@ -148,7 +148,7 @@ GameObject:
   - 135: {fileID: 13577124}
   - 114: {fileID: 11464560}
   m_Layer: 2
-  m_Name: SphereCollider
+  m_Name: DetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,7 +435,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 479468}
   - 95: {fileID: 9549888}
-  - 136: {fileID: 13680836}
   - 195: {fileID: 19518624}
   - 114: {fileID: 11459400}
   m_Layer: 0
@@ -711,7 +710,7 @@ GameObject:
   - 135: {fileID: 13501644}
   - 114: {fileID: 11490788}
   m_Layer: 2
-  m_Name: SphereCollider1
+  m_Name: PlayerInRangeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,8 +1582,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.18504, z: 0}
+  m_LocalScale: {x: 1.1850357, y: 1.1850351, z: 1.1850351}
   m_Children: []
   m_Father: {fileID: 479468}
   m_RootOrder: 3
@@ -1974,11 +1973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903a12ef0bef7c74ca06dba4ec1fc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolWayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   isPlayerSeen: 0
+  radius: 10
 --- !u!114 &11464560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2012,7 +2008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 500
+  startingHealth: 100
   deadMaterial: {fileID: 2100000, guid: f50f10ff709fa50448b4bad3f138ee1a, type: 2}
   currentHealth: 0
 --- !u!135 &13501644
@@ -2065,19 +2061,6 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &13680836
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145624}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2.350666
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &13714072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2188,7 +2171,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 145624}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 2.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
