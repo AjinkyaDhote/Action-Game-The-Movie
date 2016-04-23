@@ -6,6 +6,7 @@ public class Hit : MonoBehaviour {
 	private GameObject DestroyedObject;
     private Transform enemySpine;
     private Transform enemyHead;
+    private GameObject player;
 
 
     void Start()
@@ -13,6 +14,7 @@ public class Hit : MonoBehaviour {
         DestroyedObject = Resources.Load("CreateDestroyedPrefab/CrateDestroyed") as GameObject;
         enemySpine = transform.parent.parent.parent.parent.parent.parent.parent.parent;
         enemyHead = transform.parent.parent.parent.parent.parent.parent.GetChild(1).GetChild(0);
+         player = GameObject.FindGameObjectWithTag("Player");
     }
     void Update()
     {
@@ -31,6 +33,8 @@ public class Hit : MonoBehaviour {
        
         
 		DestroyIt();
+        Debug.Log(player);
+        player.GetComponent<PlayerHealthScript>().PlayerDamage();
 		
 	}
 	

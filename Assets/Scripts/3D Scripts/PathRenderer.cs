@@ -10,6 +10,7 @@ public class PathRenderer : MonoBehaviour {
     private Vector3 posTwo;
     private GameObject go;
     float angle;
+    public GameObject nodePrefab;
     Vector3[] wayPoints3D;
 
     float distance, xValue, zValue;
@@ -41,6 +42,8 @@ public class PathRenderer : MonoBehaviour {
         {
             posOne = wayPoints3D[i];
             posTwo = wayPoints3D[i+1];
+            GameObject node = (GameObject)Instantiate(nodePrefab, new Vector3 (posTwo.x,0.11f,posTwo.z), Quaternion.Euler(0, angle, 0));
+            node.transform.localScale = new Vector3(1.5f, 0, 1.5f);
             //Debug.Log("1: " + wayPoints3D[0]);
             //Debug.Log("2: " + posTwo);
 
