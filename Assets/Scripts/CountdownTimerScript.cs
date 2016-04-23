@@ -12,16 +12,14 @@ public class CountdownTimerScript : MonoBehaviour {
     int countdown;
     float initialTime;
 
-    void Start () {
-
+    void Start ()
+    {
         countdown = 3;
         gunCamera = transform.parent.GetComponent<Canvas>().worldCamera;
         gunCamera.cullingMask = gunCamera.cullingMask & 0x800;
         Time.timeScale = 0.0f;
         countdownText = GetComponent<Text>();
     }
-	
-
 	void Update ()
     {
         if (countdownStarted)
