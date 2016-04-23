@@ -5,10 +5,12 @@ using UnityEngine.UI;
 public class Battery : MonoBehaviour {
 
     Text BatteryText;
-    private int batteryCount = 100;
+	private int batteryCount;
     PlayerShooting playerShootingScript;
     string batteryString;
     void Start () {
+
+		batteryCount = 100;
         playerShootingScript = transform.GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
 		BatteryText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("BatteryText").GetComponent<Text>();
         batteryString = " " + batteryCount;
