@@ -346,7 +346,7 @@ GameObject:
   - 222: {fileID: 22246456}
   - 114: {fileID: 11425228}
   m_Layer: 5
-  m_Name: Heart
+  m_Name: ClockImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -518,7 +518,7 @@ GameObject:
   - 222: {fileID: 22299076}
   - 114: {fileID: 11439152}
   m_Layer: 5
-  m_Name: useImage
+  m_Name: TintImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -657,8 +657,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494246}
-  - {fileID: 481146}
   - {fileID: 495648}
+  - {fileID: 481146}
   - {fileID: 22443032}
   m_Father: {fileID: 474688}
   m_RootOrder: 0
@@ -676,7 +676,7 @@ Transform:
   - {fileID: 422914}
   - {fileID: 406774}
   m_Father: {fileID: 475752}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &494246
 Transform:
   m_ObjectHideFlags: 1
@@ -718,7 +718,7 @@ Transform:
   - {fileID: 448846}
   - {fileID: 446126}
   m_Father: {fileID: 475752}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!20 &2051460
 Camera:
   m_ObjectHideFlags: 1
@@ -1037,11 +1037,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb49d1508ddd6264fb9d84b408a057f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTime: 0
-  slowDuration: 1
   sliderFillRate: 0.2
-  flashSpeed: 0.4
+  sliderDepleteRate: 0.5
+  reducedTimeScale: 0.3
+  sliderValueActive: 50
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
+  coolDownTimer: 2
 --- !u!114 &11405036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1180,7 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoNeeded: 1
   damageDealt: 1
-  coolDownTimer: 1
+  coolDownTimer: 0.1
 --- !u!114 &11438462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1247,14 +1248,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1340,7 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2062718}
-  playerSpeed: 10
+  playerSpeed: 7
   mouseLook:
     XSensitivity: 2
     YSensitivity: 2
@@ -15592,7 +15593,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22427252
 RectTransform:
@@ -15755,8 +15756,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22492156
 RectTransform:
