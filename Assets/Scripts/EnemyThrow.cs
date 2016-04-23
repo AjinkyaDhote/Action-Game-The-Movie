@@ -9,7 +9,7 @@ public class EnemyThrow : MonoBehaviour {
     private throwScript throwing;
     private GameObject player;
     //private bool isPlayerSeen = false;
-
+    Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
     private AudioSource roarSource;
     private AudioSource attackSource;
     // Use this for initialization
@@ -23,6 +23,9 @@ public class EnemyThrow : MonoBehaviour {
         anim.SetBool("isPlayerSeen", false);
         anim.SetBool("hasYelled", false);
         player = GameObject.FindGameObjectWithTag("Player");
+        enemyBodyCollider = transform.GetChild(3).GetChild(2).GetComponent<Collider>();
+        enemyHeadCollider = transform.GetChild(3).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
+        playerCollider = player.GetComponent<Collider>();
         //transform.position += transform.forward * 0 * Time.deltaTime;
         roarSource = roar.GetComponent<AudioSource>();
         attackSource = attack.GetComponent<AudioSource>();
@@ -38,7 +41,12 @@ public class EnemyThrow : MonoBehaviour {
             distance();
         if (anim.GetBool("isPlayerSeen"))
         {
+           Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
+            
+           Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
+            
             transform.LookAt(player.transform);
+          
             anim.SetBool("hasYelled", true);
             
             Debug.Log("Following player");
