@@ -16,13 +16,14 @@ public class PlayerShooting : MonoBehaviour
     CountdownTimerScript countdownTimer;
     EnemyHealth damageScript;
     bool shooting = false;
-    int bulletCount = 300;
+    int bulletCount;
 
     Text AmmoText;
     string bulletsString;
 
     void Start()
 	{
+        bulletCount = 300;
 		weaponSystemScript = GetComponent<WeaponSystem> ();
 		AmmoText = transform.FindChild ("FPS UI Canvas").FindChild ("AmmoText").GetComponent<Text> ();
 		bulletsString = " " + bulletCount;
