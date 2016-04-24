@@ -122,7 +122,7 @@ public class PlayerShooting : MonoBehaviour
                      damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
                     if (damageScript != null)
                     {
-                        damageScript.Damage(10000);
+                        damageScript.Damage(25);
                     }
                 }
             }

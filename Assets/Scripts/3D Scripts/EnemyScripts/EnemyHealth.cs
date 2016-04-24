@@ -3,21 +3,25 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
 
-	public int startingHealth = 3;
+	
     private Animator anim;
     //private NavMeshAgent agent;
-    public Material deadMaterial;
-	public AudioClip ZombieDeath;
+    private Material deadMaterial;
+	private AudioClip ZombieDeath;
 
     int delayTime;
 	public int currentHealth;
 	void Start ()
     {
-		
-	
+        deadMaterial = Resources.Load("Material/deadMaterial") as Material;
+        ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
+
         delayTime = 6;
         //agent = GetComponent<NavMeshAgent>();        
-        currentHealth = startingHealth;
+        if (transform.parent.parent.name == "Warzombie_F_Pedroso")
+            currentHealth = 10;
+        else
+            currentHealth = 60;
         anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
     }
