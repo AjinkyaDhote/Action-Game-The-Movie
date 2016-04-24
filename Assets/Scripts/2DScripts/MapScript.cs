@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -16,10 +16,12 @@ public class MapScript : MonoBehaviour
     public RaycastHit[] hits;
     public Transform CrossPrefab;
     public Transform LowBatteryPrefab;
-    
+    public int batteryCount;
+    public int ammoCount;
 
     private RaycastHit hit;
     private List<Vector2> mapPoints;
+    private List<int> distanceTravelled;
     private Vector3 prevShadowPos;
     private Vector2 cursorGreenHotspot, cursorRedHotspot;
     private List<Object> playerShadowPrefabList;
@@ -33,9 +35,8 @@ public class MapScript : MonoBehaviour
     private Transform LowBattery;
     private int layerMask;
     private int thresholdDistance;
-    //int batteryCount;
-    int ammoCount;
-    int distanceTravelled;
+    
+    
 
     public Vector2 convertToPixels(Vector3 worldPos)
     {
@@ -54,6 +55,9 @@ public class MapScript : MonoBehaviour
     {
         mapPoints = GameManager.Instance.mapPoints;
         mapPoints.Clear();
+
+        distanceTravelled = GameManager.Instance.distanceTravelled;
+        distanceTravelled.Clear();
 
         //BatteryPos = GameManager.Instance.BatteryPos;
         //BatteryPos.Clear();
@@ -310,6 +314,8 @@ public class MapScript : MonoBehaviour
                 player2D.source = player2D.gameObject.transform.position;
                 player2D.destination = player2D.gameObject.transform.position;
             }
+
+            distanceTravelled.RemoveAt(distanceTravelled.Count - 1);
         }
     }
 
@@ -324,6 +330,7 @@ public class MapScript : MonoBehaviour
         {
             // reduce batteryzz
             int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, worldPos));
+            distanceTravelled.Add(travelDist);
             int currentBattery = System.Int32.Parse(batteryText.text);
             if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0)
             {

@@ -21,6 +21,8 @@ public class PlayerShooting : MonoBehaviour
     Text AmmoText;
     string bulletsString;
 
+    int headShotCount;
+
     void Start()
 	{
 		bulletCount = 300;
@@ -32,7 +34,10 @@ public class PlayerShooting : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
 		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
-	}
+
+        GameManager.Instance.headShots = 0;
+        headShotCount = GameManager.Instance.headShots;//-------------------------------------------------------------------------------------------------
+    }
     void Update()
     {
         if(weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
@@ -122,6 +127,7 @@ public class PlayerShooting : MonoBehaviour
                     if (damageScript != null)
                     {
                         damageScript.Damage(10000);
+                        GameManager.Instance.headShots++;
                     }
                 }
             }

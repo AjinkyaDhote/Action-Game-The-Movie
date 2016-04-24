@@ -40,6 +40,7 @@ public class EnemyHealth : MonoBehaviour {
 
 	void Defeated()
 	{
+        GameManager.Instance.totalEnemiesKilled++;
         anim.SetBool("isPlayerDead", true);
         Destroy(transform.parent.parent.gameObject, delayTime);
     }
