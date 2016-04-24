@@ -10,6 +10,7 @@ public class AI_movement : MonoBehaviour
 	[HideInInspector]
 	public bool isPlayerSeen;
 	bool isPlayerInRange;
+	public AudioClip zombieWalk;
 
 	public float radius;
 	private float minRadius;
@@ -45,6 +46,7 @@ public class AI_movement : MonoBehaviour
 		Vector3 direction;
 		do
 		{
+			AudioSource.PlayClipAtPoint(zombieWalk,new Vector3(transform.position.x,transform.position.y,transform.position.z));
 			randomPoint.x = (Random.value * (radius - minRadius)) + minRadius;
 			randomPoint.y = 1.0f;
 			randomPoint.z = (Random.value * (radius - minRadius)) + minRadius;
