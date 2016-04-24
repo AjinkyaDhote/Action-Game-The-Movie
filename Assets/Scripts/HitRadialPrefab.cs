@@ -6,14 +6,14 @@ public class HitRadialPrefab : MonoBehaviour
 {
 
     private GameObject enemy;
-    bool enemyTrue = false;
+    bool enemyTrue;
     float angleBetween;
     Image hitRadialImage;
 
     // Use this for initialization
     void Start()
     {
-
+        enemyTrue = false;
     }
 
     // Update is called once per frame

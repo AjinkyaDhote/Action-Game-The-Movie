@@ -378,7 +378,6 @@ GameObject:
   - 20: {fileID: 2051460}
   - 124: {fileID: 12438118}
   - 92: {fileID: 9237526}
-  - 81: {fileID: 8115674}
   - 114: {fileID: 11491300}
   - 114: {fileID: 11456150}
   m_Layer: 0
@@ -903,13 +902,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!81 &8115674
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164052}
-  m_Enabled: 0
 --- !u!81 &8169042
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1042,7 +1034,8 @@ MonoBehaviour:
   reducedTimeScale: 0.3
   sliderValueActive: 50
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
-  coolDownTimer: 2
+  coolDownTimer: 5
+  isRMBHoldType: 0
 --- !u!114 &11405036
 MonoBehaviour:
   m_ObjectHideFlags: 1

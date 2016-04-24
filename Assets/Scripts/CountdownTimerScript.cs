@@ -7,13 +7,14 @@ public class CountdownTimerScript : MonoBehaviour {
     Camera gunCamera;
     [HideInInspector]
     public bool hasGameStarted = false;
-    bool countdownStarted = false;
+    bool countdownStarted;
     Text countdownText;
     int countdown;
     float initialTime;
 
     void Start ()
     {
+        countdownStarted = false;
         countdown = 3;
         gunCamera = transform.parent.GetComponent<Canvas>().worldCamera;
         gunCamera.cullingMask = gunCamera.cullingMask & 0x800;

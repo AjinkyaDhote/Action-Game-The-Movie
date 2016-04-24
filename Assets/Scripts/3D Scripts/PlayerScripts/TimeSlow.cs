@@ -12,47 +12,72 @@ public class TimeSlow : MonoBehaviour
     public float sliderValueActive = 50.0f;
     public Color flashColor = new Color(1.0f, 0.0f, 0.0f, 0.1f);
     public float coolDownTimer = 5.0f;
+    [HideInInspector]
+    public bool isRMBHoldType;
 
     Image tintImageScript;
     Image clockImageScript;
     Image sliderFillImageScript;
     Slider slider;
     CountdownTimerScript countdownTimer;
+    PauseMenu pauseMenuScript;
     float initialFixedDeltaTime;
-    bool isPressed = false;
-    bool isRefilling = false;
-    bool isSlowTimeDisabled = false;
+    bool isPressed;
+    bool isRefilling;
+    bool isSlowTimeDisabled;
+    bool isSlowTimeEnabledInToggleMode;
     void Start()
     {
+        isPressed = false;
+        isRefilling = false;
+        isSlowTimeDisabled = false;
+        isSlowTimeEnabledInToggleMode = true;
         initialFixedDeltaTime = Time.fixedDeltaTime;
         tintImageScript = transform.GetChild(0).GetComponent<Image>();
         clockImageScript=transform.GetChild(1).GetComponent<Image>();
         sliderFillImageScript = transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Image>();
         slider = transform.GetChild(2).GetComponent<Slider>();
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
     }
 
     void Update()
     {
-        if(countdownTimer.hasGameStarted)
+        if(pauseMenuScript.isPaused)
         {
-            if (Input.GetButton("Fire2") && !isRefilling && !isSlowTimeDisabled)
+            if (isPressed)
             {
-                isPressed = true;
-            }
-            else if (Input.GetButtonUp("Fire2"))
-            {
-                if(!isSlowTimeDisabled)
-                {
-                    isSlowTimeDisabled = true;
-                    StartCoroutine("CoolDownWait");
-                }     
-                if (slider.value < sliderValueActive)
-                {
-                    isRefilling = true;
-                }
                 ResetBulletTime();
             }
+        }
+        if(countdownTimer.hasGameStarted && !pauseMenuScript.isPaused)
+        {
+            if (isRMBHoldType)
+            {
+                if (Input.GetButton("Fire2") && !isRefilling && !isSlowTimeDisabled)
+                {
+                    isPressed = true;
+                }
+                else if (Input.GetButtonUp("Fire2"))
+                {
+                    ResetBulletTime();
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Fire2") && !isRefilling && !isSlowTimeDisabled)
+                {
+                    if (isSlowTimeEnabledInToggleMode)
+                    {
+                        isPressed = true;
+                        isSlowTimeEnabledInToggleMode = false;
+                    }
+                    else
+                    {     
+                        ResetBulletTime();
+                    }
+                }
+            }           
         }   
         if (isPressed)
         {
@@ -91,16 +116,43 @@ public class TimeSlow : MonoBehaviour
             }
             if (slider.value == slider.minValue)
             {
-                ResetBulletTime();
+                if(!isSlowTimeEnabledInToggleMode)
+                {
+                    ResetBulletTime();
+                }
+                else
+                {
+                    tintImageScript.color = Color.clear;
+                    Time.timeScale = 1.0f;
+                    isPressed = false;
+                    Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
+                }            
             }
         }       
     }
     void ResetBulletTime()
     {
         tintImageScript.color = Color.clear;
-        Time.timeScale = 1.0f;
-        isPressed = false;
-        Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
+        if(pauseMenuScript.isPaused)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
+        }   
+        isPressed = false;     
+        isSlowTimeEnabledInToggleMode = true;
+        if (!isSlowTimeDisabled)
+        {
+            isSlowTimeDisabled = true;
+            StartCoroutine("CoolDownWait");
+        }
+        if (slider.value < sliderValueActive)
+        {
+            isRefilling = true;
+        }
     }
     IEnumerator CoolDownWait()
     {
