@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Vector3 returnVal;
 		returnVal.x = (relativePoint.x / width2DPlane) * width3DPlane;
-		returnVal.y = 1.0f;
+		returnVal.y = transform.position.y;
 		returnVal.z = (relativePoint.y / height2DPlane) * height3DPlane;
 		return returnVal;
 	}
