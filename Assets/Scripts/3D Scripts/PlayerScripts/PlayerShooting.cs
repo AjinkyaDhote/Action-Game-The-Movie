@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     public Animator anim;
     public ParticleSystem[] impacts;
 
+
     GameObject laserPrefab;
     GameObject laser;
     float nextFire = 0.0f;
@@ -17,13 +18,15 @@ public class PlayerShooting : MonoBehaviour
     EnemyHealth damageScript;
     bool shooting = false;
 	int bulletCount;
+	AudioSource noBullets;
 
     Text AmmoText;
     string bulletsString;
 
     void Start()
 	{
-		bulletCount = 300;
+		noBullets = GetComponent<AudioSource> ();
+		bulletCount = 10;
 		weaponSystemScript = GetComponent<WeaponSystem> ();
 		AmmoText = transform.FindChild ("FPS UI Canvas").FindChild ("AmmoText").GetComponent<Text> ();
 		bulletsString = " " + bulletCount;
@@ -41,92 +44,84 @@ public class PlayerShooting : MonoBehaviour
             {
                 nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                 shooting = true;
+				if (bulletCount <= 0) 
+				{
+					noBullets.Play ();
+				}
             }
         }
         else if (Input.GetButtonDown("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
             shooting = true;
+			if (bulletCount <= 0) 
+			{
+				noBullets.Play ();
+			}
         }
+
     }
 
 
     void FixedUpdate()
 	{     
-        if (shooting && bulletCount > 0)
-        {
+		if (shooting && (bulletCount > 0)) {
 			weaponSystemScript.audioGun.Play ();
-			muzzleFlash.Play();
-			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
-			{
-				anim.SetTrigger("ShotGun");
-			}
-			else if(weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun" )
-			{
-				anim.SetTrigger("Fire");
+			muzzleFlash.Play ();
+			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") {
+				anim.SetTrigger ("ShotGun");
+			} else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun") {
+				anim.SetTrigger ("Fire");
 			}
 
-			if (bulletCount > 0) 
-			{
+			if (bulletCount > 0) {
 				bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
 				bulletsString = " " + bulletCount;
 				AmmoText.text = bulletsString;
 			}
 
-			if (bulletCount <= 10)
-			{
+			if (bulletCount <= 10) {
 				AmmoText.color = Color.red;
 			}	
-            shooting = false;
-            RaycastHit hit;
+			shooting = false;
+			RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 50f))
-            {
-                if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
-                {
-                    laser = Instantiate(laserPrefab);
-                    laser.transform.SetParent(transform);
-                    laser.transform.localPosition = new Vector3(0.695f, -0.809f, 2.805f);
-                    laser.transform.localRotation = Quaternion.identity;
-                    laser.GetComponent<Laser>().GetCorrectEnemy(hit.point);
-                }
-                if (hit.collider.tag == "Wall")
-                {
-                    impacts[0].transform.position = hit.point;
-                    Debug.Log(hit.point);
-                    impacts[0].Play();
-                }
-                else if (hit.collider.tag == "BodyCollider")
-                {
+			if (Physics.Raycast (transform.position, transform.forward, out hit, 50f)) {
+				if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun") {
+					laser = Instantiate (laserPrefab);
+					laser.transform.SetParent (transform);
+					laser.transform.localPosition = new Vector3 (0.695f, -0.809f, 2.805f);
+					laser.transform.localRotation = Quaternion.identity;
+					laser.GetComponent<Laser> ().GetCorrectEnemy (hit.point);
+				}
+				if (hit.collider.tag == "Wall") {
+					impacts [0].transform.position = hit.point;
+					Debug.Log (hit.point);
+					impacts [0].Play ();
+				} else if (hit.collider.tag == "BodyCollider") {
 
-                    impacts[1].transform.position = hit.point;
-                    impacts[1].Play();
-                    AI_movement aiMovementScript = hit.collider.transform.parent.parent.GetComponent<AI_movement>();
-                    if (aiMovementScript != null)
-                    {
-                        if (!aiMovementScript.isPlayerSeen)
-                        {
-                            aiMovementScript.Detection();
-                        }
-                    }
-                     damageScript = hit.collider.GetComponent<EnemyHealth>();
-                    if (damageScript != null)
-                    {
-                        damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
-                    }
-                }
-                else if ((hit.collider.tag == "HeadCollider"))
-                {
-                    impacts[1].transform.position = hit.point;
-                    impacts[1].Play();
-                     damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
-                    if (damageScript != null)
-                    {
-                        damageScript.Damage(10000);
-                    }
-                }
-            }
-        }
+					impacts [1].transform.position = hit.point;
+					impacts [1].Play ();
+					AI_movement aiMovementScript = hit.collider.transform.parent.parent.GetComponent<AI_movement> ();
+					if (aiMovementScript != null) {
+						if (!aiMovementScript.isPlayerSeen) {
+							aiMovementScript.Detection ();
+						}
+					}
+					damageScript = hit.collider.GetComponent<EnemyHealth> ();
+					if (damageScript != null) {
+						damageScript.Damage (weaponSystemScript.currentWeaponInfo.damageDealt);
+					}
+				} else if ((hit.collider.tag == "HeadCollider")) {
+					impacts [1].transform.position = hit.point;
+					impacts [1].Play ();
+					damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth> ();
+					if (damageScript != null) {
+						damageScript.Damage (10000);
+					}
+				}
+			}
+		} 
     }
     public void PickupAmmo()
     {
