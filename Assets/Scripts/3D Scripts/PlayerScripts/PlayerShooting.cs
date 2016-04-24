@@ -22,7 +22,7 @@ public class PlayerShooting : MonoBehaviour
 
     Text AmmoText;
     string bulletsString;
-
+    Text bulletOverText;
     void Start()
 	{
 		noBullets = GetComponent<AudioSource> ();
@@ -35,7 +35,8 @@ public class PlayerShooting : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
 		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
-	}
+        bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
+    }
     void Update()
     {
         if(weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
@@ -59,10 +60,7 @@ public class PlayerShooting : MonoBehaviour
 				noBullets.Play ();
 			}
         }
-
     }
-
-
     void FixedUpdate()
 	{     
 		if (shooting && (bulletCount > 0)) {
@@ -79,7 +77,10 @@ public class PlayerShooting : MonoBehaviour
 				bulletsString = " " + bulletCount;
 				AmmoText.text = bulletsString;
 			}
-
+            if (bulletCount <= 0)
+            {
+                bulletOverText.text = "OUT OF AMMO";
+            }
 			if (bulletCount <= 10) {
 				AmmoText.color = Color.red;
 			}	
@@ -126,6 +127,7 @@ public class PlayerShooting : MonoBehaviour
     public void PickupAmmo()
     {
         bulletCount += 10;
+        bulletOverText.text = "";
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
         if(bulletCount>=10)
