@@ -1974,6 +1974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerSeen: 0
+  zombieWalk: {fileID: 8300000, guid: 83a151f3faac21a4d9416a15d74ba41c, type: 3}
   radius: 10
 --- !u!114 &11464560
 MonoBehaviour:
@@ -2010,6 +2011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   deadMaterial: {fileID: 2100000, guid: f50f10ff709fa50448b4bad3f138ee1a, type: 2}
+  ZombieDeath: {fileID: 8300000, guid: 1f95bfe0f4216514f8ef5c1a98d0598b, type: 3}
   currentHealth: 0
 --- !u!135 &13501644
 SphereCollider:
