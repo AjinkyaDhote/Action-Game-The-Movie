@@ -19,10 +19,9 @@ public class HitRadialPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyTrue)
-        {
+      
             startRotation(enemy, hitRadialImage);
-        }
+            //Debug.Log("aaaa");
 
     }
     public void startRotation(GameObject enemyArgument, Image self)
@@ -35,7 +34,7 @@ public class HitRadialPrefab : MonoBehaviour
         if (cross.y < 0) angleBetween = -angleBetween;
 
         hitRadialImage.rectTransform.anchoredPosition3D = new Vector3(300 * Mathf.Sin((angleBetween * Mathf.PI) / 180), -300 * Mathf.Cos((angleBetween * Mathf.PI) / 180), 0);
-        // Debug.Log(" angle of hit : " + angleOfHit);
+        //Debug.Log(" angle of hit : " + angleBetween);
         hitRadialImage.rectTransform.localScale = new Vector3(4, 4, 4);
         hitRadialImage.rectTransform.localRotation = Quaternion.Euler(0, 0, angleBetween - 180);
         hitRadialImage.fillAmount = 1;
