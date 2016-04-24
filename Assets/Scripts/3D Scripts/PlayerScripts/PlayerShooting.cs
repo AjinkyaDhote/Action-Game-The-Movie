@@ -55,6 +55,7 @@ public class PlayerShooting : MonoBehaviour
 	{     
         if (shooting && bulletCount > 0)
         {
+			weaponSystemScript.audioGun.Play ();
 			muzzleFlash.Play();
 			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
 			{

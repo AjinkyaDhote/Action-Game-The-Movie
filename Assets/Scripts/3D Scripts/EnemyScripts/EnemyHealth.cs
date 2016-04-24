@@ -7,11 +7,14 @@ public class EnemyHealth : MonoBehaviour {
     private Animator anim;
     //private NavMeshAgent agent;
     public Material deadMaterial;
+	public AudioClip ZombieDeath;
 
     int delayTime;
 	public int currentHealth;
 	void Start ()
     {
+		
+	
         delayTime = 6;
         //agent = GetComponent<NavMeshAgent>();        
         currentHealth = startingHealth;
@@ -41,6 +44,7 @@ public class EnemyHealth : MonoBehaviour {
 
 	void Defeated()
 	{
+		AudioSource.PlayClipAtPoint (ZombieDeath, new Vector3 (transform.position.x, transform.position.y, transform.position.z));
         anim.SetBool("isPlayerDead", true);
         Destroy(transform.parent.parent.gameObject, delayTime);
     }
