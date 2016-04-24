@@ -20,10 +20,11 @@ public class PlayerShooting : MonoBehaviour
 
     Text AmmoText;
     string bulletsString;
+    Text bulletOverText;
 
     void Start()
 	{
-		bulletCount = 300;
+        bulletCount = 10;
 		weaponSystemScript = GetComponent<WeaponSystem> ();
 		AmmoText = transform.FindChild ("FPS UI Canvas").FindChild ("AmmoText").GetComponent<Text> ();
 		bulletsString = " " + bulletCount;
@@ -32,7 +33,8 @@ public class PlayerShooting : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
 		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
-	}
+        bulletOverText= transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
+    }
     void Update()
     {
         if(weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
@@ -76,6 +78,10 @@ public class PlayerShooting : MonoBehaviour
 			{
 				AmmoText.color = Color.red;
 			}	
+            if(bulletCount<=0)
+            {
+                bulletOverText.text = "YOU HAVE NO AMMO";
+            }
             shooting = false;
             RaycastHit hit;
 
@@ -130,6 +136,7 @@ public class PlayerShooting : MonoBehaviour
     public void PickupAmmo()
     {
         bulletCount += 10;
+        bulletOverText.text = "";
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
         if(bulletCount>=10)
