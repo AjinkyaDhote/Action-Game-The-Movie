@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private int currentLevel;
+    public enum MenuState { MAIN_MENU, LEVEL_MENU, IN_GAME_MENU };
+
+    public MenuState currentMenuState;
+
     // public variables
     public List<Vector2> mapPoints; // these are image coordinates
     public List<int> distanceTravelled;
@@ -30,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     // private variables
     private static GameManager _instance = null;
-    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, GameWinLose };
+    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentState = GameStates.MENU;
     int batteryCount;
@@ -49,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        currentMenuState = MenuState.MAIN_MENU;
+
         DontDestroyOnLoad(gameObject);
         currentState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
@@ -58,13 +65,29 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         currentState = GameStates.PLAY_GAME;
-        SceneManager.LoadScene((int)Levels.Scene3D_1);
+
+        if ( currentLevel == 1 )
+        {
+            SceneManager.LoadScene((int)Levels.Scene3D_1);
+        }
+        else if (currentLevel == 2)
+        {
+            SceneManager.LoadScene((int)Levels.Scene3D_2);
+        }
     }
 
     public void PlanGame()
     {
         currentState = GameStates.PLAN_GAME;
-        SceneManager.LoadScene((int)Levels.Scene2D_1);
+
+        if ( currentLevel == 1 )
+        {
+            SceneManager.LoadScene((int)Levels.Scene2D_1);
+        }
+        else if ( currentLevel == 2 )
+        {
+            SceneManager.LoadScene((int)Levels.Scene2D_2);
+        }
     }
 
     public void GoToMenu()
@@ -84,11 +107,17 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void setCurrentLevel( int level )
+    {
+        currentMenuState = MenuState.IN_GAME_MENU;
+        currentLevel = level;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("a"))
         {
-            if (currentState != GameStates.MENU && currentState != GameStates.PLAY_GAME)
+            if (currentState != GameStates.MENU)
             {
                 currentState = GameStates.MENU;
                 SceneManager.LoadScene((int)Levels.MENU);
@@ -96,7 +125,6 @@ public class GameManager : MonoBehaviour
                 {
                     batteryCount += batteryPickupsCount[i];
                 }
-                Debug.Log(batteryCount);
             }
         }
     }
