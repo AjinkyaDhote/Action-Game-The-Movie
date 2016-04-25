@@ -13,12 +13,12 @@ public class EnemyHealth : MonoBehaviour {
 	public int currentHealth;
 	void Start ()
     {
-        deadMaterial = Resources.Load("Material/deadMaterial") as Material;
+        deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
         ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
 
         delayTime = 6;
         //agent = GetComponent<NavMeshAgent>();        
-        if (transform.parent.parent.name == "Warzombie_F_Pedroso")
+        if (transform.parent.parent.CompareTag("SmallEnemy"))
             currentHealth = 10;
         else
             currentHealth = 60;
