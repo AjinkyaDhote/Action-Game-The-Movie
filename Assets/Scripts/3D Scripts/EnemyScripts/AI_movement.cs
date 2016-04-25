@@ -25,7 +25,7 @@ public class AI_movement : MonoBehaviour
 		Random.seed = 42;
 		initialPos = gameObject.transform.position;
 		radius = 10;
-		minRadius = 2;
+		minRadius = 0;
 
 		isPlayerSeen = false;
 		isPlayerInRange = false;
