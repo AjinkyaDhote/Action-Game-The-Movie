@@ -17,6 +17,7 @@ public class AI_movement : MonoBehaviour
     [HideInInspector]
     public bool isPlayerSeen;
     bool isPlayerInRange;
+    Vector3 resetPositionForInRange;
 
     public float radius;
     private float minRadius;
@@ -45,11 +46,10 @@ public class AI_movement : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealthScript>();
         playerCollider = player.GetComponent<Collider>();
         agent.speed = enemyWalkSpeed;
-        agent.autoBraking = false;
         Patrol();
     }
 
-    Vector3 getRandomVector()
+    Vector3 GetRandomVector()
     {
         bool hit = true;
         Vector3 randomPoint;
@@ -95,6 +95,7 @@ public class AI_movement : MonoBehaviour
                 if (isPlayerInRange)
                 {
                     agent.speed = 0;
+                    transform.position = resetPositionForInRange;
                     transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
                 }
                 else
@@ -129,11 +130,12 @@ public class AI_movement : MonoBehaviour
     public void InRange()
     {
         anim.SetBool("isPlayerInRange", true);
+        resetPositionForInRange = transform.position;
         isPlayerInRange = true;
     }
     public void OutOfRange()
     {
-        anim.SetBool("isPlayerInRange", false);
+        anim.SetBool("isPlayerInRange", false); 
         isPlayerInRange = false;
     }
     void Patrol()
@@ -143,6 +145,6 @@ public class AI_movement : MonoBehaviour
             agent.speed = 0;
             zombieWalk.Stop();
         }
-        agent.destination = getRandomVector();
+        agent.destination = GetRandomVector();
     }
 }
