@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour {
 
 	
     private Animator anim;
+    public bool isKilled;
     //private NavMeshAgent agent;
     private Material deadMaterial;
 	private AudioClip ZombieDeath;
@@ -24,6 +25,8 @@ public class EnemyHealth : MonoBehaviour {
             currentHealth = 60;
         anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
+        isKilled = false;
+        //GameManager.Instance.totalEnemiesKilled = 0;
     }
 
 	public void Damage(int damage)
@@ -48,6 +51,14 @@ public class EnemyHealth : MonoBehaviour {
 
 	void Defeated()
 	{
+        if (!isKilled)
+        {
+            Debug.Log("Killed");
+            isKilled = true;
+            GameManager.Instance.totalEnemiesKilled++;
+            anim.SetBool("isPlayerDead", true);
+            Destroy(transform.parent.parent.gameObject, delayTime);
+        }
 		AudioSource.PlayClipAtPoint (ZombieDeath, new Vector3 (transform.position.x, transform.position.y, transform.position.z));
         anim.SetBool("isPlayerDead", true);
         Destroy(transform.parent.parent.gameObject, delayTime);
