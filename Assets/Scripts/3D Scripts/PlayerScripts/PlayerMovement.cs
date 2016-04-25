@@ -43,6 +43,17 @@ public class PlayerMovement : MonoBehaviour
 
 		WASDmovement = GetComponent<wasdMovement>();
 		wayPointNumber = 1;
+
+        if (GameManager.Instance.mapPoints.Count == 1)
+        {
+            wayPointNumber = 0;
+            lastReached = true;
+        }
+        else
+        {
+            lastReached = false;
+        }
+
 		rigidBody = GetComponent<Rigidbody>();
 		if (!WASDmovement.enabled)
 		{
@@ -60,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
 		BatteryText.color = Color.white;
 		batteryString = " " + (batteryCount + _battery.batteryPickedUp);
 		BatteryText.text = batteryString;
-		lastReached = false;
 	}
 	void Update()
 	{
@@ -76,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if (Vector3.Distance(transform.position, wayPoints3D[wayPointNumber]) < 0.5f)
 			{
-				if (wayPointNumber == wayPoints3D.Length - 1 && lastReached == false)
+				if (lastReached == false && wayPointNumber == wayPoints3D.Length - 1)
 				{
 					batteryCount -= GameManager.Instance.batteryUsedList[wayPointNumber - 1];
 					batteryString = " " + (batteryCount + _battery.batteryPickedUp);
