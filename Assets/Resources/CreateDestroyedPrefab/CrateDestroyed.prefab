@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 64: {fileID: 6449000}
   m_Layer: 0
   m_Name: CrateDestroyed
   m_TagString: Untagged
@@ -3185,6 +3186,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300062, guid: 2c4ac0a1baa283544878f7fa01738d48, type: 3}
+--- !u!64 &6449000
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: 2c4ac0a1baa283544878f7fa01738d48, type: 3}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -3265,7 +3278,7 @@ Animation:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations: []

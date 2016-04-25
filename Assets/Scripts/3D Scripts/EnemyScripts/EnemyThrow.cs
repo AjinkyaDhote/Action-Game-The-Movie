@@ -1,124 +1,123 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyThrow : MonoBehaviour {
-    private GameObject crate;
-    private GameObject roar;
-    private GameObject attack;
-    private Animator anim;
-    private throwScript throwing;
-    private GameObject player;
-    
-    //private bool isPlayerSeen = false;
+public class EnemyThrow : MonoBehaviour
+{
+    public float enemyRunSpeed;
+    [HideInInspector]
+    public bool isPlayerSeen;
+    bool isPlayerInRange;
+    bool isCrateThrown;
+    bool roarNotYetPlayed;
+    Vector3 resetPositionForInRange;
+    Animator anim;
+    GameObject player;
     Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
-    private AudioSource roarSource;
-    private AudioSource attackSource;
-    // Use this for initialization
-    void Start () {
-        crate = GameObject.FindGameObjectWithTag("Crate");
-        roar = GameObject.FindGameObjectWithTag("Roar");
-        attack = GameObject.FindGameObjectWithTag("Attack");
-        throwing = crate.GetComponent<throwScript>();
+    AudioSource roarSource;
+    AudioSource attackSource;
+    ThrowCrate throwCrateScript;
+    PlayerHealthScript playerHealth;
+    GameObject hitRadialPrefab;
+    GameObject hitRadial;
+    NavMeshAgent agent;
+    PauseMenu pauseMenuScript;
+    void Start()
+    {
+        isPlayerSeen = false;
+        isPlayerInRange = false;
+        isCrateThrown = false;
+        roarNotYetPlayed = true;
+        hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
+        throwCrateScript = transform.GetChild(3).GetChild(2).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<ThrowCrate>();
         anim = GetComponent<Animator>();
-        anim.SetBool("isPlayerInRange", false);
-        anim.SetBool("throwCrate", false);
-        anim.SetBool("isPlayerRunning", false);
-        anim.SetBool("isPlayerSeen", false);
-        anim.SetBool("hasYelled", false);
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         enemyBodyCollider = transform.GetChild(3).GetChild(2).GetComponent<Collider>();
         enemyHeadCollider = transform.GetChild(3).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
         playerCollider = player.GetComponent<Collider>();
-        //transform.position += transform.forward * 0 * Time.deltaTime;
-        roarSource = roar.GetComponent<AudioSource>();
-        attackSource = attack.GetComponent<AudioSource>();
-        roarSource.playOnAwake = false;
-        attackSource.playOnAwake = false;
+        playerHealth = player.GetComponent<PlayerHealthScript>();
+        roarSource = transform.GetChild(0).GetComponent<AudioSource>();
+        attackSource = transform.GetChild(1).GetComponent<AudioSource>();
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        if (Vector3.Distance(player.transform.position, transform.position) < 20.0f && (!anim.GetBool("isPlayerSeen")))
-            distance();
-        if (anim.GetBool("isPlayerSeen"))
+        Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
+        Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
+        if (isPlayerSeen)
         {
-           Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
-            
-           Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
-            
-            transform.LookAt(player.transform);
-          
-            anim.SetBool("hasYelled", true);
-            
-            Debug.Log("Following player");
-            if (Vector3.Distance(transform.position, player.transform.position) < 3f)
+            if(!roarSource.isPlaying && roarNotYetPlayed)
             {
-                if (!attackSource.isPlaying)
-                    attackSource.Play();
-
-
-                Debug.Log("Caught player");
-
-                anim.SetBool("isPlayerInRange", true);
-                anim.SetBool("isPlayerRunning", false);
-                transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                
-                //transform.position = new Vector3(transform.position.x, 0.67f, transform.position.z);
+                roarSource.Play();
+                roarNotYetPlayed = false;
             }
-            else if (anim.GetBool("throwCrate"))
-            
+            if (anim.GetBool("isPlayerDead"))
             {
-                if (!anim.GetBool("isPlayerDead"))
-                {
-                    transform.position = new Vector3(transform.position.x, 0.67f, transform.position.z);
-                    transform.position += transform.forward * 6 * Time.deltaTime;
-                }
-                
-
-                if (Vector3.Distance(player.transform.position, transform.position) > 15.0f)
-                {
-                   
-                    anim.SetBool("isPlayerRunning", true);
-                    anim.SetBool("isPlayerInRange", false);
-                    Debug.Log("Player running away from me");
-                }
+                agent.speed = 0;
             }
-
-        }
+            else
+            {
+                transform.LookAt(player.transform);
+                if (isPlayerInRange)
+                {
+                    agent.speed = 0;
+                    transform.position = resetPositionForInRange;
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    if(pauseMenuScript.isPaused)
+                    {
+                        attackSource.Stop();
+                    }
+                    else
+                    {
+                        if (!attackSource.isPlaying)
+                        {
+                            attackSource.Play();
+                        }
+                    }                
+                }
+                else
+                {
+                    if (isCrateThrown)
+                    {
+                        agent.speed = enemyRunSpeed;
+                        agent.destination = player.transform.position;
+                    }
+                }  
+            }
+        }              
     }
 
-    void thrower()
-        {
-        
-        throwing.release(); 
-        anim.SetBool("throwCrate", true);
-        //transform.position += transform.forward * 3 * Time.deltaTime;
+    public void Detection()
+    {
+        transform.LookAt(player.transform);
+        isPlayerSeen = true;
+        anim.SetBool("isPlayerSeen", true);
+    }
+    public void InRange()
+    {
+        anim.SetBool("isPlayerInRange", true);
+        resetPositionForInRange = transform.position;
+        isPlayerInRange = true;     
+    }
+    public void OutOfRange()
+    {
+        anim.SetBool("isPlayerInRange", false);
+        isPlayerInRange = false;
+    }
+
+    void ThrowCrateNow()
+    {
+        throwCrateScript.Release();
+        isCrateThrown = true;     
     }
 
     void DamagePlayer()
     {
-        player.GetComponent<PlayerHealthScript>().PlayerDamage();
+        playerHealth.PlayerDamage();
+        hitRadial = Instantiate(hitRadialPrefab);
+        hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
+        hitRadial.GetComponent<HitRadial>().StartRotation(transform);
+        Destroy(hitRadial, 2.0f);
     }
-
-    void distance()
-    {
-
-      
-        {
-
-            transform.LookAt(player.transform);
-            //Debug.Log((Vector3.Distance(player.transform.position, transform.position)));
-           anim.SetBool("isPlayerSeen", true);
-            //isPlayerSeen = true;
-            if (!roarSource.isPlaying)
-                roarSource.Play();
-            anim.SetBool("isPlayerInRange", true);
-         
-            
-        }
-    }
-
-   
 }
