@@ -4,19 +4,29 @@ using System.Collections;
 
 public class Scoring : MonoBehaviour {
 
-    public int totalDistance;
+
+    //private int EnemiesKilled;
+    //private int healthRemaining;
+    //private int batteryRemaining; 
+    //private int totalDistance;
+    //private int headshots;
+    public Text playerHealthText;
+    //public Text ammoText;
+
     public int totalBattery;
     public int totalBatteryValue;
     public int batteryUsed;
-    public Text playerHealthText;
+    
 
-    private int remainingHealth;
+    //private int remainingHealth;
     private int initialBattery;
+    //private int initialAmmo;//..................................................
 
     // Use this for initialization
     void Start ()
     {
-        totalDistance = 0;
+        //totalDistance = 0;
+        GameManager.Instance.totalDistance = 0;
         totalBattery = 0;
         batteryUsed = 0;
         initialBattery = GameManager.Instance.battery;
@@ -36,15 +46,18 @@ public class Scoring : MonoBehaviour {
         for (int i = 0; i < GameManager.Instance.distanceTravelled.Count; i++)
         {
             Debug.Log(GameManager.Instance.distanceTravelled[i]);
-            totalDistance += GameManager.Instance.distanceTravelled[i];
+            GameManager.Instance.totalDistance += GameManager.Instance.distanceTravelled[i];      
         }
 
-        Debug.Log("Batteries");
+        /*Debug.Log("Batteries");
         for (int i = 0; i < GameManager.Instance.batteryPickupsCount.Count; i++)
         {
             totalBattery += GameManager.Instance.batteryPickupsCount[i];
         }
         Debug.Log(totalBattery);
+        */
+
+        Debug.Log(GameManager.Instance.batteryCount);
 
         Debug.Log("TotalBatteryValue");
         for (int i = 0; i < GameManager.Instance.batteryPickups.Count; i++)
@@ -68,9 +81,12 @@ public class Scoring : MonoBehaviour {
         Debug.Log(GameManager.Instance.totalEnemiesKilled);
 
         Debug.Log("HealthRemaining");
-        remainingHealth = System.Int32.Parse(playerHealthText.text);
-        Debug.Log(remainingHealth);
+        GameManager.Instance.remainingHealth = System.Int32.Parse(playerHealthText.text);
+        Debug.Log(GameManager.Instance.remainingHealth);
 
+        Debug.Log("Score");
+        GameManager.Instance.TotalScore = (GameManager.Instance.headShots / 10)*100 + (GameManager.Instance.totalEnemiesKilled / 10)*100 + (GameManager.Instance.remainingHealth / 100)*100 - (GameManager.Instance.totalDistance / 100)*100;
+        Debug.Log(GameManager.Instance.TotalScore);
 
 
     }
