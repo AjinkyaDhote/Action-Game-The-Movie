@@ -77,7 +77,7 @@ public class EnemyThrow : MonoBehaviour {
                 }
                 
 
-                if (Vector3.Distance(player.transform.position, transform.position) > 15.0f)
+                if (Vector3.Distance(player.transform.position, transform.position) > 3.0f)
                 {
                    
                     anim.SetBool("isPlayerRunning", true);

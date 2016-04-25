@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
 
 public class WinTrigger : MonoBehaviour {
 
@@ -22,6 +20,7 @@ public class WinTrigger : MonoBehaviour {
             GameManager.Instance.win_Lose = true;
             GameManager.Instance.win_Lose_Message = "You Win!";
             GameManager.Instance.GoToWinLoseScene();
+            GameManager.Instance.currentMenuState = GameManager.MenuState.LEVEL_MENU;
         }
     }
 

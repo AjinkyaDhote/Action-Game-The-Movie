@@ -4,17 +4,13 @@ using UnityEngine.UI;
 
 public class Battery : MonoBehaviour
 {
-
-	private int batteryCount = 100;
 	PlayerShooting playerShootingScript;
-	string batteryString;
 	public int batteryPickedUp;
 
 	void Start()
 	{
 		batteryPickedUp = 0;
 		playerShootingScript = transform.GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
-		batteryString = " " + batteryCount;
 	}
 	void OnTriggerEnter(Collider other)
 	{
