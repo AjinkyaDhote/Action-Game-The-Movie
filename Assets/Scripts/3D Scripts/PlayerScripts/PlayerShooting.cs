@@ -17,30 +17,29 @@ public class PlayerShooting : MonoBehaviour
     CountdownTimerScript countdownTimer;
     EnemyHealth damageScript;
     bool shooting = false;
-	int bulletCount;
-	AudioSource noBullets;
+    int bulletCount;
+    AudioSource noBullets;
 
     Text AmmoText;
     string bulletsString;
     Text bulletOverText;
     void Start()
-	{
-		noBullets = GetComponent<AudioSource> ();
-		bulletCount = 10;
-		weaponSystemScript = GetComponent<WeaponSystem> ();
-		AmmoText = transform.FindChild ("FPS UI Canvas").FindChild ("AmmoText").GetComponent<Text> ();
-		bulletsString = " " + bulletCount;
-		AmmoText.text = bulletsString;
-		AmmoText.color = Color.green;
-		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
-		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
-		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
+    {
+        noBullets = GetComponent<AudioSource>();
+        bulletCount = 10;
+        weaponSystemScript = GetComponent<WeaponSystem>();
+        AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
+        bulletsString = " " + bulletCount;
+        AmmoText.text = bulletsString;
+        AmmoText.color = Color.green;
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+        laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
+        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
-    }
     }
     void Update()
     {
-        if(weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
+        if (weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
         {
             if (Input.GetButton("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
             {
@@ -63,11 +62,9 @@ public class PlayerShooting : MonoBehaviour
         }
     }
     void FixedUpdate()
-	{
+    {
         Debug.Log(".");
-	{
         if (bulletCount <= 0)
-        if (shooting && bulletCount > 0)
         {
             bulletOverText.text = "OUT OF AMMO";
         }
@@ -83,8 +80,8 @@ public class PlayerShooting : MonoBehaviour
                 {
                     bulletOverText.text = "";
                 }
-            } 
-            
+            }
+
             else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
             {
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
@@ -191,10 +188,10 @@ public class PlayerShooting : MonoBehaviour
         bulletOverText.text = "";
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
-        if(bulletCount>=10)
+        if (bulletCount >= 10)
         {
             AmmoText.color = Color.green;
-        }      
+        }
     }
 }
 
