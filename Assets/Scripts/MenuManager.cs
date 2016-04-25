@@ -3,7 +3,7 @@
 public class MenuManager : MonoBehaviour
 {
     public Transform MainMount, LevelMount, InGameMount;
-    public Camera camera;
+    public Camera cam;
 
     void Start()
     {
@@ -11,7 +11,7 @@ public class MenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        MainMenuCamControl mainMenuCamControl = camera.GetComponent<MainMenuCamControl>();
+        MainMenuCamControl mainMenuCamControl = cam.GetComponent<MainMenuCamControl>();
 
         if ( GameManager.Instance.currentMenuState == GameManager.MenuState.MAIN_MENU )
         {
