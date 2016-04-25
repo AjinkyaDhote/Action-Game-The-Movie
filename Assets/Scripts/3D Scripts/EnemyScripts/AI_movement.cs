@@ -10,11 +10,13 @@ public class AI_movement : MonoBehaviour
 	[HideInInspector]
 	public bool isPlayerSeen;
 	bool isPlayerInRange;
-	public AudioClip zombieWalk;
+	CountdownTimerScript counter;
+
 
 	public float radius;
 	private float minRadius;
 	private Vector3 initialPos;
+	private AudioSource zombieWalk;
 
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
 
@@ -28,12 +30,14 @@ public class AI_movement : MonoBehaviour
 		isPlayerSeen = false;
 		isPlayerInRange = false;
 
+		zombieWalk = GetComponent<AudioSource> ();
 		agent = GetComponent<NavMeshAgent>();        
 		anim = GetComponent<Animator>();          
 		enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
 		enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerCollider = player.GetComponent<Collider>();
+		counter = GameObject.FindGameObjectWithTag ("InstructionsCanvas").GetComponentInChildren<CountdownTimerScript> ();
 
 		agent.autoBraking = false;
 		Patrol();
@@ -46,7 +50,6 @@ public class AI_movement : MonoBehaviour
 		Vector3 direction;
 		do
 		{
-			AudioSource.PlayClipAtPoint(zombieWalk,new Vector3(transform.position.x,transform.position.y,transform.position.z));
 			randomPoint.x = (Random.value * (radius - minRadius)) + minRadius;
 			randomPoint.y = 1.0f;
 			randomPoint.z = (Random.value * (radius - minRadius)) + minRadius;
@@ -65,9 +68,17 @@ public class AI_movement : MonoBehaviour
 
 	void Update()
 	{
+//		if (counter.hasGameStarted) 
+//		{
+//			if (!zombieWalk.isPlaying) 
+//			{
+//				zombieWalk.Play ();	
+//			}
+//		}
 		if (anim.GetBool ("isPlayerDead")) {
 
 			agent.speed = 0;
+			zombieWalk.Stop ();
 		} 
 		else {
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
@@ -126,6 +137,7 @@ public class AI_movement : MonoBehaviour
 		if (anim.GetBool("isPlayerDead"))
 		{
 			agent.speed = 0;
+			zombieWalk.Stop ();
 		}
 
 		agent.destination = getRandomVector();
