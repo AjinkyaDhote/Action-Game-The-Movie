@@ -73,11 +73,11 @@ public class EnemyThrow : MonoBehaviour {
                 if (!anim.GetBool("isPlayerDead"))
                 {
                     transform.position = new Vector3(transform.position.x, 0.67f, transform.position.z);
-                    transform.position += transform.forward * 9 * Time.deltaTime;
+                    transform.position += transform.forward * 6 * Time.deltaTime;
                 }
                 
 
-                if (Vector3.Distance(player.transform.position, transform.position) > 10.0f)
+                if (Vector3.Distance(player.transform.position, transform.position) > 15.0f)
                 {
                    
                     anim.SetBool("isPlayerRunning", true);

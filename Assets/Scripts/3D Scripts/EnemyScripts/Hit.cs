@@ -30,11 +30,10 @@ public class Hit : MonoBehaviour {
 
     void OnCollisionEnter( Collision collision ) {
 
-       
-        
-		DestroyIt();
         Debug.Log(player);
+		DestroyIt();
         player.GetComponent<PlayerHealthScript>().PlayerDamage();
+	
 		
 	}
 	
