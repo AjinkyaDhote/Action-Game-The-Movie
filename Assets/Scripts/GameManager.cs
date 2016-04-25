@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
     public enum MenuState { MAIN_MENU, LEVEL_MENU, IN_GAME_MENU };
 
+    public bool playAvailable;
+
     public MenuState currentMenuState;
 
     // public variables
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        playAvailable = false;
         currentMenuState = MenuState.MAIN_MENU;
 
         DontDestroyOnLoad(gameObject);
@@ -117,15 +120,14 @@ public class GameManager : MonoBehaviour
 
     public void setCurrentLevel( int level )
     {
-        currentMenuState = MenuState.IN_GAME_MENU;
         currentLevel = level;
     }
 
     void Update()
-    {
+    { 
         if (Input.GetKeyDown("a"))
         {
-            if (currentState != GameStates.MENU)
+            if (currentState != GameStates.MENU && currentState != GameStates.PLAY_GAME)
             {
                 currentState = GameStates.MENU;
                 SceneManager.LoadScene((int)Levels.MENU);
