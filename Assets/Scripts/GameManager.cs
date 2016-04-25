@@ -114,10 +114,10 @@ public class GameManager : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         if (Input.GetKeyDown("a"))
         {
-            if (currentState != GameStates.MENU)
+            if (currentState != GameStates.MENU && currentState != GameStates.PLAY_GAME)
             {
                 currentState = GameStates.MENU;
                 SceneManager.LoadScene((int)Levels.MENU);
