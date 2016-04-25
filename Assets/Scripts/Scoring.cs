@@ -8,7 +8,9 @@ public class Scoring : MonoBehaviour {
     public int totalBattery;
     public int totalBatteryValue;
     public int batteryUsed;
+    public Text playerHealthText;
 
+    private int remainingHealth;
     private int initialBattery;
 
     // Use this for initialization
@@ -19,6 +21,9 @@ public class Scoring : MonoBehaviour {
         batteryUsed = 0;
         initialBattery = GameManager.Instance.battery;
         totalBatteryValue = 0 + initialBattery;
+
+        
+
         Debug.Log("initialBattery");
         Debug.Log(initialBattery);
     }
@@ -61,6 +66,12 @@ public class Scoring : MonoBehaviour {
 
         Debug.Log("Killed");
         Debug.Log(GameManager.Instance.totalEnemiesKilled);
+
+        Debug.Log("HealthRemaining");
+        remainingHealth = System.Int32.Parse(playerHealthText.text);
+        Debug.Log(remainingHealth);
+
+
 
     }
         // Update is called once per frame

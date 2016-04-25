@@ -2008,7 +2008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 5
+  isKilled: 0
   deadMaterial: {fileID: 2100000, guid: f50f10ff709fa50448b4bad3f138ee1a, type: 2}
   currentHealth: 0
 --- !u!135 &13501644
@@ -2057,10 +2058,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.6
+  m_Radius: 0.1
+  m_Height: 0.4157466
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.04, z: 0}
 --- !u!137 &13714072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

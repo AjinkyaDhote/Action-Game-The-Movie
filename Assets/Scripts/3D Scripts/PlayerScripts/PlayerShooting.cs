@@ -21,8 +21,6 @@ public class PlayerShooting : MonoBehaviour
     Text AmmoText;
     string bulletsString;
 
-    int headShotCount;
-
     void Start()
 	{
 		bulletCount = 300;
@@ -34,9 +32,6 @@ public class PlayerShooting : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
 		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
-
-        GameManager.Instance.headShots = 0;
-        headShotCount = GameManager.Instance.headShots;//-------------------------------------------------------------------------------------------------
     }
     void Update()
     {
@@ -57,7 +52,8 @@ public class PlayerShooting : MonoBehaviour
 
 
     void FixedUpdate()
-	{     
+	{
+        Debug.Log(".");
         if (shooting && bulletCount > 0)
         {
 			muzzleFlash.Play();
@@ -114,7 +110,7 @@ public class PlayerShooting : MonoBehaviour
                         }
                     }
                      damageScript = hit.collider.GetComponent<EnemyHealth>();
-                    if (damageScript != null)
+                    if ((damageScript != null) && !damageScript.isKilled)
                     {
                         damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
                     }
@@ -124,10 +120,11 @@ public class PlayerShooting : MonoBehaviour
                     impacts[1].transform.position = hit.point;
                     impacts[1].Play();
                      damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
-                    if (damageScript != null)
+                    if ((damageScript != null) && (!damageScript.isKilled))
                     {
                         damageScript.Damage(10000);
                         GameManager.Instance.headShots++;
+                        Debug.Log("Head Shot");
                     }
                 }
             }

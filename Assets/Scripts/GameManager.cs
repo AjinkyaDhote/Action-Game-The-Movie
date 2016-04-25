@@ -53,9 +53,6 @@ public class GameManager : MonoBehaviour
         currentState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
         batteryCount = 0;
-
-        headShots = 0;
-        totalEnemiesKilled = 0;
     }
 
     public void PlayGame()

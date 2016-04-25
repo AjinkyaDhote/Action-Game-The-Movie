@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour {
 
 	public int startingHealth = 3;
     private Animator anim;
+    public bool isKilled;
     //private NavMeshAgent agent;
     public Material deadMaterial;
 
@@ -16,6 +17,8 @@ public class EnemyHealth : MonoBehaviour {
         currentHealth = startingHealth;
         anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
+        isKilled = false;
+        //GameManager.Instance.totalEnemiesKilled = 0;
     }
 
 	public void Damage(int damage)
@@ -40,8 +43,13 @@ public class EnemyHealth : MonoBehaviour {
 
 	void Defeated()
 	{
-        GameManager.Instance.totalEnemiesKilled++;
-        anim.SetBool("isPlayerDead", true);
-        Destroy(transform.parent.parent.gameObject, delayTime);
+        if (!isKilled)
+        {
+            Debug.Log("Killed");
+            isKilled = true;
+            GameManager.Instance.totalEnemiesKilled++;
+            anim.SetBool("isPlayerDead", true);
+            Destroy(transform.parent.parent.gameObject, delayTime);
+        }
     }
 }

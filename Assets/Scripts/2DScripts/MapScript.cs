@@ -132,7 +132,8 @@ public class MapScript : MonoBehaviour
         int currentBattery = System.Int32.Parse(batteryText.text);
         thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
 
-        //batteryCount = 0;
+        GameManager.Instance.headShots = 0;
+        GameManager.Instance.totalEnemiesKilled = 0;
 
     }
 
