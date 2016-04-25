@@ -439,7 +439,7 @@ GameObject:
   - 114: {fileID: 11459400}
   m_Layer: 0
   m_Name: Warzombie_F_Pedroso
-  m_TagString: Enemy
+  m_TagString: SmallEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1722,7 +1722,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34, y: -0.29399872, z: -21.3}
+  m_LocalPosition: {x: -34, y: 0.1, z: -21.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 445300}
@@ -1974,6 +1974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerSeen: 0
+  zombieWalk: {fileID: 8300000, guid: 83a151f3faac21a4d9416a15d74ba41c, type: 3}
   radius: 10
 --- !u!114 &11464560
 MonoBehaviour:
@@ -2008,9 +2009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
-  isKilled: 0
-  deadMaterial: {fileID: 2100000, guid: f50f10ff709fa50448b4bad3f138ee1a, type: 2}
   currentHealth: 0
 --- !u!135 &13501644
 SphereCollider:
@@ -2043,7 +2041,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125720}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4
   m_Height: 1.8
@@ -2056,12 +2054,12 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112210}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.4157466
+  m_Radius: 0.2
+  m_Height: 0.6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.04, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13714072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -3,18 +3,26 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
 
-	public int startingHealth = 3;
+	
     private Animator anim;
     public bool isKilled;
     //private NavMeshAgent agent;
-    public Material deadMaterial;
+    private Material deadMaterial;
+	private AudioClip ZombieDeath;
 
-    int delayTime = 6;
+    int delayTime;
 	public int currentHealth;
 	void Start ()
     {
-		//agent = GetComponent<NavMeshAgent>();        
-        currentHealth = startingHealth;
+        deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
+        ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
+
+        delayTime = 6;
+        //agent = GetComponent<NavMeshAgent>();        
+        if (transform.parent.parent.CompareTag("SmallEnemy"))
+            currentHealth = 10;
+        else
+            currentHealth = 60;
         anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
         isKilled = false;
@@ -51,5 +59,8 @@ public class EnemyHealth : MonoBehaviour {
             anim.SetBool("isPlayerDead", true);
             Destroy(transform.parent.parent.gameObject, delayTime);
         }
+		AudioSource.PlayClipAtPoint (ZombieDeath, new Vector3 (transform.position.x, transform.position.y, transform.position.z));
+        anim.SetBool("isPlayerDead", true);
+        Destroy(transform.parent.parent.gameObject, delayTime);
     }
 }

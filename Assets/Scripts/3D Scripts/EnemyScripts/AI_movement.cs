@@ -10,6 +10,7 @@ public class AI_movement : MonoBehaviour
 	[HideInInspector]
 	public bool isPlayerSeen;
 	bool isPlayerInRange;
+	public AudioClip zombieWalk;
 
 	public float radius;
 	private float minRadius;
@@ -45,6 +46,7 @@ public class AI_movement : MonoBehaviour
 		Vector3 direction;
 		do
 		{
+			AudioSource.PlayClipAtPoint(zombieWalk,new Vector3(transform.position.x,transform.position.y,transform.position.z));
 			randomPoint.x = (Random.value * (radius - minRadius)) + minRadius;
 			randomPoint.y = 1.0f;
 			randomPoint.z = (Random.value * (radius - minRadius)) + minRadius;
@@ -76,12 +78,15 @@ public class AI_movement : MonoBehaviour
 				transform.LookAt(player.transform);
 				if (isPlayerInRange)
 				{
+                    agent.speed = 0;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
 
 				}
 				else
 				{
-					transform.position += transform.forward * 9 * Time.deltaTime;
+                    //transform.position += transform.forward * 9 * Time.deltaTime;
+                    agent.speed = 7;
+                    agent.destination = player.transform.position;
 
 				}       
 			}
@@ -104,7 +109,7 @@ public class AI_movement : MonoBehaviour
 		transform.LookAt(player.transform);
 		isPlayerSeen = true;
 		anim.SetBool("isPlayerSeen", true);
-		agent.speed = 0;
+		//agent.speed = 0;
 	}
 	public void InRange()
 	{

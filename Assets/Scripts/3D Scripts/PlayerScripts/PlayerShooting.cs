@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     public Animator anim;
     public ParticleSystem[] impacts;
 
+
     GameObject laserPrefab;
     GameObject laser;
     float nextFire = 0.0f;
@@ -17,13 +18,15 @@ public class PlayerShooting : MonoBehaviour
     EnemyHealth damageScript;
     bool shooting = false;
 	int bulletCount;
+	AudioSource noBullets;
 
     Text AmmoText;
     string bulletsString;
-
+    Text bulletOverText;
     void Start()
 	{
-		bulletCount = 300;
+		noBullets = GetComponent<AudioSource> ();
+		bulletCount = 10;
 		weaponSystemScript = GetComponent<WeaponSystem> ();
 		AmmoText = transform.FindChild ("FPS UI Canvas").FindChild ("AmmoText").GetComponent<Text> ();
 		bulletsString = " " + bulletCount;
@@ -32,6 +35,8 @@ public class PlayerShooting : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag ("PauseMenu").GetComponent<PauseMenu> ();
 		laserPrefab = Resources.Load ("Laser Prefab/Laser") as GameObject;
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild (0).GetComponent<CountdownTimerScript> ();
+        bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
+    }
     }
     void Update()
     {
@@ -41,42 +46,92 @@ public class PlayerShooting : MonoBehaviour
             {
                 nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                 shooting = true;
+                if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+                {
+                    noBullets.Play();
+                }
             }
         }
         else if (Input.GetButtonDown("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
             shooting = true;
+            if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+            {
+                noBullets.Play();
+            }
         }
     }
-
-
     void FixedUpdate()
 	{
         Debug.Log(".");
+	{
+        if (bulletCount <= 0)
         if (shooting && bulletCount > 0)
         {
-			muzzleFlash.Play();
-			if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun") 
-			{
-				anim.SetTrigger("ShotGun");
-			}
-			else if(weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun" )
-			{
-				anim.SetTrigger("Fire");
-			}
+            bulletOverText.text = "OUT OF AMMO";
+        }
+        else
+        {
+            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            {
+                if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+                {
+                    bulletOverText.text = "SWITCH GUN";
+                }
+                else if (bulletCount > weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+                {
+                    bulletOverText.text = "";
+                }
+            } 
+            
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
+            {
+                if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+                {
+                    bulletOverText.text = "SWITCH GUN";
+                }
+                else if (bulletCount > weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+                {
+                    bulletOverText.text = "";
+                }
+            }
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
+            {
+                if (bulletCount > weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
+                {
+                    bulletOverText.text = "";
+                }
+            }
+        }
 
-			if (bulletCount > 0) 
-			{
-				bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
-				bulletsString = " " + bulletCount;
-				AmmoText.text = bulletsString;
-			}
+        if (shooting && (bulletCount > weaponSystemScript.currentWeaponInfo.ammoNeeded - 1))
+        {
+            weaponSystemScript.audioGun.Play();
+            muzzleFlash.Play();
+            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            {
+                anim.SetTrigger("ShotGun");
+            }
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
+            {
+                anim.SetTrigger("Fire");
+            }
 
-			if (bulletCount <= 10)
-			{
-				AmmoText.color = Color.red;
-			}	
+            if (bulletCount > 0)
+            {
+                bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
+                if (bulletCount <= 0)
+                {
+                    bulletCount = 0;
+                }
+                bulletsString = " " + bulletCount;
+                AmmoText.text = bulletsString;
+            }
+            if (bulletCount <= 10)
+            {
+                AmmoText.color = Color.red;
+            }
             shooting = false;
             RaycastHit hit;
 
@@ -109,7 +164,7 @@ public class PlayerShooting : MonoBehaviour
                             aiMovementScript.Detection();
                         }
                     }
-                     damageScript = hit.collider.GetComponent<EnemyHealth>();
+                    damageScript = hit.collider.GetComponent<EnemyHealth>();
                     if ((damageScript != null) && !damageScript.isKilled)
                     {
                         damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
@@ -119,10 +174,10 @@ public class PlayerShooting : MonoBehaviour
                 {
                     impacts[1].transform.position = hit.point;
                     impacts[1].Play();
-                     damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
+                    damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
                     if ((damageScript != null) && (!damageScript.isKilled))
                     {
-                        damageScript.Damage(10000);
+                        damageScript.Damage(25);
                         GameManager.Instance.headShots++;
                         Debug.Log("Head Shot");
                     }
@@ -133,6 +188,7 @@ public class PlayerShooting : MonoBehaviour
     public void PickupAmmo()
     {
         bulletCount += 10;
+        bulletOverText.text = "";
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
         if(bulletCount>=10)
