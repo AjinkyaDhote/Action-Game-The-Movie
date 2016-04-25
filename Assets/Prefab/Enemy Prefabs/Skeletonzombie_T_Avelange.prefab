@@ -416,10 +416,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 441154}
   - 95: {fileID: 9587674}
-  - 114: {fileID: 11432458}
+  - 114: {fileID: 11488228}
   m_Layer: 0
   m_Name: Skeletonzombie_T_Avelange
-  m_TagString: Enemy
+  m_TagString: BigEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -750,7 +750,6 @@ GameObject:
   - 4: {fileID: 449050}
   - 137: {fileID: 13740242}
   - 82: {fileID: 8286322}
-  - 114: {fileID: 11498572}
   m_Layer: 0
   m_Name: skeletonZombie
   m_TagString: Untagged
@@ -1349,8 +1348,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138464}
-  m_LocalRotation: {x: 0, y: -0.9959737, z: 0, w: 0.08964616}
-  m_LocalPosition: {x: -21.299889, y: 0.6724707, z: -30.026262}
+  m_LocalRotation: {x: 0, y: -0.99999964, z: 0, w: 0.0009261188}
+  m_LocalPosition: {x: -33.02, y: 0, z: 45.52}
   m_LocalScale: {x: 1.6704574, y: 1.6704578, z: 1.6704578}
   m_Children:
   - {fileID: 442834}
@@ -2341,22 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 500
   currentHealth: 0
---- !u!114 &11432458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413d2a5022cf6424f8a6c2a524c17f42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crate: {fileID: 191522}
-  roar: {fileID: 140036}
-  attack: {fileID: 111440}
 --- !u!114 &11471522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2369,20 +2353,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crateSpeed: 700
---- !u!114 &11498572
+--- !u!114 &11488228
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 161860}
+  m_GameObject: {fileID: 138464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413d2a5022cf6424f8a6c2a524c17f42, type: 3}
+  m_Script: {fileID: 11500000, guid: a7c9b0d037b41d24c8fc306a5f59224b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crate: {fileID: 0}
-  roar: {fileID: 0}
-  attack: {fileID: 0}
 --- !u!136 &13600382
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2390,7 +2371,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181578}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4982914
   m_Height: 1.8
@@ -2403,7 +2384,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104196}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4
   m_Height: 0.1

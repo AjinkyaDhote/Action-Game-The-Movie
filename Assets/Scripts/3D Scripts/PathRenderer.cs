@@ -3,14 +3,14 @@ using System.Collections;
 
 public class PathRenderer : MonoBehaviour {
 
-    public GameObject prefab;
+    private GameObject planePrefab;
     //GameObject objOne;
     //public GameObject objTwo;
     private Vector3 posOne;
     private Vector3 posTwo;
     private GameObject go;
     float angle;
-    public GameObject nodePrefab;
+    private GameObject nodePrefab;
     Vector3[] wayPoints3D;
 
     float distance, xValue, zValue;
@@ -26,6 +26,8 @@ public class PathRenderer : MonoBehaviour {
 
     void Start()
     {
+        planePrefab = Resources.Load("LinePrefab/Line") as GameObject;
+        nodePrefab = Resources.Load("NodePrefab/Node") as GameObject;
         angle = 0;
         width2DPlane = GameManager.Instance.width2DPlane;
         height2DPlane = GameManager.Instance.height2DPlane;
@@ -47,7 +49,7 @@ public class PathRenderer : MonoBehaviour {
             //Debug.Log("1: " + wayPoints3D[0]);
             //Debug.Log("2: " + posTwo);
 
-            go = (GameObject)Instantiate(prefab, new Vector3(xValue, 0, zValue), Quaternion.Euler(0, angle, 0));
+            go = (GameObject)Instantiate(planePrefab, new Vector3(xValue, 0, zValue), Quaternion.Euler(0, angle, 0));
             xValue = (posOne.x + posTwo.x) / 2;
             zValue = (posOne.z + posTwo.z) / 2;
             distance = Vector3.Distance(posOne, posTwo);
