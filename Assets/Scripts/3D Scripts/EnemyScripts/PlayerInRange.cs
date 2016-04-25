@@ -1,19 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInRange : MonoBehaviour
-{
+public class PlayerInRange : MonoBehaviour{
     AI_movement aiMovementScript;
+    EnemyThrow enemyThrowScript;
     void Start()
     {
-        aiMovementScript = transform.parent.GetComponent<AI_movement>();
+        if (transform.parent.CompareTag("SmallEnemy"))
+        {
+            aiMovementScript = transform.parent.GetComponent<AI_movement>();
+        }
+        else
+        {
+            enemyThrowScript = transform.parent.GetComponent<EnemyThrow>();
+        }
     }
     void OnTriggerEnter(Collider other)
     {
-        aiMovementScript.InRange();
+        if (other.CompareTag("Player"))
+        {
+            if (aiMovementScript != null)
+            {
+                aiMovementScript.InRange();
+            }
+            if (enemyThrowScript != null)
+            {
+                enemyThrowScript.InRange();
+            }
+        }
     }
-    void OnTriggerExit()
+    void OnTriggerExit(Collider other)
     {
-        aiMovementScript.OutOfRange();
+        if (other.CompareTag("Player"))
+        {
+            if (aiMovementScript != null)
+            {
+                aiMovementScript.OutOfRange();
+            }
+            if (enemyThrowScript != null)
+            {
+                enemyThrowScript.OutOfRange();
+            }
+        }
     }
 }
