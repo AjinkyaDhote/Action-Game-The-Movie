@@ -2,19 +2,22 @@
 using System.Collections;
 
 public class EnemyThrow : MonoBehaviour {
-    public GameObject crate;
-    public GameObject roar;
-    public GameObject attack;
+    private GameObject crate;
+    private GameObject roar;
+    private GameObject attack;
     private Animator anim;
     private throwScript throwing;
     private GameObject player;
+    
     //private bool isPlayerSeen = false;
     Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
     private AudioSource roarSource;
     private AudioSource attackSource;
     // Use this for initialization
     void Start () {
-        
+        crate = GameObject.FindGameObjectWithTag("Crate");
+        roar = GameObject.FindGameObjectWithTag("Roar");
+        attack = GameObject.FindGameObjectWithTag("Attack");
         throwing = crate.GetComponent<throwScript>();
         anim = GetComponent<Animator>();
         anim.SetBool("isPlayerInRange", false);
@@ -37,7 +40,7 @@ public class EnemyThrow : MonoBehaviour {
     void Update()
     {
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 18.0f && (!anim.GetBool("isPlayerSeen")))
+        if (Vector3.Distance(player.transform.position, transform.position) < 20.0f && (!anim.GetBool("isPlayerSeen")))
             distance();
         if (anim.GetBool("isPlayerSeen"))
         {
@@ -70,11 +73,11 @@ public class EnemyThrow : MonoBehaviour {
                 if (!anim.GetBool("isPlayerDead"))
                 {
                     transform.position = new Vector3(transform.position.x, 0.67f, transform.position.z);
-                    transform.position += transform.forward * 3 * Time.deltaTime;
+                    transform.position += transform.forward * 6 * Time.deltaTime;
                 }
                 
 
-                if (Vector3.Distance(player.transform.position, transform.position) > 10.0f)
+                if (Vector3.Distance(player.transform.position, transform.position) > 15.0f)
                 {
                    
                     anim.SetBool("isPlayerRunning", true);

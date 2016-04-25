@@ -3,23 +3,30 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
 
-	public int startingHealth = 3;
+	
     private Animator anim;
+    public bool isKilled;
     //private NavMeshAgent agent;
-    public Material deadMaterial;
-	public AudioClip ZombieDeath;
+    private Material deadMaterial;
+	private AudioClip ZombieDeath;
 
     int delayTime;
 	public int currentHealth;
 	void Start ()
     {
-		
-	
+        deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
+        ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
+
         delayTime = 6;
         //agent = GetComponent<NavMeshAgent>();        
-        currentHealth = startingHealth;
+        if (transform.parent.parent.CompareTag("SmallEnemy"))
+            currentHealth = 10;
+        else
+            currentHealth = 60;
         anim = transform.parent.parent.GetComponent<Animator> ();
         anim.SetBool("isPlayerDead", false);
+        isKilled = false;
+        //GameManager.Instance.totalEnemiesKilled = 0;
     }
 
 	public void Damage(int damage)
@@ -44,6 +51,14 @@ public class EnemyHealth : MonoBehaviour {
 
 	void Defeated()
 	{
+        if (!isKilled)
+        {
+            Debug.Log("Killed");
+            isKilled = true;
+            GameManager.Instance.totalEnemiesKilled++;
+            anim.SetBool("isPlayerDead", true);
+            Destroy(transform.parent.parent.gameObject, delayTime);
+        }
 		AudioSource.PlayClipAtPoint (ZombieDeath, new Vector3 (transform.position.x, transform.position.y, transform.position.z));
         anim.SetBool("isPlayerDead", true);
         Destroy(transform.parent.parent.gameObject, delayTime);

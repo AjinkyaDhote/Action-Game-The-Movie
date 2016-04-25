@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     // public variables
     public List<Vector2> mapPoints; // these are image coordinates
+    public List<int> distanceTravelled;
     //public List<Vector3> BatteryPos;
     public List<int> batteryUsedList;
     public List<int> batteryPickups; public List<int> ammoPickups;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public int battery = 100;
     public int batteryDepletionRate = 5;
+    public int headShots;
+    public int totalEnemiesKilled;
 
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 

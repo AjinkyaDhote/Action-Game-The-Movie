@@ -10,10 +10,13 @@ public class AI_movement : MonoBehaviour
 	[HideInInspector]
 	public bool isPlayerSeen;
 	bool isPlayerInRange;
+	CountdownTimerScript counter;
+
 
 	public float radius;
 	private float minRadius;
 	private Vector3 initialPos;
+	private AudioSource zombieWalk;
 
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
 
@@ -27,12 +30,14 @@ public class AI_movement : MonoBehaviour
 		isPlayerSeen = false;
 		isPlayerInRange = false;
 
+		zombieWalk = GetComponent<AudioSource> ();
 		agent = GetComponent<NavMeshAgent>();        
 		anim = GetComponent<Animator>();          
 		enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
 		enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerCollider = player.GetComponent<Collider>();
+		counter = GameObject.FindGameObjectWithTag ("InstructionsCanvas").GetComponentInChildren<CountdownTimerScript> ();
 
 		agent.autoBraking = false;
 		Patrol();
@@ -63,9 +68,17 @@ public class AI_movement : MonoBehaviour
 
 	void Update()
 	{
+//		if (counter.hasGameStarted) 
+//		{
+//			if (!zombieWalk.isPlaying) 
+//			{
+//				zombieWalk.Play ();	
+//			}
+//		}
 		if (anim.GetBool ("isPlayerDead")) {
 
 			agent.speed = 0;
+			zombieWalk.Stop ();
 		} 
 		else {
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
@@ -76,12 +89,15 @@ public class AI_movement : MonoBehaviour
 				transform.LookAt(player.transform);
 				if (isPlayerInRange)
 				{
+                    agent.speed = 0;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
 
 				}
 				else
 				{
-					transform.position += transform.forward * 9 * Time.deltaTime;
+                    //transform.position += transform.forward * 9 * Time.deltaTime;
+                    agent.speed = 7;
+                    agent.destination = player.transform.position;
 
 				}       
 			}
@@ -104,7 +120,7 @@ public class AI_movement : MonoBehaviour
 		transform.LookAt(player.transform);
 		isPlayerSeen = true;
 		anim.SetBool("isPlayerSeen", true);
-		agent.speed = 0;
+		//agent.speed = 0;
 	}
 	public void InRange()
 	{
@@ -121,6 +137,7 @@ public class AI_movement : MonoBehaviour
 		if (anim.GetBool("isPlayerDead"))
 		{
 			agent.speed = 0;
+			zombieWalk.Stop ();
 		}
 
 		agent.destination = getRandomVector();

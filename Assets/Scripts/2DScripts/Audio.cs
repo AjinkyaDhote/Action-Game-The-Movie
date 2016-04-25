@@ -6,31 +6,16 @@ public class Audio: MonoBehaviour {
 	public AudioSource mouseClick;
 	public AudioSource undo;
 	public AudioSource wrongClick;
-	public AudioSource backgroundMusic;
+    public AudioSource backgroundMusic;
 
-
-	// Use this for initialization
-	void Start () {
-
-		backgroundMusic.Play ();
-
-	}
-	
-	// Update is called once per frame
-
-
-
-
-	void Update () 
-	{
-		
-	}
-		
+    void Start()
+    {
+        backgroundMusic.Play();
+    }
 
 	public void MouseClicked()
 	{
-		mouseClick.Play ();
-		
+		mouseClick.Play ();		
 	}
 
 	public void WrongClick()
@@ -42,8 +27,4 @@ public class Audio: MonoBehaviour {
 	{
 		undo.Play ();
 	}
-
-
-		
-
 }
