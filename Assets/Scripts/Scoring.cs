@@ -84,7 +84,8 @@ public class Scoring : MonoBehaviour {
         GameManager.Instance.remainingHealth = System.Int32.Parse(playerHealthText.text);
         Debug.Log(GameManager.Instance.remainingHealth);
 
-        GameManager.Instance.TotalScore = (GameManager.Instance.headShots / 50)*100 + (GameManager.Instance.totalEnemiesKilled / 50)*100 + (GameManager.Instance.remainingHealth / 500)*1000 - (GameManager.Instance.totalDistance / 100)*200;
+        Debug.Log("Score");
+        GameManager.Instance.TotalScore = (GameManager.Instance.headShots / 10)*100 + (GameManager.Instance.totalEnemiesKilled / 10)*100 + (GameManager.Instance.remainingHealth / 100)*100 - (GameManager.Instance.totalDistance / 100)*100;
         Debug.Log(GameManager.Instance.TotalScore);
 
 
