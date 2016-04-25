@@ -18,6 +18,7 @@ public class MapScript : MonoBehaviour
     public Transform LowBatteryPrefab;
     public int batteryCount;
     public int ammoCount;
+	public GameObject SoundManager;
 
     private RaycastHit hit;
     private List<Vector2> mapPoints;
@@ -230,8 +231,10 @@ public class MapScript : MonoBehaviour
 
     private void UndoPrevMove()
     {
+		
         if (playerShadowPrefabList.Count > 0)
         {
+			SoundManager.GetComponent<Audio> ().Undo();
             mapPoints.RemoveAt(mapPoints.Count - 1);
 
             Transform prevShadow = playerShadowPrefabList[playerShadowPrefabList.Count - 1] as Transform;
@@ -327,111 +330,110 @@ public class MapScript : MonoBehaviour
 
         //Debug.Log(countObjects(worldPos, "wallColliders"));
 
-        if (countObjects(worldPos, "wallColliders") == 0)//if(!checkForWall(worldPos))//if (!checkForObject(worldPos)  || (hit.transform.parent.name != "wallColliders"))//if (!checkForObstruction(worldPos))
-        {
-            // reduce batteryzz
-            int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, worldPos));
-            distanceTravelled.Add(travelDist);
-            int currentBattery = System.Int32.Parse(batteryText.text);
-            if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0)
-            {
-                int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
-                int batteriesPicked = 0;
-                if (countObjects(worldPos, "Batteries") > 0)                                         //battery detection
-                {
-                    //Debug.Log(countObjects(worldPos, "Batteries"));
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        if (hits[i].transform.parent.name == "Batteries")
-                        {
-                            //Debug.Log(i);
-                            //Destroy(hits[i].transform.gameObject);
-                            BatteriesHitList.Add(hits[i].transform.gameObject);
-                            hits[i].transform.gameObject.SetActive(false);
-                            batteryPickups.Add(50);
-                            batteryLeft += 50;
-                            batteriesPicked++;
-                        }
-                    }
+		if (countObjects (worldPos, "wallColliders") == 0) {//if(!checkForWall(worldPos))//if (!checkForObject(worldPos)  || (hit.transform.parent.name != "wallColliders"))//if (!checkForObstruction(worldPos))
+			// reduce batteryzz
+			int travelDist = (int)Mathf.Ceil (Vector3.Distance (prevShadowPos, worldPos));
+			distanceTravelled.Add (travelDist);
+			int currentBattery = System.Int32.Parse (batteryText.text);
+			if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0) {
+				SoundManager.GetComponent<Audio> ().MouseClicked ();
+				int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
+				int batteriesPicked = 0;
+				if (countObjects (worldPos, "Batteries") > 0) {                                         //battery detection
+					//Debug.Log(countObjects(worldPos, "Batteries"));
+					for (int i = 0; i < hits.Length; i++) {
+						if (hits [i].transform.parent.name == "Batteries") {
+							//Debug.Log(i);
+							//Destroy(hits[i].transform.gameObject);
+							BatteriesHitList.Add (hits [i].transform.gameObject);
+							hits [i].transform.gameObject.SetActive (false);
+							batteryPickups.Add (50);
+							batteryLeft += 50;
+							batteriesPicked++;
+						}
+					}
 
-                    /*  if (batteryLeft > 100)
+					/*  if (batteryLeft > 100)
                       {
                           batteryLeft = batteryLeft - (batteryLeft % 100);
                       }*/
-                }
-                batteryPickupsCount.Add(batteriesPicked);
-                //Debug.Log("batteryCount");
-                //for (int i = 0; i < batteryPickupsCount.Count; i++)
-                //{
-                //    Debug.Log(batteryPickupsCount[i]);
-                //}
+				}
+				batteryPickupsCount.Add (batteriesPicked);
+				//Debug.Log("batteryCount");
+				//for (int i = 0; i < batteryPickupsCount.Count; i++)
+				//{
+				//    Debug.Log(batteryPickupsCount[i]);
+				//}
 
-                //Debug.Log("Batterypickups");
-                //for (int i = 0; i < batteryPickups.Count; i++)
-                //{
-                //    Debug.Log(batteryPickups[i]);
-                //}
-                batteryUsedList.Add((travelDist * GameManager.Instance.batteryDepletionRate));
-                batteryText.text = batteryLeft.ToString();
+				//Debug.Log("Batterypickups");
+				//for (int i = 0; i < batteryPickups.Count; i++)
+				//{
+				//    Debug.Log(batteryPickups[i]);
+				//}
+				batteryUsedList.Add ((travelDist * GameManager.Instance.batteryDepletionRate));
+				batteryText.text = batteryLeft.ToString ();
 
-                int ammosPicked = 0;
-                if (countObjects(worldPos, "Ammos") > 0)                                         //Ammo detection
-                {
-                    //Debug.Log(countObjects(worldPos, "Batteries"));
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        if (hits[i].transform.parent.name == "Ammos")
-                        {
-                            //Debug.Log(i);
-                            //Destroy(hits[i].transform.gameObject);
-                            ammosHitList.Add(hits[i].transform.gameObject);
-                            hits[i].transform.gameObject.SetActive(false);
-                            ammoPickups.Add(10);
-                            //batteryLeft += 10;
-                            ammosPicked++;
-                        }
-                    }
+				int ammosPicked = 0;
+				if (countObjects (worldPos, "Ammos") > 0) {                                         //Ammo detection
+					//Debug.Log(countObjects(worldPos, "Batteries"));
+					for (int i = 0; i < hits.Length; i++) {
+						if (hits [i].transform.parent.name == "Ammos") {
+							//Debug.Log(i);
+							//Destroy(hits[i].transform.gameObject);
+							ammosHitList.Add (hits [i].transform.gameObject);
+							hits [i].transform.gameObject.SetActive (false);
+							ammoPickups.Add (10);
+							//batteryLeft += 10;
+							ammosPicked++;
+						}
+					}
 
-                    /*  if (batteryLeft > 100)
+					/*  if (batteryLeft > 100)
                       {
                           batteryLeft = batteryLeft - (batteryLeft % 100);
                       }*/
-                }
-                ammoPickupsCount.Add(ammosPicked);
-                //Debug.Log("ammoCount");
-                //for (int i = 0; i < ammoPickupsCount.Count; i++)
-                //{
-                //    Debug.Log(ammoPickupsCount[i]);
-                //}
+				}
+				ammoPickupsCount.Add (ammosPicked);
+				//Debug.Log("ammoCount");
+				//for (int i = 0; i < ammoPickupsCount.Count; i++)
+				//{
+				//    Debug.Log(ammoPickupsCount[i]);
+				//}
 
-                //Debug.Log("ammoPickups");
-                //for (int i = 0; i < ammoPickups.Count; i++)
-                //{
-                //    Debug.Log(ammoPickups[i]);
-                //}
-
-
-                // draw the line and shadow
-                Vector2 imagePos = convertToPixels(worldPos);
-                mapPoints.Add(imagePos);
-
-                playerPosList.Add(worldPos);
-                Object playerShadowprefab = Instantiate(PlayerShadowPrefab, worldPos, Quaternion.identity);
-                playerShadowPrefabList.Add(playerShadowprefab);
-
-                Transform line = Instantiate(LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
-                linePrefabList.Add(line);
-                LineRenderer LineR = line.GetComponent<LineRenderer>();
-                LineR.SetPosition(0, prevShadowPos);
-                LineR.SetPosition(1, worldPos);
-
-                prevShadowPos = worldPos;
-                currentBattery = System.Int32.Parse(batteryText.text);
-                thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
+				//Debug.Log("ammoPickups");
+				//for (int i = 0; i < ammoPickups.Count; i++)
+				//{
+				//    Debug.Log(ammoPickups[i]);
+				//}
 
 
+				// draw the line and shadow
+				Vector2 imagePos = convertToPixels (worldPos);
+				mapPoints.Add (imagePos);
 
-            }
-        }
+				playerPosList.Add (worldPos);
+				Object playerShadowprefab = Instantiate (PlayerShadowPrefab, worldPos, Quaternion.identity);
+				playerShadowPrefabList.Add (playerShadowprefab);
+
+				Transform line = Instantiate (LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
+				linePrefabList.Add (line);
+				LineRenderer LineR = line.GetComponent<LineRenderer> ();
+				LineR.SetPosition (0, prevShadowPos);
+				LineR.SetPosition (1, worldPos);
+
+				prevShadowPos = worldPos;
+				currentBattery = System.Int32.Parse (batteryText.text);
+				thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
+
+
+
+			} else {
+				SoundManager.GetComponent<Audio> ().WrongClick ();
+			}
+		} 
+		else 
+		{
+			SoundManager.GetComponent<Audio> ().WrongClick ();
+		}
     }
 }
