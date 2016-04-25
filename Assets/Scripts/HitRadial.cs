@@ -1,28 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class HitRadial : MonoBehaviour {
 
-    public Image HitImage;
-    private GameObject enemy;
-    private Image HitRadialImage;
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void createNewRadial(GameObject AttackingEnemy)
+public class HitRadial : MonoBehaviour
+{
+    Transform enemyTransform;
+    Image hitRadialImage;
+    void Start()
     {
-        enemy = AttackingEnemy;
-        HitRadialImage = (Image)Instantiate(HitImage, new Vector3(0, 0, 0), Quaternion.identity);
-        HitRadialImage.transform.SetParent(transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas"));
-        Destroy(HitRadialImage.gameObject, 2.0f);
-        HitRadialImage.GetComponent<HitRadialPrefab>().startRotation(enemy, HitRadialImage);
+        hitRadialImage = GetComponent<Image>();
+    }
 
+    void Update()
+    {
+        if (enemyTransform)
+        {
+            StartRotation(enemyTransform);
+        }      
+    }
+    public void StartRotation(Transform enemyArgument)
+    {
+        enemyTransform = enemyArgument;
+        float angleBetween = Vector3.Angle(enemyTransform.forward, transform.parent.parent.parent.parent.forward);
+        Vector3 cross = Vector3.Cross(enemyTransform.forward,transform.parent.parent.parent.parent.forward);
+        if (cross.y < 0)
+        {
+            angleBetween = -angleBetween;
+        }
+        if(hitRadialImage)
+        {
+            hitRadialImage.rectTransform.anchoredPosition3D = new Vector3(300 * Mathf.Sin((angleBetween * Mathf.PI) / 180), -300 * Mathf.Cos((angleBetween * Mathf.PI) / 180), 0);
+            //Debug.Log(" angle of hit : " + angleBetween);
+            hitRadialImage.rectTransform.localScale = new Vector3(4, 4, 4);
+            hitRadialImage.rectTransform.localRotation = Quaternion.Euler(0, 0, angleBetween - 180);
+        }       
     }
 }

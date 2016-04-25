@@ -28,7 +28,7 @@ public class throwScript : MonoBehaviour {
         Debug.Log("crate released");
         transform.parent = null;
         rigid.useGravity = true;
-		float speed = crateSpeed * Time.deltaTime;
+		//float speed = crateSpeed * Time.deltaTime;
 		//transform.position = Vector3.MoveTowards (transform.position, player.transform.position, speed);
         rigid.MovePosition(transform.position + (player.transform.position - transform.position).normalized * crateSpeed * Time.deltaTime);
     }

@@ -26,7 +26,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         noBullets = GetComponent<AudioSource>();
-        bulletCount = 10;
+        bulletCount = 300;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         bulletsString = " " + bulletCount;
@@ -63,7 +63,6 @@ public class PlayerShooting : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(".");
         if (bulletCount <= 0)
         {
             bulletOverText.text = "OUT OF AMMO";

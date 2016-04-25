@@ -2048,6 +2048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903a12ef0bef7c74ca06dba4ec1fc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyWalkSpeed: 2
+  enemyRunSpeed: 10
   isPlayerSeen: 0
   radius: 10
 --- !u!114 &11464560
@@ -2083,6 +2085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283d9f19d58264d4583abad4dcafb84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isKilled: 0
   currentHealth: 0
 --- !u!135 &13501644
 SphereCollider:
