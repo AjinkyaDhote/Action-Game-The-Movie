@@ -22,11 +22,19 @@ public class GameManager : MonoBehaviour
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
-
+    
     public int battery = 100;
     public int batteryDepletionRate = 5;
+
+    //Score Board..................................................
     public int headShots;
     public int totalEnemiesKilled;
+    public int remainingHealth;
+    public int totalDistance;
+    public int TotalScore;
+    //........................................................
+    public int batteryCount;
+
 
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
@@ -40,7 +48,7 @@ public class GameManager : MonoBehaviour
     private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentState = GameStates.MENU;
-    int batteryCount;
+    
 
     public static GameManager Instance
     {
