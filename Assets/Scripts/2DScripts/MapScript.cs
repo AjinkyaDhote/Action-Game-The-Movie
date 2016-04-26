@@ -13,6 +13,7 @@ public class MapScript : MonoBehaviour
     public Player2D player2D;
     public List<Vector3> playerPosList;
     public Text batteryText;
+	public Text EndText;
     public RaycastHit[] hits;
     public Transform CrossPrefab;
     public Transform LowBatteryPrefab;
@@ -234,7 +235,7 @@ public class MapScript : MonoBehaviour
 
     private void UndoPrevMove()
     {
-		
+		EndText.gameObject.SetActive (false);
         if (playerShadowPrefabList.Count > 0)
         {
 			SoundManager.GetComponent<Audio> ().Undo();
@@ -409,6 +410,12 @@ public class MapScript : MonoBehaviour
 				//    Debug.Log(ammoPickups[i]);
 				//}
 
+
+
+				if(countObjects (worldPos, "Target") > 0)
+				{
+					EndText.gameObject.SetActive (true);
+				}
 
 				// draw the line and shadow
 				Vector2 imagePos = convertToPixels (worldPos);

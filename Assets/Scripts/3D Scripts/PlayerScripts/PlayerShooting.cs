@@ -34,7 +34,7 @@ public class PlayerShooting : MonoBehaviour
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
-        AmmoText.color = Color.green;
+		AmmoText.color = Color.white;
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
         laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
@@ -200,7 +200,7 @@ public class PlayerShooting : MonoBehaviour
         AmmoText.text = bulletsString;
         if (bulletCount >= 10)
         {
-            AmmoText.color = Color.green;
+			AmmoText.color = Color.white;
         }
     }
 }
