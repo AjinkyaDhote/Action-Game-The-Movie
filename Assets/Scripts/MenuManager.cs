@@ -43,11 +43,11 @@ public class MenuManager : MonoBehaviour
 
             if (GameManager.Instance.playAvailable == true)
         {
-            playButton.enabled = true;
+			playButton.interactable  = true;
         }
         else
         {
-            playButton.enabled = false;
+			playButton.interactable  = false;
         }
     }
 
@@ -71,7 +71,7 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.currentMenuState = GameManager.MenuState.IN_GAME_MENU;
         GameManager.Instance.setCurrentLevel(level);
         GameManager.Instance.playAvailable = false;
-        playButton.enabled = false;
+		playButton.interactable = false;
     }
 
     public void setMenuStateToLevel()
