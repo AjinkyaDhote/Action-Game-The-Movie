@@ -12,7 +12,7 @@ public class PlayerHealthScript : MonoBehaviour
     {
         HealthText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("HealthText").GetComponent<Text>();
         healthString = " " + healthCount;
-        HealthText.color = Color.green;
+		HealthText.color = Color.white;
         HealthText.text = healthString;
     }
 
