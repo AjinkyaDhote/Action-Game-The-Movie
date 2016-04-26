@@ -8,8 +8,8 @@ public class MapScript : MonoBehaviour
     public Transform PlayerShadowPrefab;
     public Transform LinePrefab;
     //public Transform LinePrefabDynamic;
-    public Texture2D cursorGreen;
-    public Texture2D cursorRed;
+	private Texture2D cursorGreen;
+	private Texture2D cursorRed;
     public Player2D player2D;
     public List<Vector3> playerPosList;
     public Text batteryText;
@@ -54,6 +54,9 @@ public class MapScript : MonoBehaviour
 
     void Start()
     {
+		cursorGreen = Resources.Load ("Sprites/Robot") as Texture2D;
+		cursorRed = Resources.Load ("Sprites/Robot_red") as Texture2D;
+
         mapPoints = GameManager.Instance.mapPoints;
         mapPoints.Clear();
 
