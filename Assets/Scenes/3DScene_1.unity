@@ -14,7 +14,7 @@ SceneSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.04
@@ -1011,7 +1011,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472858, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 31.31
+      value: -44.4
       objectReference: {fileID: 0}
     - target: {fileID: 472858, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1035,10 +1035,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22424632, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22424632, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467510, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
+      propertyPath: healthCount
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401968, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1659,23 +1667,23 @@ Prefab:
       objectReference: {fileID: 1171051388}
     - target: {fileID: 22479116, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.47368422
       objectReference: {fileID: 0}
     - target: {fileID: 22479116, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22432648, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.47368422
       objectReference: {fileID: 0}
     - target: {fileID: 22432648, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.47368422
       objectReference: {fileID: 0}
     - target: {fileID: 22432648, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 187966, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_IsActive
@@ -2371,7 +2379,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: 10.96
       objectReference: {fileID: 0}
     - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2379,7 +2387,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -9.2
+      value: 40.47
       objectReference: {fileID: 0}
     - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
       propertyPath: m_LocalRotation.x

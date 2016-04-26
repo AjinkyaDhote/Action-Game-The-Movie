@@ -3,9 +3,11 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public Transform MainMount, LevelMount, InGameMount;
+    public Transform MainMount, LevelMount, InGameMount, ScoreMount;
     public Camera cam;
     public Button playButton;
+
+    public Text HeadShots, EnemiesKilled, Health, DistanceCoverd, Total;
 
     void Start()
     {
@@ -27,8 +29,19 @@ public class MenuManager : MonoBehaviour
         {
             mainMenuCamControl.setMount(InGameMount);
         }
+        else if (GameManager.Instance.currentMenuState == GameManager.MenuState.SCORE_BOARD)
+        {
+            HeadShots.text = GameManager.Instance.headShots.ToString();
+            EnemiesKilled.text = GameManager.Instance.totalEnemiesKilled.ToString();
+            Health.text = GameManager.Instance.remainingHealth.ToString();
+            DistanceCoverd.text = GameManager.Instance.totalDistance.ToString();
+            Total.text = GameManager.Instance.TotalScore.ToString();
 
-        if (GameManager.Instance.playAvailable == true)
+            mainMenuCamControl.setMount(ScoreMount);
+        }
+
+
+            if (GameManager.Instance.playAvailable == true)
         {
             playButton.enabled = true;
         }
@@ -69,5 +82,10 @@ public class MenuManager : MonoBehaviour
     public void setMenuStateToMainMenu()
     {
         GameManager.Instance.currentMenuState = GameManager.MenuState.MAIN_MENU;
+    }
+
+    public void ShowLevelMenu()
+    {
+        GameManager.Instance.currentMenuState = GameManager.MenuState.LEVEL_MENU;
     }
 }
