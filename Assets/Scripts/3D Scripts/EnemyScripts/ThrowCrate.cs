@@ -52,13 +52,18 @@ public class ThrowCrate : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        DestroyedCrate = Instantiate(DestroyedCratePrefab, transform.position, transform.rotation) as GameObject;
-        if(other.CompareTag("Player"))
+       
+		if(other.CompareTag("Player") || other.CompareTag("Level"))
         {
-            player.GetComponent<PlayerHealthScript>().PlayerDamage();
+			DestroyedCrate = Instantiate(DestroyedCratePrefab, transform.position, transform.rotation) as GameObject;
+			if(other.CompareTag("Player")){
+				player.GetComponent<PlayerHealthScript>().PlayerDamage();
+			}
+				Destroy(gameObject);
+				Destroy(DestroyedCrate, 5.0f);
+            
         }
-        Destroy(gameObject);
-        Destroy(DestroyedCrate, 5.0f);
+       
     }
 
     void IgnoreCollisons()
