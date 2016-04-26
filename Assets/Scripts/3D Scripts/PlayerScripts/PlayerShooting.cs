@@ -23,6 +23,9 @@ public class PlayerShooting : MonoBehaviour
     Text AmmoText;
     string bulletsString;
     Text bulletOverText;
+
+    AI_movement aiMovementScript;
+    EnemyThrow enemyThrowScript;
     void Start()
     {
         noBullets = GetComponent<AudioSource>();
@@ -152,14 +155,22 @@ public class PlayerShooting : MonoBehaviour
 
                     impacts[1].transform.position = hit.point;
                     impacts[1].Play();
-                    AI_movement aiMovementScript = hit.collider.transform.parent.parent.GetComponent<AI_movement>();
-                    if (aiMovementScript != null)
+                    if(hit.collider.transform.parent.parent.CompareTag("SmallEnemy"))
                     {
+                        aiMovementScript = hit.collider.transform.parent.parent.GetComponent<AI_movement>();
                         if (!aiMovementScript.isPlayerSeen)
                         {
                             aiMovementScript.Detection();
                         }
                     }
+                    if(hit.collider.transform.parent.parent.CompareTag("BigEnemy"))
+                    {
+                        enemyThrowScript = hit.collider.transform.parent.parent.GetComponent<EnemyThrow>();
+                        if (!enemyThrowScript.isPlayerSeen)
+                        {
+                            enemyThrowScript.Detection();
+                        }
+                    }               
                     damageScript = hit.collider.GetComponent<EnemyHealth>();
                     if ((damageScript != null) && !damageScript.isKilled)
                     {
