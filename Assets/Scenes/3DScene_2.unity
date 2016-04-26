@@ -136,6 +136,70 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 925e77c7e167a354e863165fb44e4982, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &104682873 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11402782, guid: 925e77c7e167a354e863165fb44e4982,
+    type: 2}
+  m_PrefabInternal: {fileID: 104682872}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1001 &145576332
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 74.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 24.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6114389
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.3623427
+      objectReference: {fileID: 0}
+    - target: {fileID: 455910, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.3623427
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405712, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+      propertyPath: Score
+      value: 
+      objectReference: {fileID: 2061736094}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e0dbdb53e250e1e4b93f9894a3a52558, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &169813470
 Prefab:
   m_ObjectHideFlags: 0
@@ -173,11 +237,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 27
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -219,11 +287,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -288,7 +360,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
 --- !u!1001 &413113142
 Prefab:
   m_ObjectHideFlags: 0
@@ -326,7 +398,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22440616, guid: 533d23c06d6a1cd45a3efcc1231e249c, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22440616, guid: 533d23c06d6a1cd45a3efcc1231e249c, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -412,11 +484,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 20
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -458,11 +534,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -504,11 +584,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -550,11 +634,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 21
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -596,11 +684,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -645,7 +737,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 7
 --- !u!1001 &872253700
 Prefab:
   m_ObjectHideFlags: 0
@@ -683,11 +775,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -729,11 +825,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 28
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -775,11 +875,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 24
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -821,11 +925,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -867,11 +975,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 31
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -913,11 +1025,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 25
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -959,11 +1075,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1005,11 +1125,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1051,11 +1175,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1097,11 +1225,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 23
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1143,7 +1275,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1185,11 +1317,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 30
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1231,7 +1367,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 441154, guid: 504a79c8438b454428b9a9e151783640, type: 2}
       propertyPath: m_RootOrder
-      value: 34
+      value: 36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 504a79c8438b454428b9a9e151783640, type: 2}
@@ -1320,11 +1456,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1366,11 +1506,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 32
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1412,11 +1556,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 26
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1458,7 +1606,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22471714, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 22471714, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1564,11 +1712,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1610,11 +1762,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 29
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1656,11 +1812,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
@@ -1702,15 +1862,69 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 33
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &2061736093
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.1870418
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.070057
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -16.71036
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450052, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470720, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+      propertyPath: playerHealthText
+      value: 
+      objectReference: {fileID: 104682873}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &2061736094 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 118552, guid: 4a6c3527b5887194c85ff5a36122831e, type: 2}
+  m_PrefabInternal: {fileID: 2061736093}
 --- !u!1001 &2106810587
 Prefab:
   m_ObjectHideFlags: 0
@@ -1748,7 +1962,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409116, guid: d28d03368614738429ed81a987d5998c, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d28d03368614738429ed81a987d5998c, type: 2}
@@ -1790,11 +2004,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_RootOrder
-      value: 22
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
       propertyPath: m_Name
       value: Warzombie_F_Pedroso (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145624, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}

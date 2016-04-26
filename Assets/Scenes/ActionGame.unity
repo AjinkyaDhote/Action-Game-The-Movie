@@ -125,7 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aab50f111866f64eb7440d7318f2e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playAvailable: 0
+  currentMenuState: 0
   mapPoints: []
+  distanceTravelled: 
   batteryUsedList: 
   batteryPickups: 
   ammoPickups: 
@@ -137,6 +140,12 @@ MonoBehaviour:
   ammoPosList: []
   battery: 100
   batteryDepletionRate: 5
+  headShots: 0
+  totalEnemiesKilled: 0
+  remainingHealth: 0
+  totalDistance: 0
+  TotalScore: 0
+  batteryCount: 0
   width2DPlane: 0
   width3DPlane: 0
   height2DPlane: 0
