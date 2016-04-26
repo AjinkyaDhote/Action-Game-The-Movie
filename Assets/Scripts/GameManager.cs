@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public int TotalScore;
     //........................................................
     public int batteryCount;
-    private Texture2D gameCursor;
 
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
@@ -64,8 +63,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gameCursor = Resources.Load("Sprites/Robot_red") as Texture2D;
-
         headShots = 0;
         totalEnemiesKilled = 0;
         remainingHealth = 0;
@@ -145,10 +142,5 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    void OnLevelWasLoaded(int level)
-    {
-        Cursor.SetCursor(gameCursor, Vector2.zero, CursorMode.Auto);
     }
 }
