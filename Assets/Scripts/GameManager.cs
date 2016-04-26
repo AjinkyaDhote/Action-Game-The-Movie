@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int currentLevel;
-    public enum MenuState { MAIN_MENU, LEVEL_MENU, IN_GAME_MENU };
+    public enum MenuState { MAIN_MENU, LEVEL_MENU, IN_GAME_MENU, SCORE_BOARD };
 
     public bool playAvailable;
 
@@ -64,6 +64,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        headShots = 0;
+        totalEnemiesKilled = 0;
+        remainingHealth = 0;
+        totalDistance = 0;
+        TotalScore = 0;
+
         playAvailable = false;
         currentMenuState = MenuState.MAIN_MENU;
 
