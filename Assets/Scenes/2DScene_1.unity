@@ -167,6 +167,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &75411190 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11423124, guid: b3ee409431d09b24ea55c8b765a6964b,
+    type: 2}
+  m_PrefabInternal: {fileID: 75411189}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &166904309
 Prefab:
   m_ObjectHideFlags: 0
@@ -465,12 +471,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
---- !u!114 &361237994 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11431450, guid: b3ee409431d09b24ea55c8b765a6964b,
-    type: 2}
-  m_PrefabInternal: {fileID: 75411189}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &429842416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   cursorRed: {fileID: 2800000, guid: 5c3a9766123d02a4db866cc450923d70, type: 3}
   player2D: {fileID: 1249927581}
   playerPosList: []
-  batteryText: {fileID: 361237994}
+  batteryText: {fileID: 75411190}
   CrossPrefab: {fileID: 499626, guid: 75f99f38e943196428412708921f7ac3, type: 2}
   LowBatteryPrefab: {fileID: 406682, guid: cba9829fae570cb40b3098496034d4d5, type: 2}
   batteryCount: 0

@@ -245,7 +245,7 @@ public class MapScript : MonoBehaviour
             Destroy(prevLine.gameObject);
             linePrefabList.RemoveAt(linePrefabList.Count - 1);
 
-            //--------------------------------------------------------
+            //--------------------------------------------------------Undo
 
             int batteriesToRemove = batteryPickupsCount[batteryPickupsCount.Count - 1];
             for (int i = 0; i < batteriesToRemove; i++)
