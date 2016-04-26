@@ -3,9 +3,11 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public Transform MainMount, LevelMount, InGameMount;
+    public Transform MainMount, LevelMount, InGameMount, ScoreMount;
     public Camera cam;
     public Button playButton;
+
+    public Text HeadShots, EnemiesKilled, Health, DistanceCoverd, Total;
 
     void Start()
     {
@@ -27,14 +29,25 @@ public class MenuManager : MonoBehaviour
         {
             mainMenuCamControl.setMount(InGameMount);
         }
-
-        if (GameManager.Instance.playAvailable == true)
+        else if (GameManager.Instance.currentMenuState == GameManager.MenuState.SCORE_BOARD)
         {
-            playButton.enabled = true;
+            HeadShots.text = GameManager.Instance.headShots.ToString();
+            EnemiesKilled.text = GameManager.Instance.totalEnemiesKilled.ToString();
+            Health.text = GameManager.Instance.remainingHealth.ToString();
+            DistanceCoverd.text = GameManager.Instance.totalDistance.ToString();
+            Total.text = GameManager.Instance.TotalScore.ToString();
+
+            mainMenuCamControl.setMount(ScoreMount);
+        }
+
+
+            if (GameManager.Instance.playAvailable == true)
+        {
+			playButton.interactable  = true;
         }
         else
         {
-            playButton.enabled = false;
+			playButton.interactable  = false;
         }
     }
 
@@ -58,7 +71,7 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.currentMenuState = GameManager.MenuState.IN_GAME_MENU;
         GameManager.Instance.setCurrentLevel(level);
         GameManager.Instance.playAvailable = false;
-        playButton.enabled = false;
+		playButton.interactable = false;
     }
 
     public void setMenuStateToLevel()
@@ -69,5 +82,10 @@ public class MenuManager : MonoBehaviour
     public void setMenuStateToMainMenu()
     {
         GameManager.Instance.currentMenuState = GameManager.MenuState.MAIN_MENU;
+    }
+
+    public void ShowLevelMenu()
+    {
+        GameManager.Instance.currentMenuState = GameManager.MenuState.LEVEL_MENU;
     }
 }

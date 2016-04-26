@@ -18,9 +18,9 @@ public class WinTrigger : MonoBehaviour {
             Score.GetComponent<Scoring>().Score();
 
             GameManager.Instance.win_Lose = true;
-            GameManager.Instance.win_Lose_Message = "You Win!";
+            GameManager.Instance.win_Lose_Message = "Target Reached!";
+            GameManager.Instance.currentMenuState = GameManager.MenuState.SCORE_BOARD;
             GameManager.Instance.GoToWinLoseScene();
-            GameManager.Instance.currentMenuState = GameManager.MenuState.LEVEL_MENU;
         }
     }
 
