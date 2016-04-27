@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         noBullets = GetComponent<AudioSource>();
-        bulletCount = 300;
+        bulletCount = 75;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         bulletsString = " " + bulletCount;
