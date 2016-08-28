@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
@@ -19,6 +20,9 @@ public class PlayerShooting : MonoBehaviour
     bool shooting = false;
     int bulletCount;
     AudioSource noBullets;
+    GameObject bulletPrefab;
+    GameObject[] bullets;
+    int bulletInUse = 0;
 
     Text AmmoText;
     string bulletsString;
@@ -26,8 +30,16 @@ public class PlayerShooting : MonoBehaviour
 
     AI_movement aiMovementScript;
     EnemyThrow enemyThrowScript;
+
     void Start()
     {
+        bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
+        bullets = new GameObject[GameManager.Instance.totalAmmoCollected];
+        for (int i = 0; i < bullets.Length; i++)
+        {
+            bullets[i] = Instantiate(bulletPrefab, transform.GetChild(0)) as GameObject;
+            bullets[i].SetActive(false);
+        }
         noBullets = GetComponent<AudioSource>();
         bulletCount = 75;
         weaponSystemScript = GetComponent<WeaponSystem>();
@@ -48,6 +60,8 @@ public class PlayerShooting : MonoBehaviour
             {
                 nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                 shooting = true;
+                bullets[bulletInUse].transform.localPosition = transform.localPosition + new Vector3(0.734f, -0.7040001f, 3.542001f);
+                bullets[bulletInUse++].SetActive(true);
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
                 {
                     noBullets.Play();

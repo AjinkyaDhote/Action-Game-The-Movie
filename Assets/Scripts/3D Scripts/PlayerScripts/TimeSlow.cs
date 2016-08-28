@@ -147,16 +147,16 @@ public class TimeSlow : MonoBehaviour
         if (!isSlowTimeDisabled)
         {
             isSlowTimeDisabled = true;
-            StartCoroutine("CoolDownWait");
+            //StartCoroutine("CoolDownWait");
         }
         if (slider.value < sliderValueActive)
         {
             isRefilling = true;
         }
     }
-    IEnumerator CoolDownWait()
-    {
-        yield return new WaitForSeconds(coolDownTimer);
-        isSlowTimeDisabled = false;
-    }
+    //IEnumerator CoolDownWait()
+    //{
+    //    yield return new WaitForSeconds(coolDownTimer);
+    //    isSlowTimeDisabled = false;
+    //}
 }
