@@ -35,13 +35,14 @@ public class GameManager : MonoBehaviour
     //........................................................
     public int batteryCount;
 
-
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
     [HideInInspector]
     public bool win_Lose = false;
     [HideInInspector]
     public string win_Lose_Message = null;
+    [HideInInspector]
+    public int totalAmmoCollected;
 
     // private variables
     private static GameManager _instance = null;
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
         currentMenuState = MenuState.MAIN_MENU;
 
         DontDestroyOnLoad(gameObject);
-        currentState = GameStates.MENU;
+        currentState = GameStates.MENU;     
         SceneManager.LoadScene((int)Levels.MENU);
         batteryCount = 0;
     }
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         currentState = GameStates.PLAY_GAME;
+        totalAmmoCollected = ammoPickups.Count * 10 + 75;
 
         if ( currentLevel == 1 )
         {
@@ -108,13 +110,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void GoToMenu()
-    {
+    {       
         currentState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
     }
 
     public void GoToWinLoseScene()
-    {
+    {    
         currentState = GameStates.GAME_OVER;
         SceneManager.LoadScene((int)Levels.GameWinLose);
     }
