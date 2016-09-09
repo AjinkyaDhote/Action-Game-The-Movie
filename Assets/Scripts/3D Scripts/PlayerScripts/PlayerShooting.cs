@@ -21,8 +21,10 @@ public class PlayerShooting : MonoBehaviour
     int bulletCount;
     AudioSource noBullets;
     GameObject bulletPrefab;
-    GameObject[] bullets;
-    int bulletInUse = 0;
+    List<GameObject> bullets;
+    int bulletInUse;
+    Rigidbody bulletRB;
+    Transform bulletSpawnerTrasform;
 
     Text AmmoText;
     string bulletsString;
@@ -33,15 +35,17 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
+        bulletInUse = 0;
+        bulletCount = 75;
+        bulletSpawnerTrasform = transform.GetChild(0).GetChild(0);
         bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
-        bullets = new GameObject[GameManager.Instance.totalAmmoCollected];
-        for (int i = 0; i < bullets.Length; i++)
+        bullets = new List<GameObject>(bulletCount);
+        for (int i = 0; i < bullets.Capacity; i++)
         {
-            bullets[i] = Instantiate(bulletPrefab, transform.GetChild(0)) as GameObject;
+            bullets.Add(Instantiate(bulletPrefab) as GameObject);
             bullets[i].SetActive(false);
         }
         noBullets = GetComponent<AudioSource>();
-        bulletCount = 75;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         bulletsString = " " + bulletCount;
@@ -60,8 +64,6 @@ public class PlayerShooting : MonoBehaviour
             {
                 nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                 shooting = true;
-                bullets[bulletInUse].transform.localPosition = transform.localPosition + new Vector3(0.734f, -0.7040001f, 3.542001f);
-                bullets[bulletInUse++].SetActive(true);
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
                 {
                     noBullets.Play();
@@ -72,6 +74,11 @@ public class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
             shooting = true;
+            bullets[bulletInUse].transform.position = bulletSpawnerTrasform.position;
+            bullets[bulletInUse].SetActive(true);
+            bulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
+            bulletRB.AddForce(-bulletSpawnerTrasform.up * 1000.0f);
+            bulletInUse++;
             if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
             {
                 noBullets.Play();
@@ -98,7 +105,7 @@ public class PlayerShooting : MonoBehaviour
                 }
             }
 
-            else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun")
             {
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
                 {
@@ -126,7 +133,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 anim.SetTrigger("ShotGun");
             }
-            else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
             {
                 anim.SetTrigger("Fire");
             }
