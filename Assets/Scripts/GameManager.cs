@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour
     public List<int> distanceTravelled;
     //public List<Vector3> BatteryPos;
     public List<int> batteryUsedList;
-    public List<int> batteryPickups; public List<int> ammoPickups;
-    public List<int> batteryPickupsCount; public List<int> ammoPickupsCount;
-    public List<GameObject> BatteriesHitList; public List<GameObject> ammosHitList;
+    public List<int> batteryPickups; //public List<int> ammoPickups;
+    public List<int> batteryPickupsCount; //public List<int> ammoPickupsCount;
+    public List<GameObject> BatteriesHitList; //public List<GameObject> ammosHitList;
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public string win_Lose_Message = null;
     [HideInInspector]
-    public int totalAmmoCollected;
+    //public int totalAmmoCollected;
 
     // private variables
     private static GameManager _instance = null;
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         currentState = GameStates.PLAY_GAME;
-        totalAmmoCollected = ammoPickups.Count * 10 + 75;
+        //totalAmmoCollected = ammoPickups.Count * 10 + 75;
 
         if ( currentLevel == 1 )
         {

@@ -20,7 +20,7 @@ public class PlayerShooting : MonoBehaviour
     bool shooting = false;
     int bulletCount;
     AudioSource noBullets;
-    GameObject bulletPrefab;
+    //GameObject bulletPrefab;
     GameObject[] bullets;
     int bulletInUse = 0;
 
@@ -33,13 +33,13 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
-        bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
-        bullets = new GameObject[GameManager.Instance.totalAmmoCollected];
-        for (int i = 0; i < bullets.Length; i++)
-        {
-            bullets[i] = Instantiate(bulletPrefab, transform.GetChild(0)) as GameObject;
-            bullets[i].SetActive(false);
-        }
+        //bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
+        //bullets = new GameObject[GameManager.Instance.totalAmmoCollected];
+        //for (int i = 0; i < bullets.Length; i++)
+        //{
+        //    //bullets[i] = Instantiate(bulletPrefab, transform.GetChild(0)) as GameObject;
+        //    bullets[i].SetActive(false);
+        //}
         noBullets = GetComponent<AudioSource>();
         bulletCount = 75;
         weaponSystemScript = GetComponent<WeaponSystem>();
