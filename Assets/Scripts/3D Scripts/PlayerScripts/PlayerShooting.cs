@@ -176,10 +176,10 @@ public class PlayerShooting : MonoBehaviour
 
                     impacts[1].transform.position = hit.point;
                     impacts[1].Play();
-                    if(hit.collider.transform.parent.parent.CompareTag("SmallEnemy"))
+                    if(hit.collider.transform.CompareTag("SmallEnemy"))
                     {
-                        aiMovementScript = hit.collider.transform.parent.parent.GetComponent<AI_movement>();
-                        if (!aiMovementScript.isPlayerSeen)
+                        aiMovementScript = hit.collider.transform.GetComponentInParent<AI_movement>();
+                        if (!aiMovementScript.isPlayerSeenA)
                         {
                             aiMovementScript.Detection();
                         }
@@ -192,7 +192,7 @@ public class PlayerShooting : MonoBehaviour
                             enemyThrowScript.Detection();
                         }
                     }               
-                    damageScript = hit.collider.GetComponent<EnemyHealth>();
+                    damageScript = hit.collider.GetComponentInParent<EnemyHealth>();
                     if ((damageScript != null) && !damageScript.isKilled)
                     {
                         damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
@@ -202,7 +202,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     impacts[1].transform.position = hit.point;
                     impacts[1].Play();
-                    damageScript = hit.collider.transform.parent.parent.parent.parent.GetComponent<EnemyHealth>();
+                    damageScript = hit.collider.transform.GetComponentInParent<EnemyHealth>();
                     if ((damageScript != null) && (!damageScript.isKilled))
                     {
                         damageScript.Damage(25);
