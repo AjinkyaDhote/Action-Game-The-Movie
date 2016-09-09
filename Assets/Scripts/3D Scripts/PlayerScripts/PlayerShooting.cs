@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
@@ -19,6 +20,11 @@ public class PlayerShooting : MonoBehaviour
     bool shooting = false;
     int bulletCount;
     AudioSource noBullets;
+    GameObject bulletPrefab;
+    List<GameObject> bullets;
+    int bulletInUse;
+    Rigidbody bulletRB;
+    Transform bulletSpawnerTrasform;
 
     Text AmmoText;
     string bulletsString;
@@ -26,10 +32,20 @@ public class PlayerShooting : MonoBehaviour
 
     AI_movement aiMovementScript;
     EnemyThrow enemyThrowScript;
+
     void Start()
     {
+        bulletInUse = 0;
+        bulletCount = 75;
+        bulletSpawnerTrasform = transform.GetChild(0).GetChild(0);
+        bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
+        bullets = new List<GameObject>(bulletCount);
+        for (int i = 0; i < bullets.Capacity; i++)
+        {
+            bullets.Add(Instantiate(bulletPrefab) as GameObject);
+            bullets[i].SetActive(false);
+        }
         noBullets = GetComponent<AudioSource>();
-        bulletCount = 300;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         bulletsString = " " + bulletCount;
@@ -58,6 +74,11 @@ public class PlayerShooting : MonoBehaviour
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
             shooting = true;
+            bullets[bulletInUse].transform.position = bulletSpawnerTrasform.position;
+            bullets[bulletInUse].SetActive(true);
+            bulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
+            bulletRB.AddForce(-bulletSpawnerTrasform.up * 1000.0f);
+            bulletInUse++;
             if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
             {
                 noBullets.Play();
@@ -84,7 +105,7 @@ public class PlayerShooting : MonoBehaviour
                 }
             }
 
-            else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun")
             {
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
                 {
@@ -112,7 +133,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 anim.SetTrigger("ShotGun");
             }
-            else if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
             {
                 anim.SetTrigger("Fire");
             }

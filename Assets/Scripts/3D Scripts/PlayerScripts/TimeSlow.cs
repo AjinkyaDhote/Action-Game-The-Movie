@@ -9,9 +9,9 @@ public class TimeSlow : MonoBehaviour
     [Range(0.0f,1.0f)]
     public float reducedTimeScale = 0.3f;
     [Range(0.0f, 100.0f)]
-    public float sliderValueActive = 50.0f;
+    public float sliderValueActive = 0.01f;
     public Color flashColor = new Color(1.0f, 0.0f, 0.0f, 0.1f);
-    public float coolDownTimer = 5.0f;
+    //public float coolDownTimer = 5.0f;
     [HideInInspector]
     public bool isRMBHoldType;
 
@@ -24,13 +24,13 @@ public class TimeSlow : MonoBehaviour
     float initialFixedDeltaTime;
     bool isPressed;
     bool isRefilling;
-    bool isSlowTimeDisabled;
+    //bool isSlowTimeDisabled;
     bool isSlowTimeEnabledInToggleMode;
     void Start()
     {
         isPressed = false;
         isRefilling = false;
-        isSlowTimeDisabled = false;
+        //isSlowTimeDisabled = false;
         isSlowTimeEnabledInToggleMode = true;
         initialFixedDeltaTime = Time.fixedDeltaTime;
         tintImageScript = transform.GetChild(0).GetComponent<Image>();
@@ -54,7 +54,7 @@ public class TimeSlow : MonoBehaviour
         {
             if (isRMBHoldType)
             {
-                if (Input.GetButton("Fire2") && !isRefilling && !isSlowTimeDisabled)
+                if (Input.GetButton("Fire2") && !isRefilling )//&& !isSlowTimeDisabled)
                 {
                     isPressed = true;
                 }
@@ -65,7 +65,7 @@ public class TimeSlow : MonoBehaviour
             }
             else
             {
-                if (Input.GetButtonDown("Fire2") && !isRefilling && !isSlowTimeDisabled)
+                if (Input.GetButtonDown("Fire2") && !isRefilling)// && !isSlowTimeDisabled)
                 {
                     if (isSlowTimeEnabledInToggleMode)
                     {
@@ -91,7 +91,7 @@ public class TimeSlow : MonoBehaviour
                 isRefilling = false;
             }
         }
-        if (isSlowTimeDisabled || slider.value <= sliderValueActive)
+        if (slider.value <= sliderValueActive)// || isSlowTimeDisabled)
         {
             clockImageScript.color = sliderFillImageScript.color = Color.red;
         }
@@ -102,7 +102,7 @@ public class TimeSlow : MonoBehaviour
     }
     void SlowTime()
     {
-        if (isPressed && (!isSlowTimeDisabled))
+        if (isPressed) //&& (!isSlowTimeDisabled))
         {
             if (Time.timeScale == 1.0f && slider.value >= sliderValueActive)
             {
@@ -144,19 +144,19 @@ public class TimeSlow : MonoBehaviour
         }   
         isPressed = false;     
         isSlowTimeEnabledInToggleMode = true;
-        if (!isSlowTimeDisabled)
+        /*if (!isSlowTimeDisabled)
         {
             isSlowTimeDisabled = true;
-            StartCoroutine("CoolDownWait");
-        }
+            //StartCoroutine("CoolDownWait");
+        }*/
         if (slider.value < sliderValueActive)
         {
             isRefilling = true;
         }
     }
-    IEnumerator CoolDownWait()
-    {
-        yield return new WaitForSeconds(coolDownTimer);
-        isSlowTimeDisabled = false;
-    }
+    //IEnumerator CoolDownWait()
+    //{
+    //    yield return new WaitForSeconds(coolDownTimer);
+    //    isSlowTimeDisabled = false;
+    //}
 }

@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     public bool win_Lose = false;
     [HideInInspector]
     public string win_Lose_Message = null;
+    [HideInInspector]
+    public int totalAmmoCollected;
 
     // private variables
     private static GameManager _instance = null;
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         currentState = GameStates.PLAY_GAME;
+        totalAmmoCollected = ammoPickups.Count * 10 + 75;
 
         if ( currentLevel == 1 )
         {
