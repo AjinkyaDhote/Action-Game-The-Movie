@@ -7,7 +7,7 @@ public class AI_movement : MonoBehaviour
 	public float enemyRunSpeed;
 
 	GameObject player;
-	Animator anim;
+	//Animator anim;
 	PlayerHealthScript playerHealth;
 
 	GameObject hitRadialPrefab;
@@ -15,7 +15,7 @@ public class AI_movement : MonoBehaviour
 
 	NavMeshAgent agent;
 	[HideInInspector]
-	public bool isPlayerSeen;
+	
 	bool isPlayerInRange;
 	Vector3 resetPositionForInRange;
 
@@ -28,7 +28,13 @@ public class AI_movement : MonoBehaviour
 	private Random r;
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
 
-	void Start()
+    private bool isPlayerDead;
+    public bool isPlayerSeenA;
+    private bool isPlayerInRangeA;
+
+
+
+    void Start()
 	{
 		randomVectors = new Vector3[8];
 
@@ -47,14 +53,14 @@ public class AI_movement : MonoBehaviour
 		radius = 10;
 		minRadius = 2;
 
-		isPlayerSeen = false;
+		
 		isPlayerInRange = false;
 
 		zombieWalk = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
-		anim = GetComponent<Animator>();
-		enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
-		enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
+		//anim = GetComponent<Animator>();
+		enemyBodyCollider = transform.GetChild(2).GetComponent<Collider>();
+		enemyHeadCollider = transform.GetChild(3).GetComponent<Collider>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
@@ -89,15 +95,8 @@ public class AI_movement : MonoBehaviour
 		return randomPoint;
 	}
 	void Update()
-	{
-		//		if (counter.hasGameStarted) 
-		//		{
-		//			if (!zombieWalk.isPlaying) 
-		//			{
-		//				zombieWalk.Play ();	
-		//			}
-		//		}
-		if (anim.GetBool("isPlayerDead"))
+	{	
+		if (isPlayerDead)
 		{
 			agent.speed = 0;
 			zombieWalk.Stop();
@@ -107,7 +106,7 @@ public class AI_movement : MonoBehaviour
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
 			Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
-			if (isPlayerSeen)
+			if (isPlayerSeenA)
 			{
 				transform.LookAt(player.transform);
 				if (isPlayerInRange)
@@ -142,23 +141,23 @@ public class AI_movement : MonoBehaviour
 	public void Detection()
 	{
 		transform.LookAt(player.transform);
-		isPlayerSeen = true;
-		anim.SetBool("isPlayerSeen", true);
+		
+        isPlayerSeenA = true;
 	}
 	public void InRange()
 	{
-		anim.SetBool("isPlayerInRange", true);
+        isPlayerSeenA = true;
 		resetPositionForInRange = transform.position;
 		isPlayerInRange = true;
 	}
 	public void OutOfRange()
 	{
-		anim.SetBool("isPlayerInRange", false); 
+        isPlayerSeenA = false; 
 		isPlayerInRange = false;
 	}
 	void Patrol()
 	{
-		if (anim.GetBool("isPlayerDead"))
+		if (isPlayerDead)
 		{
 			agent.speed = 0;
 			zombieWalk.Stop();
