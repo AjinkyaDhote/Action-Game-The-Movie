@@ -6,22 +6,21 @@ public class PlayerInRange : MonoBehaviour{
     EnemyThrow enemyThrowScript;
     void Start()
     {
-        if (transform.parent.CompareTag("SmallEnemy"))
-        {
-            aiMovementScript = transform.parent.GetComponent<AI_movement>();
-        }
-        else
-        {
-            enemyThrowScript = transform.parent.GetComponent<EnemyThrow>();
-        }
+      
+            aiMovementScript = transform.GetComponentInParent<AI_movement>();
+        
+       
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        Debug.Log(aiMovementScript);
+        if (other.tag =="Player")
         {
+            //int a = 0;
             if (aiMovementScript != null)
             {
                 aiMovementScript.InRange();
+                
             }
             if (enemyThrowScript != null)
             {

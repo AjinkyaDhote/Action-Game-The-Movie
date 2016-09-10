@@ -7,14 +7,10 @@ public class DetectionScript : MonoBehaviour {
 
     void Start()
     {
-        if(transform.parent.CompareTag("SmallEnemy"))
-        {
-            aiMovementScript = transform.parent.GetComponent<AI_movement>();
-        }
-		else
-        {
-            enemyThrowScript = transform.parent.GetComponent<EnemyThrow>();
-        }
+       
+            aiMovementScript = transform.GetComponentInParent<AI_movement>();
+        
+		
     }
     void OnTriggerEnter(Collider other)
 	{
@@ -23,6 +19,7 @@ public class DetectionScript : MonoBehaviour {
             if (aiMovementScript != null)
             {
                 aiMovementScript.Detection();
+                
             }
             if (enemyThrowScript != null)
             {
