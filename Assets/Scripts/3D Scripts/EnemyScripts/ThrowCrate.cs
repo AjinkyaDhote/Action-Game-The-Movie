@@ -57,7 +57,7 @@ public class ThrowCrate : MonoBehaviour {
         {
 			DestroyedCrate = Instantiate(DestroyedCratePrefab, transform.position, transform.rotation) as GameObject;
 			if(other.CompareTag("Player")){
-				player.GetComponent<PlayerHealthScript>().PlayerDamage();
+				player.GetComponent<PlayerHealthScript>().PlayerDamage(10f);
 			}
 				Destroy(gameObject);
 				Destroy(DestroyedCrate, 5.0f);
