@@ -29,6 +29,8 @@ public class AI_movement : MonoBehaviour
 
     bool isPlayerDead;
     bool _isPlayerSeen = false;
+    private GameObject arrow_sprite;
+    private  Renderer  arrow_renderer;
     public bool IsPlayerSeen
     {
         get
@@ -68,7 +70,12 @@ public class AI_movement : MonoBehaviour
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
 		agent.speed = enemyWalkSpeed;
-		Patrol();
+        arrow_sprite = transform.FindChild("arrow_detection").gameObject;
+        arrow_renderer = arrow_sprite.GetComponent<Renderer>();
+        arrow_renderer.enabled = false;
+
+
+        Patrol();
 	}
 
 	Vector3 GetRandomVector()
@@ -145,7 +152,8 @@ public class AI_movement : MonoBehaviour
 	{
 		transform.LookAt(player.transform);	
         _isPlayerSeen = true;
-	}
+        arrow_renderer.enabled = true;
+    }
 	public void InRange()
 	{
         _isPlayerSeen = true;
