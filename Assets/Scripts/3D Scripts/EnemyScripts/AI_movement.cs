@@ -25,14 +25,17 @@ public class AI_movement : MonoBehaviour
 	private AudioSource zombieWalk;
 
 	private Vector3[] randomVectors;
-	private Random r;
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
 
-    private bool isPlayerDead;
-    public bool isPlayerSeenA;
-    private bool isPlayerInRangeA;
-
-
+    bool isPlayerDead;
+    bool _isPlayerSeen = false;
+    public bool IsPlayerSeen
+    {
+        get
+        {
+            return _isPlayerSeen;
+        }
+    }
 
     void Start()
 	{
@@ -48,8 +51,8 @@ public class AI_movement : MonoBehaviour
 		randomVectors[7] = new Vector3(1.0f, 1.0f, -1.0f);
 
 		hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
-		Random.seed = 42;
-		initialPos = gameObject.transform.position;
+        Random.InitState(42);
+        initialPos = gameObject.transform.position;
 		radius = 10;
 		minRadius = 2;
 
@@ -58,10 +61,10 @@ public class AI_movement : MonoBehaviour
 
 		zombieWalk = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
-		//anim = GetComponent<Animator>();
-		enemyBodyCollider = transform.GetChild(2).GetComponent<Collider>();
-		enemyHeadCollider = transform.GetChild(3).GetComponent<Collider>();
-		player = GameObject.FindGameObjectWithTag("Player");
+		//anim = GetComponent<Animator>();		
+		enemyHeadCollider = transform.GetChild(0).GetComponent<Collider>();
+        enemyBodyCollider = transform.GetChild(1).GetComponent<Collider>();
+        player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
 		agent.speed = enemyWalkSpeed;
@@ -73,7 +76,7 @@ public class AI_movement : MonoBehaviour
 		bool hit = true;
 		Vector3 randomPoint;
 		Vector3 direction;
-		int randomIndex = (int)Random.Range(0, 8);
+		int randomIndex = Random.Range(0, 8);
 
 		do
 		{
@@ -106,7 +109,7 @@ public class AI_movement : MonoBehaviour
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
 			Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
-			if (isPlayerSeenA)
+			if (_isPlayerSeen)
 			{
 				transform.LookAt(player.transform);
 				if (isPlayerInRange)
@@ -140,19 +143,17 @@ public class AI_movement : MonoBehaviour
 	}
 	public void Detection()
 	{
-		transform.LookAt(player.transform);
-		
-        isPlayerSeenA = true;
+		transform.LookAt(player.transform);	
+        _isPlayerSeen = true;
 	}
 	public void InRange()
 	{
-        isPlayerSeenA = true;
+        _isPlayerSeen = true;
 		resetPositionForInRange = transform.position;
 		isPlayerInRange = true;
 	}
 	public void OutOfRange()
 	{
-        isPlayerSeenA = false; 
 		isPlayerInRange = false;
 	}
 	void Patrol()

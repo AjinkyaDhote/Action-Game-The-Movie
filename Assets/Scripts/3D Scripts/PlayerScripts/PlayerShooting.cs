@@ -9,6 +9,19 @@ public class PlayerShooting : MonoBehaviour
     public Animator anim;
     public ParticleSystem[] impacts;
 
+    [SerializeField]
+    float _bulletForce = 0.0f;   
+    public float BulletForce
+    {
+        get
+        {
+            return _bulletForce;
+        }
+        set
+        {
+            _bulletForce = value;
+        }
+    }
 
     GameObject laserPrefab;
     GameObject laser;
@@ -77,7 +90,7 @@ public class PlayerShooting : MonoBehaviour
             bullets[bulletInUse].transform.position = bulletSpawnerTrasform.position;
             bullets[bulletInUse].SetActive(true);
             bulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
-            bulletRB.AddForce(-bulletSpawnerTrasform.up * 1000.0f);
+            bulletRB.AddForce(-bulletSpawnerTrasform.up * _bulletForce);
             bulletInUse++;
             if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
             {
@@ -153,64 +166,64 @@ public class PlayerShooting : MonoBehaviour
                 AmmoText.color = Color.red;
             }
             shooting = false;
-            RaycastHit hit;
+            //RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 50f))
-            {
-                if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
-                {
-                    laser = Instantiate(laserPrefab);
-                    laser.transform.SetParent(transform);
-                    laser.transform.localPosition = new Vector3(0.695f, -0.809f, 2.805f);
-                    laser.transform.localRotation = Quaternion.identity;
-                    laser.GetComponent<Laser>().GetCorrectEnemy(hit.point);
-                }
-                if (hit.collider.tag == "Wall")
-                {
-                    impacts[0].transform.position = hit.point;
-                    Debug.Log(hit.point);
-                    impacts[0].Play();
-                }
-                else if (hit.collider.tag == "BodyCollider")
-                {
+            //if (Physics.Raycast(transform.position, transform.forward, out hit, 50f))
+            //{
+            //    if (weaponSystemScript.currentWeaponInHand.Value.name == "GravityGun")
+            //    {
+            //        laser = Instantiate(laserPrefab);
+            //        laser.transform.SetParent(transform);
+            //        laser.transform.localPosition = new Vector3(0.695f, -0.809f, 2.805f);
+            //        laser.transform.localRotation = Quaternion.identity;
+            //        laser.GetComponent<Laser>().GetCorrectEnemy(hit.point);
+            //    }
+            //    if (hit.collider.tag == "Wall")
+            //    {
+            //        impacts[0].transform.position = hit.point;
+            //        Debug.Log(hit.point);
+            //        impacts[0].Play();
+            //    }
+            //    else if (hit.collider.tag == "BodyCollider")
+            //    {
 
-                    impacts[1].transform.position = hit.point;
-                    impacts[1].Play();
-                    if(hit.collider.transform.CompareTag("SmallEnemy"))
-                    {
-                        aiMovementScript = hit.collider.transform.GetComponentInParent<AI_movement>();
-                        if (!aiMovementScript.isPlayerSeenA)
-                        {
-                            aiMovementScript.Detection();
-                        }
-                    }
-                    if(hit.collider.transform.parent.parent.CompareTag("BigEnemy"))
-                    {
-                        enemyThrowScript = hit.collider.transform.parent.parent.GetComponent<EnemyThrow>();
-                        if (!enemyThrowScript.isPlayerSeen)
-                        {
-                            enemyThrowScript.Detection();
-                        }
-                    }               
-                    damageScript = hit.collider.GetComponentInParent<EnemyHealth>();
-                    if ((damageScript != null) && !damageScript.isKilled)
-                    {
-                        damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
-                    }
-                }
-                else if ((hit.collider.tag == "HeadCollider"))
-                {
-                    impacts[1].transform.position = hit.point;
-                    impacts[1].Play();
-                    damageScript = hit.collider.transform.GetComponentInParent<EnemyHealth>();
-                    if ((damageScript != null) && (!damageScript.isKilled))
-                    {
-                        damageScript.Damage(25);
-                        GameManager.Instance.headShots++;
-                        Debug.Log("Head Shot");
-                    }
-                }
-            }
+            //        impacts[1].transform.position = hit.point;
+            //        impacts[1].Play();
+            //        if(hit.collider.transform.CompareTag("SmallEnemy"))
+            //        {
+            //            aiMovementScript = hit.collider.transform.GetComponentInParent<AI_movement>();
+            //            if (!aiMovementScript.isPlayerSeenA)
+            //            {
+            //                aiMovementScript.Detection();
+            //            }
+            //        }
+            //        if(hit.collider.transform.parent.parent.CompareTag("BigEnemy"))
+            //        {
+            //            enemyThrowScript = hit.collider.transform.parent.parent.GetComponent<EnemyThrow>();
+            //            if (!enemyThrowScript.isPlayerSeen)
+            //            {
+            //                enemyThrowScript.Detection();
+            //            }
+            //        }               
+            //        damageScript = hit.collider.GetComponentInParent<EnemyHealth>();
+            //        if ((damageScript != null) && !damageScript.isKilled)
+            //        {
+            //            damageScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
+            //        }
+            //    }
+            //    else if ((hit.collider.tag == "HeadCollider"))
+            //    {
+            //        impacts[1].transform.position = hit.point;
+            //        impacts[1].Play();
+            //        damageScript = hit.collider.transform.GetComponentInParent<EnemyHealth>();
+            //        if ((damageScript != null) && (!damageScript.isKilled))
+            //        {
+            //            damageScript.Damage(25);
+            //            GameManager.Instance.headShots++;
+            //            Debug.Log("Head Shot");
+            //        }
+            //    }
+            //}
         }
     }
     public void PickupAmmo()
