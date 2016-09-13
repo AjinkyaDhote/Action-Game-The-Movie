@@ -7,7 +7,7 @@ public class AI_movement : MonoBehaviour
 	public float enemyRunSpeed;
 
 	GameObject player;
-	Animator anim;
+	//Animator anim;
 	PlayerHealthScript playerHealth;
 
 	GameObject hitRadialPrefab;
@@ -15,7 +15,7 @@ public class AI_movement : MonoBehaviour
 
 	NavMeshAgent agent;
 	[HideInInspector]
-	public bool isPlayerSeen;
+	
 	bool isPlayerInRange;
 	Vector3 resetPositionForInRange;
 
@@ -25,10 +25,21 @@ public class AI_movement : MonoBehaviour
 	private AudioSource zombieWalk;
 
 	private Vector3[] randomVectors;
-	private Random r;
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
 
-	void Start()
+    bool isPlayerDead;
+    bool _isPlayerSeen = false;
+    private GameObject arrow_sprite;
+    private  Renderer  arrow_renderer;
+    public bool IsPlayerSeen
+    {
+        get
+        {
+            return _isPlayerSeen;
+        }
+    }
+
+    void Start()
 	{
 		randomVectors = new Vector3[8];
 
@@ -42,24 +53,29 @@ public class AI_movement : MonoBehaviour
 		randomVectors[7] = new Vector3(1.0f, 1.0f, -1.0f);
 
 		hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
-		Random.seed = 42;
-		initialPos = gameObject.transform.position;
+        Random.InitState(42);
+        initialPos = gameObject.transform.position;
 		radius = 10;
 		minRadius = 2;
 
-		isPlayerSeen = false;
+		
 		isPlayerInRange = false;
 
 		zombieWalk = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
-		anim = GetComponent<Animator>();
-		enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
-		enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
-		player = GameObject.FindGameObjectWithTag("Player");
+		//anim = GetComponent<Animator>();		
+		enemyHeadCollider = transform.GetChild(0).GetComponent<Collider>();
+        enemyBodyCollider = transform.GetChild(1).GetComponent<Collider>();
+        player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
 		agent.speed = enemyWalkSpeed;
-		Patrol();
+        arrow_sprite = transform.FindChild("arrow_detection").gameObject;
+        arrow_renderer = arrow_sprite.GetComponent<Renderer>();
+        arrow_renderer.enabled = false;
+
+
+        Patrol();
 	}
 
 	Vector3 GetRandomVector()
@@ -67,7 +83,7 @@ public class AI_movement : MonoBehaviour
 		bool hit = true;
 		Vector3 randomPoint;
 		Vector3 direction;
-		int randomIndex = (int)Random.Range(0, 8);
+		int randomIndex = Random.Range(0, 8);
 
 		do
 		{
@@ -89,15 +105,8 @@ public class AI_movement : MonoBehaviour
 		return randomPoint;
 	}
 	void Update()
-	{
-		//		if (counter.hasGameStarted) 
-		//		{
-		//			if (!zombieWalk.isPlaying) 
-		//			{
-		//				zombieWalk.Play ();	
-		//			}
-		//		}
-		if (anim.GetBool("isPlayerDead"))
+	{	
+		if (isPlayerDead)
 		{
 			agent.speed = 0;
 			zombieWalk.Stop();
@@ -107,7 +116,7 @@ public class AI_movement : MonoBehaviour
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
 			Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
-			if (isPlayerSeen)
+			if (_isPlayerSeen)
 			{
 				transform.LookAt(player.transform);
 				if (isPlayerInRange)
@@ -133,7 +142,7 @@ public class AI_movement : MonoBehaviour
 	}
 	void DamagePlayer()
 	{
-		playerHealth.PlayerDamage();
+		playerHealth.PlayerDamage(10f);
 		hitRadial = Instantiate(hitRadialPrefab);
 		hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
 		hitRadial.GetComponent<HitRadial>().StartRotation(transform);
@@ -141,24 +150,23 @@ public class AI_movement : MonoBehaviour
 	}
 	public void Detection()
 	{
-		transform.LookAt(player.transform);
-		isPlayerSeen = true;
-		anim.SetBool("isPlayerSeen", true);
-	}
+		transform.LookAt(player.transform);	
+        _isPlayerSeen = true;
+        arrow_renderer.enabled = true;
+    }
 	public void InRange()
 	{
-		anim.SetBool("isPlayerInRange", true);
+        _isPlayerSeen = true;
 		resetPositionForInRange = transform.position;
 		isPlayerInRange = true;
 	}
 	public void OutOfRange()
 	{
-		anim.SetBool("isPlayerInRange", false); 
 		isPlayerInRange = false;
 	}
 	void Patrol()
 	{
-		if (anim.GetBool("isPlayerDead"))
+		if (isPlayerDead)
 		{
 			agent.speed = 0;
 			zombieWalk.Stop();

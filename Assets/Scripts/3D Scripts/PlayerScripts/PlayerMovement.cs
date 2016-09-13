@@ -55,18 +55,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
 		rigidBody = GetComponent<Rigidbody>();
-		if (!WASDmovement.enabled)
-		{
+		//if (!WASDmovement.enabled)
+		//{
 			wayPoints3D = new Vector3[GameManager.Instance.mapPoints.Count];
 			for (int i = 0; i < wayPoints3D.Length; i++)
 			{
 				wayPoints3D[i] = convertPoint(GameManager.Instance.mapPoints[i]);
 			}
 			transform.position = wayPoints3D[0];
-		}
-		mouseLook = new MouseLook();
-
-		_battery = gameObject.GetComponent<Battery>();
+        transform.forward = (wayPoints3D[1] - transform.position).normalized;
+		//}
+        //transform.position = new Vector3(-0.1f, 2.4f, -42.1f);
+        mouseLook = new MouseLook();
+        //transform.position = wayPoints3D[0];
+        _battery = gameObject.GetComponent<Battery>();
 		BatteryText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("BatteryText").GetComponent<Text>();
 		BatteryText.color = Color.white;
 		batteryString = " " + (batteryCount + _battery.batteryPickedUp);

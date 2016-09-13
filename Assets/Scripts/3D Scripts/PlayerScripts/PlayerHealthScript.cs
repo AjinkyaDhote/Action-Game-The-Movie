@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealthScript : MonoBehaviour
 {
     Text HealthText;
-	public int healthCount;
+	public float healthCount;
     string healthString;
 
     void Start()
@@ -16,9 +16,9 @@ public class PlayerHealthScript : MonoBehaviour
         HealthText.text = healthString;
     }
 
-    public void PlayerDamage()
+    public void PlayerDamage(float damage)
     {
-        healthCount -= 10;
+        healthCount -= damage;
         healthString = "" + healthCount;
         HealthText.text = healthString;
 

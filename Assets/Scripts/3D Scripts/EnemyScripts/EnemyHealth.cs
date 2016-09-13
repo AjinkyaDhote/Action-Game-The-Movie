@@ -1,66 +1,74 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyHealth : MonoBehaviour {
-
-	
-    private Animator anim;
-    public bool isKilled;
+public class EnemyHealth : MonoBehaviour
+{
+    //private Animator anim;
+    private bool _isKilled = false;
+    public bool IsKilled
+    {
+        get
+        {
+            return _isKilled;
+        }
+    }
+    private bool isPlayerDead;
     //private NavMeshAgent agent;
     private Material deadMaterial;
-	private AudioClip ZombieDeath;
+    private AudioClip ZombieDeath;
+    private MeshRenderer meshRenderer;
 
     int delayTime;
-	public int currentHealth;
-	void Start ()
+    private int currentHealth;
+    void Start()
     {
+        meshRenderer = GetComponent<MeshRenderer>();
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
         ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
-
-        delayTime = 6;
+        delayTime = 0;
         //agent = GetComponent<NavMeshAgent>();        
-        if (transform.parent.parent.CompareTag("SmallEnemy"))
+        if (transform.CompareTag("SmallEnemy"))
             currentHealth = 10;
         else
             currentHealth = 60;
-        anim = transform.parent.parent.GetComponent<Animator> ();
-        anim.SetBool("isPlayerDead", false);
-        isKilled = false;
+        //anim = transform.parent.parent.GetComponent<Animator> ();
+        isPlayerDead = false;
+        _isKilled = false;
         //GameManager.Instance.totalEnemiesKilled = 0;
     }
 
-	public void Damage(int damage)
-	{
-		currentHealth -= damage;
-
-		if (currentHealth <= 0) 
-		{
-			Defeated ();
-		}
-        if (currentHealth < 2)
+    public void Damage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log(currentHealth);
+        if (currentHealth <= 0)
         {
-            foreach (Transform child in this.transform.parent.transform.parent)
-            {
-                if (child.name == "WorldWar_zombie")
-                {
-                    child.GetComponent<Renderer>().material = deadMaterial;
-                }
-            }
+            Defeated();
+            meshRenderer.material.color = Color.red;       
+            //foreach (Transform child in transform.parent.transform.parent)
+            //{
+            //    if (child.tag == "SmallEnemy")
+            //    {
+            //        child.GetComponent<Renderer>().material.color = colorDead;
+            //    }
+            //}
         }
-	}
 
-	void Defeated()
-	{
-        if (!isKilled)
+    }
+
+    void Defeated()
+    {
+        if (!_isKilled)
         {
             Debug.Log("Killed");
-            isKilled = true;
+            _isKilled = true;
             GameManager.Instance.totalEnemiesKilled++;
-            anim.SetBool("isPlayerDead", true);
-            Destroy(transform.parent.parent.gameObject, delayTime);
+            isPlayerDead = true;
+            //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
+            Destroy(gameObject, delayTime);
         }
-		AudioSource.PlayClipAtPoint (ZombieDeath, new Vector3 (transform.position.x, transform.position.y, transform.position.z));
-        anim.SetBool("isPlayerDead", true);
-        Destroy(transform.parent.parent.gameObject, delayTime);
+        AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        isPlayerDead = true;
+        Destroy(gameObject, delayTime);
     }
 }
