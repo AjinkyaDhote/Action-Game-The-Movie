@@ -16,13 +16,13 @@ public class PayLoadRangeScript : MonoBehaviour {
         playerHealth = player.GetComponent<PlayerHealthScript>();
         outOfRange = false;
         boxCollider = GetComponent<BoxCollider>();
-        playerCollider = player.GetComponent<CapsuleCollider>();
+        //playerCollider = player.GetComponent<CapsuleCollider>();
 	}
 	
 	
 	void Update ()
     {
-        Physics.IgnoreCollision(boxCollider, playerCollider);
+        //Physics.IgnoreCollision(boxCollider, playerCollider);
         if(outOfRange)
         {
             playerHealth.PlayerDamage(0.01f);

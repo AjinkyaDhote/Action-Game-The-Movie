@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 			{
 				wayPoints3D[i] = convertPoint(GameManager.Instance.mapPoints[i]);
 			}
-			transform.position = wayPoints3D[0];
+			transform.position = wayPoints3D[0] + new Vector3(4f,0f,0f); //SetPlayerPosition in 3D
         transform.forward = (wayPoints3D[1] - transform.position).normalized;
 		//}
         //transform.position = new Vector3(-0.1f, 2.4f, -42.1f);

@@ -42,7 +42,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -133,6 +133,10 @@ Prefab:
     - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
@@ -474,6 +478,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -686,6 +694,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -793,6 +805,10 @@ Prefab:
     - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
@@ -1026,6 +1042,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -1134,6 +1154,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -1179,6 +1203,10 @@ Prefab:
     - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
@@ -1287,6 +1315,10 @@ Prefab:
     - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
@@ -1398,66 +1430,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 2372812, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2399082, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2382912, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2382794, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2375216, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2374810, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2356564, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2355682, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2327724, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2306026, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2303154, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2382954, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2377114, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2369694, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2352670, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 54000011244424562, guid: 9b79d28e79b2e434d8248435ed9397f4,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b79d28e79b2e434d8248435ed9397f4, type: 2}
   m_IsPrefabParent: 0
@@ -1503,6 +1480,10 @@ Prefab:
     - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
@@ -2733,6 +2714,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -2891,6 +2876,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -3046,38 +3035,14 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1444608578}
-    - target: {fileID: 54000012731610268, guid: d89875237f6772a49978af4f7fc1151b,
+    - target: {fileID: 114000010906844364, guid: d89875237f6772a49978af4f7fc1151b,
         type: 2}
-      propertyPath: m_Mass
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 54000012731610268, guid: d89875237f6772a49978af4f7fc1151b,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54000012731610268, guid: d89875237f6772a49978af4f7fc1151b,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65000011237126100, guid: d89875237f6772a49978af4f7fc1151b,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54000012731610268, guid: d89875237f6772a49978af4f7fc1151b,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 135000010337587714, guid: d89875237f6772a49978af4f7fc1151b,
-        type: 2}
-      propertyPath: m_Radius
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 54000012731610268, guid: d89875237f6772a49978af4f7fc1151b, type: 2}
+    - {fileID: 54000011014764278, guid: d89875237f6772a49978af4f7fc1151b, type: 2}
+    - {fileID: 114000010906844364, guid: d89875237f6772a49978af4f7fc1151b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d89875237f6772a49978af4f7fc1151b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1908810317 stripped
@@ -3085,21 +3050,17 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000013934123392, guid: d89875237f6772a49978af4f7fc1151b,
     type: 2}
   m_PrefabInternal: {fileID: 1908810316}
---- !u!54 &1908810318
-Rigidbody:
+--- !u!114 &1908810318
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1908810317}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856be0885e8c5014f8c631fc35b15fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1919043357
 Prefab:
   m_ObjectHideFlags: 0
@@ -3143,6 +3104,10 @@ Prefab:
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
   m_IsPrefabParent: 0
@@ -3162,7 +3127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1920092173
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3172,7 +3137,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a74df44dad214de499f0314ad663913f, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3248,7 +3213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cab63021a1dc64394a8f48f24ff68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic3D: {fileID: 1920092173}
+  backgroundMusic3D: {fileID: 0}
 --- !u!4 &1920092175
 Transform:
   m_ObjectHideFlags: 0
@@ -3304,6 +3269,10 @@ Prefab:
     - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
       propertyPath: m_Name
       value: WhiteBox SmallEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012007851038, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e838f49d2f091943b5d99a1d57a8251, type: 2}
