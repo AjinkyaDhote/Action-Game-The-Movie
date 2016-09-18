@@ -1,33 +1,72 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PayLoadRangeScript : MonoBehaviour {
 
-    public GameObject player;
-
-
+    private GameObject player;
     private PlayerHealthScript playerHealth;
     private bool outOfRange;
     private  BoxCollider boxCollider;
     private CapsuleCollider playerCollider;
-	
-	void Start ()
+    private Image screenBlurImage;
+    [SerializeField]
+    [Range(0.0f, 1.0f)]
+    private float _blurIntensity = 0.8f;  
+    public float BlurIntensity
     {
+        get
+        {
+            return _blurIntensity;
+        }
+        set
+        {
+            _blurIntensity = value;
+        }
+    }
+    private float _speedOfScreenBlur = 10.0f;
+    public float SpeedOfScreenBlur
+    {
+        get
+        {
+            return _speedOfScreenBlur;
+        }
+        set
+        {
+            _speedOfScreenBlur = value;
+        }
+    }
+
+    void Start ()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealthScript>();
         outOfRange = false;
         boxCollider = GetComponent<BoxCollider>();
+        playerCollider = player.GetComponent<CapsuleCollider>();
         //playerCollider = player.GetComponent<CapsuleCollider>();
+        screenBlurImage = player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas").FindChild("ScreenBlur").GetComponent<Image>();
 	}
 	
 	
 	void Update ()
     {
         //Physics.IgnoreCollision(boxCollider, playerCollider);
-        if(outOfRange)
+        if (outOfRange)
         {
             playerHealth.PlayerDamage(0.01f);
-        }	
-
+            if (screenBlurImage.color.a < _blurIntensity)
+            {
+                screenBlurImage.color += new Color(0.0f, 0.0f, 0.0f, Time.deltaTime / _speedOfScreenBlur);
+            }
+        }
+        else
+        {
+            if (screenBlurImage.color.a > 0.0f)
+            {
+                screenBlurImage.color = Color.clear;
+            }
+        }
 	}
  
     //void OnCollisionEnter(Collision other)
@@ -41,7 +80,7 @@ public class PayLoadRangeScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.tag == "Player")
         {
             outOfRange = false;
         }
@@ -50,7 +89,7 @@ public class PayLoadRangeScript : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.tag == "Player")
         {
             outOfRange = true;
             //playerHealth.PlayerDamage();
