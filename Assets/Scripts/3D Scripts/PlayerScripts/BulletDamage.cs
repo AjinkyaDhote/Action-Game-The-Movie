@@ -13,14 +13,15 @@ public class BulletDamage : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SmallEnemy"))
+        /*if (other.CompareTag("HeadCollider") && other.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponent<AI_movement>(); ;
             if (!aiMovementScript.IsPlayerSeen)
             {
                 aiMovementScript.Detection();
+                int a = 0;
             }
-        }
+        }*/
         if (other.CompareTag("HeadCollider"))
         {
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
