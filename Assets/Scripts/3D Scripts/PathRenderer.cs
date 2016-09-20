@@ -44,21 +44,30 @@ public class PathRenderer : MonoBehaviour {
         {
             posOne = wayPoints3D[i];
             posTwo = wayPoints3D[i+1];
+
             GameObject node = (GameObject)Instantiate(nodePrefab, new Vector3 (posTwo.x,0.11f,posTwo.z), Quaternion.Euler(0, angle, 0));
             node.transform.localScale = new Vector3(1.5f, 0, 1.5f);
             //Debug.Log("1: " + wayPoints3D[0]);
             //Debug.Log("2: " + posTwo);
-
-            go = (GameObject)Instantiate(planePrefab, new Vector3(xValue, 0, zValue), Quaternion.Euler(0, angle, 0));
-            xValue = (posOne.x + posTwo.x) / 2;
-            zValue = (posOne.z + posTwo.z) / 2;
-            distance = Vector3.Distance(posOne, posTwo);
-            //Debug.Log("" + distance);
-            go.transform.localScale = new Vector3(distance / 10, 1, 0.1f);
-            //Debug.Log("" + go.transform.localPosition);
-            go.transform.localPosition = new Vector3(xValue, 0.1f, zValue);
-            float debugAngle = Mathf.Atan2((posTwo.z - posOne.z), (posTwo.x - posOne.x)) * Mathf.Rad2Deg;
-            go.transform.localEulerAngles = new Vector3(0, -debugAngle, 0);
+            
+            //Debug.Log("" + Vector3.Distance(posOne, posTwo));
+            int pathMultiplier = (int)Vector3.Distance(posOne, posTwo) / 8;
+            for (int iterator = 1; iterator < pathMultiplier*2; iterator+=2)
+            {
+                go = (GameObject)Instantiate(planePrefab, new Vector3(xValue, 0, zValue), Quaternion.Euler(0, angle, 0));
+                Vector3 differenceVector = posTwo - posOne;
+                differenceVector /= 2*pathMultiplier;
+                differenceVector *= iterator;
+                xValue = (posOne.x + differenceVector.x);
+                zValue = (posOne.z + differenceVector.z);
+                distance = Vector3.Distance(posOne, posTwo);
+                //Debug.Log("" + pathMultiplier);
+                go.transform.localScale = new Vector3(distance /( 10* pathMultiplier), 1, 0.1f);
+                //Debug.Log("" + go.transform.localPosition);
+                go.transform.localPosition = new Vector3(xValue, 0.1f, zValue);
+                float debugAngle = Mathf.Atan2((posTwo.z - posOne.z), (posTwo.x - posOne.x)) * Mathf.Rad2Deg;
+                go.transform.localEulerAngles = new Vector3(0, -debugAngle, 0);
+            }
         }
 
     }
