@@ -20,15 +20,17 @@ public class EnemyHealth : MonoBehaviour
 
     int delayTime;
     private int currentHealth;
+    AI_movement aiMovementScript;
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
         ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
         delayTime = 0;
+        aiMovementScript = transform.GetComponentInParent<AI_movement>();
         //agent = GetComponent<NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
-            currentHealth = 10;
+            currentHealth = 3;
         else
             currentHealth = 60;
         //anim = transform.parent.parent.GetComponent<Animator> ();
@@ -41,10 +43,15 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         Debug.Log(currentHealth);
+        if (aiMovementScript != null)
+        {
+            aiMovementScript.Detection();
+        }
         if (currentHealth <= 0)
         {
             Defeated();
-            meshRenderer.material.color = Color.red;       
+            meshRenderer.material.color = Color.red;
+           
             //foreach (Transform child in transform.parent.transform.parent)
             //{
             //    if (child.tag == "SmallEnemy")

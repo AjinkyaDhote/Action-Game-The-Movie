@@ -7,6 +7,7 @@ public class MapScript : MonoBehaviour
 {
     public Transform PlayerShadowPrefab;
     public Transform LinePrefab;
+    
 	private Texture2D cursorGreen;
 	private Texture2D cursorRed;
     public Player2D player2D;
@@ -14,29 +15,42 @@ public class MapScript : MonoBehaviour
     public Text batteryText;
 	public Text EndText;
     public RaycastHit[] hits;
+
     public Transform CrossPrefab;
     public Transform LowBatteryPrefab;
     public Transform DynamicBatteryPrefab;
     public int batteryCount;
-    public int ammoCount;
+    //public int ammoCount;
 	public GameObject SoundManager;
 
     private RaycastHit hit;
+
     private List<Vector2> mapPoints;
     private List<int> distanceTravelled;
+
     private Vector3 prevShadowPos;
     private Vector2 cursorGreenHotspot, cursorRedHotspot;
+
     private List<Object> playerShadowPrefabList;
     private List<Object> linePrefabList;
-    private List<GameObject> BatteriesHitList; private List<GameObject> ammosHitList;
+    private List<GameObject> BatteriesHitList; //private List<GameObject> ammosHitList;
     private List<int> batteryUsedList;
-    private List<int> batteryPickups; private List<int> ammoPickups;
-    private List<int> batteryPickupsCount; private List<int> ammoPickupsCount;
+    private List<int> batteryPickups; //private List<int> ammoPickups;
+    private List<int> batteryPickupsCount;// private List<int> ammoPickupsCount;
+
+    private Stack<GameObject> ammoList;
+    private Stack<int> ammoPickupsCount;
+
     private Transform lineDynamic;
     private Transform cross;
     private Transform LowBattery;
     private Transform DynamicBattery;
-    private int layerMask;
+
+    private LayerMask wallLayerMask;
+    private LayerMask ammoLayerMask;
+    private LayerMask batteryLayerMask;
+    private LayerMask targetLayerMask;
+
     private int thresholdDistance;
 
 
@@ -76,21 +90,21 @@ public class MapScript : MonoBehaviour
         batteryPickupsCount = GameManager.Instance.batteryPickupsCount;
         batteryPickupsCount.Clear();
 
-        ammoPickups = GameManager.Instance.ammoPickups;
-        ammoPickups.Clear();
+        //ammoPickups = GameManager.Instance.ammoPickups;
+        //ammoPickups.Clear();
 
-        ammoPickupsCount = GameManager.Instance.ammoPickupsCount;
-        ammoPickupsCount.Clear();
+        //ammoPickupsCount = GameManager.Instance.ammoPickupsCount;
+        //ammoPickupsCount.Clear();
 
-        ammosHitList = GameManager.Instance.ammosHitList;
-        ammosHitList.Clear();
+        //ammosHitList = GameManager.Instance.ammosHitList;
+        //ammosHitList.Clear();
+        
 
         playerShadowPrefabList = new List<Object>();
         linePrefabList = new List<Object>();
         playerPosList = new List<Vector3>();
-
-
-
+        ammoList = new Stack<GameObject>();
+        ammoPickupsCount = new Stack<int>();
 
         Vector2 imagePos = convertToPixels(prevShadowPos);
         mapPoints.Add(imagePos);
@@ -100,10 +114,14 @@ public class MapScript : MonoBehaviour
 
         lineDynamic = Instantiate(LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
 
-        layerMask = 1 << 12;
+        wallLayerMask = 1 << 12;
+        ammoLayerMask = 1 << 13;
+        batteryLayerMask = 1 << 14;
+        targetLayerMask = 1 << 15;
 
         cross = Instantiate(CrossPrefab, hit.point, Quaternion.identity) as Transform;
         cross.gameObject.SetActive(false);
+        
 
         LowBattery = Instantiate(LowBatteryPrefab, hit.point, Quaternion.identity) as Transform;
         LowBattery.gameObject.SetActive(false);
@@ -133,24 +151,22 @@ public class MapScript : MonoBehaviour
         prevShadowPos = playerInitialPos;
     }
 
-    private int countObjects(Vector3 mousePos, string objectname)
+    private int countObjects(Vector3 mousePos, LayerMask layerMask)
     {
         Vector3 object_vector;
-        int i;
-        int count = 0;
         object_vector = mousePos - prevShadowPos;
-        hits = Physics.RaycastAll(prevShadowPos, object_vector.normalized, object_vector.magnitude);
-        
-        for (i = 0; i < hits.Length; i++)
-        {
-            RaycastHit hitobject = hits[i];
-            if (hitobject.transform.parent.name == objectname)
-            {
-                count++;
-            }
-        }
-        return count;
+        hits = Physics.RaycastAll(prevShadowPos, object_vector.normalized, object_vector.magnitude,layerMask);
+        return hits.Length;
     }
+
+    //private int countObjectsVicinity(Vector3 mousePos, LayerMask layerMask)
+    //{
+    //    ammohit = Physics.OverlapBox((prevShadowPos + mousePos) / 2, new Vector3(5, 0.2f, (mousePos - prevShadowPos).magnitude/2), Quaternion.LookRotation((mousePos - prevShadowPos), Vector3.back), ammoLayerMask);
+    //    Debug.DrawRay((prevShadowPos + mousePos) / 2, new Vector3(5, 0, 0));
+    //    Debug.DrawRay((prevShadowPos + mousePos) / 2, new Vector3(0, 0.2f, 0));
+    //    Debug.DrawRay((prevShadowPos + mousePos) / 2, new Vector3(0, 0, (mousePos - prevShadowPos).magnitude)/2);
+    //    return ammohit.Length;
+    //}
 
 
     void Update()
@@ -165,8 +181,9 @@ public class MapScript : MonoBehaviour
         int currentBattery = System.Int32.Parse(batteryText.text);
 
         //DynamicBattery.gameObject.SetActive(true);
+        countObjects(mousePos, ammoLayerMask);
 
-        if ((countObjects(mousePos, "wallColliders") == 0))                                        //green
+        if ((countObjects(mousePos, wallLayerMask) == 0))                                        //green
         {
             Cursor.SetCursor(cursorGreen, cursorGreenHotspot, CursorMode.Auto);
             LineR.SetColors(Color.black, Color.black);
@@ -195,7 +212,7 @@ public class MapScript : MonoBehaviour
             LowBattery.gameObject.SetActive(false);
             cross.gameObject.SetActive(true);
 
-            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude, layerMask);
+            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude, wallLayerMask);
             LineR.SetPosition(1, hit.point);
             cross.position = hit.point;
 
@@ -214,6 +231,99 @@ public class MapScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             UndoPrevMove();
+        }
+    }
+
+    void OnMouseDown()
+    {
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        worldPos.z = 0.0f;
+
+        if (countObjects(worldPos, wallLayerMask) == 0)
+        {
+            int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, worldPos));
+            distanceTravelled.Add(travelDist);
+            int currentBattery = System.Int32.Parse(batteryText.text);
+            if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0)
+            {
+                SoundManager.GetComponent<Audio>().MouseClicked();
+                int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
+                int batteriesPicked = 0;
+                if (countObjects(worldPos, batteryLayerMask) > 0)
+                {                                         //battery detection
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        BatteriesHitList.Add(hits[i].transform.gameObject);
+                        hits[i].transform.gameObject.SetActive(false);
+                        batteryPickups.Add(50);
+                        batteryLeft += 50;
+                        batteriesPicked++;
+                    }
+                }
+                batteryPickupsCount.Add(batteriesPicked);
+                batteryUsedList.Add((travelDist * GameManager.Instance.batteryDepletionRate));
+                batteryText.text = batteryLeft.ToString();
+
+                //int ammosPicked = 0;
+                //if (countObjects (worldPos, ammoLayerMask) > 0) {                                         //Ammo detection
+                //	for (int i = 0; i < hits.Length; i++) {
+                //		//if (hits [i].transform.parent.name == "Ammos") {
+                //			ammosHitList.Add (hits [i].transform.gameObject);
+                //			hits [i].transform.gameObject.SetActive (false);
+                //			ammoPickups.Add (10);
+                //			ammosPicked++;
+                //		//}
+                //	}
+                //}
+                //ammoPickupsCount.Add (ammosPicked);
+
+                if (countObjects(worldPos, ammoLayerMask) > 0)                                      //ammo vicinity detection
+                {                                         
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        ammoList.Push(hits[i].transform.gameObject);
+                        hits[i].transform.GetChild(0).gameObject.SetActive(true);
+
+                        //BatteriesHitList.Add(hits[i].transform.gameObject);
+                        //hits[i].transform.gameObject.SetActive(false);
+                        //batteryPickups.Add(50);
+                        //batteryLeft += 50;
+                        //batteriesPicked++;
+                    }
+                }
+                ammoPickupsCount.Push(hits.Length);
+
+                if (countObjects(worldPos, targetLayerMask) > 0)                                      //Target Detection
+                {
+                    EndText.gameObject.SetActive(true);
+                }
+
+                // draw the line and shadow
+                Vector2 imagePos = convertToPixels(worldPos);
+                mapPoints.Add(imagePos);
+
+                playerPosList.Add(worldPos);
+                Object playerShadowprefab = Instantiate(PlayerShadowPrefab, worldPos, Quaternion.identity);
+                playerShadowPrefabList.Add(playerShadowprefab);
+
+                Transform line = Instantiate(LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
+                linePrefabList.Add(line);
+                LineRenderer LineR = line.GetComponent<LineRenderer>();
+                LineR.SetPosition(0, prevShadowPos);
+                LineR.SetPosition(1, worldPos);
+
+                prevShadowPos = worldPos;
+                currentBattery = System.Int32.Parse(batteryText.text);
+                thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
+            }
+            else
+            {
+                SoundManager.GetComponent<Audio>().WrongClick();
+            }
+        }
+        else
+        {
+            SoundManager.GetComponent<Audio>().WrongClick();
         }
     }
 
@@ -259,17 +369,22 @@ public class MapScript : MonoBehaviour
             //----------------------------------------------------------------------------------------------
 
             //----------------------------------------------------------------------------------------------
-
-            int ammosToRemove = ammoPickupsCount[ammoPickupsCount.Count - 1];
-            for (int i = 0; i < ammosToRemove; i++)
+            if(ammoList.Count > 0)
             {
-                ammosHitList[ammosHitList.Count - 1].SetActive(true);
-                ammosHitList.RemoveAt(ammosHitList.Count - 1);
+                int ammosToRemove = ammoPickupsCount.Pop();
+                for (int i = 0; i < ammosToRemove; i++)
+                {
+
+                    ammoList.Pop().transform.GetChild(0).gameObject.SetActive(false);
+                    //ammosHitList[ammosHitList.Count - 1].SetActive(true);
+                    //ammosHitList.RemoveAt(ammosHitList.Count - 1);
+                }
+
+                //ammoPickups.RemoveRange(ammoPickups.Count - ammosToRemove, ammosToRemove);   // remove the corresponding number of ammos
+                //ammoPickupsCount.RemoveAt(ammoPickupsCount.Count - 1);                               //remove the last element of ammoPickupsCount list
             }
-            
-            ammoPickups.RemoveRange(ammoPickups.Count - ammosToRemove, ammosToRemove);   // remove the corresponding number of ammos
-            ammoPickupsCount.RemoveAt(ammoPickupsCount.Count - 1);                               //remove the last element of ammoPickupsCount list
-            
+
+
             //----------------------------------------------------------------------------------------------
 
             playerPosList.RemoveAt(playerPosList.Count - 1);
@@ -285,83 +400,5 @@ public class MapScript : MonoBehaviour
 
             distanceTravelled.RemoveAt(distanceTravelled.Count - 1);
         }
-    }
-
-    void OnMouseDown()
-    {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        worldPos.z = 0.0f;
-
-		if (countObjects (worldPos, "wallColliders") == 0) {
-			int travelDist = (int)Mathf.Ceil (Vector3.Distance (prevShadowPos, worldPos));
-			distanceTravelled.Add (travelDist);
-			int currentBattery = System.Int32.Parse (batteryText.text);
-			if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0) {
-				SoundManager.GetComponent<Audio> ().MouseClicked ();
-				int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
-				int batteriesPicked = 0;
-				if (countObjects (worldPos, "Batteries") > 0) {                                         //battery detection
-					for (int i = 0; i < hits.Length; i++) {
-						if (hits [i].transform.parent.name == "Batteries") {
-							BatteriesHitList.Add (hits [i].transform.gameObject);
-							hits [i].transform.gameObject.SetActive (false);
-							batteryPickups.Add (50);
-							batteryLeft += 50;
-							batteriesPicked++;
-						}
-					}
-				}
-				batteryPickupsCount.Add (batteriesPicked);
-				batteryUsedList.Add ((travelDist * GameManager.Instance.batteryDepletionRate));
-				batteryText.text = batteryLeft.ToString ();
-
-				int ammosPicked = 0;
-				if (countObjects (worldPos, "Ammos") > 0) {                                         //Ammo detection
-					for (int i = 0; i < hits.Length; i++) {
-						if (hits [i].transform.parent.name == "Ammos") {
-							ammosHitList.Add (hits [i].transform.gameObject);
-							hits [i].transform.gameObject.SetActive (false);
-							ammoPickups.Add (10);
-							ammosPicked++;
-						}
-					}
-				}
-				ammoPickupsCount.Add (ammosPicked);
-
-
-
-				if(countObjects (worldPos, "Target") > 0)
-				{
-					EndText.gameObject.SetActive (true);
-				}
-
-				// draw the line and shadow
-				Vector2 imagePos = convertToPixels (worldPos);
-				mapPoints.Add (imagePos);
-
-				playerPosList.Add (worldPos);
-				Object playerShadowprefab = Instantiate (PlayerShadowPrefab, worldPos, Quaternion.identity);
-				playerShadowPrefabList.Add (playerShadowprefab);
-
-				Transform line = Instantiate (LinePrefab, prevShadowPos, Quaternion.identity) as Transform;
-				linePrefabList.Add (line);
-				LineRenderer LineR = line.GetComponent<LineRenderer> ();
-				LineR.SetPosition (0, prevShadowPos);
-				LineR.SetPosition (1, worldPos);
-
-				prevShadowPos = worldPos;
-				currentBattery = System.Int32.Parse (batteryText.text);
-				thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
-
-
-
-			} else {
-				SoundManager.GetComponent<Audio> ().WrongClick ();
-			}
-		} 
-		else 
-		{
-			SoundManager.GetComponent<Audio> ().WrongClick ();
-		}
     }
 }
