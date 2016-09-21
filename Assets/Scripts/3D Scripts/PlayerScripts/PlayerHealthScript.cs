@@ -18,7 +18,7 @@ public class PlayerHealthScript : MonoBehaviour
 
     public void PlayerDamage(float damage)
     {
-        healthCount -= damage;
+        healthCount -= (Time.deltaTime);
         healthString = "" + healthCount;
         HealthText.text = healthString;
 
