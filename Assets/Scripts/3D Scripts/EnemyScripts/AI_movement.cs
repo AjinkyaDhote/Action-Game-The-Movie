@@ -64,8 +64,8 @@ public class AI_movement : MonoBehaviour
 		zombieWalk = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
 		//anim = GetComponent<Animator>();		
-		enemyHeadCollider = transform.GetChild(0).GetComponent<Collider>();
-        enemyBodyCollider = transform.GetChild(1).GetComponent<Collider>();
+		enemyHeadCollider = transform.GetChild(3).GetComponent<Collider>();
+        enemyBodyCollider = transform.GetChild(0).GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
@@ -124,12 +124,14 @@ public class AI_movement : MonoBehaviour
 					agent.speed = 0;
 					transform.position = resetPositionForInRange;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    DamagePlayer();
 				}
 				else
 				{
 					agent.speed = enemyRunSpeed;
 					agent.destination = player.transform.position;
-				}
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                }
 			}
 			else
 			{
@@ -159,6 +161,7 @@ public class AI_movement : MonoBehaviour
         _isPlayerSeen = true;
 		resetPositionForInRange = transform.position;
 		isPlayerInRange = true;
+        
 	}
 	public void OutOfRange()
 	{
