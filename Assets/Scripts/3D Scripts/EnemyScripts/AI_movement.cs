@@ -130,7 +130,8 @@ public class AI_movement : MonoBehaviour
 				{
 					agent.speed = enemyRunSpeed;
 					agent.destination = player.transform.position;
-				}
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                }
 			}
 			else
 			{
