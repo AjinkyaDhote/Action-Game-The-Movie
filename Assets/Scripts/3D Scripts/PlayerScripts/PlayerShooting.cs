@@ -236,7 +236,7 @@ public class PlayerShooting : MonoBehaviour
     }
     public void PickupAmmo()
     {
-        int currentNumberOfBullets = bullets.Capacity;
+        int currentNumberOfBullets = bullets.Count;
         int futureNumberOfBullets = currentNumberOfBullets + AMMO_PICK_UP;
         for (int i = currentNumberOfBullets; i < futureNumberOfBullets; i++)
         {
