@@ -41,7 +41,7 @@ public class BulletDamage : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Wall"))
+        else if (other.CompareTag("Wall") || other.CompareTag("PayLoad"))
         {
             Destroy(gameObject);
         }      
