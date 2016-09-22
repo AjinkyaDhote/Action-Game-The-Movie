@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
+    private const int AMMO_PICK_UP = 10;
+    private const int INITIAL_NUMBER_OF_BULLETS = 5;
+
     public ParticleSystem muzzleFlash;
     public Animator anim;
     public ParticleSystem[] impacts;
+    
 
     [SerializeField]
-    float _bulletForce = 0.0f;   
+    float _bulletForce = 0.0f;
     public float BulletForce
     {
         get
@@ -49,7 +53,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         bulletInUse = 0;
-        bulletCount = 75;
+        bulletCount = INITIAL_NUMBER_OF_BULLETS;
         bulletSpawnerTrasform = transform.GetChild(0).GetChild(0);
         bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
         bullets = new List<GameObject>(bulletCount);
@@ -63,7 +67,7 @@ public class PlayerShooting : MonoBehaviour
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
-		AmmoText.color = Color.white;
+        AmmoText.color = Color.white;
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
         laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
@@ -83,7 +87,11 @@ public class PlayerShooting : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetButtonDown("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
+        else if (Input.GetButtonDown("Fire1") && 
+                (!pauseMenuScript.isPaused) && 
+                (Time.time > nextFire) && 
+                (countdownTimer.hasGameStarted) && 
+                (bulletCount != 0))
         {
             nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
             shooting = true;
@@ -228,13 +236,20 @@ public class PlayerShooting : MonoBehaviour
     }
     public void PickupAmmo()
     {
-        bulletCount += 10;
+        int currentNumberOfBullets = bullets.Capacity;
+        int futureNumberOfBullets = currentNumberOfBullets + AMMO_PICK_UP;
+        for (int i = currentNumberOfBullets; i < futureNumberOfBullets; i++)
+        {
+            bullets.Add(Instantiate(bulletPrefab) as GameObject);
+            bullets[i].SetActive(false);
+        }
+        bulletCount += AMMO_PICK_UP;
         bulletOverText.text = "";
         bulletsString = " " + bulletCount;
         AmmoText.text = bulletsString;
-        if (bulletCount >= 10)
+        if (bulletCount >= AMMO_PICK_UP)
         {
-			AmmoText.color = Color.white;
+            AmmoText.color = Color.white;
         }
     }
 }

@@ -30,7 +30,7 @@ public class BulletDamage : MonoBehaviour
                 enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
             }
             GameManager.Instance.headShots++;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
         else if(other.CompareTag("BodyCollider"))
         {
@@ -39,7 +39,11 @@ public class BulletDamage : MonoBehaviour
             {
                 enemyHealthScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
             }
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
+        else if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }      
     }
 }
