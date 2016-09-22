@@ -15,4 +15,10 @@ public class DontCollideWithPlayer : MonoBehaviour
         playerRigidbody.velocity = playerRigidbody.angularVelocity = Vector3.zero;
         playerRigidbody.position = transform.position;
     }
+
+    void OnCollsionEnter(Collision collision)
+    {
+        Debug.Log("Player collided with",collision.gameObject);
+    }
+
 }

@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
         //agent = GetComponent<NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
-            currentHealth = 3;
+            currentHealth = 5;
         else
             currentHealth = 60;
         //anim = transform.parent.parent.GetComponent<Animator> ();

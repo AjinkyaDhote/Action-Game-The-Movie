@@ -170,6 +170,54 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22409168, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 389
+      objectReference: {fileID: 0}
+    - target: {fileID: 22478756, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 438
+      objectReference: {fileID: 0}
+    - target: {fileID: 22455172, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 384
+      objectReference: {fileID: 0}
+    - target: {fileID: 22477850, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 427
+      objectReference: {fileID: 0}
+    - target: {fileID: 22482616, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 458
+      objectReference: {fileID: 0}
+    - target: {fileID: 22416876, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 376
+      objectReference: {fileID: 0}
+    - target: {fileID: 22483696, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 458
+      objectReference: {fileID: 0}
+    - target: {fileID: 22422724, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 376
+      objectReference: {fileID: 0}
+    - target: {fileID: 22483582, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 376
+      objectReference: {fileID: 0}
+    - target: {fileID: 22415288, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 460
+      objectReference: {fileID: 0}
+    - target: {fileID: 22463196, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -806
+      objectReference: {fileID: 0}
+    - target: {fileID: 22498438, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -864
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
   m_IsPrefabParent: 0
@@ -1737,16 +1785,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb589305b653dac43b73e1cbec4a4a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerShadowPrefab: {fileID: 435500, guid: 6eac153007c7811429e1fff96f7cdaf2, type: 2}
-  LinePrefab: {fileID: 473268, guid: 5459312e19f5c5946b18b513738a1bdb, type: 2}
-  player2D: {fileID: 1249927581}
-  playerPosList: []
+  batteryCount: 0
   batteryText: {fileID: 75411190}
-  EndText: {fileID: 75411191}
-  CrossPrefab: {fileID: 499626, guid: 75f99f38e943196428412708921f7ac3, type: 2}
   LowBatteryPrefab: {fileID: 406682, guid: cba9829fae570cb40b3098496034d4d5, type: 2}
   DynamicBatteryPrefab: {fileID: 400040, guid: 000d460ea08247c4597b411db1088dac, type: 2}
-  batteryCount: 0
+  PlayerShadowPrefab: {fileID: 435500, guid: 6eac153007c7811429e1fff96f7cdaf2, type: 2}
+  LinePrefab: {fileID: 473268, guid: 5459312e19f5c5946b18b513738a1bdb, type: 2}
+  CrossPrefab: {fileID: 499626, guid: 75f99f38e943196428412708921f7ac3, type: 2}
+  EndText: {fileID: 75411191}
+  player2D: {fileID: 1249927581}
+  playerPosList: []
   SoundManager: {fileID: 1733587520}
 --- !u!61 &1852946446
 BoxCollider2D:
