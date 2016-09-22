@@ -7296,7 +7296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013907925132
 GameObject:
   m_ObjectHideFlags: 1
@@ -7366,7 +7366,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.15294118, g: 1, b: 0.99215686, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -7400,7 +7400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb1ad499a417234cb6c936fe0de57c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zigs: 100
+  zigs: 50
   speed: 1
   scale: 1
 --- !u!114 &114000013113184814
@@ -7524,7 +7524,7 @@ ParticleSystem:
   moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 1
-  randomSeed: -730940293
+  randomSeed: 407715911
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -7564,7 +7564,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 5
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7690,7 +7690,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9229,7 +9229,7 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: fbd26323cc7964c4db8c7c8c57720c54, type: 2}
   m_SubsetIndices: 
