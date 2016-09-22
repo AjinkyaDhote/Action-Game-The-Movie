@@ -10,6 +10,9 @@ public class PayLoadRangeScript : MonoBehaviour {
     private  BoxCollider boxCollider;
     private CapsuleCollider playerCollider;
     private Image screenBlurImage;
+    private Light playerLight;
+    private LightningBolt lightningBoltScript;
+    private ParticleSystem myParticleSystem;
     [SerializeField]
     [Range(0.0f, 1.0f)]
     private float _blurIntensity = 0.8f;  
@@ -45,7 +48,10 @@ public class PayLoadRangeScript : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider>();
         playerCollider = player.GetComponent<CapsuleCollider>();
         screenBlurImage = player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas").FindChild("ScreenBlur").GetComponent<Image>();
-	}
+        lightningBoltScript = player.GetComponent<LightningBolt>();
+        playerLight = player.transform.GetChild(1).GetComponent<Light>();
+        myParticleSystem = player.GetComponent<ParticleSystem>();
+    }
 	
 	
 	void Update ()
@@ -58,6 +64,9 @@ public class PayLoadRangeScript : MonoBehaviour {
             {
                 screenBlurImage.color += new Color(0.0f, 0.0f, 0.0f, Time.deltaTime / _speedOfScreenBlur);
             }
+            playerLight.enabled = false;
+            myParticleSystem.Play();
+            lightningBoltScript.enabled = false;
         }
         else
         {
@@ -65,6 +74,9 @@ public class PayLoadRangeScript : MonoBehaviour {
             {
                 screenBlurImage.color = Color.clear;
             }
+            playerLight.enabled = true;
+            myParticleSystem.Stop();
+            lightningBoltScript.enabled = true;
         }
 	}
  
