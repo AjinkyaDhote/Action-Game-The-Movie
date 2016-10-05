@@ -6,7 +6,8 @@ public class PayLoadRangeScript : MonoBehaviour {
 
     private GameObject player;
     private PlayerHealthScript playerHealth;
-    private bool outOfRange;
+    [HideInInspector]
+    public bool outOfRange;
     private  BoxCollider boxCollider;
     private CapsuleCollider playerCollider;
     private Image screenBlurImage;
@@ -87,23 +88,4 @@ public class PayLoadRangeScript : MonoBehaviour {
     //        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
     //    }
     //}
-
-
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            outOfRange = false;
-        }
-    }
-
-
-    void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            outOfRange = true;
-            //playerHealth.PlayerDamage();
-        }
-    }
 }
