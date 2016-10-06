@@ -31,7 +31,6 @@ GameObject:
   - 114: {fileID: 11467510}
   - 114: {fileID: 11405036}
   - 54: {fileID: 54000014154891426}
-  - 114: {fileID: 114000013404900724}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Player
@@ -446,7 +445,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.14, y: 2.38, z: -42.02}
+  m_LocalPosition: {x: 3.14, y: 3.39, z: -42.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -7422,7 +7421,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011116427966}
-  m_Mesh: {fileID: 4300000, guid: 2958d6ecbadbd2e428825129f4151c82, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!54 &54000014154891426
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -7518,17 +7517,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
---- !u!114 &114000013404900724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4d50740b08d1841b55f6b0bc580623, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000013955829324
 MonoBehaviour:
   m_ObjectHideFlags: 1
