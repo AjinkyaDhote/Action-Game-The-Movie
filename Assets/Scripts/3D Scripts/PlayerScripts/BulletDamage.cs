@@ -7,10 +7,24 @@ public class BulletDamage : MonoBehaviour
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
     const int HEAD_SHOT_DAMAGE = 1000;
+    Collider bulletCollider;
+    Collider payloadCollider;
+    Collider payloadColliderBox;
     void Start()
     {
         weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
+        bulletCollider = GetComponent<Collider>();
+        payloadCollider = GameObject.FindGameObjectWithTag("PayLoad").GetComponent<SphereCollider>();
+        payloadColliderBox = GameObject.FindGameObjectWithTag("PayLoad").GetComponent<BoxCollider>();        
     }
+
+    void Update()
+    {
+        Physics.IgnoreCollision(bulletCollider, payloadCollider);
+        Physics.IgnoreCollision(bulletCollider, payloadColliderBox);        
+    }
+
+
     void OnTriggerEnter(Collider other)
     {
         /*if (other.CompareTag("HeadCollider") && other.CompareTag("BodyCollider"))
@@ -41,9 +55,11 @@ public class BulletDamage : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Wall") || other.CompareTag("PayLoad"))
+        else if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
-        }      
+        }
+
+        //Debug.Log("Bullet Collided with" + other.gameObject.name);
     }
 }

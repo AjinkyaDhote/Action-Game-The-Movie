@@ -63,7 +63,7 @@ public class PayLoadRangeScript : MonoBehaviour {
             playerHealth.PlayerDamage(0.1f);
             if (screenBlurImage.color.a < _blurIntensity)
             {
-                //screenBlurImage.color += new Color(0.0f, 0.0f, 0.0f, Time.deltaTime / _speedOfScreenBlur);
+                screenBlurImage.color += new Color(0.0f, 0.0f, 0.0f, Time.deltaTime / _speedOfScreenBlur);
             }
             playerLight.enabled = false;
             myParticleSystem.Play();
@@ -73,7 +73,7 @@ public class PayLoadRangeScript : MonoBehaviour {
         {
             if (screenBlurImage.color.a > 0.0f)
             {
-               // screenBlurImage.color = Color.clear;
+                screenBlurImage.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
             }
             playerLight.enabled = true;
             myParticleSystem.Stop();

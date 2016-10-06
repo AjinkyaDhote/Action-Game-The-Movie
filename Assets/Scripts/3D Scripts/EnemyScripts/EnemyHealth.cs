@@ -40,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
         if (aiMovementScript != null)
         {
             aiMovementScript.Detection();
@@ -65,7 +65,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
-            Debug.Log("Killed");
+            //Debug.Log("Killed");
             _isKilled = true;
             GameManager.Instance.totalEnemiesKilled++;
             isPlayerDead = true;
