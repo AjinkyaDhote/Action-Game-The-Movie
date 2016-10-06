@@ -6,12 +6,17 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     private const int AMMO_PICK_UP = 10;
-    private const int INITIAL_NUMBER_OF_BULLETS = 12;
+    private const int INITIAL_NUMBER_OF_BULLETS = 75;
 
-    public ParticleSystem muzzleFlash;
-    public Animator anim;
-    public ParticleSystem[] impacts;
-    
+    private const float PISTOL_RANGE = 5.0f;
+    private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
+
+    private const float SPARY_ANGLE = 5.0f;
+
+    //public ParticleSystem muzzleFlash;
+    //public Animator anim;
+    //public ParticleSystem[] impacts;
+
 
     [SerializeField]
     float _bulletForce = 0.0f;
@@ -27,94 +32,135 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    GameObject laserPrefab;
-    GameObject laser;
-    float nextFire = 0.0f;
-    WeaponSystem weaponSystemScript;
-    PauseMenu pauseMenuScript;
-    CountdownTimerScript countdownTimer;
-    EnemyHealth damageScript;
-    bool shooting = false;
-    int bulletCount;
-    AudioSource noBullets;
-    GameObject bulletPrefab;
-    List<GameObject> bullets;
-    int bulletInUse;
-    Rigidbody bulletRB;
-    Transform bulletSpawnerTrasform;
+    //private GameObject laserPrefab;
+    //private GameObject laser;
+    //private AudioSource noBullets;
+    //private EnemyThrow enemyThrowScript;
+    private float nextFire = 0.0f;
+    private WeaponSystem weaponSystemScript;
+    private PauseMenu pauseMenuScript;
+    private CountdownTimerScript countdownTimer;
+    private EnemyHealth damageScript;
+    //private bool shooting = false;
 
-    Text AmmoText;
-    string bulletsString;
-    Text bulletOverText;
+    private int bulletCount = INITIAL_NUMBER_OF_BULLETS;
+    private GameObject bulletPrefab;
+    private List<GameObject> bullets;
+    private int bulletInUse = 0;
+    private Rigidbody[] shotgunBulletRB;
+    private Transform[] shotgunBulletSpawnerTrasform;
 
-    AI_movement aiMovementScript;
-    EnemyThrow enemyThrowScript;
+    private Rigidbody pistolBulletRB;
+    private Transform pistolBulletSpawnerTrasform;
+
+    private Text AmmoText;
+    private Text bulletOverText;
+
+    private AI_movement aiMovementScript;
+
 
     void Start()
     {
-        bulletInUse = 0;
-        bulletCount = INITIAL_NUMBER_OF_BULLETS;
-        bulletSpawnerTrasform = transform.GetChild(0).GetChild(0);
-        bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
-        bullets = new List<GameObject>(bulletCount);
+        shotgunBulletSpawnerTrasform = new Transform[4];
+        for (int i = 0; i < 4; i++)
+        {
+            shotgunBulletSpawnerTrasform[i] = transform.GetChild(0).GetChild(i);
+        }
+        pistolBulletSpawnerTrasform = transform.GetChild(1).GetChild(0);
+        bulletPrefab = Resources.Load<GameObject>("Bullet Prefab/Bullet");
+        bullets = new List<GameObject>(INITIAL_NUMBER_OF_BULLETS);
         for (int i = 0; i < bullets.Capacity; i++)
         {
-            bullets.Add(Instantiate(bulletPrefab) as GameObject);
+            bullets.Add(Instantiate(bulletPrefab));
             bullets[i].SetActive(false);
         }
-        noBullets = GetComponent<AudioSource>();
+        shotgunBulletRB = new Rigidbody[4];
+        //noBullets = GetComponent<AudioSource>();
+        //laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
-        bulletsString = " " + bulletCount;
-        AmmoText.text = bulletsString;
+        AmmoText.text = " " + bulletCount;
         AmmoText.color = Color.white;
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
-        laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
+
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
     }
-    void Update()
-    {
-        if (weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
-        {
-            if (Input.GetButton("Fire1") && !pauseMenuScript.isPaused && Time.time > nextFire && countdownTimer.hasGameStarted)
-            {
-                nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
-                shooting = true;
-                if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
-                {
-                    noBullets.Play();
-                }
-            }
-        }
-        else if (Input.GetButtonDown("Fire1") && 
-                (!pauseMenuScript.isPaused) && 
-                (Time.time > nextFire) && 
-                (countdownTimer.hasGameStarted) && 
-                (bulletCount != 0))
-        {
-            nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
-            shooting = true;
-            bullets[bulletInUse].transform.position = bulletSpawnerTrasform.position;
-            bullets[bulletInUse].SetActive(true);
-            bulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
-            bulletRB.AddForce(-bulletSpawnerTrasform.up * _bulletForce);
-            bulletInUse++;
-            if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
-            {
-                noBullets.Play();
-            }
-        }
-    }
     void FixedUpdate()
     {
-        if (bulletCount <= 0)
+        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.time > nextFire) && (countdownTimer.hasGameStarted))
         {
-            bulletOverText.text = "OUT OF AMMO";
+            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            {
+                if (bulletCount >= 4)
+                {
+                    bulletCount -= 4;
+                    nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
+                    for (int i = 0; i < 4; i++)
+                    {
+                        bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform[i].position;
+                        bullets[bulletInUse].SetActive(true);
+                        shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
+                        shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
+                        bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
+                        bulletInUse++;
+                    }
+                }
+                else
+                {
+                    //noBullets.Play();
+                }
+            }
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
+            {
+                if (bulletCount > 0)
+                {
+                    bulletCount--;
+                    nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
+                    bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
+                    bullets[bulletInUse].SetActive(true);
+                    pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
+                    pistolBulletRB.AddForce(-pistolBulletSpawnerTrasform.up * _bulletForce);
+                    bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
+                    bulletInUse++;
+                }
+                else
+                {
+                    //noBullets.Play();
+                }
+            }
+            AmmoText.text = bulletCount.ToString();
+        }
+
+        if (bulletCount >= 10)
+        {
+            AmmoText.color = Color.white;
+        }
+        else if (bulletCount < 10)
+        {
+            AmmoText.color = Color.red;
+        }
+
+        if (bulletCount < 4)
+        {
+            bulletOverText.text = "SWITCH TO PISTOL";
+        }
+        else if(bulletCount <= 0)
+        {
+            bulletOverText.text = "NO BULLETS";
         }
         else
         {
-            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            bulletOverText.text = "";
+        }
+    }
+
+
+    /*void FixedUpdate()
+    {   
+        /*else
+        {
+            if (weaponSystemScript.currentWeaponInfo.gunName == "ShotGun")
             {
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
                 {
@@ -126,7 +172,7 @@ public class PlayerShooting : MonoBehaviour
                 }
             }
 
-            else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun")
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
             {
                 if (bulletCount <= weaponSystemScript.currentWeaponInfo.ammoNeeded - 1)
                 {
@@ -146,34 +192,33 @@ public class PlayerShooting : MonoBehaviour
             }
         }
 
-        if (shooting && (bulletCount > weaponSystemScript.currentWeaponInfo.ammoNeeded - 1))
-        {
-            weaponSystemScript.audioGun.Play();
-            muzzleFlash.Play();
-            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
-            {
-                anim.SetTrigger("ShotGun");
-            }
-            else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
-            {
-                anim.SetTrigger("Fire");
-            }
+        //if (shooting)// && (shotgunBulletCount > weaponSystemScript.currentWeaponInfo.ammoNeeded - 1))
+        //{
+            //weaponSystemScript.audioGun.Play();
+            ////muzzleFlash.Play();
+            //if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            //{
+            //    //anim.SetTrigger("ShotGun");
+            //}
+            //else if (weaponSystemScript.currentWeaponInHand.Value.name == "PotatoGun" || weaponSystemScript.currentWeaponInHand.Value.name == "MachineGun")
+            //{
+            //    //anim.SetTrigger("Fire");
+            //}
 
-            if (bulletCount > 0)
-            {
-                bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
-                if (bulletCount <= 0)
-                {
-                    bulletCount = 0;
-                }
-                bulletsString = " " + bulletCount;
-                AmmoText.text = bulletsString;
-            }
-            if (bulletCount <= 10)
-            {
-                AmmoText.color = Color.red;
-            }
-            shooting = false;
+            //if (bulletCount > 0)
+            //{
+            //    bulletCount -= weaponSystemScript.currentWeaponInfo.ammoNeeded;
+            //    if (bulletCount <= 0)
+            //    {
+            //        bulletCount = 0;
+            //    }
+            //    AmmoText.text = " " + shotgunBulletCount;
+            //}
+            //if (bulletCount <= 10)
+            //{
+
+            //}
+            //shooting = false;
             //RaycastHit hit;
 
             //if (Physics.Raycast(transform.position, transform.forward, out hit, 50f))
@@ -232,25 +277,30 @@ public class PlayerShooting : MonoBehaviour
             //        }
             //    }
             //}
-        }
-    }
+        //}
+    }*/
     public void PickupAmmo()
     {
         int currentNumberOfBullets = bullets.Count;
         int futureNumberOfBullets = currentNumberOfBullets + AMMO_PICK_UP;
         for (int i = currentNumberOfBullets; i < futureNumberOfBullets; i++)
         {
-            bullets.Add(Instantiate(bulletPrefab) as GameObject);
+            bullets.Add(Instantiate(bulletPrefab));
             bullets[i].SetActive(false);
         }
         bulletCount += AMMO_PICK_UP;
         bulletOverText.text = "";
-        bulletsString = " " + bulletCount;
-        AmmoText.text = bulletsString;
-        if (bulletCount >= AMMO_PICK_UP)
+        AmmoText.text = bulletCount.ToString();
+        if (bulletCount >= 10)
         {
             AmmoText.color = Color.white;
         }
+    }
+
+    Vector3 GenerateShotGunSpray(int i)
+    {
+        Quaternion rotation = Quaternion.AngleAxis(((i % 2 == 0) ? 1 : -1) * SPARY_ANGLE, ((i < 2) ? Vector3.right : Vector3.up));
+        return transform.TransformDirection(rotation * Vector3.forward);
     }
 }
 

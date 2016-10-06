@@ -7,24 +7,37 @@ public class BulletDamage : MonoBehaviour
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
     const int HEAD_SHOT_DAMAGE = 1000;
-    Collider bulletCollider;
-    Collider payloadCollider;
-    Collider payloadColliderBox;
-    void Start()
+    private float timeToDestroyBullet;
+    private bool _isFired = false;
+    public bool IsFired
     {
-        weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
-        bulletCollider = GetComponent<Collider>();
-        payloadCollider = GameObject.FindGameObjectWithTag("PayLoad").GetComponent<SphereCollider>();
-        payloadColliderBox = GameObject.FindGameObjectWithTag("PayLoad").GetComponent<BoxCollider>();        
+        get
+        {
+            return _isFired;
+        }
+        set
+        {
+            weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
+            timeToDestroyBullet = Time.time + weaponSystemScript.currentWeaponInfo.bulletLifeTime;
+            _isFired = value;
+        }
     }
-
-    void Update()
+  
+    private void Start()
     {
-        Physics.IgnoreCollision(bulletCollider, payloadCollider);
-        Physics.IgnoreCollision(bulletCollider, payloadColliderBox);        
+     
     }
-
-
+    private void Update()
+    {
+        if(_isFired)
+        {
+            if (Time.time > timeToDestroyBullet)
+            {
+                Destroy(gameObject);
+            }
+                
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         /*if (other.CompareTag("HeadCollider") && other.CompareTag("BodyCollider"))
@@ -51,15 +64,13 @@ public class BulletDamage : MonoBehaviour
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
-                enemyHealthScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
+                enemyHealthScript.Damage(1);
             }
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Wall"))
+        else if (other.CompareTag("Wall") || other.CompareTag("PayLoad"))
         {
             Destroy(gameObject);
-        }
-
-        //Debug.Log("Bullet Collided with" + other.gameObject.name);
+        }      
     }
 }
