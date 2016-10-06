@@ -776,6 +776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outOfRange: 0
+  circle: {fileID: 0}
 --- !u!114 &114000011684201946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -800,6 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c9aff7acd8df64ebb2f196db57f562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCircleAlpha: 128
 --- !u!120 &120000010600750588
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -835,10 +837,10 @@ LineRenderer:
     endWidth: 0.1
     m_StartColor:
       serializedVersion: 2
-      rgba: 4294967040
+      rgba: 2147548928
     m_EndColor:
       serializedVersion: 2
-      rgba: 4294967040
+      rgba: 2147548928
   m_UseWorldSpace: 0
 --- !u!135 &135000012785484444
 SphereCollider:
