@@ -36,10 +36,10 @@ public class PlayerMovement : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
 
-		/*width2DPlane = GameManager.Instance.width2DPlane;
+		width2DPlane = GameManager.Instance.width2DPlane;
 		height2DPlane = GameManager.Instance.height2DPlane;
 		width3DPlane = GameManager.Instance.width3DPlane;
-	    height3DPlane = GameManager.Instance.height3DPlane;*/
+	    height3DPlane = GameManager.Instance.height3DPlane;
 
 		WASDmovement = GetComponent<wasdMovement>();
 		wayPointNumber = 1;
