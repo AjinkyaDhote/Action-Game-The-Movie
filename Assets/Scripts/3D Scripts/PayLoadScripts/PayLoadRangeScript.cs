@@ -13,6 +13,9 @@ public class PayLoadRangeScript : MonoBehaviour
     public bool outOfRange;
     private BoxCollider boxCollider;
     private CapsuleCollider playerCollider;
+    [HideInInspector]
+    public LineRenderer circle;
+
 
     //private Image screenBlurImage;
     //private Light playerLight;
@@ -52,10 +55,9 @@ public class PayLoadRangeScript : MonoBehaviour
         outOfRange = false;
         boxCollider = GetComponent<BoxCollider>();
         playerCollider = player.GetComponent<CapsuleCollider>();
-
+        circle = transform.GetChild(1).GetComponent<LineRenderer>();
         //To make the circle of life
         {
-            LineRenderer circle = transform.GetChild(1).GetComponent<LineRenderer>();
             float radius = transform.GetChild(0).GetComponent<SphereCollider>().bounds.extents.x;
             float theta = 0f;
             int size = (int)((1f / THETA_SCALE) + 1f);
