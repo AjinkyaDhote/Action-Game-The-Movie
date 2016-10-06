@@ -7,9 +7,36 @@ public class BulletDamage : MonoBehaviour
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
     const int HEAD_SHOT_DAMAGE = 1000;
-    void Start()
+    private float timeToDestroyBullet;
+    private bool _isFired = false;
+    public bool IsFired
     {
-        weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
+        get
+        {
+            return _isFired;
+        }
+        set
+        {
+            weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
+            timeToDestroyBullet = Time.time + weaponSystemScript.currentWeaponInfo.bulletLifeTime;
+            _isFired = value;
+        }
+    }
+  
+    private void Start()
+    {
+     
+    }
+    private void Update()
+    {
+        if(_isFired)
+        {
+            if (Time.time > timeToDestroyBullet)
+            {
+                Destroy(gameObject);
+            }
+                
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -37,7 +64,7 @@ public class BulletDamage : MonoBehaviour
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
-                enemyHealthScript.Damage(weaponSystemScript.currentWeaponInfo.damageDealt);
+                enemyHealthScript.Damage(1);
             }
             Destroy(gameObject);
         }
