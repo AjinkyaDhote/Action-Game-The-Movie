@@ -299,14 +299,8 @@ public class PlayerShooting : MonoBehaviour
 
     Vector3 GenerateShotGunSpray(int i)
     {
-        int sign = (i % 2 == 0) ? 1 : -1;
-        Quaternion rotation = Quaternion.AngleAxis(sign * SPARY_ANGLE, ((i < 2) ? Vector3.right : Vector3.up));
+        Quaternion rotation = Quaternion.AngleAxis(((i % 2 == 0) ? 1 : -1) * SPARY_ANGLE, ((i < 2) ? Vector3.right : Vector3.up));
         return transform.TransformDirection(rotation * Vector3.forward);
-        //int sign = (i < 2) ? 1 : -1;
-        //shotgunBullets[shotgunBulletInUse].transform.position = new Vector3(shotgunBulletSpawnerTrasform.position.x + ((i % 2 == 0) ? 1 : 0) * sign * SHOTGUN_SPAWN_OFFSET, shotgunBulletSpawnerTrasform.transform.position.y + ((i % 2 == 1) ? 1 : 0) * sign * SHOTGUN_SPAWN_OFFSET,
-        //    shotgunBulletSpawnerTrasform.transform.position.z);
-        //Debug.Log(shotgunBullets[shotgunBulletInUse].transform.position);
-
     }
 }
 
