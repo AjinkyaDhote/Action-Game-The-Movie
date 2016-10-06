@@ -78,7 +78,7 @@ public class PayLoadRangeScript : MonoBehaviour
 
     void Update()
     {
-        Physics.IgnoreCollision(boxCollider, playerCollider);
+        //Physics.IgnoreCollision(boxCollider, playerCollider);
 
         if (outOfRange)
         {
