@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
         //agent = GetComponent<NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
-            currentHealth = 3;
+            currentHealth = 5;
         else
             currentHealth = 60;
         //anim = transform.parent.parent.GetComponent<Animator> ();
@@ -40,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
         if (aiMovementScript != null)
         {
             aiMovementScript.Detection();
@@ -65,7 +65,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
-            Debug.Log("Killed");
+            //Debug.Log("Killed");
             _isKilled = true;
             GameManager.Instance.totalEnemiesKilled++;
             isPlayerDead = true;
