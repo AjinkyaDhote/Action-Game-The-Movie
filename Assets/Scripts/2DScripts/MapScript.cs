@@ -29,6 +29,7 @@ public class MapScript : MonoBehaviour
     private Stack<GameObject> ammoList;
     private Stack<int> ammoPickupsCount;
     private GameObject[] allAmmos;
+    private GameObject[] allBatteries;
     GameObject[] ammolistarray;
 
     private Texture2D cursorGreen;
@@ -112,7 +113,7 @@ public class MapScript : MonoBehaviour
         ammoList = new Stack<GameObject>();
         ammoPickupsCount = new Stack<int>();
         allAmmos = GameObject.FindGameObjectsWithTag("Ammo");
-
+        allBatteries = GameObject.FindGameObjectsWithTag("Battery");
         wallLayerMask = 1 << 12;
         ammoLayerMask = 1 << 13;
         batteryLayerMask = 1 << 14;
@@ -163,15 +164,25 @@ public class MapScript : MonoBehaviour
 
         //DynamicBattery.gameObject.SetActive(true);
 
+        for (int i = 0; i < allBatteries.Length; i++)                                                               //set all batteries false
+        {
+            allBatteries[i].GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
+        for (int i = 0; i < BatteriesHitList.Count; i++)                                                               //set true selected bettery
+        {
+            BatteriesHitList[i].GetComponent<SpriteRenderer>().color = Color.green;
+        }
+
         for (int i = 0; i < allAmmos.Length; i++)                                                               //set all ammo false
         {
-            allAmmos[i].transform.GetChild(0).gameObject.SetActive(false);
+            allAmmos[i].GetComponent<SpriteRenderer>().color = Color.white;//allAmmos[i].transform.GetChild(0).gameObject.SetActive(false);
         }
 
         for (int i = 0; i < ammoList.Count; i++)                                                               //set true selected ammo
         {
             ammolistarray = ammoList.ToArray();
-            ammolistarray[i].transform.GetChild(0).gameObject.SetActive(true);
+            ammolistarray[i].GetComponent<SpriteRenderer>().color = Color.yellow;//ammolistarray[i].transform.GetChild(0).gameObject.SetActive(true);
         }
 
 
@@ -199,11 +210,20 @@ public class MapScript : MonoBehaviour
             }
             else
             {
+                //battery detection
+                if (countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) > 0)
+                {                                                                                                       //battery detection
+                    for (int i = 0; i < hitsEveryFrame.Length; i++)
+                    {
+                        hitsEveryFrame[i].transform.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                    }
+                }
+
                 if (countObjects(mousePos, ammoLayerMask, out hitsEveryFrame) > 0)                                      //ammo vicinity detection
                 {
                     for (int i = 0; i < hitsEveryFrame.Length; i++)
                     {
-                        hitsEveryFrame[i].transform.GetChild(0).gameObject.SetActive(true);
+                        hitsEveryFrame[i].transform.GetComponent<SpriteRenderer>().color = Color.yellow;//hitsEveryFrame[i].transform.GetChild(0).gameObject.SetActive(true);
                     }
                 }
             }
@@ -255,11 +275,11 @@ public class MapScript : MonoBehaviour
                 int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
                 int batteriesPicked = 0;
                 if (countObjects(worldPos, batteryLayerMask, out hits) > 0)
-                {                                         //battery detection
+                {                                                                                                       //battery detection
                     for (int i = 0; i < hits.Length; i++)
                     {
                         BatteriesHitList.Add(hits[i].transform.gameObject);
-                        hits[i].transform.gameObject.SetActive(false);
+                        hits[i].transform.gameObject.GetComponent<SpriteRenderer>().color = Color.green;//hits[i].transform.gameObject.SetActive(false);
                         batteryPickups.Add(50);
                         batteryLeft += 50;
                         batteriesPicked++;
@@ -274,7 +294,7 @@ public class MapScript : MonoBehaviour
                     for (int i = 0; i < hits.Length; i++)
                     {
                         ammoList.Push(hits[i].transform.gameObject);
-                        hits[i].transform.GetChild(0).gameObject.SetActive(true);
+                        hits[i].transform.GetComponent<SpriteRenderer>().color = Color.yellow;//hits[i].transform.GetChild(0).gameObject.SetActive(true);
                     }
                 }
                 ammoPickupsCount.Push(hits.Length);
@@ -352,7 +372,7 @@ public class MapScript : MonoBehaviour
         int batteriesToRemove = batteryPickupsCount[batteryPickupsCount.Count - 1];
         for (int i = 0; i < batteriesToRemove; i++)
         {
-            BatteriesHitList[BatteriesHitList.Count - 1].SetActive(true);
+            BatteriesHitList[BatteriesHitList.Count - 1].GetComponent<SpriteRenderer>().color = Color.white;//BatteriesHitList[BatteriesHitList.Count - 1].SetActive(true);
             BatteriesHitList.RemoveAt(BatteriesHitList.Count - 1);
         }
 
@@ -377,10 +397,10 @@ public class MapScript : MonoBehaviour
         if (ammoList.Count > 0)
         {
             int ammosToRemove = ammoPickupsCount.Pop();
-            GameObject ammoPoped = ammoList.Pop();
             for (int i = 0; i < ammosToRemove; i++)
             {
-                ammoPoped.transform.GetChild(0).gameObject.SetActive(false);
+                GameObject ammoPoped = ammoList.Pop();
+                ammoPoped.GetComponent<SpriteRenderer>().color = Color.white;//ammoPoped.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
