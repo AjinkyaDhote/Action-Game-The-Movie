@@ -156,8 +156,11 @@ public class MapScript : MonoBehaviour
     private int countObjects(Vector3 mousePos, LayerMask layerMask, out RaycastHit[] hit)
     {
         Vector3 object_vector;
+        float rayLength;
         object_vector = mousePos - prevShadowPos;
-        hit = Physics.RaycastAll(prevShadowPos, object_vector.normalized, object_vector.magnitude, layerMask);
+        rayLength = object_vector.magnitude;
+        //rayLength = (thresholdDistance * thresholdDistance < object_vector.sqrMagnitude) ? thresholdDistance : object_vector.magnitude;
+        hit = Physics.RaycastAll(prevShadowPos, object_vector.normalized, rayLength, layerMask);
         return hit.Length;
     }
 
@@ -171,7 +174,6 @@ public class MapScript : MonoBehaviour
 
         int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
         int currentBattery = System.Int32.Parse(batteryText.text);
-        Debug.Log(currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate));
         
         
 
@@ -210,7 +212,7 @@ public class MapScript : MonoBehaviour
             cross.gameObject.SetActive(false);
 
             
-            if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
+            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate)/*  + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50*/) < 0)
             {
                 Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
                 LineR.SetColors(Color.red, Color.red);
@@ -255,7 +257,7 @@ public class MapScript : MonoBehaviour
             LineR.SetPosition(1, hit.point);
             cross.position = hit.point;
 
-            if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) < 0)
+            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) /*+ countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50*/) < 0)
             {
                 if ((hit.point - prevShadowPos).magnitude > thresholdDistance)
                 {
@@ -285,7 +287,7 @@ public class MapScript : MonoBehaviour
             int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, worldPos));
             distanceTravelled.Add(travelDist);
             int currentBattery = System.Int32.Parse(batteryText.text);
-            if (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) >= 0)
+            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) /*+ countObjects(worldPos, batteryLayerMask, out hitsEveryFrame) * 50*/) >= 0)
             {
                 SoundManager.GetComponent<Audio>().MouseClicked();
                 int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);

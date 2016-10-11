@@ -991,7 +991,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9de8f901d3cac804db7e51a34e3d9714, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!1001 &1143284711
@@ -1427,7 +1427,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 443660, guid: 86f175b4927ad9447bcac935d052dc95, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 443660, guid: 86f175b4927ad9447bcac935d052dc95, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1515,7 +1515,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 2665933e2dd12864b8f15b13e4a5a41c, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
 --- !u!23 &1560489799
 MeshRenderer:
   m_ObjectHideFlags: 0
