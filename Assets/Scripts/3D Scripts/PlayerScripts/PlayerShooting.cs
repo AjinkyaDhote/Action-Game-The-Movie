@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     private const int AMMO_PICK_UP = 10;
-    private const int INITIAL_NUMBER_OF_BULLETS = 5;
+    private const int INITIAL_NUMBER_OF_BULLETS = 20;
 
     public ParticleSystem muzzleFlash;
     public Animator anim;

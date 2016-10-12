@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     //private Animator anim;
     private bool _isKilled = false;
+    EnemyHeadScript EnemyHead;
     public bool IsKilled
     {
         get
@@ -17,8 +18,8 @@ public class EnemyHealth : MonoBehaviour
     private Material deadMaterial;
     private AudioClip ZombieDeath;
     private MeshRenderer meshRenderer;
-
-    private int currentHealth;
+    
+    public int currentHealth;
     AI_movement aiMovementScript;
     void Start()
     {
@@ -26,6 +27,8 @@ public class EnemyHealth : MonoBehaviour
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
         ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
+        EnemyHead = transform.GetComponentInChildren<EnemyHeadScript>();
+        
         //agent = GetComponent<NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
             currentHealth = 3;
@@ -39,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void Damage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth -= 1;
         Debug.Log(currentHealth);
         if (aiMovementScript != null)
         {
@@ -49,14 +52,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Defeated();
             meshRenderer.material.color = Color.red;
-           
-            //foreach (Transform child in transform.parent.transform.parent)
-            //{
-            //    if (child.tag == "SmallEnemy")
-            //    {
-            //        child.GetComponent<Renderer>().material.color = colorDead;
-            //    }
-            //}
+         
         }
 
     }
@@ -67,13 +63,15 @@ public class EnemyHealth : MonoBehaviour
         {
             Debug.Log("Killed");
             _isKilled = true;
-            GameManager.Instance.totalEnemiesKilled++;
+            //GameManager.Instance.totalEnemiesKilled++;
             isPlayerDead = true;
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
-            Destroy(gameObject);
+            EnemyHead.HeadFall();
+           // Destroy(gameObject);
+           
         }
         AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
         isPlayerDead = true;
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
