@@ -54,8 +54,8 @@ public class MapScript : MonoBehaviour
     public Player2D player2D;
     public List<Vector3> playerPosList;
 
-    RaycastHit[] hitsEveryFrame;
-    RaycastHit[] hits1;
+    RaycastHit2D[] hitsEveryFrame;
+    RaycastHit2D[] hits1;
 
 
     private List<Vector2> mapPoints;
@@ -161,14 +161,14 @@ public class MapScript : MonoBehaviour
         prevShadowPos = playerInitialPos;
     }
 
-    private int countObjects(Vector3 mousePos, LayerMask layerMask, out RaycastHit[] hit)
+    private int countObjects(Vector3 mousePos, LayerMask layerMask, out RaycastHit2D[] hit)
     {
         Vector3 object_vector;
         float rayLength;
         object_vector = mousePos - prevShadowPos;
         //rayLength = object_vector.magnitude;
         rayLength = (thresholdDistance * thresholdDistance < object_vector.sqrMagnitude) ? thresholdDistance : object_vector.magnitude;
-        hit = Physics.RaycastAll(prevShadowPos, object_vector.normalized, rayLength, layerMask);
+        hit = Physics2D.RaycastAll(prevShadowPos, object_vector.normalized, rayLength, layerMask);
         return hit.Length;
     }
 
@@ -274,8 +274,8 @@ public class MapScript : MonoBehaviour
             LowBattery.gameObject.SetActive(false);
             cross.gameObject.SetActive(true);
             DynamicBattery.SetActive(false);
-            RaycastHit hit;
-            Physics.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, out hit, (mousePos - prevShadowPos).magnitude, wallLayerMask);
+            RaycastHit2D hit;
+            hit = Physics2D.Raycast(prevShadowPos, (mousePos - prevShadowPos).normalized, (mousePos - prevShadowPos).magnitude, wallLayerMask);
             LineR.SetPosition(1, hit.point);
             cross.position = hit.point;
         }
@@ -291,7 +291,7 @@ public class MapScript : MonoBehaviour
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         worldPos.z = 0.0f;
 
-        RaycastHit[] hits;
+        RaycastHit2D[] hits;
 
         if (countObjects(worldPos, wallLayerMask, out hits) == 0)
         {
@@ -409,7 +409,7 @@ public class MapScript : MonoBehaviour
         {
             GameObject batteryPoped = BatteriesHitList.Pop();
             batteryPoped.GetComponent<SpriteRenderer>().color = Color.white;
-            batteryPoped.GetComponent<Collider>().enabled = true;
+            batteryPoped.GetComponent<Collider2D>().enabled = true;
         }
 
         int batteryAmtToRemove = batteriesToRemove * 50;
@@ -437,7 +437,7 @@ public class MapScript : MonoBehaviour
             {
                 GameObject ammoPoped = ammoList.Pop();
                 ammoPoped.GetComponent<SpriteRenderer>().color = Color.white;
-                ammoPoped.GetComponent<Collider>().enabled = true;
+                ammoPoped.GetComponent<Collider2D>().enabled = true;
             }
         }
     }
