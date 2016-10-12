@@ -36,10 +36,10 @@ public class PlayerMovement : MonoBehaviour
 		pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
 		countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
 
-		/*width2DPlane = GameManager.Instance.width2DPlane;
+		width2DPlane = GameManager.Instance.width2DPlane;
 		height2DPlane = GameManager.Instance.height2DPlane;
 		width3DPlane = GameManager.Instance.width3DPlane;
-	    height3DPlane = GameManager.Instance.height3DPlane;*/
+	    height3DPlane = GameManager.Instance.height3DPlane;
 
 		WASDmovement = GetComponent<wasdMovement>();
 		wayPointNumber = 1;
@@ -62,8 +62,8 @@ public class PlayerMovement : MonoBehaviour
 			{
 				wayPoints3D[i] = convertPoint(GameManager.Instance.mapPoints[i]);
 			}
-			transform.position = wayPoints3D[0];
-        transform.forward = (wayPoints3D[1] - transform.position).normalized;
+			//transform.position = wayPoints3D[0] + new Vector3(4f,0f,0f); //SetPlayerPosition in 3D
+        //transform.forward = (wayPoints3D[1] - transform.position).normalized;
 		//}
         //transform.position = new Vector3(-0.1f, 2.4f, -42.1f);
         mouseLook = new MouseLook();
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 			}
 			else
 			{
-				rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * playerSpeed * Time.deltaTime);
+				//rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * playerSpeed * Time.deltaTime);
 				batteryString = " " + (batteryCount + _battery.batteryPickedUp);
 				BatteryText.text = batteryString;
 			}

@@ -18,7 +18,6 @@ public class EnemyHealth : MonoBehaviour
     private AudioClip ZombieDeath;
     private MeshRenderer meshRenderer;
 
-    int delayTime;
     private int currentHealth;
     AI_movement aiMovementScript;
     void Start()
@@ -26,11 +25,10 @@ public class EnemyHealth : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
         ZombieDeath = Resources.Load("Sounds/ZombieDeath") as AudioClip;
-        delayTime = 0;
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
         //agent = GetComponent<NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
-            currentHealth = 3;
+            currentHealth = 5;
         else
             currentHealth = 60;
         //anim = transform.parent.parent.GetComponent<Animator> ();
@@ -42,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
         if (aiMovementScript != null)
         {
             aiMovementScript.Detection();
@@ -67,15 +65,15 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
-            Debug.Log("Killed");
+            //Debug.Log("Killed");
             _isKilled = true;
             GameManager.Instance.totalEnemiesKilled++;
             isPlayerDead = true;
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
-            Destroy(gameObject, delayTime);
+            Destroy(gameObject);
         }
         AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
         isPlayerDead = true;
-        Destroy(gameObject, delayTime);
+        Destroy(gameObject);
     }
 }
