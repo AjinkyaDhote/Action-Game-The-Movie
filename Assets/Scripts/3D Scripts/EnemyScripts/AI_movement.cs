@@ -5,9 +5,9 @@ public class AI_movement : MonoBehaviour
 {
 	public float enemyWalkSpeed;
 	public float enemyRunSpeed;
-
+    
 	GameObject player;
-	//Animator anim;
+	
 	PlayerHealthScript playerHealth;
 
 	GameObject hitRadialPrefab;
@@ -18,15 +18,14 @@ public class AI_movement : MonoBehaviour
 	
 	bool isPlayerInRange;
 	Vector3 resetPositionForInRange;
-
-	public float radius;
-	private float minRadius;
+    Animator anim;
+	
 	private Vector3 initialPos;
-	private AudioSource zombieWalk;
+	
 
 	private Vector3[] randomVectors;
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
-
+  
     bool isPlayerDead;
     bool _isPlayerSeen = false;
     private GameObject arrow_sprite;
@@ -36,6 +35,10 @@ public class AI_movement : MonoBehaviour
         get
         {
             return _isPlayerSeen;
+        }
+        set
+        {
+            _isPlayerSeen = false;
         }
     }
 
@@ -55,17 +58,18 @@ public class AI_movement : MonoBehaviour
 		hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
         Random.InitState(42);
         initialPos = gameObject.transform.position;
-		radius = 10;
-		minRadius = 2;
 
+
+
+        anim = GetComponent<Animator>();
+        isPlayerInRange = false;
+        _isPlayerSeen = false;
+        isPlayerDead = false;
 		
-		isPlayerInRange = false;
-
-		zombieWalk = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
 		//anim = GetComponent<Animator>();		
-		enemyHeadCollider = transform.GetChild(3).GetComponent<Collider>();
-        enemyBodyCollider = transform.GetChild(0).GetComponent<Collider>();
+		enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
+        enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
@@ -109,7 +113,7 @@ public class AI_movement : MonoBehaviour
 		if (isPlayerDead)
 		{
 			agent.speed = 0;
-			zombieWalk.Stop();
+			
 		}
 		else
 		{
@@ -122,15 +126,22 @@ public class AI_movement : MonoBehaviour
 				if (isPlayerInRange)
 				{
 					agent.speed = 0;
+               
 					transform.position = resetPositionForInRange;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                    DamagePlayer();
+                    if(Vector2.Distance(player.transform.position,transform.position)< 2.0f)
+                    {
+                        
+                        DamagePlayer();
+          
+                        
+                    }
+                    
 				}
 				else
 				{
 					agent.speed = enemyRunSpeed;
 					agent.destination = player.transform.position;
-                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
                 }
 			}
 			else
@@ -154,12 +165,14 @@ public class AI_movement : MonoBehaviour
 	{
 		transform.LookAt(player.transform);	
         _isPlayerSeen = true;
+
         arrow_renderer.enabled = true;
     }
 	public void InRange()
 	{
         _isPlayerSeen = true;
 		resetPositionForInRange = transform.position;
+        anim.SetBool("isPlayerInRange", true);
 		isPlayerInRange = true;
         
 	}
@@ -169,10 +182,11 @@ public class AI_movement : MonoBehaviour
 	}
 	void Patrol()
 	{
+        anim.SetBool("isPlayerSeen", false);
 		if (isPlayerDead)
 		{
 			agent.speed = 0;
-			zombieWalk.Stop();
+			
 		}
 		agent.destination = GetRandomVector();
 	}
