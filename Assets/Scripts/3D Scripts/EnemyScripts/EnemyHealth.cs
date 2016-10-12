@@ -18,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
     private AudioClip ZombieDeath;
     private MeshRenderer meshRenderer;
 
-    private int currentHealth;
+    public int currentHealth;
     AI_movement aiMovementScript;
     void Start()
     {
@@ -40,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        //Debug.Log(currentHealth);
+        Debug.Log("damage");
         if (aiMovementScript != null)
         {
             aiMovementScript.Detection();
@@ -49,14 +49,6 @@ public class EnemyHealth : MonoBehaviour
         {
             Defeated();
             meshRenderer.material.color = Color.red;
-           
-            //foreach (Transform child in transform.parent.transform.parent)
-            //{
-            //    if (child.tag == "SmallEnemy")
-            //    {
-            //        child.GetComponent<Renderer>().material.color = colorDead;
-            //    }
-            //}
         }
 
     }
@@ -72,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
             Destroy(gameObject);
         }
-        AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        //AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
         isPlayerDead = true;
         Destroy(gameObject);
     }

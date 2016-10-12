@@ -120,12 +120,22 @@ public class AI_movement : MonoBehaviour
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
 			Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
-			if (_isPlayerSeen)
+			if (IsPlayerSeen)
 			{
 				transform.LookAt(player.transform);
-				if (isPlayerInRange)
+				if (anim.GetBool("isPlayerInRange")== true)
 				{
 					agent.speed = 0;
+
+                   
+
+                        anim.SetBool("isPunch2", true);
+                     
+                    
+                    
+                        anim.SetBool("isPunch1", true);
+                        
+                    
                
 					transform.position = resetPositionForInRange;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
@@ -141,7 +151,8 @@ public class AI_movement : MonoBehaviour
 				else
 				{
 					agent.speed = enemyRunSpeed;
-					agent.destination = player.transform.position;
+                    anim.SetBool("isPlayerInRange", false);
+                    agent.destination = player.transform.position;
                 }
 			}
 			else
@@ -163,15 +174,18 @@ public class AI_movement : MonoBehaviour
 	}
 	public void Detection()
 	{
-		transform.LookAt(player.transform);	
+		transform.LookAt(player.transform);
         _isPlayerSeen = true;
+        anim.SetBool("isPlayerSeen", true);
+        
 
         arrow_renderer.enabled = true;
     }
 	public void InRange()
 	{
         _isPlayerSeen = true;
-		resetPositionForInRange = transform.position;
+        anim.SetBool("isPlayerSeen", true);
+        resetPositionForInRange = transform.position;
         anim.SetBool("isPlayerInRange", true);
 		isPlayerInRange = true;
         
@@ -179,7 +193,9 @@ public class AI_movement : MonoBehaviour
 	public void OutOfRange()
 	{
 		isPlayerInRange = false;
-	}
+        anim.SetBool("isPlayerSeen", true);
+        anim.SetBool("isPlayerInRange", false);
+    }
 	void Patrol()
 	{
         anim.SetBool("isPlayerSeen", false);
