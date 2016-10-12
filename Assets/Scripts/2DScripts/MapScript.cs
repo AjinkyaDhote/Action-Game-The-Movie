@@ -158,8 +158,9 @@ public class MapScript : MonoBehaviour
         Vector3 object_vector;
         float rayLength;
         object_vector = mousePos - prevShadowPos;
-        rayLength = object_vector.magnitude;
-        //rayLength = (thresholdDistance * thresholdDistance < object_vector.sqrMagnitude) ? thresholdDistance : object_vector.magnitude;
+
+        //rayLength = object_vector.magnitude;
+        rayLength = (thresholdDistance * thresholdDistance < object_vector.sqrMagnitude) ? thresholdDistance : object_vector.magnitude;
         hit = Physics.RaycastAll(prevShadowPos, object_vector.normalized, rayLength, layerMask);
         return hit.Length;
     }
@@ -174,7 +175,7 @@ public class MapScript : MonoBehaviour
 
         int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, mousePos));
         int currentBattery = System.Int32.Parse(batteryText.text);
-        
+
         
 
         for (int i = 0; i < allBatteries.Length; i++)                                                               //set all batteries false
@@ -211,15 +212,16 @@ public class MapScript : MonoBehaviour
             
             cross.gameObject.SetActive(false);
 
-            
-            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate)/*  + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50*/) < 0)
+            thresholdDistance = ((currentBattery + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50) / GameManager.Instance.batteryDepletionRate);  //update threshold distance dynamically according to batteries in line
+
+            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate)  + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50) < 0)
             {
                 Cursor.SetCursor(cursorRed, cursorRedHotspot, CursorMode.Auto);
                 LineR.SetColors(Color.red, Color.red);
 
-                LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+                LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * (thresholdDistance)) + prevShadowPos);
                 LowBattery.gameObject.SetActive(true);
-                LowBattery.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+                LowBattery.position = ((((mousePos - prevShadowPos).normalized) * (thresholdDistance)) + prevShadowPos);
                 //DynamicBattery.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
                 dynamicBatteryText.text = "0";
             }
@@ -257,16 +259,16 @@ public class MapScript : MonoBehaviour
             LineR.SetPosition(1, hit.point);
             cross.position = hit.point;
 
-            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) /*+ countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50*/) < 0)
-            {
-                if ((hit.point - prevShadowPos).magnitude > thresholdDistance)
-                {
-                    cross.gameObject.SetActive(false);
-                    LowBattery.gameObject.SetActive(true);
-                    LowBattery.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
-                    LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
-                }
-            }
+            //if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) /*+ countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50*/) < 0)
+            //{
+            //    if ((hit.point - prevShadowPos).magnitude > thresholdDistance)
+            //    {
+            //        cross.gameObject.SetActive(false);
+            //        LowBattery.gameObject.SetActive(true);
+            //        LowBattery.position = ((((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+            //        LineR.SetPosition(1, (((mousePos - prevShadowPos).normalized) * thresholdDistance) + prevShadowPos);
+            //    }
+            //}
         }
         
         if (Input.GetKeyDown(KeyCode.Z))
@@ -281,13 +283,13 @@ public class MapScript : MonoBehaviour
         worldPos.z = 0.0f;
 
         RaycastHit[] hits;
-
+        
         if (countObjects(worldPos, wallLayerMask, out hits) == 0)
         {
             int travelDist = (int)Mathf.Ceil(Vector3.Distance(prevShadowPos, worldPos));
             distanceTravelled.Add(travelDist);
             int currentBattery = System.Int32.Parse(batteryText.text);
-            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) /*+ countObjects(worldPos, batteryLayerMask, out hitsEveryFrame) * 50*/) >= 0)
+            if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) + countObjects(worldPos, batteryLayerMask, out hitsEveryFrame) * 50) >= 0)
             {
                 SoundManager.GetComponent<Audio>().MouseClicked();
                 int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
