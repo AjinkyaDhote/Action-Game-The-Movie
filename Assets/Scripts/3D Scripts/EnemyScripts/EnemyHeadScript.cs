@@ -12,7 +12,7 @@ public class EnemyHeadScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void HeadFall () {
-        if(enemyHealth.currentHealth == 0)
+     //   if(enemyHealth.currentHealth == 0)
         {
             transform.parent = null;
             rBody.useGravity = true;
