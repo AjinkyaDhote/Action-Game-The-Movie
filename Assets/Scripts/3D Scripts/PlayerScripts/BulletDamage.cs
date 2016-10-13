@@ -40,33 +40,34 @@ public class BulletDamage : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        /*if (other.CompareTag("HeadCollider") && other.CompareTag("BodyCollider"))
+        //Debug.Log(other.transform.name);
+        if (other.CompareTag("HeadCollider") && other.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponent<AI_movement>(); ;
             if (!aiMovementScript.IsPlayerSeen)
             {
                 aiMovementScript.Detection();
-                int a = 0;
+            
             }
-        }*/
+        }
         if (other.CompareTag("HeadCollider"))
         {
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
-            {
+            {            
                 enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
             }
             GameManager.Instance.headShots++;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         else if(other.CompareTag("BodyCollider"))
         {
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
-            {
+            {            
                 enemyHealthScript.Damage(1);
             }
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
         else if (other.CompareTag("Wall") || other.CompareTag("PayLoad"))
         {

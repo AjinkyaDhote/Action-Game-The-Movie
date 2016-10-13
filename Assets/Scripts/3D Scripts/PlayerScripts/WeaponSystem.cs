@@ -10,10 +10,8 @@ public class WeaponSystem : MonoBehaviour
     public WeaponInfo currentWeaponInfo;
     [HideInInspector]
     public LinkedListNode<GameObject> currentWeaponInHand;
-    //[HideInInspector]
-    //public AudioSource audioGun;
 
-    PlayerShooting playerShootingScript;
+    private PlayerShooting playerShootingScript;
 
     void Start()
     {
@@ -27,7 +25,6 @@ public class WeaponSystem : MonoBehaviour
         weapons = new LinkedList<GameObject>(weaponsGO);
         currentWeaponInHand = weapons.First;
         currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
-        //audioGun = currentWeaponInHand.Value.GetComponent<AudioSource> ();
         UpdateWeaponInHand();
     }
 
@@ -78,7 +75,7 @@ public class WeaponSystem : MonoBehaviour
         }
         currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
         //ParticleSystem[] pS = currentWeaponInHand.Value.GetComponentsInChildren<ParticleSystem>();
-        //audioGun = currentWeaponInHand.Value.GetComponent<AudioSource>();
+        playerShootingScript.currentGunAudio = currentWeaponInHand.Value.GetComponent<AudioSource>();
         //for (int i = 0; i < pS.Length; i++)
         //{
         //    if (pS[i].name == "MuzzleFlash")
