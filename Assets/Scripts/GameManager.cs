@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public List<int> batteryUsedList;
     public List<int> batteryPickups; //public List<int> ammoPickups;
     public List<int> batteryPickupsCount; //public List<int> ammoPickupsCount;
-    public List<GameObject> BatteriesHitList; //public List<GameObject> ammosHitList;
+    public Stack<GameObject> BatteriesHitList; //public List<GameObject> ammosHitList;
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
         remainingHealth = 0;
         totalDistance = 0;
         TotalScore = 0;
+
+        BatteriesHitList = new Stack<GameObject>();
 
         playAvailable = false;
         currentMenuState = MenuState.MAIN_MENU;

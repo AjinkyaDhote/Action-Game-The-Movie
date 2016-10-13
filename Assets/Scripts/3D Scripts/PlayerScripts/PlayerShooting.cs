@@ -34,7 +34,9 @@ public class PlayerShooting : MonoBehaviour
 
     //private GameObject laserPrefab;
     //private GameObject laser;
-    //private AudioSource noBullets;
+    private AudioSource noBullets;
+    [HideInInspector]
+    public AudioSource currentGunAudio;
     //private EnemyThrow enemyThrowScript;
     private float nextFire = 0.0f;
     private WeaponSystem weaponSystemScript;
@@ -75,7 +77,7 @@ public class PlayerShooting : MonoBehaviour
             bullets[i].SetActive(false);
         }
         shotgunBulletRB = new Rigidbody[4];
-        //noBullets = GetComponent<AudioSource>();
+        noBullets = GetComponent<AudioSource>();
         //laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
@@ -104,11 +106,12 @@ public class PlayerShooting : MonoBehaviour
                         shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
+                        currentGunAudio.Play();
                     }
                 }
                 else
                 {
-                    //noBullets.Play();
+                    noBullets.Play();
                 }
             }
             else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
@@ -123,10 +126,11 @@ public class PlayerShooting : MonoBehaviour
                     pistolBulletRB.AddForce(-pistolBulletSpawnerTrasform.up * _bulletForce);
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;
+                    currentGunAudio.Play();
                 }
                 else
                 {
-                    //noBullets.Play();
+                    noBullets.Play();
                 }
             }
             AmmoText.text = bulletCount.ToString();
@@ -141,13 +145,14 @@ public class PlayerShooting : MonoBehaviour
             AmmoText.color = Color.red;
         }
 
-        if (bulletCount < 4)
-        {
-            bulletOverText.text = "SWITCH TO PISTOL";
-        }
-        else if(bulletCount <= 0)
+       
+        if(bulletCount <= 0)
         {
             bulletOverText.text = "NO BULLETS";
+        }
+        else if (bulletCount < 4 && !(weaponSystemScript.currentWeaponInHand.Value.name == "Pistol"))
+        {
+            bulletOverText.text = "SWITCH TO PISTOL";
         }
         else
         {
