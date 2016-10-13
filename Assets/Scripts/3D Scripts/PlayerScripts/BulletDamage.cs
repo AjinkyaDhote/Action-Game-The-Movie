@@ -54,8 +54,7 @@ public class BulletDamage : MonoBehaviour
         {
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
-            {
-                
+            {            
                 enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
             }
             GameManager.Instance.headShots++;
@@ -65,9 +64,7 @@ public class BulletDamage : MonoBehaviour
         {
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
-            {
-                
-
+            {            
                 enemyHealthScript.Damage(1);
             }
            // Destroy(gameObject);
