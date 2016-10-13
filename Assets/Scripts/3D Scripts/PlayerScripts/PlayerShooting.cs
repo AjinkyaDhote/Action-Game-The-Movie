@@ -141,13 +141,14 @@ public class PlayerShooting : MonoBehaviour
             AmmoText.color = Color.red;
         }
 
-        if (bulletCount < 4)
-        {
-            bulletOverText.text = "SWITCH TO PISTOL";
-        }
-        else if(bulletCount <= 0)
+       
+        if(bulletCount <= 0)
         {
             bulletOverText.text = "NO BULLETS";
+        }
+        else if (bulletCount < 4)
+        {
+            bulletOverText.text = "SWITCH TO PISTOL";
         }
         else
         {
