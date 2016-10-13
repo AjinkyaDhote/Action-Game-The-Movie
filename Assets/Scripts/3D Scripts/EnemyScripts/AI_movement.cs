@@ -26,7 +26,7 @@ public class AI_movement : MonoBehaviour
 	private Vector3[] randomVectors;
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
   
-    bool isPlayerDead;
+  
     bool _isPlayerSeen = false;
     private GameObject arrow_sprite;
     private  Renderer  arrow_renderer;
@@ -42,6 +42,7 @@ public class AI_movement : MonoBehaviour
         }
     }
 
+ 
     void Start()
 	{
 		randomVectors = new Vector3[8];
@@ -64,7 +65,7 @@ public class AI_movement : MonoBehaviour
         anim = GetComponent<Animator>();
         isPlayerInRange = false;
         _isPlayerSeen = false;
-        isPlayerDead = false;
+       
 		
 		agent = GetComponent<NavMeshAgent>();
 		//anim = GetComponent<Animator>();		
@@ -110,11 +111,12 @@ public class AI_movement : MonoBehaviour
 	}
 	void Update()
 	{	
-		if (isPlayerDead)
+		if (anim.GetBool("isPlayerDead") == true)
 		{
+            
 			agent.speed = 0;
-			
-		}
+            arrow_renderer.enabled = false;
+        }
 		else
 		{
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
@@ -123,28 +125,18 @@ public class AI_movement : MonoBehaviour
 			if (IsPlayerSeen)
 			{
 				transform.LookAt(player.transform);
-				if (anim.GetBool("isPlayerInRange")== true)
+				if (anim.GetBool("isPlayerInRange") == true)
 				{
 					agent.speed = 0;
 
-                   
-
-                        anim.SetBool("isPunch2", true);
-                     
-                    
-                    
-                        anim.SetBool("isPunch1", true);
-                        
-                    
-               
+                    anim.SetBool("isPunch2", true);
+                    anim.SetBool("isPunch1", true);
 					transform.position = resetPositionForInRange;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
                     if(Vector2.Distance(player.transform.position,transform.position)< 2.0f)
                     {
                         
                         DamagePlayer();
-          
-                        
                     }
                     
 				}
@@ -177,7 +169,6 @@ public class AI_movement : MonoBehaviour
 		transform.LookAt(player.transform);
         _isPlayerSeen = true;
         anim.SetBool("isPlayerSeen", true);
-        
 
         arrow_renderer.enabled = true;
     }
@@ -199,7 +190,7 @@ public class AI_movement : MonoBehaviour
 	void Patrol()
 	{
         anim.SetBool("isPlayerSeen", false);
-		if (isPlayerDead)
+		if (anim.GetBool("isPlayerDead") == true)
 		{
 			agent.speed = 0;
 			
