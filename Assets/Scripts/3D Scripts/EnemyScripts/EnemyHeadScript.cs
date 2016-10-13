@@ -6,9 +6,9 @@ public class EnemyHeadScript : MonoBehaviour {
     private Rigidbody rBody;
 	// Use this for initialization
 	void Start () {
-        enemyHealth = GameObject.Find("WhiteBoxEnemy").GetComponent<EnemyHealth>();
-        rBody = gameObject.GetComponent<Rigidbody>();
-	}
+        enemyHealth = GameObject.Find("SmallEnemy").GetComponent<EnemyHealth>();
+        rBody = GameObject.Find("mixamorig:Head").GetComponent<Rigidbody>();
+    }
 	
 	// Update is called once per frame
 	public void HeadFall () {

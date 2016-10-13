@@ -40,7 +40,7 @@ public class BulletDamage : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.transform.name);
         if (other.CompareTag("HeadCollider") && other.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponent<AI_movement>(); ;
@@ -55,7 +55,7 @@ public class BulletDamage : MonoBehaviour
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
-                Debug.Log("hiiii");
+                
                 enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
             }
             GameManager.Instance.headShots++;
@@ -66,7 +66,7 @@ public class BulletDamage : MonoBehaviour
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
-                Debug.Log("hiiii");
+                
 
                 enemyHealthScript.Damage(1);
             }
