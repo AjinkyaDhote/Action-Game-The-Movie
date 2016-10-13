@@ -18,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
     private AudioClip ZombieDeath;
     private MeshRenderer meshRenderer;
 
-    private int currentHealth;
+    public int currentHealth;
     AI_movement aiMovementScript;
     void Start()
     {
