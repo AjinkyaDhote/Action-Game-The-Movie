@@ -70,7 +70,7 @@ public class EnemyHealth : MonoBehaviour
             //GameManager.Instance.totalEnemiesKilled++;
         }
         //AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
-        
-       // Destroy(gameObject);
+
+        Destroy(gameObject, 5.0f);
     }
 }
