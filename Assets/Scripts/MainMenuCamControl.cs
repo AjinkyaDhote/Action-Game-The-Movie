@@ -1,13 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainMenuCamControl : MonoBehaviour {
+public class MainMenuCamControl : MonoBehaviour
+{
 
     public Transform currentMount;
-    public float speedFactor = 0.1f;
+    float moveFactor = 0.1f;
+    float turnFactor = 0.03f;
+
+    private float speedFactor;
+    private float moveTime = 0.8f;
+    private float turnTime = 1.5f;
+
+    public Transform ajinkyaLt, ajinkyaRt;
+    public Transform ameyaLt, ameyaRt;
+    public Transform leeLt, leeRt;
+    public Transform ravalLt, ravalRt;
+    public Transform rohanLt, rohanRt;
+    public Transform suwasLt, suwasRt;
+    public Transform tannaLt, tannaRt;
+    public Transform vikramLt, vikramRt;
+    public Transform MenuMount;
 
     void Start()
     {
+        speedFactor = moveFactor;
     }
 
     void Update()
@@ -19,5 +36,88 @@ public class MainMenuCamControl : MonoBehaviour {
     public void setMount( Transform newMount )
     {
         currentMount = newMount;
+    }
+
+    public void playCredits()
+    {
+        StartCoroutine(playCreditsCoroutine());
+    }
+
+    public IEnumerator playCreditsCoroutine()
+    {
+        // ajinkya
+        currentMount = ajinkyaRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = ajinkyaLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // ameya
+        currentMount = ameyaRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = ameyaLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // lee
+        currentMount = leeRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = leeLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // raval
+        currentMount = ravalRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = ravalLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // rohan
+        currentMount = rohanRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = rohanLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // suwas
+        currentMount = suwasRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = suwasLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // tanna
+        currentMount = tannaRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = tannaLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // vikram
+        currentMount = vikramRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = vikramLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        speedFactor = moveFactor;
+        currentMount = MenuMount;
     }
 }
