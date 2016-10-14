@@ -154,6 +154,8 @@ public class MapScript : MonoBehaviour
         thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
         GameManager.Instance.headShots = 0;
         GameManager.Instance.totalEnemiesKilled = 0;
+
+        GameManager.Instance.playAvailable = false;
     }
 
     public void setPlayerInitialPos(Vector3 playerInitialPos)
@@ -280,7 +282,7 @@ public class MapScript : MonoBehaviour
             cross.position = hit.point;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetMouseButtonDown(1))
         {
             UndoPrevMove();
         }
@@ -334,6 +336,7 @@ public class MapScript : MonoBehaviour
                 {
                     targetSprite.color = Color.green;
                     EndText.gameObject.SetActive(true);
+                    GameManager.Instance.playAvailable = true;
                     targetReached = true;
                 }
 
@@ -369,9 +372,12 @@ public class MapScript : MonoBehaviour
 
     private void UndoPrevMove()
     {
-        targetSprite.color = Color.white;
-        EndText.gameObject.SetActive(false);
-        targetReached = false;
+        {
+            targetSprite.color = Color.white;
+            EndText.gameObject.SetActive(false);
+            targetReached = false;
+            GameManager.Instance.playAvailable = false;
+        }
 
         if (playerShadowPrefabList.Count > 0)
         {
