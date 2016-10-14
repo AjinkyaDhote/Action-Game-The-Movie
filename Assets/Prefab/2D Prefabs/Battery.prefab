@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 443660}
   - 212: {fileID: 21258692}
-  - 65: {fileID: 6509210}
+  - 61: {fileID: 61000010514110220}
   m_Layer: 14
   m_Name: Battery
   m_TagString: Battery
@@ -30,18 +30,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!65 &6509210
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184546}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.2710989, y: 1.4770939, z: 0.2}
-  m_Center: {x: -0.02271609, y: -0.0009957538, z: 0}
 --- !u!212 &21258692
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -86,3 +74,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184546}
   m_IsPrefabParent: 1
+--- !u!61 &61000010514110220
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184546}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.03352165, y: -0.000116560186}
+  serializedVersion: 2
+  m_Size: {x: 3.7268054, y: 1.7835342}
