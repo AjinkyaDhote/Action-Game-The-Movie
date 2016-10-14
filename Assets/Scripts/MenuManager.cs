@@ -41,7 +41,7 @@ public class MenuManager : MonoBehaviour
         }
 
 
-            if (GameManager.Instance.playAvailable == true)
+        if (GameManager.Instance.playAvailable == true)
         {
 			playButton.interactable  = true;
         }
