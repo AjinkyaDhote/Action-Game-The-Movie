@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 	private int batteryCount = 100;
 	private Battery _battery;
 	private bool lastReached;
+    public bool countDownDone = false;
 
 	float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 	Vector3 convertPoint(Vector2 relativePoint)
@@ -76,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 	void Update()
 	{
-		if (!pauseMenuScript.isPaused)
+		if (!pauseMenuScript.isPaused && countDownDone)
 		{
 			mouseLook.LookRotation(transform, mainCamera.transform);
 		}
