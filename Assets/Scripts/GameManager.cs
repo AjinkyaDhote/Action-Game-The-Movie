@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public List<int> batteryUsedList;
     public List<int> batteryPickups; //public List<int> ammoPickups;
     public List<int> batteryPickupsCount; //public List<int> ammoPickupsCount;
-    public List<GameObject> BatteriesHitList; //public List<GameObject> ammosHitList;
+    public Stack<GameObject> BatteriesHitList; //public List<GameObject> ammosHitList;
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
 
     // private variables
     private static GameManager _instance = null;
-    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose };
+    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose, Scene2D_tut, Scene3D_tut };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
-    private GameStates currentState = GameStates.MENU;
+    private GameStates currentGameState = GameStates.MENU;
     
 
     public static GameManager Instance
@@ -71,21 +71,26 @@ public class GameManager : MonoBehaviour
         totalDistance = 0;
         TotalScore = 0;
 
+        BatteriesHitList = new Stack<GameObject>();
+
         playAvailable = false;
         currentMenuState = MenuState.MAIN_MENU;
 
         DontDestroyOnLoad(gameObject);
-        currentState = GameStates.MENU;     
+        currentGameState = GameStates.MENU;     
         SceneManager.LoadScene((int)Levels.MENU);
         batteryCount = 0;
     }
 
     public void PlayGame()
     {
-        currentState = GameStates.PLAY_GAME;
-        //totalAmmoCollected = ammoPickups.Count * 10 + 75;
-
-        if ( currentLevel == 1 )
+        currentGameState = GameStates.PLAY_GAME;
+        
+        if (currentLevel == 0)
+        {
+            SceneManager.LoadScene((int)Levels.Scene3D_tut);
+        }
+        else if ( currentLevel == 1 )
         {
             SceneManager.LoadScene((int)Levels.Scene3D_1);
         }
@@ -97,9 +102,13 @@ public class GameManager : MonoBehaviour
 
     public void PlanGame()
     {
-        currentState = GameStates.PLAN_GAME;
+        currentGameState = GameStates.PLAN_GAME;
 
-        if ( currentLevel == 1 )
+        if (currentLevel == 0)
+        {
+            SceneManager.LoadScene((int)Levels.Scene2D_tut);
+        }
+        else if ( currentLevel == 1 )
         {
             SceneManager.LoadScene((int)Levels.Scene2D_1);
         }
@@ -111,13 +120,13 @@ public class GameManager : MonoBehaviour
 
     public void GoToMenu()
     {       
-        currentState = GameStates.MENU;
+        currentGameState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
     }
 
     public void GoToWinLoseScene()
     {    
-        currentState = GameStates.GAME_OVER;
+        currentGameState = GameStates.GAME_OVER;
         SceneManager.LoadScene((int)Levels.GameWinLose);
     }
 
@@ -135,9 +144,9 @@ public class GameManager : MonoBehaviour
     { 
         if (Input.GetKeyDown("a"))
         {
-            if (currentState != GameStates.MENU && currentState != GameStates.PLAY_GAME)
+            if (currentGameState != GameStates.MENU && currentGameState != GameStates.PLAY_GAME)
             {
-                currentState = GameStates.MENU;
+                currentGameState = GameStates.MENU;
                 SceneManager.LoadScene((int)Levels.MENU);
                 for (int i = 0; i < batteryPickupsCount.Count; i++)
                 {
