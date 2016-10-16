@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class WeaponSystem : MonoBehaviour
     public LinkedListNode<GameObject> currentWeaponInHand;
 
     private PlayerShooting playerShootingScript;
+    private Image crossHair;
 
     void Start()
     {
         moveForward = false;
         playerShootingScript = GetComponent<PlayerShooting>();
+        crossHair = transform.FindChild("FPS UI Canvas").FindChild("CrossHair").GetComponent<Image>();
         GameObject[] weaponsGO = GameObject.FindGameObjectsWithTag("Gun");
         foreach (GameObject weapon in weaponsGO)
         {
@@ -74,6 +77,7 @@ public class WeaponSystem : MonoBehaviour
             }
         }
         currentWeaponInfo = currentWeaponInHand.Value.GetComponent<WeaponInfo>();
+        crossHair.sprite = currentWeaponInfo.crossHair;
         //ParticleSystem[] pS = currentWeaponInHand.Value.GetComponentsInChildren<ParticleSystem>();
         playerShootingScript.currentGunAudio = currentWeaponInHand.Value.GetComponent<AudioSource>();
         //for (int i = 0; i < pS.Length; i++)
