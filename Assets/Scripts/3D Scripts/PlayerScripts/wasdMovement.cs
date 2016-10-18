@@ -3,7 +3,7 @@
 public class wasdMovement : MonoBehaviour
 {
     [SerializeField]
-    private float _playerSpeed = 10.0f;   
+    private float _playerSpeed = 100000.0f;
     public float PlayerSpeed
     {
         get
@@ -16,26 +16,41 @@ public class wasdMovement : MonoBehaviour
         }
     }
 
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void Update()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(-(Time.deltaTime) * _playerSpeed, 0, 0);
+            rb.MovePosition(transform.position + (-transform.right) * Time.deltaTime  * _playerSpeed);
+            //rb.MovePosition(new Vector3(-(Time.deltaTime) * _playerSpeed, 0f, 0f));
+            //transform.Translate(-(Time.deltaTime) * _playerSpeed);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(0, 0, (Time.deltaTime) * _playerSpeed);
+            rb.MovePosition(transform.position + transform.forward * Time.deltaTime * _playerSpeed);
+            //rb.MovePosition(new Vector3(0f, 0f, (Time.deltaTime) * _playerSpeed));
+            //transform.Translate(0, 0, (Time.deltaTime) * _playerSpeed);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(0, 0, -(Time.deltaTime) * _playerSpeed);
+            rb.MovePosition(transform.position + (-transform.forward) * Time.deltaTime * _playerSpeed);
+            //rb.MovePosition(new Vector3(0f, 0f, -(Time.deltaTime) * _playerSpeed));
+            //transform.Translate(0, 0, -(Time.deltaTime) * _playerSpeed);
 
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate((Time.deltaTime) * _playerSpeed, 0, 0);
+            rb.MovePosition(transform.position + transform.right * Time.deltaTime * _playerSpeed);
+            //rb.MovePosition(new Vector3((Time.deltaTime) * _playerSpeed, 0f, 0f));
+            //transform.Translate((Time.deltaTime) * _playerSpeed, 0, 0);
         }
         
     }

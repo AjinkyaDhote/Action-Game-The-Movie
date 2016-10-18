@@ -18,8 +18,8 @@ public class PlayerHealthScript : MonoBehaviour
 
     public void PlayerDamage(float damage)
     {
-        healthCount -= damage;
-        healthString = "" + healthCount;
+        healthCount -= (damage);
+        healthString = "" + healthCount.ToString("0");
         HealthText.text = healthString;
 
         if (healthCount <= 30)

@@ -18,8 +18,7 @@ public class PayLoadMovementScript : MonoBehaviour
     string batteryString;
     private int batteryCount = 100;
     private Battery _battery;
-    private bool lastReached;
-    private bool isMoving;
+    private bool lastReached;    
     private bool isRotating;
 
     float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
@@ -34,9 +33,7 @@ public class PayLoadMovementScript : MonoBehaviour
     }
 
     void Start()
-    {
-        isMoving = true;
-
+    {        
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
 
@@ -58,7 +55,7 @@ public class PayLoadMovementScript : MonoBehaviour
             lastReached = false;
         }
 
-        rigidBody = GetComponent<Rigidbody>();
+        //rigidBody = GetComponent<Rigidbody>();
 
         wayPoints3D = new Vector3[GameManager.Instance.mapPoints.Count];
 
@@ -75,10 +72,10 @@ public class PayLoadMovementScript : MonoBehaviour
         batteryString = " " + (batteryCount + _battery.batteryPickedUp);
         BatteryText.text = batteryString;
     }
+  
 
     void Update()
-    {
-
+    {        
         if (Vector3.Distance(transform.position, wayPoints3D[wayPointNumber]) < 0.5f)
         {
             isRotating = true;
@@ -96,47 +93,19 @@ public class PayLoadMovementScript : MonoBehaviour
                 batteryString = " " + (batteryCount + _battery.batteryPickedUp);
                 BatteryText.text = batteryString;
                 wayPointNumber++;
-                //transform.LookAt(wayPoints3D[wayPointNumber]);
             }
         }
+
         else
         {
-            rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime);
+            //rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime);
+            transform.Translate((wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime , Space.World);
             batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-            BatteryText.text = batteryString;
+            BatteryText.text = batteryString;            
         }
         if (isRotating)
-        {         
-           transform.forward = Vector3.Lerp(transform.forward, wayPoints3D[wayPointNumber] - wayPoints3D[wayPointNumber -1], Time.deltaTime * 0.2f);
+        {
+            transform.forward = Vector3.Lerp(transform.forward, wayPoints3D[wayPointNumber] - wayPoints3D[wayPointNumber - 1], Time.deltaTime * 0.2f);
         }
     }
-
-    //void FixedUpdate()
-    //{
-    //    if (Vector3.Distance(transform.position, wayPoints3D[wayPointNumber]) < 0.5f)
-    //    {
-    //        if (lastReached == false && wayPointNumber == wayPoints3D.Length - 1)
-    //        {
-    //            batteryCount -= GameManager.Instance.batteryUsedList[wayPointNumber - 1];
-    //            batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-    //            BatteryText.text = batteryString;
-    //            lastReached = true;
-    //        }
-
-    //        if (wayPointNumber < (wayPoints3D.Length - 1))
-    //        {
-    //            batteryCount -= GameManager.Instance.batteryUsedList[wayPointNumber - 1];
-    //            batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-    //            BatteryText.text = batteryString;
-    //            wayPointNumber++;
-    //        }
-    //    }
-
-    //    else
-    //    {
-    //        rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * playerSpeed * Time.deltaTime);
-    //        batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-    //        BatteryText.text = batteryString;
-    //    }
-    //}
 }

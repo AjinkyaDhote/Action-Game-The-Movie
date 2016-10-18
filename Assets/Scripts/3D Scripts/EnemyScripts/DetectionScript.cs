@@ -18,10 +18,7 @@ public class DetectionScript : MonoBehaviour
             {
                 aiMovementScript.Detection();
             }
-            //if (enemyThrowScript != null)
-            //{
-            //    enemyThrowScript.Detection();
-            //}
+           
         }
     }
 }

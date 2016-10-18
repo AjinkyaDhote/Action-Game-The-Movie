@@ -14,12 +14,12 @@ public class Battery : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Battery")
+		/*if (other.tag == "Battery")
 		{
 			batteryPickedUp += 50;
 			Destroy(other.gameObject);
-		}
-		else if (other.tag == "Ammo")
+		}*/
+		if (other.tag == "Ammo")
 		{
 			playerShootingScript.PickupAmmo();
 			Destroy(other.gameObject);

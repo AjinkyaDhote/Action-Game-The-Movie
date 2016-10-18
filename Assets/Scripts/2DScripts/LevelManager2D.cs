@@ -28,9 +28,4 @@ public class LevelManager2D : MonoBehaviour
 		}
 
 	}
-
-    void Start()
-    {
-        GameManager.Instance.playAvailable = true;
-    }
 }

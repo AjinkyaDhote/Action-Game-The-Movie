@@ -5,9 +5,9 @@ public class AI_movement : MonoBehaviour
 {
 	public float enemyWalkSpeed;
 	public float enemyRunSpeed;
-
+    
 	GameObject player;
-	//Animator anim;
+	
 	PlayerHealthScript playerHealth;
 
 	GameObject hitRadialPrefab;
@@ -18,16 +18,15 @@ public class AI_movement : MonoBehaviour
 	
 	bool isPlayerInRange;
 	Vector3 resetPositionForInRange;
-
-	public float radius;
-	private float minRadius;
+    Animator anim;
+	
 	private Vector3 initialPos;
-	private AudioSource zombieWalk;
+	
 
 	private Vector3[] randomVectors;
 	Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
-
-    bool isPlayerDead;
+  
+  
     bool _isPlayerSeen = false;
     private GameObject arrow_sprite;
     private  Renderer  arrow_renderer;
@@ -37,8 +36,13 @@ public class AI_movement : MonoBehaviour
         {
             return _isPlayerSeen;
         }
+        set
+        {
+            _isPlayerSeen = false;
+        }
     }
 
+ 
     void Start()
 	{
 		randomVectors = new Vector3[8];
@@ -55,17 +59,18 @@ public class AI_movement : MonoBehaviour
 		hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
         Random.InitState(42);
         initialPos = gameObject.transform.position;
-		radius = 10;
-		minRadius = 2;
 
+
+
+        anim = GetComponent<Animator>();
+        isPlayerInRange = false;
+        _isPlayerSeen = false;
+       
 		
-		isPlayerInRange = false;
-
-		zombieWalk = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
 		//anim = GetComponent<Animator>();		
-		enemyHeadCollider = transform.GetChild(0).GetComponent<Collider>();
-        enemyBodyCollider = transform.GetChild(1).GetComponent<Collider>();
+		enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
+        enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player");
 		playerHealth = player.GetComponent<PlayerHealthScript>();
 		playerCollider = player.GetComponent<Collider>();
@@ -106,30 +111,41 @@ public class AI_movement : MonoBehaviour
 	}
 	void Update()
 	{	
-		if (isPlayerDead)
+		if (anim.GetBool("isPlayerDead") == true)
 		{
+            
 			agent.speed = 0;
-			zombieWalk.Stop();
-		}
+            arrow_renderer.enabled = false;
+        }
 		else
 		{
 			Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
 			Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
-			if (_isPlayerSeen)
+			if (IsPlayerSeen)
 			{
 				transform.LookAt(player.transform);
-				if (isPlayerInRange)
+				if (anim.GetBool("isPlayerInRange") == true)
 				{
 					agent.speed = 0;
+
+                    anim.SetBool("isPunch2", true);
+                    anim.SetBool("isPunch1", true);
 					transform.position = resetPositionForInRange;
 					transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    if(Vector2.Distance(player.transform.position,transform.position)< 2.0f)
+                    {
+                        
+                        DamagePlayer();
+                    }
+                    
 				}
 				else
 				{
 					agent.speed = enemyRunSpeed;
-					agent.destination = player.transform.position;
-				}
+                    anim.SetBool("isPlayerInRange", false);
+                    agent.destination = player.transform.position;
+                }
 			}
 			else
 			{
@@ -142,7 +158,7 @@ public class AI_movement : MonoBehaviour
 	}
 	void DamagePlayer()
 	{
-		playerHealth.PlayerDamage(10f);
+		playerHealth.PlayerDamage(0.5f);
 		hitRadial = Instantiate(hitRadialPrefab);
 		hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
 		hitRadial.GetComponent<HitRadial>().StartRotation(transform);
@@ -150,26 +166,34 @@ public class AI_movement : MonoBehaviour
 	}
 	public void Detection()
 	{
-		transform.LookAt(player.transform);	
+		transform.LookAt(player.transform);
         _isPlayerSeen = true;
+        anim.SetBool("isPlayerSeen", true);
+
         arrow_renderer.enabled = true;
     }
 	public void InRange()
 	{
         _isPlayerSeen = true;
-		resetPositionForInRange = transform.position;
+        anim.SetBool("isPlayerSeen", true);
+        resetPositionForInRange = transform.position;
+        anim.SetBool("isPlayerInRange", true);
 		isPlayerInRange = true;
+        
 	}
 	public void OutOfRange()
 	{
 		isPlayerInRange = false;
-	}
+        anim.SetBool("isPlayerSeen", true);
+        anim.SetBool("isPlayerInRange", false);
+    }
 	void Patrol()
 	{
-		if (isPlayerDead)
+        anim.SetBool("isPlayerSeen", false);
+		if (anim.GetBool("isPlayerDead") == true)
 		{
 			agent.speed = 0;
-			zombieWalk.Stop();
+			
 		}
 		agent.destination = GetRandomVector();
 	}
