@@ -5,44 +5,58 @@ using UnityEngine.UI;
 public class DialogManager2DLevel1 : MonoBehaviour
 {
     private Text robotText, batteryText;
+    private Button nextBt;
     private float typeTime = 0.1f;
     private float dialoguePause = 0.5f;
 
     string[] robotString = { "Ramesh", "How are you ?" };
     string[] batterString = { "Suresh", "I am fine." };
 
-    bool stringDisplayInProgress = false;
-    bool batteryTurn = true;
+    private bool stringDisplayInProgress = false;
+    private bool batteryTurn = true;
     uint dialog = 2;
     uint totalDialogs = 2;
+    private uint conversationsCompleted = 0;
 	
 	void Start ()
     {
         //gameObject.SetActive(false);
         robotText = transform.FindChild("Background").transform.FindChild("Actor1Text").GetComponent<Text>();
         batteryText = transform.FindChild("Background").transform.FindChild("Actor2Text").GetComponent<Text>();
-
-        //robotText.text = "Suresh";
-        //batteryText.text = "Ramesh";
-
-
+        nextBt = transform.FindChild("Background").transform.FindChild("NextBt").GetComponent<Button>();
+        nextBt.gameObject.SetActive(false);
+        playCutScene();
     }
 
+    void playCutScene()
+    {
+        if (!stringDisplayInProgress)
+        {
+            dialog = 0;
+            stringDisplayInProgress = true;
+            batteryTurn = true;
+            nextBt.gameObject.SetActive(false);
+            conversationsCompleted = 0;
+            StartCoroutine(playDialog(robotString[dialog], robotText));
+        }
+    }
+
+    public void playNextConversation()
+    {
+        conversationsCompleted = 0;
+        nextBt.gameObject.SetActive(false);
+        robotText.text = "";
+        batteryText.text = "";
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (!stringDisplayInProgress && conversationsCompleted == 2)
         {
-            if (!stringDisplayInProgress)
-            {
-                dialog = 0;
-                stringDisplayInProgress = true;
-                batteryTurn = true;
-                StartCoroutine(playDialog(robotString[dialog], robotText));
-            }
+            nextBt.gameObject.SetActive(true);
         }
 
-        if ( dialog < totalDialogs)
+        if ( dialog < totalDialogs && conversationsCompleted < 2)
         {
             if (!stringDisplayInProgress && batteryTurn)
             {
@@ -84,5 +98,6 @@ public class DialogManager2DLevel1 : MonoBehaviour
 
         yield return new WaitForSeconds(dialoguePause);
         stringDisplayInProgress = false;
+        conversationsCompleted++;
     }
 }
