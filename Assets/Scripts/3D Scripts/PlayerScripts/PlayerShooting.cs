@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
 
-    private const float SPARY_ANGLE = 5.0f;
+    private const float SPARY_ANGLE = 2.0f;
 
     //public ParticleSystem muzzleFlash;
     //public Animator anim;
@@ -34,21 +34,24 @@ public class PlayerShooting : MonoBehaviour
 
     //private GameObject laserPrefab;
     //private GameObject laser;
-    //private AudioSource noBullets;
+    private AudioSource noBullets;
+    [HideInInspector]
+    public AudioSource currentGunAudio;
     //private EnemyThrow enemyThrowScript;
     private float nextFire = 0.0f;
     private WeaponSystem weaponSystemScript;
     private PauseMenu pauseMenuScript;
     private CountdownTimerScript countdownTimer;
-    private EnemyHealth damageScript;
+    //private EnemyHealth damageScript;
     //private bool shooting = false;
 
+    RaycastHit hit;
     private int bulletCount = INITIAL_NUMBER_OF_BULLETS;
     private GameObject bulletPrefab;
     private List<GameObject> bullets;
     private int bulletInUse = 0;
     private Rigidbody[] shotgunBulletRB;
-    private Transform[] shotgunBulletSpawnerTrasform;
+    private Transform shotgunBulletSpawnerTrasform;
 
     private Rigidbody pistolBulletRB;
     private Transform pistolBulletSpawnerTrasform;
@@ -56,16 +59,12 @@ public class PlayerShooting : MonoBehaviour
     private Text AmmoText;
     private Text bulletOverText;
 
-    private AI_movement aiMovementScript;
+    //private AI_movement aiMovementScript;
 
 
     void Start()
     {
-        shotgunBulletSpawnerTrasform = new Transform[4];
-        for (int i = 0; i < 4; i++)
-        {
-            shotgunBulletSpawnerTrasform[i] = transform.GetChild(0).GetChild(i);
-        }
+        shotgunBulletSpawnerTrasform = transform.GetChild(0).GetChild(0);       
         pistolBulletSpawnerTrasform = transform.GetChild(1).GetChild(0);
         bulletPrefab = Resources.Load<GameObject>("Bullet Prefab/Bullet");
         bullets = new List<GameObject>(INITIAL_NUMBER_OF_BULLETS);
@@ -75,7 +74,7 @@ public class PlayerShooting : MonoBehaviour
             bullets[i].SetActive(false);
         }
         shotgunBulletRB = new Rigidbody[4];
-        //noBullets = GetComponent<AudioSource>();
+        noBullets = GetComponent<AudioSource>();
         //laserPrefab = Resources.Load("Laser Prefab/Laser") as GameObject;
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
@@ -90,43 +89,49 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.time > nextFire) && (countdownTimer.hasGameStarted))
         {
+            
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
             {
                 if (bulletCount >= 4)
                 {
+                    Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);
                     bulletCount -= 4;
                     nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     for (int i = 0; i < 4; i++)
                     {
-                        bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform[i].position;
+                        bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].SetActive(true);
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
+                        currentGunAudio.Play();
                     }
                 }
                 else
                 {
-                    //noBullets.Play();
+                    noBullets.Play();
                 }
             }
             else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
             {
                 if (bulletCount > 0)
                 {
+                    Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);            
                     bulletCount--;
                     nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].SetActive(true);
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
-                    pistolBulletRB.AddForce(-pistolBulletSpawnerTrasform.up * _bulletForce);
+                    pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce);
+                    
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;
+                    currentGunAudio.Play();
                 }
                 else
                 {
-                    //noBullets.Play();
+                    noBullets.Play();
                 }
             }
             AmmoText.text = bulletCount.ToString();
@@ -141,13 +146,14 @@ public class PlayerShooting : MonoBehaviour
             AmmoText.color = Color.red;
         }
 
-        if (bulletCount < 4)
-        {
-            bulletOverText.text = "SWITCH TO PISTOL";
-        }
-        else if(bulletCount <= 0)
+       
+        if(bulletCount <= 0)
         {
             bulletOverText.text = "NO BULLETS";
+        }
+        else if (bulletCount < 4 && !(weaponSystemScript.currentWeaponInHand.Value.name == "Pistol"))
+        {
+            bulletOverText.text = "SWITCH TO PISTOL";
         }
         else
         {
@@ -299,8 +305,8 @@ public class PlayerShooting : MonoBehaviour
 
     Vector3 GenerateShotGunSpray(int i)
     {
-        Quaternion rotation = Quaternion.AngleAxis(((i % 2 == 0) ? 1 : -1) * SPARY_ANGLE, ((i < 2) ? Vector3.right : Vector3.up));
-        return transform.TransformDirection(rotation * Vector3.forward);
+        Quaternion rotation = Quaternion.AngleAxis(Random.Range(-SPARY_ANGLE, SPARY_ANGLE), ((i < 2) ? weaponSystemScript.currentWeaponInHand.Value.transform.forward : weaponSystemScript.currentWeaponInHand.Value.transform.up));
+        return rotation * (hit.point - shotgunBulletSpawnerTrasform.position).normalized;
     }
 }
 
