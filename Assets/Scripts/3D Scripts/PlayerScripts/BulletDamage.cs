@@ -74,10 +74,7 @@ public class BulletDamage : MonoBehaviour
             }
            Destroy(gameObject);
         }
-        else if (other.collider.CompareTag("Wall") || other.collider.CompareTag("PayLoad"))
-        {
-            Destroy(gameObject);
-        }      
+        Destroy(gameObject);       
     }
 
     private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)
