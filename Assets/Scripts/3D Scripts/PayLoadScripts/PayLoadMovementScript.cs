@@ -63,7 +63,7 @@ public class PayLoadMovementScript : MonoBehaviour
         {
             wayPoints3D[i] = convertPoint(GameManager.Instance.mapPoints[i]);
         }
-        transform.position = wayPoints3D[0];
+        //transform.position = wayPoints3D[0];
         transform.LookAt(wayPoints3D[wayPointNumber]);
 
         _battery = GameObject.Find("FPSPlayer").GetComponent<Battery>();
