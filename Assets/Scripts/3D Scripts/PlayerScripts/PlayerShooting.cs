@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
 
-    private const float SPARY_ANGLE = 2.0f;
+    private const float SPARY_ANGLE = 5.0f;
 
     //public ParticleSystem muzzleFlash;
     //public Animator anim;
@@ -58,12 +58,13 @@ public class PlayerShooting : MonoBehaviour
 
     private Text AmmoText;
     private Text bulletOverText;
-
+    private ParticleSystem wallHitParticleSystem;
     //private AI_movement aiMovementScript;
 
 
     void Start()
     {
+        wallHitParticleSystem = GameObject.Find("WallHit").GetComponent<ParticleSystem>();
         shotgunBulletSpawnerTrasform = transform.GetChild(0).GetChild(0);       
         pistolBulletSpawnerTrasform = transform.GetChild(1).GetChild(0);
         bulletPrefab = Resources.Load<GameObject>("Bullet Prefab/Bullet");
@@ -100,6 +101,7 @@ public class PlayerShooting : MonoBehaviour
                     for (int i = 0; i < 4; i++)
                     {
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
+                        bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
@@ -121,6 +123,7 @@ public class PlayerShooting : MonoBehaviour
                     bulletCount--;
                     nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
+                    bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce);
@@ -160,7 +163,12 @@ public class PlayerShooting : MonoBehaviour
             bulletOverText.text = "";
         }
     }
-
+    public void PlayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
+    {
+        wallHitParticleSystem.transform.position = hitPoint;
+        //wallHitParticleSystem.transform.rotation = Quaternion.LookRotation(hitNormal);
+        wallHitParticleSystem.Play();
+    }
 
     /*void FixedUpdate()
     {   

@@ -502,7 +502,7 @@ Transform:
   m_GameObject: {fileID: 128856}
   m_LocalRotation: {x: 0.504577, y: 0.49538052, z: -0.5045772, w: -0.49538076}
   m_LocalPosition: {x: 0.6700001, y: -0.7199999, z: 1.7599983}
-  m_LocalScale: {x: 0.39288616, y: 1.6265767, z: 0.5109505}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010714403358}
@@ -614,7 +614,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128856}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 2d3be4b01c06faf4e9d69a09e12d7952, type: 3}
 --- !u!81 &8169042
 AudioListener:
   m_ObjectHideFlags: 1
@@ -7381,7 +7381,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -7455,7 +7455,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -7861,7 +7861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDownTimer: 0.5
-  bulletLifeTime: 0.5
+  bulletLifeTime: 20
   crossHair: {fileID: 21300000, guid: ea74c11938e619740856671557f817d5, type: 3}
 --- !u!114 &114000012573682834
 MonoBehaviour:
@@ -7973,7 +7973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDownTimer: 0.1
-  bulletLifeTime: 0.2
+  bulletLifeTime: 20
   crossHair: {fileID: 21300000, guid: 9ac893a432771fa45898eb06342a33bf, type: 3}
 --- !u!114 &114000014061229678
 MonoBehaviour:
