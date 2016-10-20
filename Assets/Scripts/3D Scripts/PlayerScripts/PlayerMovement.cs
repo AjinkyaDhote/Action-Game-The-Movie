@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 			//transform.position = wayPoints3D[0] + new Vector3(4f,0f,0f); //SetPlayerPosition in 3D
         //transform.forward = (wayPoints3D[1] - transform.position).normalized;
 		//}
-        //transform.position = new Vector3(-0.1f, 2.4f, -42.1f);
+        //transform.position = new Vector3(-0.1f, 2.4f, -42.1f);        
         mouseLook = new MouseLook();
         //transform.position = wayPoints3D[0];
         _battery = gameObject.GetComponent<Battery>();
@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
 		BatteryText.color = Color.white;
 		batteryString = " " + (batteryCount + _battery.batteryPickedUp);
 		BatteryText.text = batteryString;
+
+        transform.forward = (wayPoints3D[1] - wayPoints3D[0]).normalized;
 	}
 	void Update()
 	{
