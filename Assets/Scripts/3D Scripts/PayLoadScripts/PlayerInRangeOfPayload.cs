@@ -14,7 +14,7 @@ class PlayerInRangeOfPayload : MonoBehaviour
         payLoadRange = GetComponentInParent<PayLoadRangeScript>();
         playerInsideColor = new Color32(0, 255, 0, playerCircleAlpha);
         playerOutsideColor = new Color32(255, 0, 0, playerCircleAlpha);
-}
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

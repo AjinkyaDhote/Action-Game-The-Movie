@@ -14,6 +14,8 @@ public class TimeSlow : MonoBehaviour
     //public float coolDownTimer = 5.0f;
     [HideInInspector]
     public bool isRMBHoldType;
+    [HideInInspector]
+    public bool isSlowTimeEnabled = false;
 
     Image tintImageScript;
     Image clockImageScript;
@@ -107,6 +109,7 @@ public class TimeSlow : MonoBehaviour
             if (Time.timeScale == 1.0f && slider.value >= sliderValueActive)
             {
                 Time.timeScale = reducedTimeScale;
+                isSlowTimeEnabled = true;
                 tintImageScript.color = flashColor;
                 Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
             }
@@ -124,6 +127,7 @@ public class TimeSlow : MonoBehaviour
                 {
                     tintImageScript.color = Color.clear;
                     Time.timeScale = 1.0f;
+                    isSlowTimeEnabled = false;
                     isPressed = false;
                     Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
                 }            
