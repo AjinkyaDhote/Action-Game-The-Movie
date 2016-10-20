@@ -6,6 +6,7 @@ public class BulletDamage : MonoBehaviour
     AI_movement aiMovementScript;
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
+    PlayerShooting playerShootingScript;
     const int HEAD_SHOT_DAMAGE = 1000;
     private float timeToDestroyBullet;
     private bool _isFired = false;
@@ -26,7 +27,7 @@ public class BulletDamage : MonoBehaviour
   
     private void Start()
     {
-     
+        playerShootingScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
     }
     private void Update()
     {
@@ -74,7 +75,11 @@ public class BulletDamage : MonoBehaviour
             }
            Destroy(gameObject);
         }
-        Destroy(gameObject);       
+        else
+        {
+            playerShootingScript.PlayWallHitPreFab(other.contacts[0].point, other.contacts[0].normal);
+            Destroy(gameObject);
+        }           
     }
 
     private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)
