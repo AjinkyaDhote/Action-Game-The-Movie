@@ -72,6 +72,11 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.setCurrentLevel(level);
         GameManager.Instance.playAvailable = false;
 		playButton.interactable = false;
+
+        if ( GameManager.Instance.GOD_MODE )
+        {
+            playButton.interactable = true;
+        }
     }
 
     public void setMenuStateToLevel()
