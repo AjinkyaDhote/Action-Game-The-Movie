@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896da3234473e8943bec3926be15f484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthCount: 1000
+  healthCount: 100
 --- !u!114 &114000010600065842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7bba64b2b0c3244a1ea32c819ca4c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletForce: 6000
+  _bulletForce: 10000
   currentGunAudio: {fileID: 0}
 --- !u!124 &124000012771296612
 Behaviour:
@@ -13003,7 +13003,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011879254074
 RectTransform:

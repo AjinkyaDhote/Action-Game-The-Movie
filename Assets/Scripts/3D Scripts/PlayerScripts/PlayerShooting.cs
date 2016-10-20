@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     private const int AMMO_PICK_UP = 10;
-    private const int INITIAL_NUMBER_OF_BULLETS = 75;
+    private const int INITIAL_NUMBER_OF_BULLETS = 40;
 
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
