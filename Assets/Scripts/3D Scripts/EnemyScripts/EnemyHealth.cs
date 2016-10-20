@@ -64,6 +64,7 @@ public class EnemyHealth : MonoBehaviour
             _isKilled = true;
             anim.SetBool("isPunch1", false);
             anim.SetBool("isPlayerDead", true);
+            transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
            
            // enemyHead.HeadFall();
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);

@@ -9,12 +9,12 @@ public class WinTrigger : MonoBehaviour {
 
     void Start()
     {
-        
+        Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PayLoad"));
+        if (other.CompareTag("NewPayload"))
         {
             //Score.GetComponent<Scoring>().Score();
 

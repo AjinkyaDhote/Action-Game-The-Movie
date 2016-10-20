@@ -77,6 +77,7 @@ public class AI_movement : MonoBehaviour
         Vector3 randomPoint;
         Vector3 direction;
         int randomIndex = Random.Range(0, 8);
+        int initialIndex = randomIndex;
 
         do
         {
@@ -89,11 +90,11 @@ public class AI_movement : MonoBehaviour
             randomPoint *= 4;
             randomPoint += initialPos;
 
-            direction = randomPoint - gameObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
+            direction = randomPoint - gameObject.transform.position;// + new Vector3(0.0f, 1.0f, 0.0f);
             hit = Physics.Raycast(gameObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f), direction.normalized, direction.magnitude);
             //Debug.DrawRay(gameObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f), direction.normalized, Color.red, 1);
 
-        } while (hit);
+        } while (hit && initialIndex  != randomIndex);
 
         return randomPoint;
     }
@@ -107,8 +108,8 @@ public class AI_movement : MonoBehaviour
         }
         else
         {
-            Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
-            Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
+            //Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
+            //Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
 
             if (IsPlayerSeen)
             {
