@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 95da6b59cbe413c4fbe67480f75e151a
-timeCreated: 1476502476
+timeCreated: 1476846543
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -10,7 +10,7 @@ SubstanceImporter:
     prototypeName: HexagonalFloor
     shaderName: 
     shader: {fileID: 4800000, guid: 0f50fe59d6f84b84780fec3233490470, type: 3}
-    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP
+    shaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
     renderQueue: -1
     lightmapFlags: 1
     inputs:
@@ -259,6 +259,9 @@ SubstanceImporter:
           offset: {x: 0, y: 0}
       floats:
       - first:
+          name: _BumpAmt
+        second: 10
+      - first:
           name: _BumpScale
         second: 1
       - first:
@@ -270,6 +273,9 @@ SubstanceImporter:
       - first:
           name: _DstBlend
         second: 0
+      - first:
+          name: _Emission
+        second: 1
       - first:
           name: _EmissionFactor
         second: 1
@@ -291,6 +297,9 @@ SubstanceImporter:
       - first:
           name: _OcclusionStrength
         second: 1
+      - first:
+          name: _Outline
+        second: 0.005
       - first:
           name: _Parallax
         second: 0.02
@@ -315,7 +324,7 @@ SubstanceImporter:
       colors:
       - first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: 0.8058823, b: 0.5147059, a: 1}
       - first:
           name: _EmissionColor
         second: {r: 0, g: 0, b: 0, a: 1}
@@ -328,6 +337,9 @@ SubstanceImporter:
       - first:
           name: _MaskedColorC
         second: {r: 0, g: 0, b: 1, a: 1}
+      - first:
+          name: _OutlineColor
+        second: {r: 0, g: 0, b: 0, a: 1}
       - first:
           name: _UVScale
         second: {r: 1, g: 1, b: 1, a: 1}
