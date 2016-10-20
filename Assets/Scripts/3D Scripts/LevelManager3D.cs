@@ -28,6 +28,7 @@ public class LevelManager3D : MonoBehaviour
         for ( int i=0; i< GameManager.Instance.ammoPosList.Count; i++ )
         {
             worldPos = convertPoint( GameManager.Instance.ammoPosList[i] );
+            worldPos.y +=  1.0f;
             Instantiate( AmmoMeshPrefab, worldPos, Quaternion.identity );
         }
 

@@ -167,7 +167,7 @@ public class PlayerShooting : MonoBehaviour
     {
         wallHitParticleSystem.transform.position = hitPoint;
         //wallHitParticleSystem.transform.rotation = Quaternion.LookRotation(hitNormal);
-        wallHitParticleSystem.Play();
+        //wallHitParticleSystem.Play();
     }
 
     /*void FixedUpdate()
