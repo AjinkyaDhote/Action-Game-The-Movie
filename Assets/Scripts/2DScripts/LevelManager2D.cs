@@ -11,7 +11,8 @@ public class LevelManager2D : MonoBehaviour
 	{
 		MapScript mapScript = map.GetComponent<MapScript>();
 
-		GameManager.Instance.ammoPosList.Clear();
+        GameManager.Instance.ammoPosList.Clear();
+
 		for ( int i = 0; i<AmmoLayer.transform.childCount; i++)
 		{
 			Vector3 ammoPos = AmmoLayer.transform.GetChild(i).position;
