@@ -5,7 +5,8 @@ public class EnemyHealth : MonoBehaviour
 {
     private Animator anim;
     private bool _isKilled = false;
- 
+
+
     public bool IsKilled
     {
         get
@@ -24,7 +25,6 @@ public class EnemyHealth : MonoBehaviour
     
     void Start()
     {
-       
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
       
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
@@ -62,6 +62,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Debug.Log("Killed");
             _isKilled = true;
+            anim.SetBool("isPunch1", false);
             anim.SetBool("isPlayerDead", true);
            
            // enemyHead.HeadFall();
