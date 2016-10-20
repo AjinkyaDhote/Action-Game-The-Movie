@@ -144,6 +144,7 @@ public class AI_movement : MonoBehaviour
 				{
 					agent.speed = enemyRunSpeed;
                     anim.SetBool("isPlayerInRange", false);
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
                     agent.destination = player.transform.position;
                 }
 			}
