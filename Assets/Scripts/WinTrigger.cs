@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 public class WinTrigger : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class WinTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("PayLoad"))
+        if (other.CompareTag("PayLoad"));
         {
             //Score.GetComponent<Scoring>().Score();
 
