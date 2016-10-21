@@ -8,6 +8,6 @@ public class ScreenGlitch : MonoBehaviour
 
     void OnRenderImage ( RenderTexture src, RenderTexture dst )
     {
-        Graphics.Blit( src, dst, glitchMaterial );
+        Graphics.Blit( src, dst, glitchMaterial );        
     }
 }
