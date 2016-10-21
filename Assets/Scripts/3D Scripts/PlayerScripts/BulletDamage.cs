@@ -11,6 +11,9 @@ public class BulletDamage : MonoBehaviour
     private float timeToDestroyBullet;
     private bool _isFired = false;
     private ParticleSystem enemyHitParticleEffect;
+    //--------------------------------Friendly Fire ON--------------------------------------------------------
+    PayLoadHealthScript payLoadHealthScript;
+    //--------------------------------------------------------------------------------------------------------
     public bool IsFired
     {
         get
@@ -24,20 +27,23 @@ public class BulletDamage : MonoBehaviour
             _isFired = value;
         }
     }
-  
+
     private void Start()
     {
         playerShootingScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
+        //--------------------------------Friendly Fire ON--------------------------------------------------------
+        payLoadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").GetComponent<Transform>().GetChild(2).GetComponent<PayLoadHealthScript>();
+        //---------------------------------------------------------------------------------------------------------
     }
     private void Update()
     {
-        if(_isFired)
+        if (_isFired)
         {
             if (Time.time > timeToDestroyBullet)
             {
                 Destroy(gameObject);
             }
-                
+
         }
     }
     void OnCollisionEnter(Collision other)
@@ -59,7 +65,7 @@ public class BulletDamage : MonoBehaviour
             GameManager.Instance.headShots++;
             Destroy(gameObject);
         }
-        else if(other.collider.CompareTag("BodyCollider"))
+        else if (other.collider.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
             if (!aiMovementScript.IsPlayerSeen)
@@ -67,19 +73,27 @@ public class BulletDamage : MonoBehaviour
                 aiMovementScript.Detection();
 
             }
-            enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();           
+            enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
                 PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
                 enemyHealthScript.Damage(1);
             }
-           Destroy(gameObject);
+            Destroy(gameObject);
         }
+        //--------------------------------Friendly Fire ON--------------------------------------------------------
+        else if (other.collider.CompareTag("NewPayload"))
+        {
+            payLoadHealthScript.PayLoadDamage();
+            Destroy(gameObject);
+        }
+        //---------------------------------------------------------------------------------------------------------
+
         else
         {
             playerShootingScript.PlayWallHitPreFab(other.contacts[0].point, other.contacts[0].normal);
             Destroy(gameObject);
-        }           
+        }
     }
 
     private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)

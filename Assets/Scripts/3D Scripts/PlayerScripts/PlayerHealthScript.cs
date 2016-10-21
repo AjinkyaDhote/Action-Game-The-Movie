@@ -4,31 +4,36 @@ using UnityEngine.UI;
 
 public class PlayerHealthScript : MonoBehaviour
 {
-    Text HealthText;
-	public float healthCount;
-    string healthString;
+	public float initialHealth;
+    Slider healthSlider;
+    Image barColorImage;
 
     void Start()
     {
-        HealthText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("HealthText").GetComponent<Text>();
-        healthString = " " + healthCount;
-		HealthText.color = Color.white;
-        HealthText.text = healthString;
+        healthSlider = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("HealthSlider").GetComponent<Slider>();
+        healthSlider.minValue = 0;
+        healthSlider.maxValue = initialHealth;
+        healthSlider.value = initialHealth;
+        barColorImage = healthSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        barColorImage.color = Color.green;
     }
 
     public void PlayerDamage(float damage)
     {
-        healthCount -= (damage);
-        healthString = "" + healthCount.ToString("0");
-        HealthText.text = healthString;
+        healthSlider.value -= damage;
 
-        if (healthCount <= 30)
+        if (healthSlider.value <= (initialHealth / 4))
         {
-            HealthText.color = Color.red;
+            barColorImage.color = Color.red;
+        }
+        else if (healthSlider.value <= (initialHealth / 2))
+        {
+            barColorImage.color = Color.yellow;
         }
 
-        if (healthCount <= 0)
+        if (healthSlider.value <= 0)
         {
+            barColorImage.color = Color.clear;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             GameManager.Instance.win_Lose = false;

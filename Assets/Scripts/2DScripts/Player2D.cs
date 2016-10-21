@@ -8,13 +8,18 @@ public class Player2D : MonoBehaviour
 
     public int currentPosIndex;
 
+    void Awake()
+    {
+        mapScript.setPlayerInitialPos(transform.position);
+    }
+
     void Start()
     {
         speed = 2f;
         currentPosIndex = 0;
         source = transform.position;
         destination = transform.position;
-        mapScript.setPlayerInitialPos(transform.position);
+        
     }
 
     void Update()
