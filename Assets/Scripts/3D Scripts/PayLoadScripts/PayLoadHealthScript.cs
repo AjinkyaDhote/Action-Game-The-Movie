@@ -1,33 +1,63 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using System.Text;
 
-public class PayLoadHealthScript : MonoBehaviour {
+public class PayLoadHealthScript : MonoBehaviour
+{
+    const int NUMBER_OF_PARTS_FOR_HEALTH = 5;
 
-    Text payLoadHealthText;
-    public float payLoadHealth;
-    string payLoadHealthString;
+    public int payLoadHealth;
 
-	void Start ()
+    int initialPayLoadHealth;
+
+    TextMesh payLoadHealthText;
+    StringBuilder payLoadHealthString;
+    int numberOfLs = 0;
+
+    Transform playerTransform;
+    void Start()
     {
-        payLoadHealthText = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("PayLoadHealthText").GetComponent<Text>();
-        payLoadHealthString = " " + payLoadHealth;
-        payLoadHealthText.color = Color.white;
-        payLoadHealthText.text = payLoadHealthString;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        payLoadHealthString = new StringBuilder();
+        int remainder = payLoadHealth % NUMBER_OF_PARTS_FOR_HEALTH;
+        if (remainder == 0)
+        {
+            numberOfLs = payLoadHealth / NUMBER_OF_PARTS_FOR_HEALTH;
+        }
+        else
+        {
+            payLoadHealth -= remainder;
+            numberOfLs = payLoadHealth / NUMBER_OF_PARTS_FOR_HEALTH;
+        }
+        initialPayLoadHealth = payLoadHealth;
+        payLoadHealthText = GetComponent<TextMesh>();
+        payLoadHealthString = payLoadHealthString.Append('l', numberOfLs);
+        payLoadHealthText.text = payLoadHealthString.ToString();
+        payLoadHealthText.color = Color.green;
     }
 
-    public void PayLoadDamage(float damage)
+    private void Update()
     {
-        payLoadHealth -= damage;
-        payLoadHealthString = "" + payLoadHealth;
-        payLoadHealthText.text = payLoadHealthString;
+        transform.LookAt(playerTransform);
+    }
 
-        if(payLoadHealth <= 30)
+    public void PayLoadDamage()
+    {
+        payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;
+        numberOfLs--;
+        payLoadHealthString.Length = 0;
+        payLoadHealthString = payLoadHealthString.Append('l', numberOfLs);
+        payLoadHealthText.text = payLoadHealthString.ToString();
+        if (payLoadHealth <= (initialPayLoadHealth / 4))
         {
             payLoadHealthText.color = Color.red;
         }
+        else if (payLoadHealth <= (initialPayLoadHealth / 2))
+        {
+            payLoadHealthText.color = Color.yellow;
+        }
 
-        if(payLoadHealth <= 0)
+        if (payLoadHealth <= 0)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -35,5 +65,5 @@ public class PayLoadHealthScript : MonoBehaviour {
             GameManager.Instance.win_Lose_Message = "Game Over";
             GameManager.Instance.GoToWinLoseScene();
         }
-    } 	    	
+    }
 }
