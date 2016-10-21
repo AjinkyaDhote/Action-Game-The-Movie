@@ -19,6 +19,9 @@ public class AI_movement : MonoBehaviour
     bool _isPlayerSeen = false;
     GameObject arrow_sprite;
     Renderer arrow_renderer;
+    //Camera mainCamera;
+    Material glitchMaterial;
+
     public bool IsPlayerSeen
     {
         get
@@ -67,8 +70,11 @@ public class AI_movement : MonoBehaviour
         arrow_sprite = transform.FindChild("arrow_detection").gameObject;
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
         arrow_renderer.enabled = false;
+        
 
         Patrol();
+        //mainCamera = Camera.main;
+        glitchMaterial = Camera.main.GetComponent<ScreenGlitch>().glitchMaterial;
     }
 
     Vector3 GetRandomVector()
@@ -149,12 +155,15 @@ public class AI_movement : MonoBehaviour
     }
     void DamagePlayer(int damage)
     {
+        glitchMaterial.SetFloat("_Magnitude", 0.04f);
         playerHealth.PlayerDamage(damage);
         hitRadial = Instantiate(hitRadialPrefab);
         hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
         hitRadial.GetComponent<HitRadial>().StartRotation(transform);
         Destroy(hitRadial, 2.0f);
+        StartCoroutine(SetGlitch());        
     }
+
     public void Detection()
     {
         transform.LookAt(player.transform);
@@ -186,5 +195,11 @@ public class AI_movement : MonoBehaviour
             agent.speed = 0;
         }
         agent.destination = GetRandomVector();
+    }
+
+    IEnumerator SetGlitch()
+    {        
+        yield return new WaitForSeconds(1.5f);
+        glitchMaterial.SetFloat("_Magnitude", 0.0f);
     }
 }

@@ -191,11 +191,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22449148, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 393.1
+      value: 429
       objectReference: {fileID: 0}
     - target: {fileID: 22463004, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 397
+      value: 438
       objectReference: {fileID: 0}
     - target: {fileID: 22449148, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -203,11 +203,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22463004, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -282
+      value: -282.62
       objectReference: {fileID: 0}
     - target: {fileID: 22437908, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498832, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_Text
+      value: RMB
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498832, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
@@ -2599,7 +2607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1973122245
 RectTransform:
   m_ObjectHideFlags: 0
