@@ -89,7 +89,7 @@ public class PlayerShooting : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.time > nextFire) && (countdownTimer.hasGameStarted))
+        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.realtimeSinceStartup > nextFire) && (countdownTimer.hasGameStarted))
         {
             
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
@@ -98,7 +98,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);
                     bulletCount -= 4;
-                    nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
+                    nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     for (int i = 0; i < 4; i++)
                     {
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
@@ -107,7 +107,7 @@ public class PlayerShooting : MonoBehaviour
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
-                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / timeSlowScript.reducedTimeScale));
+                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime));
                         }
                         else
                         {
@@ -131,14 +131,14 @@ public class PlayerShooting : MonoBehaviour
                 {
                     Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);            
                     bulletCount--;
-                    nextFire = Time.time + weaponSystemScript.currentWeaponInfo.coolDownTimer;
+                    nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
                     {
-                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce * (1.0f / timeSlowScript.reducedTimeScale));
+                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime));
                     }
                     else
                     {
