@@ -12,11 +12,11 @@ public class PlayerShooting : MonoBehaviour
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
 
     private const float SPARY_ANGLE = 5.0f;
+    private const float MUZZLE_EFFECT_DISPLAY_TIME = 0.02f;
 
     //public ParticleSystem muzzleFlash;
     //public Animator anim;
     //public ParticleSystem[] impacts;
-
 
     [SerializeField]
     float _bulletForce = 0.0f;
@@ -31,7 +31,7 @@ public class PlayerShooting : MonoBehaviour
             _bulletForce = value;
         }
     }
-
+    private TimeSlow timeSlowScript;
     //private GameObject laserPrefab;
     //private GameObject laser;
     private AudioSource noBullets;
@@ -64,6 +64,7 @@ public class PlayerShooting : MonoBehaviour
 
     void Start()
     {
+        timeSlowScript = transform.GetChild(2).FindChild("BulletTime").GetComponent<TimeSlow>();
         wallHitParticleSystem = GameObject.Find("WallHit").GetComponent<ParticleSystem>();
         shotgunBulletSpawnerTrasform = transform.GetChild(0).GetChild(0);       
         pistolBulletSpawnerTrasform = transform.GetChild(1).GetChild(0);
@@ -104,10 +105,19 @@ public class PlayerShooting : MonoBehaviour
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
-                        shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
+                        if (timeSlowScript.isSlowTimeEnabled)
+                        {
+                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / timeSlowScript.reducedTimeScale));
+                        }
+                        else
+                        {
+                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
+                        }
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
                         currentGunAudio.Play();
+                        weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = true;
+                        StartCoroutine(MuzzleEffect());
                     }
                 }
                 else
@@ -126,11 +136,19 @@ public class PlayerShooting : MonoBehaviour
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
-                    pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce);
-                    
+                    if (timeSlowScript.isSlowTimeEnabled)
+                    {
+                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce * (1.0f / timeSlowScript.reducedTimeScale));
+                    }
+                    else
+                    {
+                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce);
+                    }                   
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;
                     currentGunAudio.Play();
+                    weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = true;
+                    StartCoroutine(MuzzleEffect());
                 }
                 else
                 {
@@ -315,6 +333,11 @@ public class PlayerShooting : MonoBehaviour
     {
         Quaternion rotation = Quaternion.AngleAxis(Random.Range(-SPARY_ANGLE, SPARY_ANGLE), ((i < 2) ? weaponSystemScript.currentWeaponInHand.Value.transform.forward : weaponSystemScript.currentWeaponInHand.Value.transform.up));
         return rotation * (hit.point - shotgunBulletSpawnerTrasform.position).normalized;
+    }
+    IEnumerator MuzzleEffect()
+    {
+        yield return new WaitForSeconds(MUZZLE_EFFECT_DISPLAY_TIME);
+        weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = false;
     }
 }
 
