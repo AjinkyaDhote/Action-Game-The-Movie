@@ -144,6 +144,7 @@ public class TimeSlow : MonoBehaviour
         else
         {
             Time.timeScale = 1.0f;
+            isSlowTimeEnabled = false;
             Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
         }   
         isPressed = false;     
