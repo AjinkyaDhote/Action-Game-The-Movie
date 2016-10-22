@@ -14,11 +14,10 @@ public class DetectionScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (aiMovementScript != null)
+            if (aiMovementScript != null && !aiMovementScript.isChasingPayload)
             {
-                aiMovementScript.Detection();
-            }
-           
+                aiMovementScript.Detection(other.transform);
+            }          
         }
     }
 }

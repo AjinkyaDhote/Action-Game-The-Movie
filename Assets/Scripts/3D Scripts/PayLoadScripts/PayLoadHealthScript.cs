@@ -5,6 +5,7 @@ using System.Text;
 public class PayLoadHealthScript : MonoBehaviour
 {
     const int NUMBER_OF_PARTS_FOR_HEALTH = 5;
+    const float STOP_PAYLOAD_MOVEMENT_TIME = 5.0f;
 
     public int payLoadHealth;
 
@@ -14,9 +15,15 @@ public class PayLoadHealthScript : MonoBehaviour
     StringBuilder payLoadHealthString;
     int numberOfLs = 0;
 
+    int resetPayloadSpeedValue;
+    PayLoadMovementScript payLoadMovementScript;
+    float resetPayloadSpeedTime;
+
     Transform playerTransform;
     void Start()
     {
+        payLoadMovementScript = transform.parent.gameObject.GetComponent<PayLoadMovementScript>();
+        resetPayloadSpeedValue = payLoadMovementScript.payLoadSpeed;
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         payLoadHealthString = new StringBuilder();
         int remainder = payLoadHealth % NUMBER_OF_PARTS_FOR_HEALTH;
@@ -39,10 +46,16 @@ public class PayLoadHealthScript : MonoBehaviour
     private void Update()
     {
         transform.LookAt(playerTransform);
+        if (Time.realtimeSinceStartup > resetPayloadSpeedTime)
+        {
+            payLoadMovementScript.payLoadSpeed = resetPayloadSpeedValue;
+        }
     }
 
     public void PayLoadDamage()
     {
+        resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
+        payLoadMovementScript.payLoadSpeed = 0;
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;
         numberOfLs--;
         payLoadHealthString.Length = 0;
