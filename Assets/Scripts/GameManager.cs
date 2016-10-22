@@ -47,6 +47,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int CurrentLevel
+    {
+        get
+        {
+            return currentLevel;
+        }
+    }
 
     [HideInInspector]
     public bool win_Lose = false;
@@ -178,14 +185,17 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameStates.PLAY_GAME;
         
+        // tutorial level
         if (currentLevel == 0)
         {
             SceneManager.LoadScene((int)Levels.Scene3D_tut);
         }
+        // Level 1
         else if ( currentLevel == 1 )
         {
             SceneManager.LoadScene((int)Levels.Scene3D_1);
         }
+        // Level 2
         else if (currentLevel == 2)
         {
             SceneManager.LoadScene((int)Levels.Scene3D_2);
