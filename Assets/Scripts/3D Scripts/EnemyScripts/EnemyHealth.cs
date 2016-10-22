@@ -4,9 +4,9 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     private Animator anim;
+    private Transform playerTransform;
+    [SerializeField]
     private bool _isKilled = false;
-
-
     public bool IsKilled
     {
         get
@@ -15,26 +15,26 @@ public class EnemyHealth : MonoBehaviour
         }
     }
     private bool isPlayerDead;
-    //private NavMeshAgent agent;
+    private NavMeshAgent agent;
     private Material deadMaterial;
    
 
 
     public int currentHealth;
-    AI_movement aiMovementScript;
+    //AI_movement aiMovementScript;
     
     void Start()
     {
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
       
-        aiMovementScript = transform.GetComponentInParent<AI_movement>();
-        
-        //agent = GetComponent<NavMeshAgent>();        
+        //aiMovementScript = transform.GetComponentInParent<AI_movement>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = GetComponent<NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
             currentHealth = 5;
         else
             currentHealth = 60;
-        anim = transform.GetComponentInParent<Animator>();
+        anim = transform.GetComponent<Animator>();
         isPlayerDead = false;
         _isKilled = false;
         //GameManager.Instance.totalEnemiesKilled = 0;
@@ -43,15 +43,11 @@ public class EnemyHealth : MonoBehaviour
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        
-        if (aiMovementScript != null)
-        {
-            aiMovementScript.Detection();
-        }
+        transform.LookAt(playerTransform);
         if (currentHealth <= 0)
         {
-            Defeated();
-           
+            agent.speed = 0.0f;
+            Defeated();           
         }
 
     }
@@ -63,7 +59,7 @@ public class EnemyHealth : MonoBehaviour
             Debug.Log("Killed");
             _isKilled = true;
             anim.SetBool("isPunch1", false);
-            anim.SetBool("isPlayerDead", true);
+            anim.SetBool("isEnemyDead", true);
             transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
            
            // enemyHead.HeadFall();

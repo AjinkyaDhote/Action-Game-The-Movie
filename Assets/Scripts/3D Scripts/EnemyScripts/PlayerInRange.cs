@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerInRange : MonoBehaviour
 {
     AI_movement aiMovementScript;
-    //EnemyThrow enemyThrowScript;
     void Start()
     {
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
@@ -13,16 +12,11 @@ public class PlayerInRange : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            //int a = 0;
             if (aiMovementScript != null)
             {
-                aiMovementScript.InRange();
+                aiMovementScript.InRange(other.transform);
 
             }
-            //if (enemyThrowScript != null)
-            //{
-            //    enemyThrowScript.InRange();
-            //}
         }
     }
     void OnTriggerExit(Collider other)
@@ -33,10 +27,6 @@ public class PlayerInRange : MonoBehaviour
             {
                 aiMovementScript.OutOfRange();
             }
-            //if (enemyThrowScript != null)
-            //{
-            //    enemyThrowScript.OutOfRange();
-            //}
         }
     }
 }

@@ -6,13 +6,14 @@ public class BulletDamage : MonoBehaviour
     AI_movement aiMovementScript;
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
+    Transform playerTransform;
     PlayerShooting playerShootingScript;
     const int HEAD_SHOT_DAMAGE = 1000;
     private float timeToDestroyBullet;
     private bool _isFired = false;
     private ParticleSystem enemyHitParticleEffect;
     //--------------------------------Friendly Fire ON--------------------------------------------------------
-    PayLoadHealthScript payLoadHealthScript;
+    //PayLoadHealthScript payLoadHealthScript;
     //--------------------------------------------------------------------------------------------------------
     public bool IsFired
     {
@@ -30,9 +31,11 @@ public class BulletDamage : MonoBehaviour
 
     private void Start()
     {
-        playerShootingScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = player.transform;
+        playerShootingScript = player.GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
         //--------------------------------Friendly Fire ON--------------------------------------------------------
-        payLoadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").GetComponent<Transform>().GetChild(2).GetComponent<PayLoadHealthScript>();
+        //payLoadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").GetComponent<Transform>().GetChild(2).GetComponent<PayLoadHealthScript>();
         //---------------------------------------------------------------------------------------------------------
     }
     private void Update()
@@ -51,11 +54,11 @@ public class BulletDamage : MonoBehaviour
         if (other.collider.CompareTag("HeadCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
-            if (!aiMovementScript.IsPlayerSeen)
+            if (!aiMovementScript.IsPlayerPayloadSeen)
             {
-                aiMovementScript.Detection();
-
+                aiMovementScript.Detection(playerTransform);
             }
+            aiMovementScript.isChasingPayload = false;
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
@@ -68,11 +71,11 @@ public class BulletDamage : MonoBehaviour
         else if (other.collider.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
-            if (!aiMovementScript.IsPlayerSeen)
+            if (!aiMovementScript.IsPlayerPayloadSeen)
             {
-                aiMovementScript.Detection();
-
+                aiMovementScript.Detection(playerTransform);
             }
+            aiMovementScript.isChasingPayload = false;
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
@@ -82,11 +85,11 @@ public class BulletDamage : MonoBehaviour
             Destroy(gameObject);
         }
         //--------------------------------Friendly Fire ON--------------------------------------------------------
-        else if (other.collider.CompareTag("NewPayload"))
-        {
-            payLoadHealthScript.PayLoadDamage();
-            Destroy(gameObject);
-        }
+        //else if (other.collider.CompareTag("NewPayload"))
+        //{
+        //    payLoadHealthScript.PayLoadDamage();
+        //    Destroy(gameObject);
+        //}
         //---------------------------------------------------------------------------------------------------------
 
         else

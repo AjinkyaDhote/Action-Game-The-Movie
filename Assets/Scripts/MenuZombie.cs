@@ -31,7 +31,7 @@ public class MenuZombie : MonoBehaviour
 
     void Patrol()
     {
-        if (anim.GetBool("isPlayerDead"))
+        if (anim.GetBool("isEnemyDead"))
         {
             agent.speed = 0;
         }
