@@ -677,6 +677,7 @@ GameObject:
   - 23: {fileID: 23000014029225374}
   - 114: {fileID: 114000014000669566}
   - 82: {fileID: 82000012580311960}
+  - 95: {fileID: 95000011485431008}
   m_Layer: 9
   m_Name: ShotGun
   m_TagString: Gun
@@ -1235,7 +1236,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: daa44870ff3bcd54eb58e525f9e2c511, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8fa74a313a5434b4c82b45c8948d2b4e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1462,6 +1463,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010966631506}
   m_Enabled: 1
+--- !u!95 &95000011485431008
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014023764324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 1783dd696637d624eabbecfc5ec6d6d2, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108000012422812190
 Light:
   m_ObjectHideFlags: 1
