@@ -15,6 +15,7 @@ public class MapScript : MonoBehaviour
     private List<int> batteryPickupsCount;
     private Color batteryColor;
     private Color batterySelectedColor;
+    private bool batteryDetected;
 
     public Transform LowBatteryPrefab;
     private Transform LowBattery;
@@ -38,6 +39,7 @@ public class MapScript : MonoBehaviour
     private GameObject[] ammolistarray;
     private Color ammoColor;
     private Color ammoSelectedColor;
+    private bool ammoDetected;
 
     private Texture2D cursorGreen;
     private Texture2D cursorRed;
@@ -50,6 +52,7 @@ public class MapScript : MonoBehaviour
     private SpriteRenderer targetSprite;
     public Text EndText;
     bool targetReached;
+    bool targetDetected;
 
     public Player2D player2D;
     public List<Vector3> playerPosList;
@@ -61,12 +64,13 @@ public class MapScript : MonoBehaviour
     private List<Vector2> mapPoints;
     private List<int> distanceTravelled;
 
-    public GameObject SoundManager;
+    public Audio SoundManager;
 
     private LayerMask wallLayerMask;
     private LayerMask ammoLayerMask;
     private LayerMask batteryLayerMask;
     private LayerMask targetLayerMask;
+    private LayerMask pickupLayerMask;
 
     private int thresholdDistance;
 
@@ -105,6 +109,7 @@ public class MapScript : MonoBehaviour
         batteryPickupsCount.Clear();
         batteryColor = Color.white;
         batterySelectedColor = Color.green;
+        batteryDetected = false;
 
         LowBattery = Instantiate(LowBatteryPrefab) as Transform;
         LowBattery.gameObject.SetActive(false);
@@ -134,9 +139,11 @@ public class MapScript : MonoBehaviour
         ammoLayerMask = 1 << 13;
         batteryLayerMask = 1 << 14;
         targetLayerMask = 1 << 15;
+        pickupLayerMask = ammoLayerMask | batteryLayerMask | targetLayerMask;
         ammoColor = Color.white;
         ammoSelectedColor = Color.yellow;
-
+        ammoDetected = false;
+        targetDetected = false;
         cross = Instantiate(CrossPrefab) as Transform;
         cross.gameObject.SetActive(false);
 
@@ -245,27 +252,49 @@ public class MapScript : MonoBehaviour
             else
             {
                 //battery detection
-                if (countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) > 0)
-                {                                                                                                       //battery detection
+                if (countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) > 0)                                               //battery detection
+                {
+                    if(!batteryDetected)
+                    {
+                        batteryDetected = true;
+                        SoundManager.PickupHover();
+                    }
                     for (int i = 0; i < hitsEveryFrame.Length; i++)
                     {
                         hitsEveryFrame[i].transform.gameObject.GetComponent<SpriteRenderer>().color = batterySelectedColor;
                     }
                 }
+                else
+                    batteryDetected = false;
+
                 dynamicBatteryText.text = (currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) + hitsEveryFrame.Length * 50).ToString();
 
                 if (countObjects(mousePos, ammoLayerMask, out hitsEveryFrame) > 0)                                      //ammo vicinity detection
                 {
+                    if (!ammoDetected)
+                    {
+                        ammoDetected = true;
+                        SoundManager.PickupHover();
+                    }
                     for (int i = 0; i < hitsEveryFrame.Length; i++)
                     {
                         hitsEveryFrame[i].transform.GetComponent<SpriteRenderer>().color = ammoSelectedColor;
                     }
                 }
+                else
+                    ammoDetected = false;
 
                 if (countObjects(mousePos, targetLayerMask, out hitsEveryFrame) > 0)                                              //Target Detection
                 {
+                    if (!targetDetected)
+                    {
+                        targetDetected = true;
+                        SoundManager.TargetHover();
+                    }
                     targetSprite.color = Color.green;
                 }
+                else
+                    targetDetected = false;
 
             }
         }
@@ -302,11 +331,12 @@ public class MapScript : MonoBehaviour
             int currentBattery = System.Int32.Parse(batteryText.text);
             if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) + countObjects(worldPos, batteryLayerMask, out hitsEveryFrame) * 50) >= 0)
             {
-                SoundManager.GetComponent<Audio>().MouseClicked();
+                SoundManager.MouseClicked();
                 int batteryLeft = currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate);
                 int batteriesPicked = 0;
                 if (countObjects(worldPos, batteryLayerMask, out hits) > 0)
                 {                                                                                                       //battery detection
+                    SoundManager.BatteryPickup();
                     for (int i = 0; i < hits.Length; i++)
                     {
                         BatteriesHitList.Push(hits[i].transform.gameObject);
@@ -323,6 +353,7 @@ public class MapScript : MonoBehaviour
 
                 if (countObjects(worldPos, ammoLayerMask, out hits) > 0)                                                //ammo vicinity detection
                 {
+                    SoundManager.AmmoPickup();
                     for (int i = 0; i < hits.Length; i++)
                     {
                         ammoList.Push(hits[i].transform.gameObject);
@@ -334,11 +365,17 @@ public class MapScript : MonoBehaviour
 
                 if (countObjects(worldPos, targetLayerMask, out hits) > 0)                                              //Target Detection
                 {
+                    SoundManager.TargetReached();
                     targetSprite.color = Color.green;
                     EndText.gameObject.SetActive(true);
                     GameManager.Instance.playAvailable = true;
                     targetReached = true;
                 }
+
+                //if(countObjects(worldPos, pickupLayerMask, out hits) == 0)
+                //{
+                    
+                //}
 
                 // draw the line and shadow
                 Vector2 imagePos = convertToPixels(worldPos);
@@ -360,12 +397,12 @@ public class MapScript : MonoBehaviour
             }
             else
             {
-                SoundManager.GetComponent<Audio>().WrongClick();
+                SoundManager.WrongClick();
             }
         }
         else
         {
-            SoundManager.GetComponent<Audio>().WrongClick();
+            SoundManager.WrongClick();
         }
     }
 
@@ -381,7 +418,7 @@ public class MapScript : MonoBehaviour
 
         if (playerShadowPrefabList.Count > 0)
         {
-            SoundManager.GetComponent<Audio>().Undo();
+            SoundManager.Undo();
             mapPoints.RemoveAt(mapPoints.Count - 1);
 
             Transform prevShadow = playerShadowPrefabList.Pop() as Transform;
