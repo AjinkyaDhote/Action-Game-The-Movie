@@ -9,9 +9,9 @@ public class BulletDamage : MonoBehaviour
     Transform playerTransform;
     PlayerShooting playerShootingScript;
     const int HEAD_SHOT_DAMAGE = 1000;
-    private float timeToDestroyBullet;
-    private bool _isFired = false;
-    private ParticleSystem enemyHitParticleEffect;
+    float timeToDestroyBullet;
+    bool _isFired = false;
+    ParticleSystem enemyHitParticleEffect;
     //--------------------------------Friendly Fire ON--------------------------------------------------------
     //PayLoadHealthScript payLoadHealthScript;
     //--------------------------------------------------------------------------------------------------------
@@ -71,6 +71,7 @@ public class BulletDamage : MonoBehaviour
         else if (other.collider.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
+            aiMovementScript.PlayEnemyHitSound();
             if (!aiMovementScript.IsPlayerPayloadSeen)
             {
                 aiMovementScript.Detection(playerTransform);
@@ -91,10 +92,13 @@ public class BulletDamage : MonoBehaviour
         //    Destroy(gameObject);
         //}
         //---------------------------------------------------------------------------------------------------------
-
+        else if (other.collider.CompareTag("Wall"))
+        {
+            playerShootingScript.DisplayWallHitPreFab(other.contacts[0].point, other.contacts[0].normal);
+            Destroy(gameObject);
+        }
         else
         {
-            playerShootingScript.PlayWallHitPreFab(other.contacts[0].point, other.contacts[0].normal);
             Destroy(gameObject);
         }
     }
