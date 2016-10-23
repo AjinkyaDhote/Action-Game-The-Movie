@@ -16,7 +16,7 @@ public class LevelManager3D : MonoBehaviour
         return returnVal;
     }
 
-    void Awake ()
+    void Start ()
     {
         width2DPlane = GameManager.Instance.width2DPlane;
         height2DPlane = GameManager.Instance.height2DPlane;
