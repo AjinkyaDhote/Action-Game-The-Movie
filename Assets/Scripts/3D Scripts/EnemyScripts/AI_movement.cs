@@ -28,6 +28,8 @@ public class AI_movement : MonoBehaviour
     GameObject payload;
     EnemyHealth enemyHealth;
     AudioSource detectionSound;
+    AudioSource enemyHit;
+    AudioSource playerHit;
     public bool IsPlayerPayloadSeen
     {
         get
@@ -44,6 +46,7 @@ public class AI_movement : MonoBehaviour
     void Start()
     {
         detectionSound = GetComponent<AudioSource>();
+        enemyHit = transform.GetChild(0).GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
 
@@ -74,6 +77,7 @@ public class AI_movement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealthScript>();
         playerCollider = player.GetComponent<Collider>();
+        playerHit = player.GetComponent<AudioSource>();
         payload = GameObject.FindGameObjectWithTag("NewPayload");
         payLoadHealthScript = payload.transform.GetChild(5).GetComponent<PayLoadHealthScript>();
         agent.speed = enemyWalkSpeed;
@@ -112,6 +116,14 @@ public class AI_movement : MonoBehaviour
         } while (hit && initialIndex  != randomIndex);
 
         return randomPoint;
+    }
+
+    public void PlayEnemyHitSound()
+    {
+        if (!enemyHealth.IsKilled)
+        {
+            enemyHit.Play();
+        }
     }
     void Update()
     {
@@ -197,6 +209,7 @@ public class AI_movement : MonoBehaviour
     {
         if (isChasingPlayer)
         {
+            playerHit.Play();
             playerHealth.PlayerDamage(damage, 0.08f, gameObject.name);
             hitRadial = Instantiate(hitRadialPrefab);
             hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));

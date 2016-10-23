@@ -14,6 +14,9 @@ public class PlayerShooting : MonoBehaviour
     private const float SPARY_ANGLE = 5.0f;
     private const float MUZZLE_EFFECT_DISPLAY_TIME = 0.02f;
 
+    private const float WALL_HIT_PREFAB_DESTROY_DELAY = 2.0f;
+    private const float WALL_HIT_PREFAB_POSITIONAL_OFFSET = 0.1f;
+
     //public ParticleSystem muzzleFlash;
     //public Animator anim;
     //public ParticleSystem[] impacts;
@@ -45,7 +48,7 @@ public class PlayerShooting : MonoBehaviour
     //private EnemyHealth damageScript;
     //private bool shooting = false;
 
-    RaycastHit hit;
+    private RaycastHit hit;
     private int bulletCount = INITIAL_NUMBER_OF_BULLETS;
     private GameObject bulletPrefab;
     private List<GameObject> bullets;
@@ -58,15 +61,16 @@ public class PlayerShooting : MonoBehaviour
 
     private Text AmmoText;
     private Text bulletOverText;
-    private ParticleSystem wallHitParticleSystem;
+    //private ParticleSystem wallHitParticleSystem;
     //private AI_movement aiMovementScript;
-
+    private GameObject wallHitPrefab;
 
     void Start()
     {
         timeSlowScript = transform.GetChild(2).FindChild("BulletTime").GetComponent<TimeSlow>();
-        wallHitParticleSystem = GameObject.Find("WallHit").GetComponent<ParticleSystem>();
-        shotgunBulletSpawnerTrasform = transform.GetChild(0).GetChild(0);       
+        //wallHitParticleSystem = GameObject.Find("WallHit").GetComponent<ParticleSystem>();
+        wallHitPrefab = Resources.Load<GameObject>("WallHitPrefab/WallHit");
+        shotgunBulletSpawnerTrasform = transform.GetChild(0).GetChild(0);
         pistolBulletSpawnerTrasform = transform.GetChild(1).GetChild(0);
         bulletPrefab = Resources.Load<GameObject>("Bullet Prefab/Bullet");
         bullets = new List<GameObject>(INITIAL_NUMBER_OF_BULLETS);
@@ -91,7 +95,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.realtimeSinceStartup > nextFire) && (countdownTimer.hasGameStarted))
         {
-            
+
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
             {
                 if (bulletCount >= 4)
@@ -129,7 +133,7 @@ public class PlayerShooting : MonoBehaviour
             {
                 if (bulletCount > 0)
                 {
-                    Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);            
+                    Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);
                     bulletCount--;
                     nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
@@ -143,7 +147,7 @@ public class PlayerShooting : MonoBehaviour
                     else
                     {
                         pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce);
-                    }                   
+                    }
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;
                     currentGunAudio.Play();
@@ -167,8 +171,8 @@ public class PlayerShooting : MonoBehaviour
             AmmoText.color = Color.red;
         }
 
-       
-        if(bulletCount <= 0)
+
+        if (bulletCount <= 0)
         {
             bulletOverText.text = "NO BULLETS";
         }
@@ -181,9 +185,11 @@ public class PlayerShooting : MonoBehaviour
             bulletOverText.text = "";
         }
     }
-    public void PlayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
+    public void DisplayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
     {
-        wallHitParticleSystem.transform.position = hitPoint;
+        GameObject wallhit = Instantiate(wallHitPrefab, hitPoint + (WALL_HIT_PREFAB_POSITIONAL_OFFSET * hitNormal), Quaternion.LookRotation(hitNormal)) as GameObject;    
+        Destroy(wallhit, WALL_HIT_PREFAB_DESTROY_DELAY);
+        //wallHitParticleSystem.transform.position = hitPoint;
         //wallHitParticleSystem.transform.rotation = Quaternion.LookRotation(hitNormal);
         //wallHitParticleSystem.Play();
     }

@@ -5,6 +5,7 @@ public class PauseMenu : MonoBehaviour {
     [HideInInspector]
     public bool isPaused;
     CountdownTimerScript countdownTimer;
+    AudioSource backgroundMusic;
 
     Camera gunCamera;
     void Start()
@@ -12,7 +13,9 @@ public class PauseMenu : MonoBehaviour {
         isPaused = false;
         gunCamera = transform.GetComponent<Canvas>().worldCamera;
         gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
-        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
+        GameObject instructionsCanvas = GameObject.FindWithTag("InstructionsCanvas");
+        countdownTimer = instructionsCanvas.transform.GetChild(0).GetComponent<CountdownTimerScript>();
+        backgroundMusic = instructionsCanvas.GetComponent<AudioSource>();
     }
 	void Update ()
     {
@@ -26,6 +29,7 @@ public class PauseMenu : MonoBehaviour {
     {
         if(isPaused)
         {
+            backgroundMusic.Pause();
             gunCamera.cullingMask = gunCamera.cullingMask | 0x400;
             gunCamera.cullingMask = gunCamera.cullingMask & 0xddf;
             Time.timeScale = 0.0f;
@@ -34,6 +38,7 @@ public class PauseMenu : MonoBehaviour {
         }
         else
         {
+            backgroundMusic.UnPause();
             gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
             gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
             Time.timeScale = 1.0f;

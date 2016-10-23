@@ -17,16 +17,14 @@ public class EnemyHealth : MonoBehaviour
     private bool isPlayerDead;
     private NavMeshAgent agent;
     private Material deadMaterial;
-   
-
-
+    private AudioSource enemyDeath;
     public int currentHealth;
     //AI_movement aiMovementScript;
     
     void Start()
     {
         deadMaterial = Resources.Load("Materials/deadMaterial") as Material;
-      
+        enemyDeath = transform.GetChild(1).GetComponent<AudioSource>();
         //aiMovementScript = transform.GetComponentInParent<AI_movement>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();        
@@ -56,6 +54,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
+            enemyDeath.Play();
             Debug.Log("Killed");
             _isKilled = true;
             anim.SetBool("isPunch1", false);
