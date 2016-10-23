@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
 
 public class DialogManager2DLevel1 : MonoBehaviour
 {
+    public GameObject tutorialManager;
+
     private Text robotText, batteryText;
     private Button nextBt;
     private float typeTime = 0.1f;
     private float dialoguePause = 0.5f;
 
-    string[] robotString = { "Ramesh", "How are you ?" };
-    string[] batterString = { "Suresh", "I am fine." };
+    private List<string> robotString; 
+    private List<string> batterString;
 
     private bool stringDisplayInProgress = false;
     private bool batteryTurn = true;
-    uint dialog = 2;
-    uint totalDialogs = 2;
+    int dialog;
+    int totalDialogs;
     private uint conversationsCompleted = 0;
 	
 	void Start ()
@@ -25,12 +29,27 @@ public class DialogManager2DLevel1 : MonoBehaviour
         batteryText = transform.FindChild("Background").transform.FindChild("Actor2Text").GetComponent<Text>();
         nextBt = transform.FindChild("Background").transform.FindChild("NextBt").GetComponent<Button>();
         nextBt.gameObject.SetActive(false);
-        playCutScene();
+
+        robotString = new List<string>();
+        batterString = new List<string>();
+        //playCutScene();
     }
 
-    void playCutScene()
+
+
+    public void playCutScene1()
     {
-        if (!stringDisplayInProgress)
+        robotString.Clear();
+        robotString.Add("Ramesh");
+        robotString.Add("How are you ?");
+
+        batterString.Clear();
+        batterString.Add("Suresh");
+        batterString.Add("I am fine.");
+
+        totalDialogs = batterString.Count;
+
+        //if (!stringDisplayInProgress)
         {
             dialog = 0;
             stringDisplayInProgress = true;
@@ -47,6 +66,12 @@ public class DialogManager2DLevel1 : MonoBehaviour
         nextBt.gameObject.SetActive(false);
         robotText.text = "";
         batteryText.text = "";
+
+        if ( totalDialogs == dialog )
+        {
+            gameObject.SetActive(false);
+            tutorialManager.GetComponent<TutorialManager2D>().Resume();
+        }
     }
 
     void Update()
