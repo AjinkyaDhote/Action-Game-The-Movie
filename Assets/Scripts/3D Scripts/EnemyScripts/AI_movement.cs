@@ -21,12 +21,13 @@ public class AI_movement : MonoBehaviour
     GameObject arrow_sprite;
     Renderer arrow_renderer;
     //Camera mainCamera;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isChasingPayload = false;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isChasingPlayer = false;
     GameObject payload;
     EnemyHealth enemyHealth;
+    AudioSource detectionSound;
     public bool IsPlayerPayloadSeen
     {
         get
@@ -42,6 +43,7 @@ public class AI_movement : MonoBehaviour
 
     void Start()
     {
+        detectionSound = GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
 
@@ -113,10 +115,14 @@ public class AI_movement : MonoBehaviour
     }
     void Update()
     {
-        //------------------------------------------------Player---------------------------------------------
-        if(!isChasingPayload && (!enemyHealth.IsKilled))
+        if (anim.GetBool("isEnemyDead"))
         {
-            if (anim.GetBool("isEnemyDead"))
+            arrow_renderer.enabled = false;
+        }
+        //------------------------------------------------Player---------------------------------------------
+        if (!isChasingPayload && (!enemyHealth.IsKilled))
+        {
+                if (anim.GetBool("isEnemyDead"))
             {
                 agent.speed = 0;
                 arrow_renderer.enabled = false;
@@ -208,8 +214,12 @@ public class AI_movement : MonoBehaviour
     }
 
 
-    public void Detection(Transform transformToLookAt)
+    public void Detection(Transform transformToLookAt, bool isSoundToBePlayed = true)
     {
+        if(isSoundToBePlayed)
+        {
+            detectionSound.Play();
+        }     
         transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);

@@ -56,7 +56,7 @@ public class BulletDamage : MonoBehaviour
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
             if (!aiMovementScript.IsPlayerPayloadSeen)
             {
-                aiMovementScript.Detection(playerTransform);
+                aiMovementScript.Detection(playerTransform, false);
             }
             aiMovementScript.isChasingPayload = false;
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
