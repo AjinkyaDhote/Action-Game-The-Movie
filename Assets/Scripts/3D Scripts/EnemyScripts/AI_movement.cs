@@ -21,13 +21,13 @@ public class AI_movement : MonoBehaviour
     GameObject arrow_sprite;
     Renderer arrow_renderer;
     //Camera mainCamera;
-    Material glitchMaterial;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isChasingPayload = false;
-    //[HideInInspector]
+    [HideInInspector]
     public bool isChasingPlayer = false;
     GameObject payload;
     EnemyHealth enemyHealth;
+    AudioSource detectionSound;
     public bool IsPlayerPayloadSeen
     {
         get
@@ -43,6 +43,7 @@ public class AI_movement : MonoBehaviour
 
     void Start()
     {
+        detectionSound = GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
 
@@ -74,7 +75,7 @@ public class AI_movement : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealthScript>();
         playerCollider = player.GetComponent<Collider>();
         payload = GameObject.FindGameObjectWithTag("NewPayload");
-        payLoadHealthScript = payload.transform.GetChild(2).GetComponent<PayLoadHealthScript>();
+        payLoadHealthScript = payload.transform.GetChild(5).GetComponent<PayLoadHealthScript>();
         agent.speed = enemyWalkSpeed;
         arrow_sprite = transform.FindChild("arrow_detection").gameObject;
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
@@ -83,7 +84,6 @@ public class AI_movement : MonoBehaviour
 
         Patrol();
         //mainCamera = Camera.main;
-        glitchMaterial = Camera.main.GetComponent<ScreenGlitch>().glitchMaterial;
     }
 
     Vector3 GetRandomVector()
@@ -115,10 +115,14 @@ public class AI_movement : MonoBehaviour
     }
     void Update()
     {
-        //------------------------------------------------Player---------------------------------------------
-        if(!isChasingPayload && (!enemyHealth.IsKilled))
+        if (anim.GetBool("isEnemyDead"))
         {
-            if (anim.GetBool("isEnemyDead"))
+            arrow_renderer.enabled = false;
+        }
+        //------------------------------------------------Player---------------------------------------------
+        if (!isChasingPayload && (!enemyHealth.IsKilled))
+        {
+                if (anim.GetBool("isEnemyDead"))
             {
                 agent.speed = 0;
                 arrow_renderer.enabled = false;
@@ -193,13 +197,11 @@ public class AI_movement : MonoBehaviour
     {
         if (isChasingPlayer)
         {
-            glitchMaterial.SetFloat("_Magnitude", 0.04f);
-            playerHealth.PlayerDamage(damage);
+            playerHealth.PlayerDamage(damage, 0.08f, gameObject.name);
             hitRadial = Instantiate(hitRadialPrefab);
             hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
             hitRadial.GetComponent<HitRadial>().StartRotation(transform);
             Destroy(hitRadial, 2.0f);
-            StartCoroutine(SetGlitch());
         } 
     }
 
@@ -212,8 +214,12 @@ public class AI_movement : MonoBehaviour
     }
 
 
-    public void Detection(Transform transformToLookAt)
+    public void Detection(Transform transformToLookAt, bool isSoundToBePlayed = true)
     {
+        if(isSoundToBePlayed)
+        {
+            detectionSound.Play();
+        }     
         transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);
@@ -237,11 +243,5 @@ public class AI_movement : MonoBehaviour
             agent.speed = 0;
         }
         agent.destination = GetRandomVector();
-    }
-
-    IEnumerator SetGlitch()
-    {        
-        yield return new WaitForSeconds(1.5f);
-        glitchMaterial.SetFloat("_Magnitude", 0.0f);
     }
 }
