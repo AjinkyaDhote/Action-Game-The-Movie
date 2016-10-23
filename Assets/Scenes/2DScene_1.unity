@@ -183,11 +183,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22402320, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -1423.7
+      value: -1413.8
       objectReference: {fileID: 0}
     - target: {fileID: 22402320, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -513.6
+      value: -557
       objectReference: {fileID: 0}
     - target: {fileID: 22449148, guid: b3ee409431d09b24ea55c8b765a6964b, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -858,13 +858,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 129252, guid: c84c1667e2c3ebc4d9d94522400460f7, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c84c1667e2c3ebc4d9d94522400460f7, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &510606792 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11415582, guid: c84c1667e2c3ebc4d9d94522400460f7,
+    type: 2}
+  m_PrefabInternal: {fileID: 510606791}
+  m_Script: {fileID: 11500000, guid: 7acd887767fb6d54496c00f75a1accbc, type: 3}
 --- !u!1 &572732870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,10 +2164,6 @@ BoxCollider2D:
   m_Offset: {x: -0.02813834, y: -0.19057457}
   serializedVersion: 2
   m_Size: {x: 0.85930544, y: 0.42283252}
---- !u!1 &1733587520 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 129252, guid: c84c1667e2c3ebc4d9d94522400460f7, type: 2}
-  m_PrefabInternal: {fileID: 510606791}
 --- !u!1001 &1751748860
 Prefab:
   m_ObjectHideFlags: 0
@@ -2344,7 +2342,7 @@ MonoBehaviour:
   EndText: {fileID: 75411191}
   player2D: {fileID: 1249927581}
   playerPosList: []
-  SoundManager: {fileID: 1733587520}
+  SoundManager: {fileID: 510606792}
 --- !u!61 &1852946446
 BoxCollider2D:
   m_ObjectHideFlags: 0

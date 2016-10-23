@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class PayLoadMovementScript : MonoBehaviour
 {
-
-    public Camera mainCamera;
     public int payLoadSpeed;
     Vector3[] wayPoints3D;
     Rigidbody rigidBody;

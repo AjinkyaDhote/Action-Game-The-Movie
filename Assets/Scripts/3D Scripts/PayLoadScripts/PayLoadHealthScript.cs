@@ -20,8 +20,11 @@ public class PayLoadHealthScript : MonoBehaviour
     float resetPayloadSpeedTime;
 
     Transform playerTransform;
+
+    AudioSource hitAudioSource;
     void Start()
     {
+        hitAudioSource = GetComponent<AudioSource>();
         payLoadMovementScript = transform.parent.gameObject.GetComponent<PayLoadMovementScript>();
         resetPayloadSpeedValue = payLoadMovementScript.payLoadSpeed;
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -54,6 +57,7 @@ public class PayLoadHealthScript : MonoBehaviour
 
     public void PayLoadDamage()
     {
+        hitAudioSource.Play();
         resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
         payLoadMovementScript.payLoadSpeed = 0;
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;
