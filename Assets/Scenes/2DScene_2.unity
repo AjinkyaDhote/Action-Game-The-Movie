@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18053626, g: 0.22601849, b: 0.30718803, a: 1}
+  m_IndirectSpecularColor: {r: 0.18053581, g: 0.2260178, b: 0.30718684, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -894,6 +894,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c84c1667e2c3ebc4d9d94522400460f7, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &304976440 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11415582, guid: c84c1667e2c3ebc4d9d94522400460f7,
+    type: 2}
+  m_PrefabInternal: {fileID: 304976439}
+  m_Script: {fileID: 11500000, guid: 7acd887767fb6d54496c00f75a1accbc, type: 3}
 --- !u!1 &344519382
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,7 +4455,7 @@ MonoBehaviour:
   EndText: {fileID: 1605249323}
   player2D: {fileID: 121736179}
   playerPosList: []
-  SoundManager: {fileID: 0}
+  SoundManager: {fileID: 304976440}
 --- !u!61 &1790315866
 BoxCollider2D:
   m_ObjectHideFlags: 0
