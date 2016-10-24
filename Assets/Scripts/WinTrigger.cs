@@ -9,7 +9,7 @@ public class WinTrigger : MonoBehaviour {
 
     void Start()
     {
-        Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
+        //Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
     }
     void Update()
     {
@@ -22,7 +22,7 @@ public class WinTrigger : MonoBehaviour {
             GameManager.Instance.GoToWinLoseScene();
         }
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("NewPayload") || other.CompareTag("Player"))
         {

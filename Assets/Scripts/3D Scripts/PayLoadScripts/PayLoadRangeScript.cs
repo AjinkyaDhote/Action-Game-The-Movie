@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PayLoadRangeScript : MonoBehaviour
 {
 
-    private const float THETA_SCALE = 0.02f;
+    private const float THETA_SCALE = 0.01f;
     private const int NUMBER_OF_CIRCLES = 4;
     private const float RATE_OF_GLITCH_INTENSITY = 0.02f;
     public static readonly byte colorScaler = 63;
