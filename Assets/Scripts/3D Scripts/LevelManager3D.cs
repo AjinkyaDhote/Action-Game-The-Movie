@@ -28,7 +28,7 @@ public class LevelManager3D : MonoBehaviour
         for ( int i=0; i< GameManager.Instance.ammoPosList.Count; i++ )
         {
             worldPos = convertPoint( GameManager.Instance.ammoPosList[i] );
-            worldPos.y +=  1.0f;
+            worldPos.y +=  0.04f;
             Instantiate( AmmoMeshPrefab, worldPos, Quaternion.identity );
         }
 
@@ -36,6 +36,7 @@ public class LevelManager3D : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.batteryPosList.Count; i++)
         {
             worldPos = convertPoint(GameManager.Instance.batteryPosList[i]);
+            worldPos.y += 0.8f;
             Instantiate(BatteryMeshPrefab, worldPos, Quaternion.Euler(-90, 0, 0));
         }
     }
