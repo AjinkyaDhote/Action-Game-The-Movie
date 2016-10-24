@@ -115,6 +115,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000013084377114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000014109590302}
+  m_Layer: 16
+  m_Name: RaycastHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000013402522068
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +214,7 @@ Transform:
   - {fileID: 4000013878448912}
   - {fileID: 4000012351301974}
   - {fileID: 4000014192162142}
+  - {fileID: 4000014109590302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000010563621508
@@ -306,6 +322,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000010090354880}
   m_RootOrder: 5
+--- !u!4 &4000014109590302
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013084377114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.202, z: -0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010090354880}
+  m_RootOrder: 8
 --- !u!4 &4000014192162142
 Transform:
   m_ObjectHideFlags: 1
@@ -412,7 +441,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 8e78748aad168f4429896b5b00bd4de6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.78
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -649,7 +678,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 17
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135000011967324594
 SphereCollider:
@@ -661,7 +690,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 12
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135000012982045596
 SphereCollider:
@@ -673,7 +702,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135000014131475326
 SphereCollider:
@@ -685,5 +714,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 9
   m_Center: {x: 0, y: 0, z: 0}
