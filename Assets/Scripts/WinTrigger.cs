@@ -22,7 +22,7 @@ public class WinTrigger : MonoBehaviour {
             GameManager.Instance.GoToWinLoseScene();
         }
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("NewPayload") || other.CompareTag("Player"))
         {
