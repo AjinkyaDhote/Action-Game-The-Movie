@@ -2,6 +2,7 @@
 //using UnityEditor;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class MapScript : MonoBehaviour
 {
@@ -97,7 +98,11 @@ public class MapScript : MonoBehaviour
         mapPoints.Add(imagePos);
         playerPosList = new List<Vector3>();
         playerPosList.Add(prevShadowPos);
-
+        
+        if (SceneManager.GetActiveScene().buildIndex == 7)
+            batteryText.text = "50";
+        else
+            batteryText.text = "100";
         int currentBattery = System.Int32.Parse(batteryText.text);
         BatteriesHitList = GameManager.Instance.BatteriesHitList;
         BatteriesHitList.Clear();
