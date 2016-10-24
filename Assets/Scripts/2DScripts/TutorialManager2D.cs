@@ -73,13 +73,12 @@ public class TutorialManager2D : MonoBehaviour
 
     void Start()
     {
-        secondBattery.active = false;
-        undoBattery.active = false;
-        ammoInRange.active = false;
-        batteryIsImp.active = false;
-        highLowDensity.active = false;
-        target.active = false;
-        dialogueBox.active = false;
+        secondBattery.SetActive(false);
+        undoBattery.SetActive(false);
+        ammoInRange.SetActive(false);
+        batteryIsImp.SetActive(false);
+        highLowDensity.SetActive(false);
+        target.SetActive(false);
     }
 
     public void Resume()
@@ -99,9 +98,9 @@ public class TutorialManager2D : MonoBehaviour
                         //print("First Step completed.");
                         currentStage = stage.SECOND_STAGE;
                         backgroudSprite.sprite = bg2;
-                        StoryColliders.gameObject.transform.GetChild(0).gameObject.SetActiveRecursively(false);
-                        secondBattery.active = true;
-                        dialogueBox.active = true;
+                        StoryColliders.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                        secondBattery.SetActive(true);
+                        
 
                         dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene1();
                         map.GetComponent<MapScript>().enabled = false;
@@ -111,13 +110,18 @@ public class TutorialManager2D : MonoBehaviour
                 break;
             case stage.SECOND_STAGE:
                 {
-                    if (dynamicBattery.GetComponent<TextMesh>().text.Equals("0"))
+                    if (dynamicBattery.GetComponent<TextMesh>().text.Equals("0") && player.gameObject.transform.position.x > -9.0f)
                     {
                         //print("Entered Second Stage.");
                         currentStage = stage.THIRD_STAGE;
                         backgroudSprite.sprite = bg3;
-                        StoryColliders.gameObject.transform.GetChild(1).gameObject.SetActiveRecursively(false);
-                        undoBattery.active = true;
+                        StoryColliders.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+                        undoBattery.SetActive(true);
+                        player.GetComponent<Player2D>().speed = 6;
+
+                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene2();
+                        map.GetComponent<MapScript>().enabled = false;
+                        map.GetComponent<BoxCollider2D>().enabled = false;
                     }
                 }
                 break;
@@ -128,20 +132,22 @@ public class TutorialManager2D : MonoBehaviour
                     {
                         currentStage = stage.FOURTH_STAGE;
                         backgroudSprite.sprite = bg4;
-                        StoryColliders.gameObject.transform.GetChild(2).gameObject.SetActiveRecursively(false);
-                        ammoInRange.active = true;
+                        StoryColliders.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+                        ammoInRange.SetActive(true);
+                        player.GetComponent<Player2D>().speed = 4;
                     }
                 }
                 break;
 
             case stage.FOURTH_STAGE:
                 {
-                    if (player.gameObject.transform.position.x > 10.0f || player.gameObject.transform.position.y > -7.7f)
+                    if (player.gameObject.transform.position.x > 10.0f && player.gameObject.transform.position.y > -8.0f)
                     {
                         currentStage = stage.FIFTH_STAGE;
                         backgroudSprite.sprite = bg5;
-                        StoryColliders.gameObject.transform.GetChild(3).gameObject.SetActiveRecursively(false);
-                        batteryIsImp.active = true;
+                        StoryColliders.gameObject.transform.GetChild(3).gameObject.SetActive(false);
+                        batteryIsImp.SetActive(true);
+                        player.GetComponent<Player2D>().speed = 6;
                     }
                 }
                 break;
@@ -152,9 +158,9 @@ public class TutorialManager2D : MonoBehaviour
                     {
                         currentStage = stage.NO_OP;
                         backgroudSprite.sprite = bg6;
-                        StoryColliders.gameObject.transform.GetChild(4).gameObject.SetActiveRecursively(false);
-                        highLowDensity.active = true;
-                        target.active = true;
+                        StoryColliders.gameObject.transform.GetChild(4).gameObject.SetActive(false);
+                        highLowDensity.SetActive(true);
+                        target.SetActive(true);
                     }
                 }
                 break;
