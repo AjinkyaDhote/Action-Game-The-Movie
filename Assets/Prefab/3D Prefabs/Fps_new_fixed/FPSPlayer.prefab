@@ -618,11 +618,12 @@ GameObject:
   - 124: {fileID: 124000012912036602}
   - 81: {fileID: 81000010551227346}
   - 114: {fileID: 114000011627283682}
+  - 114: {fileID: 114000013539249222}
   - 114: {fileID: 114000014274394642}
-  - 114: {fileID: 114000011850802756}
   - 114: {fileID: 114000014235929988}
   - 114: {fileID: 114000010582087730}
   - 114: {fileID: 114000010047108346}
+  - 114: {fileID: 114000011850802756}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2348,6 +2349,31 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
   isRMBHoldType: 0
   isSlowTimeEnabled: 0
+--- !u!114 &114000013539249222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013673135568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50e925fb93c78246bf995d9dc3a2330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  adaptiveTextureSize: 256
+  remapCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  exposureAdjustment: 1.5
+  middleGrey: 0.4
+  white: 2
+  adaptionSpeed: 1.5
+  tonemapper: {fileID: 4800000, guid: 003377fc2620a44939dadde6fe3f8190, type: 3}
+  validRenderTextureFormat: 1
 --- !u!114 &114000013668566170
 MonoBehaviour:
   m_ObjectHideFlags: 1
