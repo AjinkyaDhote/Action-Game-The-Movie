@@ -9,7 +9,7 @@ public class WinTrigger : MonoBehaviour {
 
     void Start()
     {
-        Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
+        //Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
     }
     void Update()
     {
