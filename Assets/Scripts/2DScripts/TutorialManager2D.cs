@@ -102,9 +102,9 @@ public class TutorialManager2D : MonoBehaviour
                         secondBattery.SetActive(true);
                         
 
-                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene1();
-                        map.GetComponent<MapScript>().enabled = false;
-                        map.GetComponent<BoxCollider2D>().enabled = false;
+                        //dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene1();
+                        //map.GetComponent<MapScript>().enabled = false;
+                        //map.GetComponent<BoxCollider2D>().enabled = false;
                     }
                 }
                 break;
@@ -119,9 +119,9 @@ public class TutorialManager2D : MonoBehaviour
                         undoBattery.SetActive(true);
                         player.GetComponent<Player2D>().speed = 6;
 
-                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene2();
-                        map.GetComponent<MapScript>().enabled = false;
-                        map.GetComponent<BoxCollider2D>().enabled = false;
+                        //dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene2();
+                        //map.GetComponent<MapScript>().enabled = false;
+                        //map.GetComponent<BoxCollider2D>().enabled = false;
                     }
                 }
                 break;
