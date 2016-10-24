@@ -15,7 +15,7 @@ public class Player2D : MonoBehaviour
 
     void Start()
     {
-        speed = 2f;
+        speed = 4f;
         currentPosIndex = 0;
         source = transform.position;
         destination = transform.position;
