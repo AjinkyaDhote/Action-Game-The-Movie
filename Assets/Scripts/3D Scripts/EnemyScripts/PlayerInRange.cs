@@ -14,8 +14,11 @@ public class PlayerInRange : MonoBehaviour
         {
             if (aiMovementScript != null)
             {
-                aiMovementScript.InRange(other.transform);
-
+                Physics.Raycast(transform.position, (other.gameObject.transform.position - transform.position).normalized, out aiMovementScript.raycastHit, Mathf.Infinity);
+                if (aiMovementScript.raycastHit.collider.gameObject.tag == "Player")
+                {
+                    aiMovementScript.InRange(other.transform);
+                }
             }
         }
     }
