@@ -22,7 +22,7 @@ public class DialogManager2DLevel1 : MonoBehaviour
     int totalDialogs;
     private uint conversationsCompleted = 0;
 	
-	void Start ()
+	void Awake ()
     {
         //gameObject.SetActive(false);
         robotText = transform.FindChild("Background").transform.FindChild("Actor1Text").GetComponent<Text>();
