@@ -30,6 +30,8 @@ public class AI_movement : MonoBehaviour
     AudioSource detectionSound;
     AudioSource enemyHit;
     AudioSource playerHit;
+    [HideInInspector]
+    public RaycastHit raycastHit;
     public bool IsPlayerPayloadSeen
     {
         get
@@ -192,11 +194,15 @@ public class AI_movement : MonoBehaviour
             }
             if (Vector3.Distance(transform.position, payload.transform.position) < 10.0f)
             {
-                InRange(payload.transform);
-                agent.speed = 0;
-                transform.position = resetPositionForInRange;
-                transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                anim.SetBool("isPunch1", true);
+                Physics.Raycast(transform.position, (payload.transform.position - transform.position).normalized, out raycastHit, Mathf.Infinity);
+                if (raycastHit.collider.gameObject.tag == "NewPayload")
+                {
+                    InRange(payload.transform);
+                    agent.speed = 0;
+                    transform.position = resetPositionForInRange;
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    anim.SetBool("isPunch1", true);
+                }
             }
             else if (anim.GetBool("isPlayer_PayloadInRange") && Vector3.Distance(player.transform.position, payload.transform.position) >= 10.0f)
             {
