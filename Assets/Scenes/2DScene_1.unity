@@ -1289,6 +1289,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e964e69e9dfa1645a1c6c84a50c72b5, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &978323734 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000012513763800, guid: 9e964e69e9dfa1645a1c6c84a50c72b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 978323733}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &995729306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,14 +2118,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryCount: 0
-  batteryText: {fileID: 0}
+  batteryText: {fileID: 978323734}
   LowBatteryPrefab: {fileID: 406682, guid: cba9829fae570cb40b3098496034d4d5, type: 2}
   DynamicBattery: {fileID: 1560489796}
   PlayerShadowPrefab: {fileID: 435500, guid: 6eac153007c7811429e1fff96f7cdaf2, type: 2}
   LinePrefab: {fileID: 473268, guid: 5459312e19f5c5946b18b513738a1bdb, type: 2}
   CrossPrefab: {fileID: 499626, guid: 75f99f38e943196428412708921f7ac3, type: 2}
   Target: {fileID: 18796947}
-  EndText: {fileID: 0}
+  EndText: {fileID: 1958892443}
   player2D: {fileID: 1249927581}
   playerPosList: []
   SoundManager: {fileID: 510606792}
@@ -2471,6 +2477,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: feedf207ac7568a4489e12ae2d3f7f72, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1958892443 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011476027032, guid: feedf207ac7568a4489e12ae2d3f7f72,
+    type: 2}
+  m_PrefabInternal: {fileID: 1958892442}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &2010562966
 GameObject:
   m_ObjectHideFlags: 0
