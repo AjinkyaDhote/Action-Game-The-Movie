@@ -179,7 +179,7 @@ public class AI_movement : MonoBehaviour
         //------------------------------------------------Payload---------------------------------------------
         if (!isChasingPlayer && (!enemyHealth.IsKilled))
         {
-            if (!anim.GetBool("isPlayer_PayloadSeen") && Vector3.Distance(transform.position, payload.transform.position) < 30.0f)
+            if (!anim.GetBool("isPlayer_PayloadSeen") && Vector3.Distance(transform.position, payload.transform.position) < 20.0f)
             {
                 Detection(payload.transform);
                 isChasingPayload = true;
