@@ -56,6 +56,31 @@ public class DialogManager2DLevel1 : MonoBehaviour
             batteryTurn = true;
             nextBt.gameObject.SetActive(false);
             conversationsCompleted = 0;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            StartCoroutine(playDialog(robotString[dialog], robotText));
+        }
+    }
+
+    public void playCutScene2()
+    {
+        robotString.Clear();
+        robotString.Add("vikram");
+        robotString.Add("How are you ?");
+
+        batterString.Clear();
+        batterString.Add("suwas");
+        batterString.Add("I am fine.");
+
+        totalDialogs = batterString.Count;
+
+        //if (!stringDisplayInProgress)
+        {
+            dialog = 0;
+            stringDisplayInProgress = true;
+            batteryTurn = true;
+            nextBt.gameObject.SetActive(false);
+            conversationsCompleted = 0;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(playDialog(robotString[dialog], robotText));
         }
     }
@@ -69,7 +94,7 @@ public class DialogManager2DLevel1 : MonoBehaviour
 
         if ( totalDialogs == dialog )
         {
-            gameObject.SetActive(false);
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             tutorialManager.GetComponent<TutorialManager2D>().Resume();
         }
     }
