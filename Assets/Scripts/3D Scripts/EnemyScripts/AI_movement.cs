@@ -13,7 +13,8 @@ public class AI_movement : MonoBehaviour
     NavMeshAgent agent;
     //bool isPlayerInRange;
     Vector3 resetPositionForInRange;
-    Animator anim;
+    [HideInInspector]
+    public Animator anim;
     Vector3 initialPos;
     Vector3[] randomVectors;
     Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
@@ -28,10 +29,13 @@ public class AI_movement : MonoBehaviour
     GameObject payload;
     EnemyHealth enemyHealth;
     AudioSource detectionSound;
+    static int isSoundNecessary = 0;
     AudioSource enemyHit;
     AudioSource playerHit;
-    [HideInInspector]
-    public RaycastHit raycastHit;
+    //RaycastHit raycastHit;
+    //[HideInInspector]
+    //public Transform enemyRayCastHelper;
+    //Transform payloadRayCastHelper;
     public bool IsPlayerPayloadSeen
     {
         get
@@ -47,6 +51,7 @@ public class AI_movement : MonoBehaviour
 
     void Start()
     {
+        //enemyRayCastHelper = transform.FindChild("RaycastHelper").transform;
         detectionSound = GetComponent<AudioSource>();
         enemyHit = transform.GetChild(0).GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -81,6 +86,7 @@ public class AI_movement : MonoBehaviour
         playerCollider = player.GetComponent<Collider>();
         playerHit = player.GetComponent<AudioSource>();
         payload = GameObject.FindGameObjectWithTag("NewPayload");
+        //payloadRayCastHelper = payload.transform.FindChild("RaycastHelper").transform;
         payLoadHealthScript = payload.transform.GetChild(5).GetComponent<PayLoadHealthScript>();
         agent.speed = enemyWalkSpeed;
         arrow_sprite = transform.FindChild("arrow_detection").gameObject;
@@ -194,8 +200,9 @@ public class AI_movement : MonoBehaviour
             }
             if (Vector3.Distance(transform.position, payload.transform.position) < 10.0f)
             {
-                Physics.Raycast(transform.position, (payload.transform.position - transform.position).normalized, out raycastHit, Mathf.Infinity);
-                if (raycastHit.collider.gameObject.tag == "NewPayload")
+                //Physics.Raycast(enemyRayCastHelper.position, (payloadRayCastHelper.position - enemyRayCastHelper.position).normalized, out raycastHit, Mathf.Infinity);
+                
+                //if (raycastHit.collider.gameObject.tag == "NewPayload")
                 {
                     InRange(payload.transform);
                     agent.speed = 0;
@@ -235,10 +242,11 @@ public class AI_movement : MonoBehaviour
 
     public void Detection(Transform transformToLookAt, bool isSoundToBePlayed = true)
     {
-        if(isSoundToBePlayed)
+        if ((isSoundNecessary % 2 == 0) && isSoundToBePlayed)
         {
             detectionSound.Play();
-        }     
+        }
+        isSoundNecessary++;
         transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);
