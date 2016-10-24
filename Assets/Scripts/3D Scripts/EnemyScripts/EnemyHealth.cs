@@ -55,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
         if (!_isKilled)
         {
             enemyDeath.Play();
-            Debug.Log("Killed");
+            //Debug.Log("Killed");
             _isKilled = true;
             anim.SetBool("isPunch1", false);
             anim.SetBool("isEnemyDead", true);

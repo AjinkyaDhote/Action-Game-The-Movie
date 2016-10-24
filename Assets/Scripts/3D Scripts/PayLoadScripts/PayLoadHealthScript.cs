@@ -22,6 +22,7 @@ public class PayLoadHealthScript : MonoBehaviour
     Transform playerTransform;
 
     AudioSource hitAudioSource;
+    static int isSoundNecessary = 0;
     void Start()
     {
         hitAudioSource = GetComponent<AudioSource>();
@@ -57,7 +58,11 @@ public class PayLoadHealthScript : MonoBehaviour
 
     public void PayLoadDamage()
     {
-        hitAudioSource.Play();
+        if (isSoundNecessary % 2 == 0)
+        {
+            hitAudioSource.Play();
+        }      
+        isSoundNecessary++;
         resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
         payLoadMovementScript.payLoadSpeed = 0;
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;

@@ -34,8 +34,8 @@ public class Scoring : MonoBehaviour {
 
         
 
-        Debug.Log("initialBattery");
-        Debug.Log(initialBattery);
+       // Debug.Log("initialBattery");
+        //Debug.Log(initialBattery);
     }
 
 

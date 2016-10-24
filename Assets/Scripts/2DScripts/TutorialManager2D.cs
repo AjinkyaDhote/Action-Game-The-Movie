@@ -79,6 +79,10 @@ public class TutorialManager2D : MonoBehaviour
         batteryIsImp.SetActive(false);
         highLowDensity.SetActive(false);
         target.SetActive(false);
+
+        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene0();
+        map.GetComponent<MapScript>().enabled = false;
+        map.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void Resume()
@@ -100,7 +104,7 @@ public class TutorialManager2D : MonoBehaviour
                         backgroudSprite.sprite = bg2;
                         StoryColliders.gameObject.transform.GetChild(0).gameObject.SetActive(false);
                         secondBattery.SetActive(true);
-                        
+
 
                         dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene1();
                         map.GetComponent<MapScript>().enabled = false;
@@ -135,6 +139,10 @@ public class TutorialManager2D : MonoBehaviour
                         StoryColliders.gameObject.transform.GetChild(2).gameObject.SetActive(false);
                         ammoInRange.SetActive(true);
                         player.GetComponent<Player2D>().speed = 4;
+
+                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene3();
+                        map.GetComponent<MapScript>().enabled = false;
+                        map.GetComponent<BoxCollider2D>().enabled = false;
                     }
                 }
                 break;
@@ -148,6 +156,10 @@ public class TutorialManager2D : MonoBehaviour
                         StoryColliders.gameObject.transform.GetChild(3).gameObject.SetActive(false);
                         batteryIsImp.SetActive(true);
                         player.GetComponent<Player2D>().speed = 6;
+
+                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene4();
+                        map.GetComponent<MapScript>().enabled = false;
+                        map.GetComponent<BoxCollider2D>().enabled = false;
                     }
                 }
                 break;
@@ -161,6 +173,10 @@ public class TutorialManager2D : MonoBehaviour
                         StoryColliders.gameObject.transform.GetChild(4).gameObject.SetActive(false);
                         highLowDensity.SetActive(true);
                         target.SetActive(true);
+
+                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene5();
+                        map.GetComponent<MapScript>().enabled = false;
+                        map.GetComponent<BoxCollider2D>().enabled = false;
                     }
                 }
                 break;

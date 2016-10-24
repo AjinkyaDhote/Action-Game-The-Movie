@@ -19,8 +19,11 @@ public class MainMenuCamControl : MonoBehaviour
     public Transform rohanLt, rohanRt;
     public Transform suwasLt, suwasRt;
     public Transform tannaLt, tannaRt;
+    public Transform kaushalLt, kaushalRt;
     public Transform vikramLt, vikramRt;
     public Transform MenuMount;
+
+    public GameObject canvas;
 
     void Start()
     {
@@ -40,7 +43,16 @@ public class MainMenuCamControl : MonoBehaviour
 
     public void playCredits()
     {
-        StartCoroutine(playCreditsCoroutine());
+        canvas.transform.GetChild(0).gameObject.SetActive(true);
+        StartCoroutine("playCreditsCoroutine");
+    }
+
+    public void goToMainMenu()
+    {
+        speedFactor = 0.15f;
+        currentMount = MenuMount;
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
+        StopCoroutine("playCreditsCoroutine");
     }
 
     public IEnumerator playCreditsCoroutine()
@@ -107,6 +119,16 @@ public class MainMenuCamControl : MonoBehaviour
         currentMount = tannaLt;
         speedFactor = turnFactor;
         yield return new WaitForSeconds(turnTime);
+
+        // kaushal
+        currentMount = kaushalRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = kaushalLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
 
         // vikram
         currentMount = vikramRt;

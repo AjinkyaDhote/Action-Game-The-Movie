@@ -19,12 +19,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012561152290}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: HybridWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1000013352299588
 GameObject:
@@ -37,7 +37,7 @@ GameObject:
   - 33: {fileID: 33000011185887972}
   - 23: {fileID: 23000012883988762}
   - 64: {fileID: 64000014183708820}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SpaceStation_Room_A_Wall_Internal (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - 33: {fileID: 33000010701153148}
   - 23: {fileID: 23000012415713888}
   - 64: {fileID: 64000012073329718}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wall_Corridor_Module_ (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - 33: {fileID: 33000013764986240}
   - 23: {fileID: 23000013513356320}
   - 64: {fileID: 64000010770382256}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wall_Corridor_Module_ (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,9 +112,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012634424736}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -38.3, y: 3.68, z: 34.7}
-  m_LocalScale: {x: 0.15, y: 0.2, z: 0.38}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 49.19, y: 4.73, z: 30}
+  m_LocalScale: {x: 0.15, y: 0.26, z: 0.4}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children:
   - {fileID: 4000011791253756}
@@ -254,7 +254,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
 --- !u!64 &64000012073329718
 MeshCollider:
@@ -266,7 +266,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
 --- !u!64 &64000014183708820
 MeshCollider:
@@ -278,5 +278,5 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 2a60b7822f964c4449b39f5eb89e6ca5, type: 3}

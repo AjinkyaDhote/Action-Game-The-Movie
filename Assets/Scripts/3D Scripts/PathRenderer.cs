@@ -52,7 +52,7 @@ public class PathRenderer : MonoBehaviour {
             
             //Debug.Log("" + Vector3.Distance(posOne, posTwo));
             int pathMultiplier = (int)Vector3.Distance(posOne, posTwo) / 8;
-            Debug.Log("" + pathMultiplier);
+            //Debug.Log("" + pathMultiplier);
             for (int iterator = 1; iterator < pathMultiplier*2; iterator+=2)
             {
                 go = (GameObject)Instantiate(planePrefab, new Vector3(xValue, 0, zValue), Quaternion.Euler(0, angle, 0));
