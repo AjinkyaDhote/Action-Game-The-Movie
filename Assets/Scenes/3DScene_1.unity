@@ -4897,7 +4897,98 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114000013578638404, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013578638404, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: colorCorrectionCurvesShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013578638404, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: simpleColorCorrectionCurvesShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013578638404, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: colorCorrectionSelectiveShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013238023020, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013238023020, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: intensity
+      value: 0.036
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013238023020, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: vignetteShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013238023020, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: separableBlurShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013238023020, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: chromAberrationShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011154700550, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011154700550, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_SSAOShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011154700550, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_RandomTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010997739992, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010997739992, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: intensity
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010997739992, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: fastBloomShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013895761700, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013895761700, guid: fbbaefe5653f84c47a5cf75e820861c8,
+        type: 2}
+      propertyPath: tonemapper
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000013895761700, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
+    - {fileID: 114000010997739992, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
+    - {fileID: 114000014157435650, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
+    - {fileID: 114000011154700550, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
+    - {fileID: 114000013238023020, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
+    - {fileID: 114000013578638404, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fbbaefe5653f84c47a5cf75e820861c8, type: 2}
   m_IsPrefabParent: 0
 --- !u!20 &940654678 stripped
