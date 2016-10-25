@@ -6418,7 +6418,8 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000012993777204, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 463de4ba2995adb4196bb6281f46d0bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1205442926
@@ -9910,7 +9911,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114000014169716702, guid: e0dbdb53e250e1e4b93f9894a3a52558,
+    - target: {fileID: 114000011795116110, guid: e0dbdb53e250e1e4b93f9894a3a52558,
         type: 2}
       propertyPath: playerHealth
       value: 

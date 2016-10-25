@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = false;
+    private const bool _GOD_MODE = true;
 
     public bool GOD_MODE
     {
