@@ -223,7 +223,7 @@ public class AI_movement : MonoBehaviour
         if (isChasingPlayer)
         {
             playerHit.Play();
-            playerHealth.PlayerDamage(damage, 0.08f, gameObject.name);
+            playerHealth.PlayerDamage(damage, 0.07f, gameObject.name);
             hitRadial = Instantiate(hitRadialPrefab);
             hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
             hitRadial.GetComponent<HitRadial>().StartRotation(transform);

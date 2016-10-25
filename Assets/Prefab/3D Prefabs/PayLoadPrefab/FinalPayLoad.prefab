@@ -108,6 +108,7 @@ GameObject:
   - 65: {fileID: 65000013288369250}
   - 114: {fileID: 114000011869176048}
   - 114: {fileID: 114000012183113886}
+  - 114: {fileID: 114000013253691358}
   m_Layer: 16
   m_Name: FinalPayLoad
   m_TagString: NewPayload
@@ -316,7 +317,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010954953346}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.78, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -576,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c876e6b0d78f2a49861095d157f4558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  payLoadHealth: 100
+  payLoadHealth: 50
 --- !u!114 &114000011869176048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -604,6 +605,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payLoadSpeed: 5
+--- !u!114 &114000013253691358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013055699520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11e5ba5d077f444ba32c70c935cea76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013294858950
 MonoBehaviour:
   m_ObjectHideFlags: 1
