@@ -60,6 +60,8 @@ public class PlayerShooting : MonoBehaviour
     private Transform pistolBulletSpawnerTrasform;
 
     private Text AmmoText;
+    private RectTransform AmmoAnimate;
+    private RectTransform initialPositionAmmoAnimate;
     private Text bulletOverText;
     //private ParticleSystem wallHitParticleSystem;
     //private AI_movement aiMovementScript;
@@ -86,10 +88,26 @@ public class PlayerShooting : MonoBehaviour
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         AmmoText.text = " " + bulletCount;
         AmmoText.color = Color.white;
+        AmmoAnimate = transform.FindChild("FPS UI Canvas").FindChild("AmmoTextAnimate").GetComponent<RectTransform>();
+        initialPositionAmmoAnimate = AmmoAnimate;
+        AmmoAnimate.gameObject.SetActive(false);
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
 
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
+    }
+    void Update()
+    {
+        if (AmmoAnimate.gameObject.activeSelf)
+        {
+            AmmoAnimate.position += new Vector3(0.0f, Time.deltaTime, 0.0f);
+            if (AmmoAnimate.position.y > -128.0f)
+            {
+                AmmoAnimate.gameObject.SetActive(false);
+                AmmoAnimate = initialPositionAmmoAnimate;
+                AddAmmo();
+            }
+        }
     }
     void FixedUpdate()
     {
@@ -187,7 +205,7 @@ public class PlayerShooting : MonoBehaviour
     }
     public void DisplayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
     {
-        GameObject wallhit = Instantiate(wallHitPrefab, hitPoint + (WALL_HIT_PREFAB_POSITIONAL_OFFSET * hitNormal), Quaternion.LookRotation(hitNormal)) as GameObject;    
+        GameObject wallhit = Instantiate(wallHitPrefab, hitPoint + (WALL_HIT_PREFAB_POSITIONAL_OFFSET * hitNormal), Quaternion.LookRotation(hitNormal)) as GameObject;
         Destroy(wallhit, WALL_HIT_PREFAB_DESTROY_DELAY);
         //wallHitParticleSystem.transform.position = hitPoint;
         //wallHitParticleSystem.transform.rotation = Quaternion.LookRotation(hitNormal);
@@ -326,6 +344,11 @@ public class PlayerShooting : MonoBehaviour
             bullets.Add(Instantiate(bulletPrefab));
             bullets[i].SetActive(false);
         }
+        AmmoAnimate.gameObject.SetActive(true);
+    }
+
+    void AddAmmo()
+    {
         bulletCount += AMMO_PICK_UP;
         bulletOverText.text = "";
         AmmoText.text = bulletCount.ToString();
