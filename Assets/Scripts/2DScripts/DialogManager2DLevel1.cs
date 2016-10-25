@@ -44,7 +44,7 @@ public class DialogManager2DLevel1 : MonoBehaviour
         robotString.Add("Ok. Lets move.");
 
         batterString.Clear();
-        batterString.Add("I have an overhead layout of the current area");
+        batterString.Add("I have an overhead layout of the current area.");
         batterString.Add("Sure!! Keep in mind that I am battery hungry.");
         batterString.Add("It appears there is a battery in that section. Lets pick that up.");
         batterString.Add("Stay close to me. You are also powered on my battery.");
@@ -93,7 +93,7 @@ public class DialogManager2DLevel1 : MonoBehaviour
 
         batterString.Clear();
         batterString.Add("My system tells me that I will run out of battery if we take this path.");
-        batterString.Add("Cool....  Undo using RMB");
+        batterString.Add("Cool....  Undo using Right Mouse Button");
 
         totalDialogs = batterString.Count;
 
