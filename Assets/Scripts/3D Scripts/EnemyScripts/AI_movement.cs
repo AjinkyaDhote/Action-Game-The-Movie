@@ -137,6 +137,8 @@ public class AI_movement : MonoBehaviour
     {
         if (anim.GetBool("isEnemyDead"))
         {
+            enemyBodyCollider.enabled = false;
+            enemyHeadCollider.enabled = false;
             arrow_renderer.enabled = false;
         }
         //------------------------------------------------Player---------------------------------------------

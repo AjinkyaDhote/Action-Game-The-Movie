@@ -60,8 +60,9 @@ public class PlayerShooting : MonoBehaviour
     private Transform pistolBulletSpawnerTrasform;
 
     private Text AmmoText;
-    private RectTransform AmmoAnimate;
-    private RectTransform initialPositionAmmoAnimate;
+    private GameObject AmmoAnimatePrefab;
+    private Vector3 initialPositionAmmoAnimate = new Vector3(-1.63f, -0.6f, 1.84f);
+    private List<GameObject> AmmoAnimateInstanceList = new List<GameObject>();
     private Text bulletOverText;
     //private ParticleSystem wallHitParticleSystem;
     //private AI_movement aiMovementScript;
@@ -88,9 +89,7 @@ public class PlayerShooting : MonoBehaviour
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         AmmoText.text = " " + bulletCount;
         AmmoText.color = Color.white;
-        AmmoAnimate = transform.FindChild("FPS UI Canvas").FindChild("AmmoTextAnimate").GetComponent<RectTransform>();
-        initialPositionAmmoAnimate = AmmoAnimate;
-        AmmoAnimate.gameObject.SetActive(false);
+        AmmoAnimatePrefab = Resources.Load<GameObject>("AmmoAnimatePrefab/AmmoAnimate");
         pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
 
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
@@ -98,16 +97,19 @@ public class PlayerShooting : MonoBehaviour
     }
     void Update()
     {
-        if (AmmoAnimate.gameObject.activeSelf)
+        foreach (GameObject AmmoInstance in AmmoAnimateInstanceList)
         {
-            AmmoAnimate.position += new Vector3(0.0f, Time.deltaTime, 0.0f);
-            if (AmmoAnimate.position.y > -128.0f)
+            if (AmmoInstance.activeSelf && Time.timeScale != 0.0f)
             {
-                AmmoAnimate.gameObject.SetActive(false);
-                AmmoAnimate = initialPositionAmmoAnimate;
-                AddAmmo();
+                AmmoInstance.transform.localPosition += new Vector3(0.0f, Time.deltaTime * (1.0f / Time.timeScale), 0.0f);
+                if (AmmoInstance.transform.localPosition.y > 1.38f)
+                {
+                    AddAmmo();
+                    AmmoInstance.SetActive(false);
+                }
             }
         }
+        
     }
     void FixedUpdate()
     {
@@ -344,7 +346,11 @@ public class PlayerShooting : MonoBehaviour
             bullets.Add(Instantiate(bulletPrefab));
             bullets[i].SetActive(false);
         }
-        AmmoAnimate.gameObject.SetActive(true);
+        GameObject AmmoAnimateInstance = Instantiate(AmmoAnimatePrefab, transform) as GameObject;
+        AmmoAnimateInstance.transform.LookAt(transform);
+        AmmoAnimateInstance.transform.localPosition = initialPositionAmmoAnimate;
+        AmmoAnimateInstance.SetActive(true);
+        AmmoAnimateInstanceList.Add(AmmoAnimateInstance);  
     }
 
     void AddAmmo()

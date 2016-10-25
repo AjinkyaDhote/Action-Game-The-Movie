@@ -10,7 +10,7 @@ public class Scoring : MonoBehaviour {
     //private int batteryRemaining; 
     //private int totalDistance;
     //private int headshots;
-    public Slider playerHealth;
+    private Slider playerHealth;
     //public Text ammoText;
 
     public int totalBattery;
@@ -26,6 +26,7 @@ public class Scoring : MonoBehaviour {
     void Start ()
     {
         //totalDistance = 0;
+        playerHealth = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas").FindChild("HealthSlider").GetComponent<Slider>();
         GameManager.Instance.totalDistance = 0;
         totalBattery = 0;
         batteryUsed = 0;
