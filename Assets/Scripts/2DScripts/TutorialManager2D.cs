@@ -80,9 +80,9 @@ public class TutorialManager2D : MonoBehaviour
         highLowDensity.SetActive(false);
         target.SetActive(false);
 
-        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene0();
-        map.GetComponent<MapScript>().enabled = false;
-        map.GetComponent<BoxCollider2D>().enabled = false;
+        //dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene0();
+        //map.GetComponent<MapScript>().enabled = false;
+        //map.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void Resume()
@@ -188,4 +188,15 @@ public class TutorialManager2D : MonoBehaviour
                 break;
         }
     }
+
+    public void IntroText()
+    {
+        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene0();
+        map.GetComponent<MapScript>().enabled = false;
+        map.GetComponent<BoxCollider2D>().enabled = false;
+
+        Transform introImage = dialogueBox.transform.GetChild(1);
+        introImage.gameObject.SetActive(false);
+    }
+
 }
