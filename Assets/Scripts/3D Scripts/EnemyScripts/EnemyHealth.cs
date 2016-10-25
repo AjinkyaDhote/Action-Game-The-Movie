@@ -35,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
         anim = transform.GetComponent<Animator>();
         isPlayerDead = false;
         _isKilled = false;
-        //GameManager.Instance.totalEnemiesKilled = 0;
+        GameManager.Instance.totalEnemiesKilled = 0;
     }
 
     public void Damage(int damage)
@@ -64,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
            // enemyHead.HeadFall();
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
            
-            //GameManager.Instance.totalEnemiesKilled++;
+            GameManager.Instance.totalEnemiesKilled++;
         }
         //AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
 

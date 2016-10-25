@@ -10,7 +10,7 @@ public class Scoring : MonoBehaviour {
     //private int batteryRemaining; 
     //private int totalDistance;
     //private int headshots;
-    public Text playerHealthText;
+    public Slider playerHealth;
     //public Text ammoText;
 
     public int totalBattery;
@@ -31,7 +31,6 @@ public class Scoring : MonoBehaviour {
         batteryUsed = 0;
         initialBattery = GameManager.Instance.battery;
         totalBatteryValue = 0 + initialBattery;
-
         
 
        // Debug.Log("initialBattery");
@@ -81,7 +80,7 @@ public class Scoring : MonoBehaviour {
         Debug.Log(GameManager.Instance.totalEnemiesKilled);
 
         Debug.Log("HealthRemaining");
-        GameManager.Instance.remainingHealth = System.Int32.Parse(playerHealthText.text);
+        GameManager.Instance.remainingHealth = (int)playerHealth.value;//System.Int32.Parse(playerHealthText.text);
         Debug.Log(GameManager.Instance.remainingHealth);
 
         Debug.Log("Score");

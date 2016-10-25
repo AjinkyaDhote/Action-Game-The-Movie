@@ -4,21 +4,23 @@ using UnityEngine;
 public class WinTrigger : MonoBehaviour {
 
     //public Scoring m_scoring;
-    public GameObject Score;
+    public Scoring Score;
     byte didEveryoneReach = 0;
 
     void Start()
     {
+
+        Score = GetComponent<Scoring>();
         //Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
     }
     void Update()
     {
         if (didEveryoneReach == 2)
         {
-            //Score.GetComponent<Scoring>().Score();
+            Score.Score();
             GameManager.Instance.win_Lose = true;
             GameManager.Instance.win_Lose_Message = "Target Reached!";
-            //GameManager.Instance.currentMenuState = GameManager.MenuState.SCORE_BOARD;
+            GameManager.Instance.currentMenuState = GameManager.MenuState.SCORE_BOARD;
             GameManager.Instance.GoToWinLoseScene();
         }
     }
