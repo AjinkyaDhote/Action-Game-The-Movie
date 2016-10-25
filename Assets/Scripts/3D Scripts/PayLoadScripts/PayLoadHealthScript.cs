@@ -5,7 +5,7 @@ using System.Text;
 public class PayLoadHealthScript : MonoBehaviour
 {
     const int NUMBER_OF_PARTS_FOR_HEALTH = 5;
-    const float STOP_PAYLOAD_MOVEMENT_TIME = 5.0f;
+    const float STOP_PAYLOAD_MOVEMENT_TIME = 3.0f;
 
     public int payLoadHealth;
 

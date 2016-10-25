@@ -2,20 +2,8 @@
 
 public class wasdMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float _playerSpeed = 10.0f;
-    public float PlayerSpeed
-    {
-        get
-        {
-            return _playerSpeed;
-        }
-        set
-        {
-            _playerSpeed = value;
-        }
-    }
-
+    private const float MAX_VELOCITY = 25.0f;
+    public float playerAcceleration;
     private Rigidbody rb;
 
     void Start()
@@ -25,52 +13,23 @@ public class wasdMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-        {         
-            if (rb.velocity != Vector3.zero && rb.angularVelocity != Vector3.zero)
-            {
-                rb.velocity = rb.angularVelocity = Vector3.zero;
-            }
-            //rb.MovePosition(transform.position + (-transform.right) * Time.deltaTime  * _playerSpeed);
-            //rb.MovePosition(new Vector3(-(Time.deltaTime) * _playerSpeed, 0f, 0f));     
-            transform.Translate(-(Time.deltaTime) * _playerSpeed,0f,0f);
-        }
-
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
-            if (rb.velocity != Vector3.zero && rb.angularVelocity != Vector3.zero)
-            {
-                rb.velocity = rb.angularVelocity = Vector3.zero;
-            }
-            //rb.MovePosition(transform.position + transform.forward * Time.deltaTime * _playerSpeed);
-            //rb.MovePosition(new Vector3(0f, 0f, (Time.deltaTime) * _playerSpeed));
-            rb.velocity = rb.angularVelocity = Vector3.zero;
-            transform.Translate(0, 0, (Time.deltaTime) * _playerSpeed);
+            ResetVelocities();
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            if (rb.velocity != Vector3.zero && rb.angularVelocity != Vector3.zero)
-            {
-                rb.velocity = rb.angularVelocity = Vector3.zero;
-            }
-            //rb.MovePosition(transform.position + (-transform.forward) * Time.deltaTime * _playerSpeed);
-            //rb.MovePosition(new Vector3(0f, 0f, -(Time.deltaTime) * _playerSpeed));
-            rb.velocity = rb.angularVelocity = Vector3.zero;
-            transform.Translate(0, 0, -(Time.deltaTime) * _playerSpeed);
+        rb.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, MAX_VELOCITY);
+    }
 
-        }
-
-        if (Input.GetKey(KeyCode.D))
+    void ResetVelocities()
+    {
+        if (rb.velocity != Vector3.zero)
         {
-            if (rb.velocity != Vector3.zero && rb.angularVelocity != Vector3.zero)
-            {
-                rb.velocity = rb.angularVelocity = Vector3.zero;
-            }
-            //rb.MovePosition(transform.position + transform.right * Time.deltaTime * _playerSpeed);
-            //rb.MovePosition(new Vector3((Time.deltaTime) * _playerSpeed, 0f, 0f));
-            rb.velocity = rb.angularVelocity = Vector3.zero;
-            transform.Translate((Time.deltaTime) * _playerSpeed, 0, 0);
+            rb.velocity = Vector3.zero;
         }
-        
+        if (rb.angularVelocity != Vector3.zero)
+        {
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 }
