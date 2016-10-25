@@ -1242,21 +1242,16 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 408261544}
-    - target: {fileID: 114000010208373524, guid: a310f697f24c5b140ae710344b092442,
-        type: 2}
-      propertyPath: tutorialManager
-      value: 
-      objectReference: {fileID: 1332191536}
     - target: {fileID: 114000012963864546, guid: a310f697f24c5b140ae710344b092442,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1332191537}
-    - target: {fileID: 114000012963864546, guid: a310f697f24c5b140ae710344b092442,
+    - target: {fileID: 114000010208373524, guid: a310f697f24c5b140ae710344b092442,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: IntroText
-      objectReference: {fileID: 0}
+      propertyPath: tutorialManager
+      value: 
+      objectReference: {fileID: 1332191536}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a310f697f24c5b140ae710344b092442, type: 2}
   m_IsPrefabParent: 0
