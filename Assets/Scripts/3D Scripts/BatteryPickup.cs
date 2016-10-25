@@ -9,7 +9,5 @@ public class BatteryPickup : MonoBehaviour {
         {
             gameObject.SetActive(false);
         }
-    }
-
-
+    }    
 }
