@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     { 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKeyDown("q"))
         {
             if (currentGameState != GameStates.MENU && currentGameState != GameStates.PLAY_GAME)
             {

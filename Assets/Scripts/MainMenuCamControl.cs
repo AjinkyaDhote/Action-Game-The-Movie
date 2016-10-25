@@ -141,5 +141,7 @@ public class MainMenuCamControl : MonoBehaviour
 
         speedFactor = moveFactor;
         currentMount = MenuMount;
+
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
