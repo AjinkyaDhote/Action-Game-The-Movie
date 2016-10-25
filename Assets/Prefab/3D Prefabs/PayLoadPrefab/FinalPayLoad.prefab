@@ -108,7 +108,8 @@ GameObject:
   - 65: {fileID: 65000013288369250}
   - 114: {fileID: 114000011869176048}
   - 114: {fileID: 114000012183113886}
-  m_Layer: 0
+  - 114: {fileID: 114000012524243410}
+  m_Layer: 18
   m_Name: FinalPayLoad
   m_TagString: NewPayload
   m_Icon: {fileID: 0}
@@ -604,6 +605,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payLoadSpeed: 5
+--- !u!114 &114000012524243410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013055699520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11e5ba5d077f444ba32c70c935cea76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013294858950
 MonoBehaviour:
   m_ObjectHideFlags: 1
