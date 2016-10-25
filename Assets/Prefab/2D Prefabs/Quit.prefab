@@ -22,7 +22,7 @@ GameObject:
   - 222: {fileID: 222000012668525478}
   - 114: {fileID: 114000010083312392}
   m_Layer: 5
-  m_Name: Undo_text
+  m_Name: Quit_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 224000013314600706}
   m_Layer: 5
-  m_Name: Undo
+  m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ GameObject:
   - 222: {fileID: 222000011922511576}
   - 114: {fileID: 114000011978308108}
   m_Layer: 5
-  m_Name: Undo icon
+  m_Name: Quit icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 43fce4773f14b4345ba8a3938d7dff1c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 85c74cca5644f0d4683aba7dd4dd3eb5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -149,7 +149,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -617, y: -97}
+  m_AnchoredPosition: {x: -617, y: -170}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013374850364

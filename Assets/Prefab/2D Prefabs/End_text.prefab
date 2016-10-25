@@ -57,10 +57,10 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press 'A' to Execute
+  m_Text: Path planned! Press 'Q' to go back and PLAY.
 --- !u!222 &222000012807829402
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -82,6 +82,6 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.5, y: -495}
-  m_SizeDelta: {x: 427, y: 76}
+  m_AnchoredPosition: {x: 7, y: -491}
+  m_SizeDelta: {x: 752, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
