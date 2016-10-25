@@ -219,7 +219,7 @@ public class DialogManager2DLevel1 : MonoBehaviour
         }
     }
 
-    private IEnumerator playDialog(string i_string, Text i_text)
+    public IEnumerator playDialog(string i_string, Text i_text)
     {
         int stringLen = i_string.Length;
         int currentLen = 0;
