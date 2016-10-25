@@ -4,7 +4,7 @@ using UnityEngine;
 public class WinTrigger : MonoBehaviour {
 
     //public Scoring m_scoring;
-    public Scoring Score;
+    Scoring Score;
     [HideInInspector]
     public bool hasPlayerReached = false;
     [HideInInspector]

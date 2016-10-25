@@ -11,6 +11,7 @@ GameObject:
   - 65: {fileID: 6568612}
   - 114: {fileID: 11405712}
   - 54: {fileID: 54000012448055368}
+  - 114: {fileID: 114000011795116110}
   m_Layer: 0
   m_Name: WinTrigger
   m_TagString: Untagged
@@ -55,6 +56,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: {fileID: 0}
+  hasPlayerReached: 0
+  hasPayloadReached: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -81,3 +84,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &114000011795116110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437189d6071931146aa4d87fc76c11e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
+  totalBattery: 0
+  totalBatteryValue: 0
+  batteryUsed: 0
