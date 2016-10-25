@@ -4,8 +4,11 @@ using UnityEngine;
 public class WinTrigger : MonoBehaviour {
 
     //public Scoring m_scoring;
-    public Scoring Score;
-    byte didEveryoneReach = 0;
+    Scoring Score;
+    [HideInInspector]
+    public bool hasPlayerReached = false;
+    [HideInInspector]
+    public bool hasPayloadReached = false;
 
     void Start()
     {
@@ -15,7 +18,8 @@ public class WinTrigger : MonoBehaviour {
     }
     void Update()
     {
-        if (didEveryoneReach == 2)
+
+        if (hasPlayerReached  && hasPayloadReached)
         {
             Score.Score();
             GameManager.Instance.win_Lose = true;
@@ -24,12 +28,4 @@ public class WinTrigger : MonoBehaviour {
             GameManager.Instance.GoToWinLoseScene();
         }
     }
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("NewPayload") || other.CompareTag("Player"))
-        {
-            didEveryoneReach++;
-        }
-    }
-
 }
