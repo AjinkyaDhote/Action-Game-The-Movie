@@ -65,7 +65,6 @@ public class BulletDamage : MonoBehaviour
                 PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
                 enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
             }
-            GameManager.Instance.headShots++;
             Destroy(gameObject);
         }
         else if (other.collider.CompareTag("BodyCollider"))
