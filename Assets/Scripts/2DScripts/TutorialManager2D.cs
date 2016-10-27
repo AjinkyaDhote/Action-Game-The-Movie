@@ -114,7 +114,7 @@ public class TutorialManager2D : MonoBehaviour
                 break;
             case stage.SECOND_STAGE:
                 {
-                    if (dynamicBattery.GetComponent<TextMesh>().text.Equals("0") && player.gameObject.transform.position.x > -9.0f)
+                    if (dynamicBattery.GetComponent<TextMesh>().text.Equals("0") && (player.gameObject.transform.position.x > -9.0f || player.gameObject.transform.position.y > -4.0f))
                     {
                         //print("Entered Second Stage.");
                         currentStage = stage.THIRD_STAGE;
