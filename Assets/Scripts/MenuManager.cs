@@ -9,6 +9,23 @@ public class MenuManager : MonoBehaviour
 
     public Text HeadShots, EnemiesKilled, Health, DistanceCoverd, Total;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.Instance.currentMenuState == GameManager.MenuState.IN_GAME_MENU)
+            {
+                cam.GetComponent<MainMenuCamControl>().setMount(LevelMount);
+                setMenuStateToLevel();
+            }
+            else if (GameManager.Instance.currentMenuState == GameManager.MenuState.LEVEL_MENU)
+            {
+                cam.GetComponent<MainMenuCamControl>().setMount(MainMount);
+                setMenuStateToMainMenu();
+            }
+        }
+    }
+
     void Start()
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
