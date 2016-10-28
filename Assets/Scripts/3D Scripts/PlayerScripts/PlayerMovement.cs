@@ -70,10 +70,10 @@ public class PlayerMovement : MonoBehaviour
         mouseLook = new MouseLook();
         //transform.position = wayPoints3D[0];
         _battery = gameObject.GetComponent<Battery>();
-		BatteryText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("BatteryText").GetComponent<Text>();
-		BatteryText.color = Color.white;
+		//BatteryText = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("BatteryText").GetComponent<Text>();
+		//BatteryText.color = Color.white;
 		batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-		BatteryText.text = batteryString;
+		//BatteryText.text = batteryString;
 
         transform.forward = (wayPoints3D[1] - wayPoints3D[0]).normalized;
 	}
