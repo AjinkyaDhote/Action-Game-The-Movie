@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     private const int AMMO_PICK_UP = 10;
-    private const int INITIAL_NUMBER_OF_BULLETS = 40;
+    private const int INITIAL_NUMBER_OF_BULLETS = 400;
 
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
@@ -185,6 +185,7 @@ public class PlayerShooting : MonoBehaviour
     }
     public void DisplayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
     {
+        //print("Hit point" + hitPoint);
         GameObject wallhit = Instantiate(wallHitPrefab, hitPoint + (WALL_HIT_PREFAB_POSITIONAL_OFFSET * hitNormal), Quaternion.LookRotation(hitNormal)) as GameObject;
         Destroy(wallhit, WALL_HIT_PREFAB_DESTROY_DELAY);
     }
