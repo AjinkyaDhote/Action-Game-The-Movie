@@ -3,6 +3,9 @@ using System.Collections;
 
 public class BulletDamage : MonoBehaviour
 {
+    //GameObject testsphere;
+    const float SCALE = 0.8f;
+
     AI_movement aiMovementScript;
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
@@ -31,6 +34,7 @@ public class BulletDamage : MonoBehaviour
 
     private void Start()
     {
+        //testsphere = GameObject.Find("TESTSPHERE");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         playerShootingScript = player.GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
@@ -93,7 +97,8 @@ public class BulletDamage : MonoBehaviour
         //---------------------------------------------------------------------------------------------------------
         else if (other.collider.CompareTag("Wall"))
         {
-            playerShootingScript.DisplayWallHitPreFab(other.contacts[0].point, other.contacts[0].normal);
+            ContactPoint contactPoint = other.contacts[Random.Range(0, other.contacts.Length)];
+            playerShootingScript.DisplayWallHitPreFab(contactPoint.point, contactPoint.normal);
             Destroy(gameObject);
         }
         else
