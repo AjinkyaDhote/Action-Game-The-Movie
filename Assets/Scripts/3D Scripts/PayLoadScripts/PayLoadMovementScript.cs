@@ -12,7 +12,7 @@ public class PayLoadMovementScript : MonoBehaviour
     [HideInInspector]
     public static CountdownTimerScript countdownTimer;
 
-    Text BatteryText;
+    //Text BatteryText;
     string batteryString;
     private int batteryCount = 100;
     private Battery _battery;
@@ -65,10 +65,10 @@ public class PayLoadMovementScript : MonoBehaviour
         transform.LookAt(wayPoints3D[wayPointNumber]);
 
         _battery = GameObject.Find("FPSPlayer").GetComponent<Battery>();
-        BatteryText = GameObject.Find("FPS UI Canvas").GetComponent<Transform>().GetChild(4).GetComponent<Text>();
-        BatteryText.color = Color.white;
+        //BatteryText = GameObject.Find("FPS UI Canvas").GetComponent<Transform>().GetChild(4).GetComponent<Text>();
+        //BatteryText.color = Color.white;
         batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-        BatteryText.text = batteryString;
+        //BatteryText.text = batteryString;
     }
   
 
@@ -81,7 +81,7 @@ public class PayLoadMovementScript : MonoBehaviour
             {
                 batteryCount -= GameManager.Instance.batteryUsedList[wayPointNumber - 1];
                 batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-                BatteryText.text = batteryString;
+                //BatteryText.text = batteryString;
                 lastReached = true;
             }
 
@@ -89,7 +89,7 @@ public class PayLoadMovementScript : MonoBehaviour
             {
                 batteryCount -= GameManager.Instance.batteryUsedList[wayPointNumber - 1];
                 batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-                BatteryText.text = batteryString;
+                //BatteryText.text = batteryString;
                 wayPointNumber++;
             }
         }
@@ -99,7 +99,7 @@ public class PayLoadMovementScript : MonoBehaviour
             //rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime);
             transform.Translate((wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime , Space.World);
             batteryString = " " + (batteryCount + _battery.batteryPickedUp);
-            BatteryText.text = batteryString;            
+            //BatteryText.text = batteryString;            
         }
         if (isRotating)
         {
