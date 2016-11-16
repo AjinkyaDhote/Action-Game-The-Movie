@@ -4,28 +4,23 @@ using UnityEngine;
 public class WinTrigger : MonoBehaviour {
 
     //public Scoring m_scoring;
-    Scoring Score;
+   
     [HideInInspector]
     public bool hasPlayerReached = false;
     [HideInInspector]
     public bool hasPayloadReached = false;
 
+    private Animator doorAnimationController;
     void Start()
     {
-
-        Score = GetComponent<Scoring>();
-        //Debug.Log("WinTrigger POsition"+ gameObject.transform.position);
+        doorAnimationController = transform.GetChild(1).GetComponent<Animator>();
+       
     }
     void Update()
-    {
-
+    {      
         if (hasPlayerReached  && hasPayloadReached)
         {
-            Score.Score();
-            GameManager.Instance.win_Lose = true;
-            GameManager.Instance.win_Lose_Message = "Target Reached!";
-            GameManager.Instance.currentMenuState = GameManager.MenuState.SCORE_BOARD;
-            GameManager.Instance.GoToWinLoseScene();
+            doorAnimationController.SetBool("Open",true);  
         }
-    }
+    } 
 }
