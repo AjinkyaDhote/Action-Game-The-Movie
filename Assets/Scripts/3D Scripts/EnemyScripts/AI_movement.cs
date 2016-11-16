@@ -22,10 +22,10 @@ public class AI_movement : MonoBehaviour
     GameObject arrow_sprite;
     Renderer arrow_renderer;
     //Camera mainCamera;
-    [HideInInspector]
-    public bool isChasingPayload = false;
-    [HideInInspector]
-    public bool isChasingPlayer = false;
+    //[HideInInspector]
+    //public bool isChasingPayload = false;
+    //[HideInInspector]
+    //public bool isChasingPlayer = false;
     GameObject payload;
     EnemyHealth enemyHealth;
     AudioSource detectionSound;
@@ -36,6 +36,10 @@ public class AI_movement : MonoBehaviour
     //[HideInInspector]
     //public Transform enemyRayCastHelper;
     //Transform payloadRayCastHelper;
+
+    Transform targetTransform;
+    [HideInInspector]
+    public bool engaged;
     public bool IsPlayerPayloadSeen
     {
         get
@@ -92,7 +96,8 @@ public class AI_movement : MonoBehaviour
         arrow_sprite = transform.FindChild("arrow_detection").gameObject;
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
         arrow_renderer.enabled = false;
-        
+
+        engaged = false;
 
         Patrol();
         //mainCamera = Camera.main;
@@ -135,130 +140,86 @@ public class AI_movement : MonoBehaviour
     }
     void Update()
     {
-        if (anim.GetBool("isEnemyDead"))
+        if (!enemyHealth.IsKilled)
+        {
+            if (_isPlayer_Payload_Seen)
+            {
+                transform.LookAt(targetTransform);
+                if (anim.GetBool("isPlayer_PayloadInRange") && engaged)
+                {
+                    agent.speed = 0;
+                    anim.SetBool("isPunch1", true);
+                    transform.position = resetPositionForInRange;
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                }
+                else
+                {
+                    agent.speed = enemyRunSpeed;
+                    anim.SetBool("isPlayer_PayloadInRange", false);
+                    anim.SetBool("isPunch1", false);
+                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    agent.destination = targetTransform.position;
+                }
+            }
+            else
+            {
+                if (agent.remainingDistance < 0.5f)
+                {
+                    Patrol();
+                }
+            }
+        }
+        else
         {
             enemyBodyCollider.enabled = false;
             enemyHeadCollider.enabled = false;
             arrow_renderer.enabled = false;
+            agent.speed = 0;
         }
-        //------------------------------------------------Player---------------------------------------------
-        if (!isChasingPayload && (!enemyHealth.IsKilled))
-        {
-                if (anim.GetBool("isEnemyDead"))
-            {
-                agent.speed = 0;
-                arrow_renderer.enabled = false;
-            }
-            else
-            {
-                //Physics.IgnoreCollision(enemyBodyCollider, playerCollider);
-                //Physics.IgnoreCollision(enemyHeadCollider, playerCollider);
-
-                if (_isPlayer_Payload_Seen)
-                {
-                    transform.LookAt(player.transform);              
-                    if (anim.GetBool("isPlayer_PayloadInRange") && isChasingPlayer)
-                    {
-                        agent.speed = 0;
-                        anim.SetBool("isPunch2", true);
-                        anim.SetBool("isPunch1", true);
-                        transform.position = resetPositionForInRange;
-                        transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                    }
-                    else
-                    {
-                        isChasingPlayer = true;
-                        agent.speed = enemyRunSpeed;
-                        anim.SetBool("isPlayer_PayloadInRange", false);
-                        anim.SetBool("isPunch1", false);
-                        transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                        agent.destination = player.transform.position;
-                    }
-                }
-                else
-                {
-                    if (agent.remainingDistance < 0.5f)
-                    {
-                        Patrol();
-                    }
-                }
-            }
-        }
-        //------------------------------------------------Player---------------------------------------------
-
-        //------------------------------------------------Payload---------------------------------------------
-        if (!isChasingPlayer && (!enemyHealth.IsKilled))
-        {
-            if (!anim.GetBool("isPlayer_PayloadSeen") && Vector3.Distance(transform.position, payload.transform.position) < 20.0f)
-            {
-                Detection(payload.transform);
-                isChasingPayload = true;
-            }
-            if (anim.GetBool("isPlayer_PayloadSeen") && !anim.GetBool("isPlayer_PayloadInRange"))
-            {
-                agent.destination = payload.transform.position;
-                transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                agent.speed = enemyRunSpeed;
-            }
-            if (Vector3.Distance(transform.position, payload.transform.position) < 10.0f)
-            {
-                //Physics.Raycast(enemyRayCastHelper.position, (payloadRayCastHelper.position - enemyRayCastHelper.position).normalized, out raycastHit, Mathf.Infinity);
-                
-                //if (raycastHit.collider.gameObject.tag == "NewPayload")
-                {
-                    InRange(payload.transform);
-                    agent.speed = 0;
-                    transform.position = resetPositionForInRange;
-                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
-                    anim.SetBool("isPunch1", true);
-                }
-            }
-            else if (anim.GetBool("isPlayer_PayloadInRange") && Vector3.Distance(player.transform.position, payload.transform.position) >= 10.0f)
-            {
-                OutOfRange();
-            }
-        }
-        //------------------------------------------------Payload---------------------------------------------
     }
     void DamagePlayer(int damage)
     {
-        if (isChasingPlayer)
+        if(targetTransform.tag == "Player")
         {
             playerHit.Play();
+
             playerHealth.PlayerDamage(damage, 0.07f, gameObject.name);
+
             hitRadial = Instantiate(hitRadialPrefab);
             hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
             hitRadial.GetComponent<HitRadial>().StartRotation(transform);
             Destroy(hitRadial, 2.0f);
-        } 
-    }
-
-    void DamagePayload()
-    {
-        if(isChasingPayload)
+        }
+        else if(targetTransform.tag == "NewPayload")
         {
             payLoadHealthScript.PayLoadDamage();
         }
     }
-
-
-    public void Detection(Transform transformToLookAt, bool isSoundToBePlayed = true)
+    
+    public void Detection(Transform transformToLookAt)
     {
-        if ((isSoundNecessary % 2 == 0) && isSoundToBePlayed)
+        if ((isSoundNecessary % 2 == 0))
         {
             detectionSound.Play();
         }
         isSoundNecessary++;
+
         transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);
         arrow_renderer.enabled = true;
+
+        targetTransform = transformToLookAt;
     }
     public void InRange(Transform transformToLookAt)
     {
+        engaged = true;
+
         transform.LookAt(transformToLookAt);
         resetPositionForInRange = transform.position;
         anim.SetBool("isPlayer_PayloadInRange", true);
+
+        targetTransform = transformToLookAt;
     }
     public void OutOfRange()
     {

@@ -7413,7 +7413,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010717938264, guid: 23a2474800920584196084052211dc01, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23a2474800920584196084052211dc01, type: 2}
@@ -7951,6 +7951,10 @@ Prefab:
       propertyPath: m_Name
       value: SmallEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010717938264, guid: 23a2474800920584196084052211dc01, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23a2474800920584196084052211dc01, type: 2}
   m_IsPrefabParent: 0
@@ -8039,6 +8043,11 @@ Prefab:
       objectReference: {fileID: 940654678}
     - target: {fileID: 184142, guid: 533d23c06d6a1cd45a3efcc1231e249c, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000010959228256, guid: 533d23c06d6a1cd45a3efcc1231e249c,
+        type: 2}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10430,7 +10439,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010717938264, guid: 23a2474800920584196084052211dc01, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23a2474800920584196084052211dc01, type: 2}
