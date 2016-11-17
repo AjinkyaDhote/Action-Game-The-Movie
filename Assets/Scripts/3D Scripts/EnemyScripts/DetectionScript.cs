@@ -12,9 +12,9 @@ public class DetectionScript : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("NewPayload"))
         {
-            if (aiMovementScript != null && !aiMovementScript.isChasingPayload)
+            if (aiMovementScript != null)// && !aiMovementScript.isChasingPayload)
             {
                 aiMovementScript.Detection(other.transform);
             }          

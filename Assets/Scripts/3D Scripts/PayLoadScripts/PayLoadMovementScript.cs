@@ -6,7 +6,7 @@ public class PayLoadMovementScript : MonoBehaviour
 {
     public int payLoadSpeed;
     Vector3[] wayPoints3D;
-    Rigidbody rigidBody;
+    //Rigidbody rigidBody;
     int wayPointNumber;
     PauseMenu pauseMenuScript;
     [HideInInspector]
