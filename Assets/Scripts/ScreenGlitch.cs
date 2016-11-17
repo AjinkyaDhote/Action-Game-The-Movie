@@ -15,10 +15,36 @@ public class ScreenGlitch : MonoBehaviour
     private Shader glitchShader;
     void Awake()
     {
-        _glitchMaterial = Resources.Load<Material>("Materials/ScreenGlitch");
+        //_glitchMaterial = Resources.Load<Material>("Materials/ScreenGlitch");
         glitchShader = Resources.Load<Shader>("Shaders/ScreenGlitch");
-        _glitchMaterial.shader = glitchShader;
-        _glitchMaterial.mainTexture = null;
+        //_glitchMaterial.shader = glitchShader;
+        //_glitchMaterial.mainTexture = null;
+        if(glitchShader)
+        {
+            _glitchMaterial = CreateMaterial(glitchShader);
+            _glitchMaterial.shader = glitchShader;
+            _glitchMaterial.mainTexture = null;
+        }
+    }
+    private static Material CreateMaterial(Shader shader)
+    {
+        if (!shader)
+            return null;
+        Material m = new Material(shader);
+        m.hideFlags = HideFlags.HideAndDontSave;
+        return m;
+    }
+    private static void DestroyMaterial(Material mat)
+    {
+        if (mat)
+        {
+            DestroyImmediate(mat);
+            mat = null;
+        }
+    }
+    void OnDisable()
+    {
+        DestroyMaterial(_glitchMaterial);
     }
     void OnRenderImage ( RenderTexture src, RenderTexture dst )
     {

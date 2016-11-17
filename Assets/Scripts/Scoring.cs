@@ -42,10 +42,8 @@ public class Scoring : MonoBehaviour {
 
     public void Score()
     {
-        Debug.Log("Distances");
         for (int i = 0; i < GameManager.Instance.distanceTravelled.Count; i++)
         {
-            Debug.Log(GameManager.Instance.distanceTravelled[i]);
             GameManager.Instance.totalDistance += GameManager.Instance.distanceTravelled[i];      
         }
 
@@ -57,36 +55,36 @@ public class Scoring : MonoBehaviour {
         Debug.Log(totalBattery);
         */
 
-        Debug.Log(GameManager.Instance.batteryCount);
+        //Debug.Log(GameManager.Instance.batteryCount);
 
-        Debug.Log("TotalBatteryValue");
+        //Debug.Log("TotalBatteryValue");
         for (int i = 0; i < GameManager.Instance.batteryPickups.Count; i++)
         {
             totalBatteryValue += GameManager.Instance.batteryPickups[i];
         }
-        Debug.Log(totalBatteryValue);
+        //Debug.Log(totalBatteryValue);
 
-        Debug.Log("BatteryUsed");
+        //Debug.Log("BatteryUsed");
         for (int i = 0; i < GameManager.Instance.batteryUsedList.Count; i++)
         {
             batteryUsed += GameManager.Instance.batteryUsedList[i];
         }
-        Debug.Log(batteryUsed);
+        //Debug.Log(batteryUsed);
 
 
-        Debug.Log("Headshots");
-        Debug.Log(GameManager.Instance.headShots);
+        //Debug.Log("Headshots");
+        //Debug.Log(GameManager.Instance.headShots);
 
-        Debug.Log("Killed");
-        Debug.Log(GameManager.Instance.totalEnemiesKilled);
+        //Debug.Log("Killed");
+        //Debug.Log(GameManager.Instance.totalEnemiesKilled);
 
-        Debug.Log("HealthRemaining");
+        //Debug.Log("HealthRemaining");
         GameManager.Instance.remainingHealth = (int)playerHealth.value;//System.Int32.Parse(playerHealthText.text);
-        Debug.Log(GameManager.Instance.remainingHealth);
+        //Debug.Log(GameManager.Instance.remainingHealth);
 
-        Debug.Log("Score");
+        //Debug.Log("Score");
         GameManager.Instance.TotalScore = (GameManager.Instance.headShots)*100 + (GameManager.Instance.totalEnemiesKilled)*100 + (GameManager.Instance.remainingHealth)*50 - (GameManager.Instance.totalDistance);
-        Debug.Log(GameManager.Instance.TotalScore);
+        //Debug.Log(GameManager.Instance.TotalScore);
 
 
     }

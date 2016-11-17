@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
             return _isKilled;
         }
     }
-    private bool isPlayerDead;
+    //private bool isPlayerDead;
     private NavMeshAgent agent;
     private Material deadMaterial;
     private AudioSource enemyDeath;
@@ -33,7 +33,7 @@ public class EnemyHealth : MonoBehaviour
         else
             currentHealth = 60;
         anim = transform.GetComponent<Animator>();
-        isPlayerDead = false;
+        //isPlayerDead = false;
         _isKilled = false;
         GameManager.Instance.totalEnemiesKilled = 0;
     }
