@@ -11,7 +11,8 @@ public class PlayerShooting : MonoBehaviour
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
 
-    private const float SPARY_ANGLE = 5.0f;
+    private const int NUMBER_OF_SHOTGUN_BULLETS = 8;
+    private const float SPARY_ANGLE = 1.0f;
     private const float MUZZLE_EFFECT_DISPLAY_TIME = 0.02f;
 
     private const float WALL_HIT_PREFAB_DESTROY_DELAY = 2.0f;
@@ -73,7 +74,7 @@ public class PlayerShooting : MonoBehaviour
             bullets.Add(Instantiate(bulletPrefab));
             bullets[i].SetActive(false);
         }
-        shotgunBulletRB = new Rigidbody[4];
+        shotgunBulletRB = new Rigidbody[NUMBER_OF_SHOTGUN_BULLETS];
         noBullets = GetComponent<AudioSource>();
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
@@ -96,12 +97,12 @@ public class PlayerShooting : MonoBehaviour
 
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
             {
-                if (bulletCount >= 4)
+                if (bulletCount >= NUMBER_OF_SHOTGUN_BULLETS)
                 {
                     Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);
-                    bulletCount -= 4;
+                    bulletCount -= NUMBER_OF_SHOTGUN_BULLETS;
                     nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < NUMBER_OF_SHOTGUN_BULLETS; i++)
                     {
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
@@ -174,7 +175,7 @@ public class PlayerShooting : MonoBehaviour
         {
             bulletOverText.text = "NO BULLETS";
         }
-        else if (bulletCount < 4 && !(weaponSystemScript.currentWeaponInHand.Value.name == "Pistol"))
+        else if (bulletCount < NUMBER_OF_SHOTGUN_BULLETS && !(weaponSystemScript.currentWeaponInHand.Value.name == "Pistol"))
         {
             bulletOverText.text = "SWITCH TO PISTOL";
         }
