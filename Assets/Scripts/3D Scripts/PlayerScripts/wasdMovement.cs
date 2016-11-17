@@ -2,7 +2,7 @@
 
 public class wasdMovement : MonoBehaviour
 {
-    private const float MAX_VELOCITY = 25.0f;
+    private const float MAX_VELOCITY = 50.0f;
     public float playerAcceleration;
     private Rigidbody playerRigidBody;
 
