@@ -40,7 +40,7 @@ public class CountdownTimerScript : MonoBehaviour {
                 hasGameStarted = true;
                 Time.timeScale = 1.0f;
                 countdownStarted = false;
-                GameObject.Find("FPSPlayer").GetComponent<PlayerMovement>().countDownDone = true;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().countDownDone = true;
                 backgroundMusic.Play();
             }
         }

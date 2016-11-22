@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 	private int batteryCount = 100;
 	private Battery _battery;
 	private bool lastReached;
+    [HideInInspector]
     public bool countDownDone = false;
 
 	float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
