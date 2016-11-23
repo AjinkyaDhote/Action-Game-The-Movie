@@ -4,22 +4,22 @@ using UnityEngine.UI;
 
 public class MouseSensitivitySlider : MonoBehaviour {
 
-    PlayerMovement playerMovementScript;
+    wasdMovement wasdMovementScript;
     Slider mouseSensitivitySlider;
     Text sensitivityValueText;
 
     void Start ()
     {
-        playerMovementScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        wasdMovementScript = GameObject.FindGameObjectWithTag("Player").GetComponent<wasdMovement>();
         mouseSensitivitySlider = GetComponent<Slider>();
         sensitivityValueText = transform.GetChild(4).gameObject.GetComponent<Text>();
-        playerMovementScript.mouseLook.XSensitivity = playerMovementScript.mouseLook.YSensitivity = mouseSensitivitySlider.value;
+        wasdMovementScript.mouseLook.XSensitivity = wasdMovementScript.mouseLook.YSensitivity = mouseSensitivitySlider.value;
         sensitivityValueText.text = mouseSensitivitySlider.value.ToString("f2");
     }
 	
 	public void SetMouseSentivity ()
     {
-        playerMovementScript.mouseLook.XSensitivity = playerMovementScript.mouseLook.YSensitivity = mouseSensitivitySlider.value;
+        wasdMovementScript.mouseLook.XSensitivity = wasdMovementScript.mouseLook.YSensitivity = mouseSensitivitySlider.value;
         sensitivityValueText.text = mouseSensitivitySlider.value.ToString("f2");
     }
 }

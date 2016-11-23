@@ -188,28 +188,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012863461710}
   - 95: {fileID: 95000013809373918}
-  - 195: {fileID: 195000013943697230}
   - 114: {fileID: 114000013931862164}
   - 114: {fileID: 114000010658693112}
+  - 195: {fileID: 195000013943697230}
   - 82: {fileID: 82000010418422176}
   m_Layer: 0
   m_Name: SmallEnemy
   m_TagString: SmallEnemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1000010763192776
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000010551760298}
-  m_Layer: 0
-  m_Name: RaycastHelper
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -969,19 +954,6 @@ Transform:
   - {fileID: 4000012040799412}
   m_Father: {fileID: 4000013443018734}
   m_RootOrder: 0
---- !u!4 &4000010551760298
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010763192776}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000012863461710}
-  m_RootOrder: 6
 --- !u!4 &4000010671167806
 Transform:
   m_ObjectHideFlags: 1
@@ -1398,7 +1370,6 @@ Transform:
   - {fileID: 4000013867710974}
   - {fileID: 4000014026844946}
   - {fileID: 4000012492475412}
-  - {fileID: 4000010551760298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000012905912316

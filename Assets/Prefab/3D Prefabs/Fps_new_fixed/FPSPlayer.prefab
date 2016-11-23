@@ -264,12 +264,12 @@ GameObject:
   - 4: {fileID: 4000012359438474}
   - 136: {fileID: 136000012856918384}
   - 114: {fileID: 114000010668057986}
-  - 114: {fileID: 114000012865136022}
   - 114: {fileID: 114000010566807350}
   - 114: {fileID: 114000013387748136}
   - 54: {fileID: 54000014123841606}
   - 82: {fileID: 82000010397705354}
   - 114: {fileID: 114000011442082596}
+  - 65: {fileID: 65000013027611186}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Player
@@ -1069,6 +1069,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65000013027611186
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011595463726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 2, z: 4}
+  m_Center: {x: 0, y: -2, z: 0}
 --- !u!81 &81000010551227346
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1722,6 +1734,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAcceleration: 100
+  mainCamera: {fileID: 20000012774664108}
+  countDownDone: 0
+  mouseLook:
+    XSensitivity: 1
+    YSensitivity: 1
+    clampVerticalRotation: 1
+    MinimumX: -90
+    MaximumX: 90
+    smooth: 0
+    smoothTime: 5
 --- !u!114 &114000010708051594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2034,28 +2056,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
---- !u!114 &114000012865136022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011595463726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31c5de7f31e8184581cfd3fbf2e96f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 20000012774664108}
-  playerSpeed: 6
-  mouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
-    clampVerticalRotation: 1
-    MinimumX: -90
-    MaximumX: 90
-    smooth: 0
-    smoothTime: 5
-  countDownDone: 0
 --- !u!114 &114000012891109882
 MonoBehaviour:
   m_ObjectHideFlags: 1

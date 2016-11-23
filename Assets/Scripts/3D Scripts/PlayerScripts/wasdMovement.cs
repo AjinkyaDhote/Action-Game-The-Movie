@@ -5,10 +5,18 @@ public class wasdMovement : MonoBehaviour
     private const float MAX_VELOCITY = 25.0f;
     public float playerAcceleration;
     private Rigidbody playerRigidBody;
+    public Camera mainCamera;
+    PauseMenu pauseMenuScript;
+    public bool countDownDone = false;
+    public MouseLook mouseLook;
+    public static CountdownTimerScript countdownTimer;
 
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();
+        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+        mouseLook = new MouseLook();
+        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
     }
 
     void Update()
@@ -20,6 +28,10 @@ public class wasdMovement : MonoBehaviour
         playerRigidBody.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
         playerRigidBody.velocity = Vector3.ClampMagnitude(playerRigidBody.velocity, MAX_VELOCITY);
 
+        if (!pauseMenuScript.isPaused && countDownDone)
+        {
+            mouseLook.LookRotation(transform, mainCamera.transform);
+        }
     }
     void ResetVelocities()
     {
