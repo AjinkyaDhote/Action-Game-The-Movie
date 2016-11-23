@@ -8,7 +8,7 @@ public class PlayerInRange : MonoBehaviour
     {
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player" || other.tag == "NewPayload")
         {
