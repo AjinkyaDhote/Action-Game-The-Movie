@@ -4,6 +4,7 @@ using System.Collections;
 public class LaserConsole : MonoBehaviour {
 
     public GameObject[] lasers;
+    public float _health;
 
     Transform ConsoleText;
     BoxCollider boxCollider;
@@ -13,7 +14,25 @@ public class LaserConsole : MonoBehaviour {
         ConsoleText = gameObject.transform.GetChild(0);
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
     }
-			
+	
+    void Update()
+    {
+        if(_health == 0)
+        {
+            gameObject.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 17  )
+        {
+            _health -= 1f;
+        }
+
+    }    
+        	    	
 
     void OnTriggerStay(Collider other)
     {
@@ -31,6 +50,9 @@ public class LaserConsole : MonoBehaviour {
             }
         }
     }
+
+
+
 
     void OnTriggerExit(Collider other)
     {
