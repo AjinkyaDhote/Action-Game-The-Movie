@@ -45,7 +45,7 @@ public class MouseLook
             camera.localRotation = m_CameraTargetRot;
         }
 
-        if (Input.GetMouseButtonUp(0) && PlayerMovement.countdownTimer.hasGameStarted)
+        if (Input.GetMouseButtonUp(0) && wasdMovement.countdownTimer.hasGameStarted)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
