@@ -5,10 +5,12 @@ public class wasdMovement : MonoBehaviour
     private const float MAX_VELOCITY = 50.0f;
     public float playerAcceleration;
     private Rigidbody playerRigidBody;
-
+    [HideInInspector]
+    public bool isMoving;
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();
+        isMoving = false;
     }
 
     void Update()
@@ -16,6 +18,11 @@ public class wasdMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
             ResetVelocities();
+            isMoving = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            isMoving = true;
         }
         playerRigidBody.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
         playerRigidBody.velocity = Vector3.ClampMagnitude(playerRigidBody.velocity, MAX_VELOCITY);

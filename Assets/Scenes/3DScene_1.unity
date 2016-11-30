@@ -15511,6 +15511,61 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1161305742}
   m_Mesh: {fileID: 4300000, guid: 263a5c8c5ebc79048a4f3148ca6330db, type: 3}
+--- !u!1 &1170861269 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011595463726, guid: fbbaefe5653f84c47a5cf75e820861c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 169763802}
+--- !u!114 &1170861279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1170861269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a123d201c07b2344b03399bf4824762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 1362579981}
+  motionBob:
+    HorizontalBobRange: 0.25
+    VerticalBobRange: 0.25
+    Bobcurve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1.5
+        value: -1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 2
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    VerticaltoHorizontalRatio: 1
+  StrideInterval: 1
+  RunningStrideLengthen: 0
+  BobSpeed: 2.5
 --- !u!1 &1172081405
 GameObject:
   m_ObjectHideFlags: 0
@@ -18285,6 +18340,11 @@ MeshFilter:
 Transform:
   m_PrefabParentObject: {fileID: 479468, guid: 6b53715f476db0848968ff0b31d82e2f, type: 2}
   m_PrefabInternal: {fileID: 488217429}
+--- !u!20 &1362579981 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20000012774664108, guid: fbbaefe5653f84c47a5cf75e820861c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 169763802}
 --- !u!1 &1365974455
 GameObject:
   m_ObjectHideFlags: 0
