@@ -9,8 +9,10 @@ public class wasdMovement : MonoBehaviour
     PauseMenu pauseMenuScript;
     public bool countDownDone = false;
     public MouseLook mouseLook;
-    public static CountdownTimerScript countdownTimer;    [HideInInspector]
-    public bool isMoving;    void Start()
+    public static CountdownTimerScript countdownTimer;
+    [HideInInspector]
+    public bool isMoving;
+    void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();
 		pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
