@@ -10,13 +10,14 @@ public class wasdMovement : MonoBehaviour
     public bool countDownDone = false;
     public MouseLook mouseLook;
     public static CountdownTimerScript countdownTimer;
-
+    [HideInInspector]
+    public bool isMoving;
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();
-        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+		pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
         mouseLook = new MouseLook();
-        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
+        countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();        isMoving = false;
     }
 
     void Update()
@@ -24,6 +25,11 @@ public class wasdMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
             ResetVelocities();
+            isMoving = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            isMoving = true;
         }
         playerRigidBody.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
         playerRigidBody.velocity = Vector3.ClampMagnitude(playerRigidBody.velocity, MAX_VELOCITY);
