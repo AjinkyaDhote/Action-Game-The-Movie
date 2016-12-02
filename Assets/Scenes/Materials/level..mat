@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ScreenGlitch
-  m_Shader: {fileID: 4800000, guid: 640ceacbdcf857f4d90f33d2cc821c05, type: 3}
+  m_Name: level.
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -91,9 +91,6 @@ Material:
     - first:
         name: _GlossyReflections
       second: 1
-    - first:
-        name: _Magnitude
-      second: 0.08
     - first:
         name: _Metallic
       second: 0
