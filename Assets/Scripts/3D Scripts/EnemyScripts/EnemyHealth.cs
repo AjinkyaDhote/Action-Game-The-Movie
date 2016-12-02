@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
             return _isKilled;
         }
     }
-    private bool isPlayerDead;
+    //private bool isPlayerDead;
     private NavMeshAgent agent;
     private Material deadMaterial;
     private AudioSource enemyDeath;
@@ -33,9 +33,9 @@ public class EnemyHealth : MonoBehaviour
         else
             currentHealth = 60;
         anim = transform.GetComponent<Animator>();
-        isPlayerDead = false;
+        //isPlayerDead = false;
         _isKilled = false;
-        //GameManager.Instance.totalEnemiesKilled = 0;
+        GameManager.Instance.totalEnemiesKilled = 0;
     }
 
     public void Damage(int damage)
@@ -54,6 +54,10 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
+            if (currentHealth < -900)
+            {
+                GameManager.Instance.headShots++;
+            }        
             enemyDeath.Play();
             //Debug.Log("Killed");
             _isKilled = true;
@@ -64,7 +68,7 @@ public class EnemyHealth : MonoBehaviour
            // enemyHead.HeadFall();
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
            
-            //GameManager.Instance.totalEnemiesKilled++;
+            GameManager.Instance.totalEnemiesKilled++;
         }
         //AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
 

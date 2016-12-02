@@ -228,7 +228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Low Zombie Density
+  m_Text: Low Enemy Density
 --- !u!114 &114000010513499324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -435,7 +435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Medium Zombie Density
+  m_Text: Medium Enemy Density
 --- !u!114 &114000012787715706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,7 +495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: High Zombie Density
+  m_Text: High Enemy Density
 --- !u!222 &222000010583134264
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -589,7 +589,7 @@ RectTransform:
   m_RootOrder: 9
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 654, y: -220}
+  m_AnchoredPosition: {x: 646, y: -220}
   m_SizeDelta: {x: 77.404, y: 58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011331415130
@@ -617,7 +617,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 253, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011488291426
@@ -635,7 +635,7 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 656, y: -125}
+  m_AnchoredPosition: {x: 648, y: -125}
   m_SizeDelta: {x: 77.404, y: 58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000011793409022
@@ -671,7 +671,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 645, y: 176}
+  m_AnchoredPosition: {x: 637, y: 176}
   m_SizeDelta: {x: 77.4, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000012433952416
@@ -743,7 +743,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 648, y: 74}
+  m_AnchoredPosition: {x: 640, y: 74}
   m_SizeDelta: {x: 77.4, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224000013790943036
@@ -761,6 +761,6 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 649, y: -27}
+  m_AnchoredPosition: {x: 641, y: -27}
   m_SizeDelta: {x: 77.4, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}

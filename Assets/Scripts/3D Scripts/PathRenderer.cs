@@ -80,9 +80,9 @@ public class PathRenderer : MonoBehaviour {
             xValue = (posOne.x + differenceVector.x);
             zValue = (posOne.z + differenceVector.z);
             distance = Vector3.Distance(posOne, posTwo);
-            Debug.Log("" + pathMultiplier);
+            //Debug.Log("" + pathMultiplier);
             go.transform.localScale = new Vector3((distance / (10 * pathMultiplier)), 1, 0.1f);
-            Debug.Log("" + go.transform.localPosition);
+            //Debug.Log("" + go.transform.localPosition);
             go.transform.localPosition = new Vector3(xValue, 0.1f, zValue);
             float debugAngle = Mathf.Atan2((posTwo.z - posOne.z), (posTwo.x - posOne.x)) * Mathf.Rad2Deg;
             go.transform.localEulerAngles = new Vector3(0, -debugAngle, 0);

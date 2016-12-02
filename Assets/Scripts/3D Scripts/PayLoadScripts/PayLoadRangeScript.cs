@@ -7,7 +7,7 @@ public class PayLoadRangeScript : MonoBehaviour
 
     private const float THETA_SCALE = 0.01f;
     private const int NUMBER_OF_CIRCLES = 4;
-    private const float RATE_OF_GLITCH_INTENSITY = 0.02f;
+    private const float RATE_OF_GLITCH_INTENSITY = 0.03f;
     public static readonly byte colorScaler = 63;
 
     public float rateOfHealthDegeneration;
@@ -110,16 +110,16 @@ public class PayLoadRangeScript : MonoBehaviour
                 playerHealth.PlayerRegenerate(rateOfHealthRegeneration * Time.deltaTime);
                 break;
             case Range.OutsideFirstCircle:
-                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideFirstCircle * Time.deltaTime, (int)Range.OutsideFirstCircle * RATE_OF_GLITCH_INTENSITY);
+                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideFirstCircle * Time.deltaTime, RATE_OF_GLITCH_INTENSITY);
                 break;
             case Range.OutsideSecondCircle:
-                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideSecondCircle * Time.deltaTime, (int)Range.OutsideSecondCircle * RATE_OF_GLITCH_INTENSITY);
+                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideSecondCircle * Time.deltaTime, (RATE_OF_GLITCH_INTENSITY + 0.01f));
                 break;
             case Range.OutsideThirdCircle:
-                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideThirdCircle * Time.deltaTime, (int)Range.OutsideThirdCircle * RATE_OF_GLITCH_INTENSITY);
+                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideThirdCircle * Time.deltaTime, (RATE_OF_GLITCH_INTENSITY + 0.02f));
                 break;
             case Range.OutsideFourthCircle:
-                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideFourthCircle * Time.deltaTime, (int)Range.OutsideFourthCircle * RATE_OF_GLITCH_INTENSITY);
+                playerHealth.PlayerDamage(rateOfHealthDegeneration * (int)Range.OutsideFourthCircle * Time.deltaTime, (RATE_OF_GLITCH_INTENSITY + 0.03f));
                 break;
         }
 

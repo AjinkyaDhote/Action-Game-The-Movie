@@ -3,12 +3,16 @@ using System.Collections;
 
 public class BulletDamage : MonoBehaviour
 {
+    //GameObject testsphere;
+    const float SCALE = 0.8f;
+
     AI_movement aiMovementScript;
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
     Transform playerTransform;
     PlayerShooting playerShootingScript;
     const int HEAD_SHOT_DAMAGE = 1000;
+    const int SHOT_DAMAGE = 1;
     float timeToDestroyBullet;
     bool _isFired = false;
     ParticleSystem enemyHitParticleEffect;
@@ -31,6 +35,7 @@ public class BulletDamage : MonoBehaviour
 
     private void Start()
     {
+        //testsphere = GameObject.Find("TESTSPHERE");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         playerShootingScript = player.GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
@@ -51,40 +56,25 @@ public class BulletDamage : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("HeadCollider"))
+        
+        if (other.collider.CompareTag("HeadCollider") || other.collider.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
-            if (!aiMovementScript.IsPlayerPayloadSeen)
-            {
-                aiMovementScript.Detection(playerTransform, false);
-            }
-            aiMovementScript.isChasingPayload = false;
+            aiMovementScript.PlayEnemyHitSound();           
+            aiMovementScript.Detection(playerTransform);
+            aiMovementScript.engaged = false;
+
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
                 PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
-                enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
+                if (other.collider.CompareTag("HeadCollider"))
+                    enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
+                else
+                    enemyHealthScript.Damage(SHOT_DAMAGE);
             }
-            GameManager.Instance.headShots++;
-            Destroy(gameObject);
         }
-        else if (other.collider.CompareTag("BodyCollider"))
-        {
-            aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
-            aiMovementScript.PlayEnemyHitSound();
-            if (!aiMovementScript.IsPlayerPayloadSeen)
-            {
-                aiMovementScript.Detection(playerTransform);
-            }
-            aiMovementScript.isChasingPayload = false;
-            enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
-            if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
-            {
-                PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
-                enemyHealthScript.Damage(1);
-            }
-            Destroy(gameObject);
-        }
+
         //--------------------------------Friendly Fire ON--------------------------------------------------------
         //else if (other.collider.CompareTag("NewPayload"))
         //{
@@ -92,15 +82,14 @@ public class BulletDamage : MonoBehaviour
         //    Destroy(gameObject);
         //}
         //---------------------------------------------------------------------------------------------------------
+
         else if (other.collider.CompareTag("Wall"))
         {
-            playerShootingScript.DisplayWallHitPreFab(other.contacts[0].point, other.contacts[0].normal);
-            Destroy(gameObject);
+            ContactPoint contactPoint = other.contacts[Random.Range(0, other.contacts.Length)];
+            playerShootingScript.DisplayWallHitPreFab(contactPoint.point, contactPoint.normal);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        Destroy(gameObject);
     }
 
     private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)

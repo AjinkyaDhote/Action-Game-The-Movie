@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 using System.Collections;
 
 public class TimeSlow : MonoBehaviour
@@ -28,8 +29,15 @@ public class TimeSlow : MonoBehaviour
     bool isRefilling;
     //bool isSlowTimeDisabled;
     bool isSlowTimeEnabledInToggleMode;
+
+    ColorCorrectionCurves colorCorrectionCurves;
+    Grayscale grayscale;
     void Start()
     {
+        colorCorrectionCurves = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<ColorCorrectionCurves>();
+        grayscale = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<Grayscale>();
+        colorCorrectionCurves.enabled = true;
+        grayscale.enabled = false;
         isPressed = false;
         isRefilling = false;
         //isSlowTimeDisabled = false;
@@ -110,6 +118,8 @@ public class TimeSlow : MonoBehaviour
             {
                 Time.timeScale = reducedTimeScale;
                 isSlowTimeEnabled = true;
+                colorCorrectionCurves.enabled = false;
+                grayscale.enabled = true;
                 tintImageScript.color = flashColor;
                 Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
             }
@@ -128,6 +138,8 @@ public class TimeSlow : MonoBehaviour
                     tintImageScript.color = Color.clear;
                     Time.timeScale = 1.0f;
                     isSlowTimeEnabled = false;
+                    colorCorrectionCurves.enabled = true;
+                    grayscale.enabled = false;
                     isPressed = false;
                     Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
                 }            
@@ -145,6 +157,8 @@ public class TimeSlow : MonoBehaviour
         {
             Time.timeScale = 1.0f;
             isSlowTimeEnabled = false;
+            colorCorrectionCurves.enabled = true;
+            grayscale.enabled = false;
             Time.fixedDeltaTime = initialFixedDeltaTime * Time.timeScale;
         }   
         isPressed = false;     
