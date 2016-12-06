@@ -11,7 +11,7 @@ public class HeadBob : MonoBehaviour
     [Range(0f, 1f)]
     public float RunningStrideLengthen;
     public float BobSpeed = 5.0f;
-
+    private wasdMovement wasd;
     // private CameraRefocus m_CameraRefocus;
     //private bool m_PreviouslyGrounded;
     //private Vector3 m_OriginalCameraPosition;
@@ -20,6 +20,7 @@ public class HeadBob : MonoBehaviour
     void Start()
     {
         motionBob.Setup(Camera, StrideInterval);
+        wasd = GetComponent<wasdMovement>();
         //m_OriginalCameraPosition = Camera.transform.localPosition;
         //     m_CameraRefocus = new CameraRefocus(Camera, transform.root.transform, Camera.transform.localPosition);
     }
@@ -27,27 +28,30 @@ public class HeadBob : MonoBehaviour
 
     void Update()
     {
-        //  m_CameraRefocus.GetFocusPoint();
-        Vector3 newCameraPosition;
-        //if (rigidbodyFirstPersonController.Velocity.magnitude > 0 && rigidbodyFirstPersonController.Grounded)
-        //{
-        Camera.transform.localPosition = motionBob.DoHeadBob(BobSpeed);//rigidbodyFirstPersonController.Velocity.magnitude * (rigidbodyFirstPersonController.Running ? RunningStrideLengthen : 1f));
+        if (wasd.isMoving)
+        {
+            //  m_CameraRefocus.GetFocusPoint();
+            Vector3 newCameraPosition;
+            //if (rigidbodyFirstPersonController.Velocity.magnitude > 0 && rigidbodyFirstPersonController.Grounded)
+            //{
+            Camera.transform.localPosition = motionBob.DoHeadBob(BobSpeed);//rigidbodyFirstPersonController.Velocity.magnitude * (rigidbodyFirstPersonController.Running ? RunningStrideLengthen : 1f));
             newCameraPosition = Camera.transform.localPosition;
             newCameraPosition.y = Camera.transform.localPosition.y;// - jumpAndLandingBob.Offset();
-        //}
-        //else
-        //{
-        //    newCameraPosition = Camera.transform.localPosition;
-        //    newCameraPosition.y = m_OriginalCameraPosition.y;// - jumpAndLandingBob.Offset();
-        //}
-        Camera.transform.localPosition = newCameraPosition;
+                                                                   //}
+                                                                   //else
+                                                                   //{
+                                                                   //    newCameraPosition = Camera.transform.localPosition;
+                                                                   //    newCameraPosition.y = m_OriginalCameraPosition.y;// - jumpAndLandingBob.Offset();
+                                                                   //}
+            Camera.transform.localPosition = newCameraPosition;
 
-        //if (!m_PreviouslyGrounded && rigidbodyFirstPersonController.Grounded)
-        //{
-        //    StartCoroutine(jumpAndLandingBob.DoBobCycle());
-        //}
+            //if (!m_PreviouslyGrounded && rigidbodyFirstPersonController.Grounded)
+            //{
+            //    StartCoroutine(jumpAndLandingBob.DoBobCycle());
+            //}
 
-        //m_PreviouslyGrounded = rigidbodyFirstPersonController.Grounded;
-        //  m_CameraRefocus.SetFocusPoint();
+            //m_PreviouslyGrounded = rigidbodyFirstPersonController.Grounded;
+            //  m_CameraRefocus.SetFocusPoint();
+        }
     }
 }

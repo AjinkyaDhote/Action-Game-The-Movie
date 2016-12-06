@@ -12,7 +12,7 @@ public class AI_movement : MonoBehaviour
     GameObject hitRadial;
     NavMeshAgent agent;
     //bool isPlayerInRange;
-    Vector3 resetPositionForInRange;
+    //Vector3 resetPositionForInRange;
     [HideInInspector]
     public Animator anim;
     Vector3 initialPos;
@@ -144,22 +144,21 @@ public class AI_movement : MonoBehaviour
         {
             if (_isPlayer_Payload_Seen)
             {
-                transform.LookAt(targetTransform);
+                //transform.LookAt(targetTransform);
                 if (anim.GetBool("isPlayer_PayloadInRange") && engaged)
                 {
                     agent.speed = 0;
                     anim.SetBool("isPunch1", true);
-                    transform.position = resetPositionForInRange;
-                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    //transform.position = resetPositionForInRange;
                 }
                 else
                 {
                     agent.speed = enemyRunSpeed;
                     anim.SetBool("isPlayer_PayloadInRange", false);
                     anim.SetBool("isPunch1", false);
-                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
                     agent.destination = targetTransform.position;
                 }
+                transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
             }
             else
             {
@@ -204,7 +203,7 @@ public class AI_movement : MonoBehaviour
         }
         isSoundNecessary++;
 
-        transform.LookAt(transformToLookAt);
+        //transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);
         arrow_renderer.enabled = true;
@@ -216,7 +215,7 @@ public class AI_movement : MonoBehaviour
         engaged = true;
 
         transform.LookAt(transformToLookAt);
-        resetPositionForInRange = transform.position;
+        //resetPositionForInRange = transform.position;
         anim.SetBool("isPlayer_PayloadInRange", true);
 
         targetTransform = transformToLookAt;
