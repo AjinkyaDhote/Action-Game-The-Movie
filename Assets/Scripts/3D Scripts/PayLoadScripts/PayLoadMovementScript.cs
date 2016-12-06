@@ -19,6 +19,7 @@ public class PayLoadMovementScript : MonoBehaviour
     private bool lastReached;    
     private bool isRotating;
 
+
     float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
     Vector3 convertPoint(Vector2 relativePoint)
@@ -94,16 +95,22 @@ public class PayLoadMovementScript : MonoBehaviour
             }
         }
 
-        else
+        else if(!lastReached)
         {
             //rigidBody.MovePosition(transform.position + (wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime);
             transform.Translate((wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime , Space.World);
             batteryString = " " + (batteryCount + _battery.batteryPickedUp);
             //BatteryText.text = batteryString;            
         }
-        if (isRotating)
+        if (isRotating && !lastReached)
         {
             transform.forward = Vector3.Lerp(transform.forward, wayPoints3D[wayPointNumber] - wayPoints3D[wayPointNumber - 1], Time.deltaTime * 0.2f);
+        }
+
+
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(wayPoints3D[wayPoints3D.Length - 1].x, wayPoints3D[wayPoints3D.Length - 1].z)) < 1.0f)
+        {
+            Destroy(gameObject.GetComponent<Rigidbody>());
         }
     }
 }

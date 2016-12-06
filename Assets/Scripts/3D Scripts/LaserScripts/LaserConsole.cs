@@ -21,6 +21,7 @@ public class LaserConsole : MonoBehaviour {
         {
             gameObject.transform.parent.gameObject.SetActive(false);
         }
+
     }
 
 

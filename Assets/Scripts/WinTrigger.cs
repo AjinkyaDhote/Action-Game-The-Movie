@@ -11,16 +11,16 @@ public class WinTrigger : MonoBehaviour {
     public bool hasPayloadReached = false;
 
     private Animator doorAnimationController;
+    
     void Start()
     {
-        doorAnimationController = transform.GetChild(1).GetComponent<Animator>();
-       
+        doorAnimationController = transform.GetChild(1).GetComponent<Animator>();        
     }
     void Update()
     {      
-        if (hasPlayerReached  && hasPayloadReached)
+        if (hasPlayerReached  && hasPayloadReached) 
         {
-            doorAnimationController.SetBool("Open",true);  
+            doorAnimationController.SetBool("Open", true);            
         }
-    } 
+    }   
 }
