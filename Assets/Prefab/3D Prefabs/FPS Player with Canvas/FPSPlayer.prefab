@@ -27,7 +27,6 @@ GameObject:
   - 4: {fileID: 472858}
   - 136: {fileID: 13691912}
   - 114: {fileID: 11401968}
-  - 114: {fileID: 11463262}
   - 114: {fileID: 11467510}
   - 114: {fileID: 11405036}
   - 54: {fileID: 54000014154891426}
@@ -644,7 +643,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb5b10c74e0979499016bbcfe21f1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 10
+  playerAcceleration: 0
+  mainCamera: {fileID: 0}
+  countDownDone: 0
+  mouseLook:
+    XSensitivity: 1
+    YSensitivity: 1
+    clampVerticalRotation: 1
+    MinimumX: -90
+    MaximumX: 90
+    smooth: 0
+    smoothTime: 5
+  isMoving: 0
 --- !u!114 &11402782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -695,6 +705,7 @@ MonoBehaviour:
   sliderValueActive: 0.01
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
   isRMBHoldType: 0
+  isSlowTimeEnabled: 0
 --- !u!114 &11405036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1001,28 +1012,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeaponInfo: {fileID: 0}
---- !u!114 &11463262
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31c5de7f31e8184581cfd3fbf2e96f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 2062718}
-  playerSpeed: 6
-  mouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
-    clampVerticalRotation: 1
-    MinimumX: -90
-    MaximumX: 90
-    smooth: 0
-    smoothTime: 5
-  countDownDone: 0
 --- !u!114 &11467510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1034,7 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896da3234473e8943bec3926be15f484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthCount: 1000
+  initialHealth: 0
 --- !u!114 &11479882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7634,7 +7623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2fca786c3ba11499ba9482e547a291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glitchMaterial: {fileID: 2100000, guid: 325c4255f31147348a077844289c61f7, type: 2}
 --- !u!114 &114000011566818582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7649,6 +7637,7 @@ MonoBehaviour:
   coolDownTimer: 0.5
   bulletLifeTime: 0.5
   crossHair: {fileID: 21300000, guid: ea74c11938e619740856671557f817d5, type: 3}
+  muzzleMesh: {fileID: 0}
 --- !u!114 &114000012193110066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7794,6 +7783,7 @@ MonoBehaviour:
   coolDownTimer: 0.1
   bulletLifeTime: 0.2
   crossHair: {fileID: 21300000, guid: 9ac893a432771fa45898eb06342a33bf, type: 3}
+  muzzleMesh: {fileID: 0}
 --- !u!114 &114000014233996704
 MonoBehaviour:
   m_ObjectHideFlags: 1
