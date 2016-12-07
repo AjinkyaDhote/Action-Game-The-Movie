@@ -4,28 +4,17 @@ using System.Collections;
 public class EndScreen : MonoBehaviour {
 
     public Transform endState;
-
-    Scoring Score;
+    
     GameObject payload;    
-    public bool isDoorOpen;
+    bool isDoorOpen;
 
     // Use this for initialization
     void Start ()
-    {
-        Score = GetComponent<Scoring>();
+    {        
         payload = GameObject.FindGameObjectWithTag("NewPayload");
         isDoorOpen = false;
     }
-
-    public void ShowEndScreen()
-    {
-        //Score.Score();
-        //GameManager.Instance.win_Lose = true;
-        //GameManager.Instance.win_Lose_Message = "Target Reached!";
-        //GameManager.Instance.currentMenuState = GameManager.MenuState.SCORE_BOARD;
-        //GameManager.Instance.GoToWinLoseScene();
-    }
-
+   
     void Update()
     {
         if(isDoorOpen)
