@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EndStateScript : MonoBehaviour {
-
-    public GameObject payLoad;
-
+public class EndStateScript : MonoBehaviour
+{    
     Scoring score;	
-
 
 	void Start ()
     {
-        score = GetComponent<Scoring>();
+        score = GetComponent<Scoring>();        
 	}
 
     void ShowEndScreen()
@@ -24,10 +21,9 @@ public class EndStateScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "NewPayload")
+        if (other.gameObject.tag == "Player")
         {
             ShowEndScreen();
         }
-    }
-     
+    }     
 }

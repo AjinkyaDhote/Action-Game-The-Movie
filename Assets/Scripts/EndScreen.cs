@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EndScreen : MonoBehaviour {
 
-    public Transform endState;
+    Transform endState;
     
     GameObject payload;    
     bool isDoorOpen;
@@ -12,6 +12,7 @@ public class EndScreen : MonoBehaviour {
     void Start ()
     {        
         payload = GameObject.FindGameObjectWithTag("NewPayload");
+        endState = GameObject.FindGameObjectWithTag("EndState").transform;
         isDoorOpen = false;
     }
    
@@ -19,8 +20,7 @@ public class EndScreen : MonoBehaviour {
     {
         if(isDoorOpen)
         {
-            payload.transform.forward = Vector3.Lerp(payload.transform.forward, (endState.transform.position - payload.transform.position), Time.deltaTime * 0.2f);
-            //Debug.Log(Vector3.Angle(payload.transform.forward , (endState.transform.position - payload.transform.position)));
+            payload.transform.forward = Vector3.Lerp(payload.transform.forward, (endState.transform.position - payload.transform.position), Time.deltaTime * 0.2f);             
             payload.transform.Translate((endState.transform.position - payload.transform.position).normalized * 5f * Time.deltaTime, Space.World);
         }
     }  

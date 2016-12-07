@@ -6,9 +6,9 @@ public class PayLoadMovementScript : MonoBehaviour
 {
     public int payLoadSpeed;
     Vector3[] wayPoints3D;
-    //Rigidbody rigidBody;
+    
     int wayPointNumber;
-    PauseMenu pauseMenuScript;
+    
     [HideInInspector]
     public static CountdownTimerScript countdownTimer;
     
@@ -29,7 +29,7 @@ public class PayLoadMovementScript : MonoBehaviour
 
     void Start()
     {        
-        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+        
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
 
         width2DPlane = GameManager.Instance.width2DPlane;
