@@ -9,7 +9,7 @@ Material:
   m_Name: new_textured_map1_diffuse
   m_Shader: {fileID: 10, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
@@ -48,13 +48,13 @@ Material:
     - first:
         name: _Illum
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0a0642d585364f24881ee2ede1a8b31d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: ff5943a44fb52314f8389a488d511565, type: 3}
+        m_Texture: {fileID: 2800000, guid: ccaeb70ec8c004044846914920b55d9c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
