@@ -36,9 +36,6 @@ public class PlayerShooting : MonoBehaviour
         }
     }
     private TimeSlow timeSlowScript;
-    private AudioSource noBullets;
-    [HideInInspector]
-    public AudioSource currentGunAudio;
     //private EnemyThrow enemyThrowScript;
     private float nextFire = 0.0f;
     private WeaponSystem weaponSystemScript;
@@ -75,7 +72,6 @@ public class PlayerShooting : MonoBehaviour
             bullets[i].SetActive(false);
         }
         shotgunBulletRB = new Rigidbody[NUMBER_OF_SHOTGUN_BULLETS];
-        noBullets = GetComponent<AudioSource>();
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         AmmoText.text = " " + bulletCount;
@@ -85,10 +81,6 @@ public class PlayerShooting : MonoBehaviour
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
         AmmoAnimation = transform.FindChild("FPS UI Canvas").FindChild("AmmoAnimateText").GetComponent<Animation>();
         AmmoAnimation.gameObject.SetActive(false);
-    }
-    void Update()
-    {  
-             
     }
     void FixedUpdate()
     {
@@ -118,14 +110,14 @@ public class PlayerShooting : MonoBehaviour
                         }
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
-                        currentGunAudio.Play();
+                        SoundManager3D.Instance.shotgun.Play();
                         weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = true;
                         StartCoroutine(MuzzleEffect());
                     }
                 }
                 else
                 {
-                    noBullets.Play();
+                    SoundManager3D.Instance.gunEmpty.Play();
                 }
             }
             else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
@@ -149,13 +141,13 @@ public class PlayerShooting : MonoBehaviour
                     }
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;
-                    currentGunAudio.Play();
+                    SoundManager3D.Instance.pistol.Play();
                     weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = true;
                     StartCoroutine(MuzzleEffect());
                 }
                 else
                 {
-                    noBullets.Play();
+                    SoundManager3D.Instance.gunEmpty.Play();
                 }
             }
             AmmoText.text = bulletCount.ToString();
@@ -186,7 +178,6 @@ public class PlayerShooting : MonoBehaviour
     }
     public void DisplayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
     {
-        //print("Hit point" + hitPoint);
         GameObject wallhit = Instantiate(wallHitPrefab, hitPoint + (WALL_HIT_PREFAB_POSITIONAL_OFFSET * hitNormal), Quaternion.LookRotation(hitNormal)) as GameObject;
         Destroy(wallhit, WALL_HIT_PREFAB_DESTROY_DELAY);
     }
