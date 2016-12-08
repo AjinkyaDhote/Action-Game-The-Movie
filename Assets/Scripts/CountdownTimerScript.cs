@@ -41,7 +41,9 @@ public class CountdownTimerScript : MonoBehaviour {
                 Time.timeScale = 1.0f;
                 countdownStarted = false;
                 GameObject.Find("FPSPlayer").GetComponent<wasdMovement>().countDownDone = true;
+                GameManager.Instance.countDownDone = true;
                 backgroundMusic.Play();
+
             }
         }
     }

@@ -34,7 +34,7 @@ public class wasdMovement : MonoBehaviour
         playerRigidBody.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
         playerRigidBody.velocity = Vector3.ClampMagnitude(playerRigidBody.velocity, MAX_VELOCITY);
 
-        if (!pauseMenuScript.isPaused && countDownDone)
+        if (!pauseMenuScript.isPaused && countDownDone && !GameManager.Instance.infoDialogue)
         {
             mouseLook.LookRotation(transform, mainCamera.transform);
         }
