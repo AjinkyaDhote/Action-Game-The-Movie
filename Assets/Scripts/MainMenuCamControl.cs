@@ -20,6 +20,7 @@ public class MainMenuCamControl : MonoBehaviour
     public Transform suwasLt, suwasRt;
     public Transform tannaLt, tannaRt;
     public Transform kaushalLt, kaushalRt;
+    public Transform franziLt, franziRt;
     public Transform vikramLt, vikramRt;
     public Transform MenuMount;
 
@@ -126,6 +127,15 @@ public class MainMenuCamControl : MonoBehaviour
         yield return new WaitForSeconds(moveTime);
 
         currentMount = kaushalLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(turnTime);
+
+        // franzi
+        currentMount = franziRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(moveTime);
+
+        currentMount = franziLt;
         speedFactor = turnFactor;
         yield return new WaitForSeconds(turnTime);
 
