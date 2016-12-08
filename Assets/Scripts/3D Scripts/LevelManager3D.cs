@@ -7,6 +7,7 @@ public class LevelManager3D : MonoBehaviour
     public Transform AmmoMeshPrefab;
 
     private float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
+
     private Vector3 convertPoint(Vector2 relativePoint)
     {
         Vector3 returnVal;
