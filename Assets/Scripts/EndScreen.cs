@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EndScreen : MonoBehaviour {
 
-    Transform endState;
+    public Transform endState;
     
     GameObject payload;    
     bool isDoorOpen;
@@ -11,8 +11,7 @@ public class EndScreen : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {        
-        payload = GameObject.FindGameObjectWithTag("NewPayload");
-        endState = GameObject.FindGameObjectWithTag("EndState").transform;
+        payload = GameObject.FindGameObjectWithTag("NewPayload");        
         isDoorOpen = false;
     }
    

@@ -6,8 +6,12 @@ public class PayLoadMovementScript : MonoBehaviour
 {
     public int payLoadSpeed;
     Vector3[] wayPoints3D;
-    
-    int wayPointNumber;
+
+    [HideInInspector]
+    public int wayPointLength;
+
+    [HideInInspector]
+    public int wayPointNumber;
     
     [HideInInspector]
     public static CountdownTimerScript countdownTimer;
@@ -57,7 +61,8 @@ public class PayLoadMovementScript : MonoBehaviour
         }
         transform.position = wayPoints3D[0];
         transform.LookAt(wayPoints3D[wayPointNumber]);
-        
+
+        wayPointLength = wayPoints3D.Length;         
     }
   
 
@@ -88,7 +93,7 @@ public class PayLoadMovementScript : MonoBehaviour
 
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(wayPoints3D[wayPoints3D.Length - 1].x, wayPoints3D[wayPoints3D.Length - 1].z)) < 1.0f)
         {
-            Destroy(gameObject.GetComponent<Rigidbody>());
+            //Destroy(gameObject.GetComponent<Rigidbody>());
         }
     }
 }

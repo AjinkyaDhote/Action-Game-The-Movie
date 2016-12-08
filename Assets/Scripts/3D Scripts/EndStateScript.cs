@@ -3,11 +3,15 @@ using System.Collections;
 
 public class EndStateScript : MonoBehaviour
 {    
-    Scoring score;	
+    Scoring score;
+    bool hasPayloadReached;
+    bool hasPlayerReached;
 
 	void Start ()
     {
-        score = GetComponent<Scoring>();        
+        score = GetComponent<Scoring>();
+        hasPayloadReached = false;
+        hasPlayerReached = false;
 	}
 
     void ShowEndScreen()
@@ -19,11 +23,26 @@ public class EndStateScript : MonoBehaviour
         GameManager.Instance.GoToWinLoseScene();
     }
 
+
+    void Update()
+    {
+        if(hasPlayerReached && hasPayloadReached)
+        {
+            ShowEndScreen();
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            ShowEndScreen();
+            hasPlayerReached = true;            
         }
+
+        if(other.gameObject.name == "WinTriggerDetectionCollider")
+        {
+            hasPayloadReached = true;
+        }
+
     }     
 }
