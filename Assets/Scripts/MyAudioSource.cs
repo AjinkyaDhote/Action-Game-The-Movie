@@ -22,6 +22,7 @@ public class MyAudioSource
         audioSource.volume = volume;
         audioSource.loop = loop;
         audioSource.playOnAwake = playOnAwake;
+        playCount = 0;
     }
     public void Play()
     {

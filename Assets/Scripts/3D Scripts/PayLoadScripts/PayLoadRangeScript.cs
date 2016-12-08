@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class PayLoadRangeScript : MonoBehaviour
 {
-
-    private const float THETA_SCALE = 0.01f;
     private const int NUMBER_OF_CIRCLES = 4;
     private const float RATE_OF_GLITCH_INTENSITY = 0.03f;
     public static readonly byte colorScaler = 63;
@@ -61,18 +59,8 @@ public class PayLoadRangeScript : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealthScript>();
         range = Range.CompletelyInside;
         circle = transform.GetChild(4).GetComponent<LineRenderer>();      
-        float radius = transform.GetChild(0).GetComponent<SphereCollider>().bounds.extents.x;
-        float theta = 0f;     
-        int circleSize = (int)((1f / THETA_SCALE) + 1f);
-        Vector3[] circlePoints = new Vector3[circleSize];
-        for (int j = 0; j < circleSize; j++)
-        {
-            theta += (2.0f * Mathf.PI * THETA_SCALE);
-            float x = radius * Mathf.Cos(theta);
-            float y = radius * Mathf.Sin(theta);
-            circlePoints[j] = new Vector3(x, y, 0);
-        }       
-        circle.SetVertexCount(circleSize);
+        Vector3[] circlePoints = Utilities.GenerateCirclePoints(transform.GetChild(0).GetComponent<SphereCollider>().bounds.extents.x); 
+        circle.SetVertexCount(circlePoints.Length);
         circle.SetPositions(circlePoints);
 
         //screenBlurImage = player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas").FindChild("ScreenBlur").GetComponent<Image>();

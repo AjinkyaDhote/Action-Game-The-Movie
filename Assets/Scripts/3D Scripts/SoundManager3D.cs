@@ -12,20 +12,15 @@ public class SoundManager3D : MonoBehaviour
     public MyAudioSource onEnemyHit;
     public MyAudioSource enemyDeath;
 
+    [HideInInspector]
     public MyAudioSource[] myAudioSources;
     private void Awake()
     {
-        backgroundMusic.Initilaize();
-        onHitByEnemyPlayer.Initilaize();
-        gunEmpty.Initilaize();
-        shotgun.Initilaize();
-        pistol.Initilaize();
-        onHitByEnemyPayload.Initilaize();
-        intruderAlert.Initilaize();
-        onEnemyHit.Initilaize();
-        enemyDeath.Initilaize();
-
         myAudioSources = new MyAudioSource[] { backgroundMusic, onHitByEnemyPlayer, gunEmpty, shotgun, pistol, onHitByEnemyPayload, intruderAlert, onEnemyHit, enemyDeath };
+        for (int i = 0; i < myAudioSources.Length; i++)
+        {
+            myAudioSources[i].Initilaize();
+        }
     }
     private static SoundManager3D _instance = null;
     public static SoundManager3D Instance
