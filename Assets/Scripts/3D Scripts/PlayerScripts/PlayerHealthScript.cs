@@ -41,6 +41,7 @@ public class PlayerHealthScript : MonoBehaviour
 
     public void PlayerDamage(float damage, float glitchIntensity, string id = null)
     {
+        SoundManager3D.Instance.onHitByEnemyPlayer.Play();
         if (id != null)
         {
             isGlitchEffectResetNeeded = false;
