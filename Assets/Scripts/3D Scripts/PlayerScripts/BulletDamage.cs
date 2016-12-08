@@ -60,7 +60,7 @@ public class BulletDamage : MonoBehaviour
         if (other.collider.CompareTag("HeadCollider") || other.collider.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
-            aiMovementScript.PlayEnemyHitSound();           
+            SoundManager3D.Instance.onEnemyHit.Play();          
             aiMovementScript.Detection(playerTransform);
             aiMovementScript.engaged = false;
 
