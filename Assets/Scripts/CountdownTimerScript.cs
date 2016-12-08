@@ -12,8 +12,10 @@ public class CountdownTimerScript : MonoBehaviour {
     int countdown;
     float initialTime;
 
+
     void Start ()
     {
+
         countdownStarted = false;
         countdown = 3;
         gunCamera = transform.parent.GetComponent<Canvas>().worldCamera;
@@ -39,7 +41,7 @@ public class CountdownTimerScript : MonoBehaviour {
                 Time.timeScale = 1.0f;
                 countdownStarted = false;
                 GameObject.Find("FPSPlayer").GetComponent<wasdMovement>().countDownDone = true;
-                SoundManager3D.Instance.backgroundMusic.Play();
+GameManager.Instance.countDownDone = true;SoundManager3D.Instance.backgroundMusic.Play();
             }
         }
     }
