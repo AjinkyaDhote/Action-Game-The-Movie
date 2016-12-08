@@ -63,11 +63,11 @@ public class EnemyHealth : MonoBehaviour
             _isKilled = true;
             anim.SetBool("isPunch1", false);
             anim.SetBool("isEnemyDead", true);
-            transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-           
-           // enemyHead.HeadFall();
+            transform.GetChild(1).GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+            transform.GetChild(1).GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+            // enemyHead.HeadFall();
             //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
-           
+
             GameManager.Instance.totalEnemiesKilled++;
         }
         //AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
