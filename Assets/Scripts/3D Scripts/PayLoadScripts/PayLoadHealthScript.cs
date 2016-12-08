@@ -50,7 +50,6 @@ public class PayLoadHealthScript : MonoBehaviour
     public void PayLoadDamage()
     {
         SoundManager3D.Instance.onHitByEnemyPayload.Play();
-              
         resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
         payLoadMovementScript.payLoadSpeed = 0;
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;

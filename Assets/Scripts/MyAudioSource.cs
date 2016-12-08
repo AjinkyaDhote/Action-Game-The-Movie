@@ -11,7 +11,6 @@ public class MyAudioSource
     public float volume = 1.0f;
     public bool loop = false;
     public bool playOnAwake = false;
-    [HideInInspector]
     public AudioSource audioSource;
     private uint playCount = 0;
 
