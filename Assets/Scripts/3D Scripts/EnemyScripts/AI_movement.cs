@@ -173,7 +173,7 @@ public class AI_movement : MonoBehaviour
         }
         else if(targetTransform.tag == "NewPayload")
         {
-            payLoadHealthScript.PayLoadDamage();
+            payLoadHealthScript.PayLoadDamage(gameObject.tag);
         }
     }
     
