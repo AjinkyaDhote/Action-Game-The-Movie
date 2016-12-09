@@ -2,6 +2,31 @@
 
 public class SoundManager3D : MonoBehaviour
 {
+    private bool _globalVolumeControl = false;
+    public bool globalVolumeControl
+    {
+        get
+        {
+            return _globalVolumeControl;
+        }
+        set
+        {
+            _globalVolumeControl = value;
+        }
+    }
+    private float _volume = 1.0f;
+    public float volume
+    {
+        get
+        {
+            return _volume;
+        }
+        set
+        {
+            _volume = value;
+           
+        }
+    }
     public MyAudioSource backgroundMusic;
     public MyAudioSource onHitByEnemyPlayer;
     public MyAudioSource gunEmpty;
@@ -24,6 +49,14 @@ public class SoundManager3D : MonoBehaviour
                 _instance = FindObjectOfType<SoundManager3D>();
             }
             return _instance;
+        }
+    }
+    private void OnValidate()
+    {
+        myAudioSources = new MyAudioSource[] { backgroundMusic, onHitByEnemyPlayer, gunEmpty, shotgun, pistol, onHitByEnemyPayload, intruderAlert, onEnemyHit, enemyDeath };
+        for (int i = 0; i < myAudioSources.Length; i++)
+        {
+            myAudioSources[i].volume = _volume;
         }
     }
     private void Awake()
