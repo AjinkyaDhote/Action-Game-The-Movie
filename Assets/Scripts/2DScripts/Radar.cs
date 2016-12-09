@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Radar : MonoBehaviour
-
 {
     private float reciprocalSpeed;
     [SerializeField]
@@ -31,7 +30,8 @@ public class Radar : MonoBehaviour
     private uint it;
     private float elapsedTime, currentTime;
     private bool isElapsedTimeIniTialized;
-    private LineRenderer lineRenderer;
+    private Transform radarImage;
+    //private LineRenderer lineRenderer;
     private void Start()
     {
         circlePoints = Utilities.GenerateCirclePoints(RADIUS);
@@ -49,7 +49,8 @@ public class Radar : MonoBehaviour
         }
         it = 0;
         isElapsedTimeIniTialized = false;
-        lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer = GetComponent<LineRenderer>();
+        radarImage = GameObject.Find("HUD").GetComponent<Transform>().FindChild("RadarImage");
         Speed = Speed;
     }
     private void FixedUpdate()
@@ -77,7 +78,16 @@ public class Radar : MonoBehaviour
     }
     private void RescaleObjects()
     {
-        lineRenderer.SetPosition(1, circlePoints[it]);
+        if (it == circlePoints.Length - 1)
+        {
+            radarImage.rotation *= Quaternion.Euler(0.0f, 0.0f, (Vector3.Angle((circlePoints[it] - Vector3.zero).normalized, (circlePoints[0] - Vector3.zero).normalized)) * Time.fixedDeltaTime*7.55f);
+        }
+        else
+        {
+            radarImage.rotation *= Quaternion.Euler(0.0f, 0.0f, (Vector3.Angle((circlePoints[it] - Vector3.zero).normalized, (circlePoints[it + 1] - Vector3.zero).normalized)) * Time.fixedDeltaTime*7.55f);
+        }
+        Debug.DrawRay(Vector3.zero, circlePoints[it].normalized * 30.0f, Color.green, 10.0f);
+        //lineRenderer.SetPosition(1, circlePoints[it]);
         raycasts = Physics2D.RaycastAll(Vector2.zero, circlePoints[it].normalized, RADIUS, LAYERMASK);
         for (int i = 0; i < ammos.Length; i++)
         {
