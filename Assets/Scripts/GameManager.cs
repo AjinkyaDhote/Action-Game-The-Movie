@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     //........................................................
     public int batteryCount;
 
+    public int shotsFired;
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
     private const bool _GOD_MODE = true;
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
 
         playAvailable = false;
 
+        shotsFired = 0;
         if (_GOD_MODE)
         {
             playAvailable = true;
