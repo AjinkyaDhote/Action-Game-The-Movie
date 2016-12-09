@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class PayLoadRangeScript : MonoBehaviour
 {
-
-    private const float THETA_SCALE = 0.01f;
     private const int NUMBER_OF_CIRCLES = 4;
     private const float RATE_OF_GLITCH_INTENSITY = 0.03f;
     public static readonly byte colorScaler = 63;
@@ -14,19 +12,9 @@ public class PayLoadRangeScript : MonoBehaviour
     public float rateOfHealthRegeneration;
     private GameObject player;
     private PlayerHealthScript playerHealth;
-    //[HideInInspector]
-    //public bool outOfRange0;
-    //[HideInInspector]
-    //public bool outOfRange1;
-    //[HideInInspector]
-    //public bool outOfRange2;
-    //[HideInInspector]
-    //public bool outOfRange3;
     public enum Range { CompletelyInside, OutsideFirstCircle, OutsideSecondCircle, OutsideThirdCircle, OutsideFourthCircle }
     [HideInInspector]
     public Range range;
-    private BoxCollider boxCollider;
-    private CapsuleCollider playerCollider;
     [HideInInspector]
     public LineRenderer circle;
     //[HideInInspector]
@@ -67,31 +55,12 @@ public class PayLoadRangeScript : MonoBehaviour
 
     void Start()
     {
-        //circlePoints = new Vector3[NUMBER_OF_CIRCLES][];
-        //circleSize = new int[NUMBER_OF_CIRCLES];
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealthScript>();
         range = Range.CompletelyInside;
-        boxCollider = GetComponent<BoxCollider>();
-        playerCollider = player.GetComponent<CapsuleCollider>();
-        circle = transform.GetChild(4).GetComponent<LineRenderer>();
-        //for (int i = 0; i < NUMBER_OF_CIRCLES; i++)
-        //{
-        float radius = transform.GetChild(0).GetComponent<SphereCollider>().bounds.extents.x;
-        float theta = 0f;
-       
-        int circleSize = (int)((1f / THETA_SCALE) + 1f);
-        Vector3[] circlePoints = new Vector3[circleSize];
-        //circlePoints[i] = new Vector3[circleSize[i]];
-        for (int j = 0; j < circleSize; j++)
-        {
-            theta += (2.0f * Mathf.PI * THETA_SCALE);
-            float x = radius * Mathf.Cos(theta);
-            float y = radius * Mathf.Sin(theta);
-            circlePoints[j] = new Vector3(x, y, 0);
-        }
-        //}
-        circle.SetVertexCount(circleSize);
+        circle = transform.GetChild(4).GetComponent<LineRenderer>();      
+        Vector3[] circlePoints = Utilities.GenerateCirclePoints(transform.GetChild(0).GetComponent<SphereCollider>().bounds.extents.x); 
+        circle.SetVertexCount(circlePoints.Length);
         circle.SetPositions(circlePoints);
 
         //screenBlurImage = player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas").FindChild("ScreenBlur").GetComponent<Image>();
@@ -102,8 +71,7 @@ public class PayLoadRangeScript : MonoBehaviour
 
 
     void Update()
-    {
-        //Physics.IgnoreCollision(boxCollider, playerCollider);
+    {     
         switch (range)
         {
             case Range.CompletelyInside:
