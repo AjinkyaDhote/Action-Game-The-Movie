@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
     public Camera cam;
     public Button playButton;
 
-    public Text HeadShots, EnemiesKilled, Health, DistanceCoverd, Total;
+    public Text HeadShots, EnemiesKilled, Accuracy, Health, DistanceCoverd, Total;
 
     void Update()
     {
@@ -53,6 +53,7 @@ public class MenuManager : MonoBehaviour
         {
             HeadShots.text = GameManager.Instance.headShots.ToString();
             EnemiesKilled.text = GameManager.Instance.totalEnemiesKilled.ToString();
+            Accuracy.text = GameManager.Instance.shotsFired.ToString();
             Health.text = GameManager.Instance.remainingHealth.ToString();
             DistanceCoverd.text = GameManager.Instance.totalDistance.ToString();
             Total.text = GameManager.Instance.TotalScore.ToString();

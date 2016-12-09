@@ -86,7 +86,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.realtimeSinceStartup > nextFire) && (countdownTimer.hasGameStarted))
         {
-
+            GameManager.Instance.shotsFired++;
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
             {
                 if (bulletCount >= NUMBER_OF_SHOTGUN_BULLETS)
