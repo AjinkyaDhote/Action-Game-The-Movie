@@ -15,14 +15,14 @@ public class MyAudioSource
     public AudioSource audioSource;
     private uint playCount = 0;
 
-    public void Initilaize()
+    public static void Initilaize(GameObject gameObject, MyAudioSource myAudioSource)
     {
-        audioSource = SoundManager3D.Instance.gameObject.AddComponent<AudioSource>();
-        audioSource.clip = audioClip;
-        audioSource.volume = volume;
-        audioSource.loop = loop;
-        audioSource.playOnAwake = playOnAwake;
-        playCount = 0;
+        myAudioSource.audioSource = gameObject.AddComponent<AudioSource>();
+        myAudioSource.audioSource.clip = myAudioSource.audioClip;
+        myAudioSource.audioSource.volume = myAudioSource.volume;
+        myAudioSource.audioSource.loop = myAudioSource.loop;
+        myAudioSource.audioSource.playOnAwake = myAudioSource.playOnAwake;
+        myAudioSource.playCount = 0;
     }
 
     public void Play()
