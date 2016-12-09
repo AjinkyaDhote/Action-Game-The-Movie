@@ -11,6 +11,7 @@ public class SoundManager3D : MonoBehaviour
     public MyAudioSource intruderAlert;
     public MyAudioSource onEnemyHit;
     public MyAudioSource enemyDeath;
+    
 
     [HideInInspector]
     public MyAudioSource[] myAudioSources;

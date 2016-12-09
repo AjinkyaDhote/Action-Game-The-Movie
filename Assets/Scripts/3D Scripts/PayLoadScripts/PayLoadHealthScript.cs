@@ -47,13 +47,20 @@ public class PayLoadHealthScript : MonoBehaviour
         }
     }
 
-    public void PayLoadDamage()
+    public void PayLoadDamage(string tag)
     {
         SoundManager3D.Instance.onHitByEnemyPayload.Play();
         resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
         payLoadMovementScript.payLoadSpeed = 0;
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;
-        numberOfLs--;
+        if (tag == "SmallEnemy")
+        {
+            numberOfLs--;
+        }
+        else if(tag == "LaserTrap")
+        {
+            numberOfLs -= 6;
+        }
         payLoadHealthString.Length = 0;
         payLoadHealthString = payLoadHealthString.Append('l', numberOfLs);
         payLoadHealthText.text = payLoadHealthString.ToString();
