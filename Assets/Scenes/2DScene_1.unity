@@ -2318,6 +2318,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 120000011162175524, guid: eedd827f12debf9489b26bc642a2c3e6,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf80c6462fecb4942a051f33db536057, type: 2}
+    - target: {fileID: 120000011162175524, guid: eedd827f12debf9489b26bc642a2c3e6,
+        type: 2}
+      propertyPath: m_Parameters.startWidth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011162175524, guid: eedd827f12debf9489b26bc642a2c3e6,
+        type: 2}
+      propertyPath: m_Parameters.endWidth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011162175524, guid: eedd827f12debf9489b26bc642a2c3e6,
+        type: 2}
+      propertyPath: m_Parameters.m_StartColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011162175524, guid: eedd827f12debf9489b26bc642a2c3e6,
+        type: 2}
+      propertyPath: m_Parameters.m_EndColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eedd827f12debf9489b26bc642a2c3e6, type: 2}
   m_IsPrefabParent: 0
