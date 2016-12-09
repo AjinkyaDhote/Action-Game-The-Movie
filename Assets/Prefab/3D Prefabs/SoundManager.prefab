@@ -53,55 +53,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMusic:
     frequencyModifier: 1
-    audioClip: {fileID: 8300000, guid: 46ff56928d6d7c8449a7d85850e62a63, type: 3}
+    audioClip: {fileID: 8300000, guid: d2bee054545919e4ba5cd246df154584, type: 3}
     volume: 1
     loop: 1
     playOnAwake: 0
+    audioSource: {fileID: 0}
   onHitByEnemyPlayer:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: aa0cff5b16874bd46b9b7c9d00f9f676, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   gunEmpty:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: a97f68a4c262f474394d49b92fdab877, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   shotgun:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 8fa74a313a5434b4c82b45c8948d2b4e, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   pistol:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: eb784da492ec45e4583869eb2e78d403, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   onHitByEnemyPayload:
     frequencyModifier: 4
     audioClip: {fileID: 8300000, guid: 8e78748aad168f4429896b5b00bd4de6, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   intruderAlert:
     frequencyModifier: 4
     audioClip: {fileID: 8300000, guid: f87f0ca8a8402f948b584dc4b44c550f, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   onEnemyHit:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 08c020be992121c4da2afd748a889c6e, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
   enemyDeath:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: dd1d6a1da9bd83f4abde48a0a3b90170, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
+    audioSource: {fileID: 0}
+  menuMusic:
+    frequencyModifier: 1
+    audioClip: {fileID: 8300000, guid: 46ff56928d6d7c8449a7d85850e62a63, type: 3}
+    volume: 1
+    loop: 1
+    playOnAwake: 1
+    audioSource: {fileID: 0}
+  myAudioSources: []

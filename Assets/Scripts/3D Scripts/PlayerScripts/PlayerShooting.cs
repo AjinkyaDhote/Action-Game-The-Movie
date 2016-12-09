@@ -19,7 +19,7 @@ public class PlayerShooting : MonoBehaviour
     private const float WALL_HIT_PREFAB_POSITIONAL_OFFSET = 0.1f;
 
     //public ParticleSystem muzzleFlash;
-    //public Animator anim;
+    //private Animator pistolAnim;
     //public ParticleSystem[] impacts;
 
     [SerializeField]
@@ -81,6 +81,7 @@ public class PlayerShooting : MonoBehaviour
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
         AmmoAnimation = transform.FindChild("FPS UI Canvas").FindChild("AmmoAnimateText").GetComponent<Animation>();
         AmmoAnimation.gameObject.SetActive(false);
+        //pistolAnim = transform.GetChild(1).GetComponent<Animator>();
     }
     void FixedUpdate()
     {
@@ -130,6 +131,7 @@ public class PlayerShooting : MonoBehaviour
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
+                    //pistolAnim.SetTrigger("NewGunAnimation");
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
                     {

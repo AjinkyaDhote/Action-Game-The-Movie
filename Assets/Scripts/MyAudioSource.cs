@@ -11,6 +11,7 @@ public class MyAudioSource
     public float volume = 1.0f;
     public bool loop = false;
     public bool playOnAwake = false;
+    [HideInInspector]
     public AudioSource audioSource;
     private uint playCount = 0;
 
@@ -23,6 +24,7 @@ public class MyAudioSource
         audioSource.playOnAwake = playOnAwake;
         playCount = 0;
     }
+
     public void Play()
     {
         if (frequencyModifier != 0)

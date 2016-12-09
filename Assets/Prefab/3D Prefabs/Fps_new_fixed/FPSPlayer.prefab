@@ -753,7 +753,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011595463726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.14, y: 3.48, z: -42.02}
+  m_LocalPosition: {x: 3.14, y: 3.48, z: -45.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
   m_Children:
@@ -1576,8 +1576,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 20000012774664108}
   motionBob:
-    HorizontalBobRange: 0.25
-    VerticalBobRange: 0.25
+    HorizontalBobRange: 0.5
+    VerticalBobRange: 0.5
     Bobcurve:
       serializedVersion: 2
       m_Curve:
