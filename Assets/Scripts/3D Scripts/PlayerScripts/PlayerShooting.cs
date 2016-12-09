@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     private const int AMMO_PICK_UP = 10;
-    private const int INITIAL_NUMBER_OF_BULLETS = 400;
+    public int INITIAL_NUMBER_OF_BULLETS = 400;
 
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
@@ -36,6 +36,9 @@ public class PlayerShooting : MonoBehaviour
             _bulletForce = value;
         }
     }
+
+    public int bulletCount;
+
     private TimeSlow timeSlowScript;
     //private EnemyThrow enemyThrowScript;
     private float nextFire = 0.0f;
@@ -43,8 +46,7 @@ public class PlayerShooting : MonoBehaviour
     private PauseMenu pauseMenuScript;
     private CountdownTimerScript countdownTimer;
 
-    private RaycastHit hit;
-    private int bulletCount = INITIAL_NUMBER_OF_BULLETS;
+    private RaycastHit hit;    
     private GameObject bulletPrefab;
     private List<GameObject> bullets;
     private int bulletInUse = 0;
