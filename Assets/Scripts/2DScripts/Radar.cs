@@ -2,8 +2,23 @@
 using System.Collections;
 
 public class Radar : MonoBehaviour
+
 {
-    public float speed;
+    private float reciprocalSpeed;
+    [SerializeField]
+    private float _speed = 1000.0f;
+    public float Speed
+    {
+        get
+        {
+            return _speed;
+        }
+        set
+        {
+            _speed = value;
+            reciprocalSpeed = 1.0f / _speed;
+        }
+    }
     private const float RADIUS = 30.0f;
     private const float SCALE_MULTIPLIER = 2.0f;
     private const int LAYERMASK = 0x6000;
@@ -35,6 +50,7 @@ public class Radar : MonoBehaviour
         it = 0;
         isElapsedTimeIniTialized = false;
         lineRenderer = GetComponent<LineRenderer>();
+        Speed = Speed;
     }
     private void FixedUpdate()
     {
@@ -48,7 +64,7 @@ public class Radar : MonoBehaviour
             currentTime = elapsedTime = Time.fixedTime;
             isElapsedTimeIniTialized = true;
         }
-        if (currentTime - elapsedTime >= (1.0f / speed))
+        if (currentTime - elapsedTime >= reciprocalSpeed)
         {
             elapsedTime = currentTime;
             it++;
