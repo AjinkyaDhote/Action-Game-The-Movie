@@ -268,7 +268,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f86637613caa021488c31d8ab3462c16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f34361b7b391013419a18c4576624349, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1253,6 +1253,10 @@ Prefab:
       value: 
       objectReference: {fileID: 1332191536}
     - target: {fileID: 1000013888265212, guid: a310f697f24c5b140ae710344b092442, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012650318224, guid: a310f697f24c5b140ae710344b092442, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2934,14 +2938,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d088e163b30e74187393859907fc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroudSprite: {fileID: 226138953}
+  backgroudSprite: {fileID: 50446626}
   batteryAmmoLayer: {fileID: 1273822112}
   map: {fileID: 50446623}
-  bg2: {fileID: 21300000, guid: 491cef147de3e8540929a32ddcc77cd0, type: 3}
-  bg3: {fileID: 21300000, guid: 9a25cff18ddc0904a823a05be03d6ff4, type: 3}
-  bg4: {fileID: 21300000, guid: 407ffb8860aa214419d68c251e39d58d, type: 3}
-  bg5: {fileID: 21300000, guid: 4eaddd3aed73cba4fb32d1fa1bd388ed, type: 3}
-  bg6: {fileID: 21300000, guid: f077b11a0c3323d4c9796a982bb66f39, type: 3}
+  bg2: {fileID: 21300000, guid: e54cd775a3662ca49a350b608c55830c, type: 3}
+  bg3: {fileID: 21300000, guid: 8422f9fc37065f14084a7d796b190f19, type: 3}
+  bg4: {fileID: 21300000, guid: 6907850ae44347746a2df553387d4f1a, type: 3}
+  bg5: {fileID: 21300000, guid: 0fe9bae2f8f17984ea181dfbc9373d42, type: 3}
+  bg6: {fileID: 21300000, guid: f86637613caa021488c31d8ab3462c16, type: 3}
   secondBattery: {fileID: 1166061560}
   undoBattery: {fileID: 45130083}
   ammoInRange: {fileID: 944241786}
