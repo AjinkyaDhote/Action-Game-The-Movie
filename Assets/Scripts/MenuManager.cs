@@ -53,7 +53,7 @@ public class MenuManager : MonoBehaviour
         {
             HeadShots.text = GameManager.Instance.headShots.ToString();
             EnemiesKilled.text = GameManager.Instance.totalEnemiesKilled.ToString();
-            Accuracy.text = GameManager.Instance.shotsFired.ToString();
+            Accuracy.text = GameManager.Instance.accuracy.ToString();
             Health.text = GameManager.Instance.remainingHealth.ToString();
             DistanceCoverd.text = GameManager.Instance.totalDistance.ToString();
             Total.text = GameManager.Instance.TotalScore.ToString();

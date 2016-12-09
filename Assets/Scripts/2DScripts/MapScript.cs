@@ -168,8 +168,7 @@ public class MapScript : MonoBehaviour
         GameManager.Instance.height2DPlane = gameObject.GetComponent<SpriteRenderer>().sprite.textureRect.height;
 
         thresholdDistance = (currentBattery / GameManager.Instance.batteryDepletionRate);
-        GameManager.Instance.headShots = 0;
-        GameManager.Instance.totalEnemiesKilled = 0;
+        GameManager.Instance.totalDistance = 0;
 
         GameManager.Instance.playAvailable = false;
     }
