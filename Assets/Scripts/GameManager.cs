@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public int shotsFired;
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = true;
+    private const bool _GOD_MODE = false;
 
     public bool GOD_MODE
     {

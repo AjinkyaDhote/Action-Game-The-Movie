@@ -11,6 +11,8 @@ public class MyAudioSource
     public float volume = 1.0f;
     public bool loop = false;
     public bool playOnAwake = false;
+    [Range(-3.0f, 3.0f)]
+    public float pitch = 1.0f;
     [HideInInspector]
     public AudioSource audioSource;
     private uint playCount = 0;
@@ -22,6 +24,7 @@ public class MyAudioSource
         myAudioSource.audioSource.volume = myAudioSource.volume;
         myAudioSource.audioSource.loop = myAudioSource.loop;
         myAudioSource.audioSource.playOnAwake = myAudioSource.playOnAwake;
+        myAudioSource.audioSource.pitch = myAudioSource.pitch;
         myAudioSource.playCount = 0;
     }
 
@@ -31,9 +34,9 @@ public class MyAudioSource
         {
             if (playCount % frequencyModifier == 0)
             {
-                audioSource.Play();
-                playCount++;
+                audioSource.Play();  
             }
+            playCount++;
         }
         else
         {
