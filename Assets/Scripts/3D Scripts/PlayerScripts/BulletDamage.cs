@@ -39,6 +39,7 @@ public class BulletDamage : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         playerShootingScript = player.GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
+        
         //--------------------------------Friendly Fire ON--------------------------------------------------------
         //payLoadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").GetComponent<Transform>().GetChild(2).GetComponent<PayLoadHealthScript>();
         //---------------------------------------------------------------------------------------------------------
@@ -67,6 +68,7 @@ public class BulletDamage : MonoBehaviour
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
+                GameManager.Instance.hitcount++;
                 PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
                 if (other.collider.CompareTag("HeadCollider"))
                     enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);

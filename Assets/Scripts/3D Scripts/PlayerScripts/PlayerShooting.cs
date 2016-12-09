@@ -86,6 +86,11 @@ public class PlayerShooting : MonoBehaviour
         AmmoAnimation.gameObject.SetActive(false);
         pistolAnim = transform.GetChild(1).GetComponent<Animator>();
         shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
+
+        GameManager.Instance.headShots = 0;
+        GameManager.Instance.totalEnemiesKilled = 0;
+        GameManager.Instance.shotsFired = 0;
+        GameManager.Instance.hitcount = 0;
     }
     void FixedUpdate()
     {

@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
         anim = transform.GetComponent<Animator>();
         //isPlayerDead = false;
         _isKilled = false;
-        GameManager.Instance.totalEnemiesKilled = 0;
+        //GameManager.Instance.totalEnemiesKilled = 0;
     }
 
     public void Damage(int damage)
