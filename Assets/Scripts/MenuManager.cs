@@ -30,7 +30,10 @@ public class MenuManager : MonoBehaviour
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         Cursor.lockState = CursorLockMode.None;
+        GameManager.Instance.infoDialogue = false;
         Cursor.visible = true;
+
+        GameManager.Instance.countDownDone = false;
 
         MainMenuCamControl mainMenuCamControl = cam.GetComponent<MainMenuCamControl>();
 

@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
     public enum MenuState { MAIN_MENU, LEVEL_MENU, IN_GAME_MENU, SCORE_BOARD };
 
+    public bool countDownDone = false;
+    public bool infoDialogue = false;
+
     public bool playAvailable;
 
     public MenuState currentMenuState;

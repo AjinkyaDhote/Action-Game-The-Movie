@@ -8,19 +8,13 @@ public class PlayerInRange : MonoBehaviour
     {
         aiMovementScript = transform.GetComponentInParent<AI_movement>();
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player" || other.tag == "NewPayload")
         {
             if (aiMovementScript != null)
             {
-                //RaycastHit raycastHit;
-                //Physics.Raycast(aiMovementScript.enemyRayCastHelper.position, (other.gameObject.transform.position - aiMovementScript.enemyRayCastHelper.position).normalized, out raycastHit, Mathf.Infinity);
-                
-                //if (raycastHit.collider.gameObject.tag == "Player")
-                {
-                    aiMovementScript.InRange(other.transform);
-                }
+                aiMovementScript.InRange(other.transform);
             }
         }
     }

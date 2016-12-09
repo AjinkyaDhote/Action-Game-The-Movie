@@ -215,7 +215,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 13.19, y: 9.11}
+  m_Size: {x: 8.7, y: 6}
 --- !u!114 &50446625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7f619f554e4e3294bb9af93b005e1f7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f86637613caa021488c31d8ab3462c16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -279,8 +279,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 50446623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
-  m_LocalScale: {x: 2.6003156, y: 2.6003156, z: 1.3001578}
+  m_LocalPosition: {x: -0.05, y: -0.04, z: -0.1}
+  m_LocalScale: {x: 3.9861047, y: 3.9861047, z: 1.9930524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -330,7 +330,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: df80f5f5b5828cd40a7018cab39a756a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 567d16028b3153a4b8f942518f69c210, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1252,6 +1252,10 @@ Prefab:
       propertyPath: tutorialManager
       value: 
       objectReference: {fileID: 1332191536}
+    - target: {fileID: 1000013888265212, guid: a310f697f24c5b140ae710344b092442, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a310f697f24c5b140ae710344b092442, type: 2}
   m_IsPrefabParent: 0
@@ -3092,7 +3096,7 @@ Transform:
   m_GameObject: {fileID: 1411401302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.25, y: 0, z: -1}
-  m_LocalScale: {x: 1.1370701, y: 1.1370697, z: 1.1370697}
+  m_LocalScale: {x: 1.1512834, y: 1.1370697, z: 1.1370697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1981690482}
