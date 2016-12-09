@@ -103,11 +103,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010090354880}
-  - 95: {fileID: 95000011942091274}
   - 65: {fileID: 65000013288369250}
   - 114: {fileID: 114000011869176048}
   - 114: {fileID: 114000012183113886}
-  - 114: {fileID: 114000012250543446}
   - 54: {fileID: 54000012648104660}
   m_Layer: 18
   m_Name: FinalPayLoad
@@ -487,23 +485,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1964858, y: 2.6289673, z: 5.4213104}
   m_Center: {x: -0.011299849, y: 1.9444835, z: 0.27679443}
---- !u!95 &95000011942091274
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013055699520}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d7673f562fa8e544c969f68e7501d58d, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!102 &102000014219381474
 TextMesh:
   serializedVersion: 3
@@ -590,18 +571,6 @@ MonoBehaviour:
   payLoadSpeed: 5
   wayPointLength: 0
   wayPointNumber: 0
---- !u!114 &114000012250543446
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013055699520}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d11e5ba5d077f444ba32c70c935cea76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasPlayerReached: 0
 --- !u!114 &114000013294858950
 MonoBehaviour:
   m_ObjectHideFlags: 1
