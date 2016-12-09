@@ -265,7 +265,6 @@ GameObject:
   - 114: {fileID: 114000010668057986}
   - 114: {fileID: 114000010566807350}
   - 114: {fileID: 114000013387748136}
-  - 114: {fileID: 114000011442082596}
   - 54: {fileID: 54000014123841606}
   - 65: {fileID: 65000013027611186}
   - 114: {fileID: 114000011776654670}
@@ -436,6 +435,7 @@ GameObject:
   - 33: {fileID: 33000013629862028}
   - 23: {fileID: 23000011046501516}
   - 114: {fileID: 114000013237285118}
+  - 95: {fileID: 95000013409854184}
   m_Layer: 9
   m_Name: Pistol
   m_TagString: Gun
@@ -611,6 +611,7 @@ GameObject:
   - 33: {fileID: 33000012337728944}
   - 23: {fileID: 23000014029225374}
   - 114: {fileID: 114000014000669566}
+  - 95: {fileID: 95000011008322230}
   m_Layer: 9
   m_Name: ShotGun
   m_TagString: Gun
@@ -666,10 +667,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014023764324}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: -0.5, y: 0.50000006, z: 0.50000006, w: 0.5}
   m_LocalPosition: {x: 0.67, y: -0.668, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 89.99999}
   m_Children:
   - {fileID: 4000010125939524}
   - {fileID: 4000012163735146}
@@ -684,7 +685,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012880786460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6700001, y: -0.7, z: 1.56}
+  m_LocalPosition: {x: 0.67, y: -0.7, z: 1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1098,6 +1099,40 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010966631506}
   m_Enabled: 1
+--- !u!95 &95000011008322230
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014023764324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04b6b688e3a2e3a479320a2960848706, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95000013409854184
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012880786460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2d3be4b01c06faf4e9d69a09e12d7952, type: 3}
+  m_Controller: {fileID: 9100000, guid: cf48c869e1f9fb345a413241f483b71a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108000012422812190
 Light:
   m_ObjectHideFlags: 1
@@ -1466,17 +1501,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000011442082596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011595463726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34189e8d3f3c81342903b45047a4e138, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000011510508486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1869,7 +1893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392e8d4270fff4d46841fe4ae642b797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDownTimer: 0.1
+  coolDownTimer: 0.2
   bulletLifeTime: 20
   crossHair: {fileID: 21300000, guid: 9ac893a432771fa45898eb06342a33bf, type: 3}
   muzzleMesh: {fileID: 23000014045297490}
