@@ -179,7 +179,10 @@ public class AI_movement : MonoBehaviour
     
     public void Detection(Transform transformToLookAt)
     {
-        SoundManager3D.Instance.intruderAlert.Play();
+        if (!SoundManager3D.Instance.intruderAlert.audioSource.isPlaying)
+        {
+            SoundManager3D.Instance.intruderAlert.Play();
+        }
         //transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);

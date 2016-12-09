@@ -38,7 +38,7 @@ public class EnemySight : MonoBehaviour
             {
                 //Debug.Log(hit.collider.name);
 
-                //Debug.DrawRay(ray.origin, ray.direction * (hit.distance),Color.red);
+                Debug.DrawRay(ray.origin, ray.direction * (hit.distance),Color.red);
                 if ((hit.collider.tag == "Player") || (hit.collider.tag == "NewPayload"))
                 {
                     if (aiMovementScript != null)// && !aiMovementScript.isChasingPayload)
