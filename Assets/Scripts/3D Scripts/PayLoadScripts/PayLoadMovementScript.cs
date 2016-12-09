@@ -6,14 +6,19 @@ public class PayLoadMovementScript : MonoBehaviour
 {
     public int payLoadSpeed;
     Vector3[] wayPoints3D;
-    //Rigidbody rigidBody;
-    int wayPointNumber;
-    PauseMenu pauseMenuScript;
+
+    [HideInInspector]
+    public int wayPointLength;
+
+    [HideInInspector]
+    public int wayPointNumber;
+    
     [HideInInspector]
     public static CountdownTimerScript countdownTimer;
     
     private bool lastReached;    
     private bool isRotating;
+
 
     float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
@@ -28,7 +33,7 @@ public class PayLoadMovementScript : MonoBehaviour
 
     void Start()
     {        
-        pauseMenuScript = GameObject.FindWithTag("PauseMenu").GetComponent<PauseMenu>();
+        
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();
 
         width2DPlane = GameManager.Instance.width2DPlane;
@@ -56,7 +61,8 @@ public class PayLoadMovementScript : MonoBehaviour
         }
         transform.position = wayPoints3D[0];
         transform.LookAt(wayPoints3D[wayPointNumber]);
-        
+
+        wayPointLength = wayPoints3D.Length;         
     }
   
 
@@ -75,14 +81,19 @@ public class PayLoadMovementScript : MonoBehaviour
                 wayPointNumber++;
             }
         }
-        else
+        else if(!lastReached)
         {
             transform.Translate((wayPoints3D[wayPointNumber] - transform.position).normalized * payLoadSpeed * Time.deltaTime , Space.World);         
         }
 
-        if (isRotating)
+        if (isRotating && !lastReached)
         {
             transform.forward = Vector3.Lerp(transform.forward, wayPoints3D[wayPointNumber] - wayPoints3D[wayPointNumber - 1], Time.deltaTime * 0.2f);
+        }
+
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(wayPoints3D[wayPoints3D.Length - 1].x, wayPoints3D[wayPoints3D.Length - 1].z)) < 1.0f)
+        {
+            //Destroy(gameObject.GetComponent<Rigidbody>());
         }
     }
 }

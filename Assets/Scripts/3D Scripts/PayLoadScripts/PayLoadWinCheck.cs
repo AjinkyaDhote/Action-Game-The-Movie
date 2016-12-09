@@ -3,23 +3,16 @@ using System.Collections;
 
 public class PayLoadWinCheck : MonoBehaviour
 {
-    WinTrigger winTriggerScript;
+    public bool hasPlayerReached;           
+
     void Start()
     {
-        winTriggerScript = GameObject.Find("WinTrigger").GetComponent<WinTrigger>();
+        hasPlayerReached = false;
     }
-    void OnTriggerEnter(Collider other)
+  
+
+    void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name == "WinTrigger")
-        {
-            winTriggerScript.hasPayloadReached = true;
-        }
-    }
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.name == "WinTrigger")
-    //    {
-    //        winTriggerScript.didEveryoneReach--;
-    //    }
-    //}
+
+    }  
 }

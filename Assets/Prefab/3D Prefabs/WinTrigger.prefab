@@ -23,9 +23,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 186506}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -65.49, y: 2.49, z: 33.87578}
-  m_LocalScale: {x: 0.6114389, y: 0.3623427, z: 0.6060883}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 75.83, y: 3.28, z: 33.23}
+  m_LocalScale: {x: 0.7903493, y: 0.39997953, z: 0.6060883}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
   m_Children:
   - {fileID: 4000013640098744}
@@ -144,7 +144,6 @@ GameObject:
   - 4: {fileID: 4000010115832354}
   - 95: {fileID: 95000013829313672}
   - 114: {fileID: 114000013063617980}
-  - 114: {fileID: 114000012167845096}
   m_Layer: 0
   m_Name: EndDoor
   m_TagString: Untagged
@@ -342,8 +341,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011720325992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: -6.51, z: -0.96}
-  m_LocalScale: {x: 2.902248, y: 1, z: 1.2301451}
+  m_LocalPosition: {x: -0.08, y: -7.75, z: -4.6}
+  m_LocalScale: {x: 2.902248, y: 1, z: 1.7718719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 455910}
@@ -708,20 +707,6 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114000012167845096
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011914633050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 437189d6071931146aa4d87fc76c11e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalBattery: 0
-  totalBatteryValue: 0
-  batteryUsed: 0
 --- !u!114 &114000013063617980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -733,3 +718,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c0fc53da0025b48974f96953d27e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endState: {fileID: 0}

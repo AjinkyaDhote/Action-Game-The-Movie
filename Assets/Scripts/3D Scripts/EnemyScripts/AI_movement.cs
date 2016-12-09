@@ -17,7 +17,7 @@ public class AI_movement : MonoBehaviour
     public Animator anim;
     Vector3 initialPos;
     Vector3[] randomVectors;
-    Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
+    Collider enemyBodyCollider, enemyHeadCollider;
     bool _isPlayer_Payload_Seen = false;
     GameObject arrow_sprite;
     Renderer arrow_renderer;
@@ -28,10 +28,6 @@ public class AI_movement : MonoBehaviour
     //public bool isChasingPlayer = false;
     GameObject payload;
     EnemyHealth enemyHealth;
-    AudioSource detectionSound;
-    static int isSoundNecessary = 0;
-    AudioSource enemyHit;
-    AudioSource playerHit;
     //RaycastHit raycastHit;
     //[HideInInspector]
     //public Transform enemyRayCastHelper;
@@ -56,8 +52,6 @@ public class AI_movement : MonoBehaviour
     void Start()
     {
         //enemyRayCastHelper = transform.FindChild("RaycastHelper").transform;
-        detectionSound = GetComponent<AudioSource>();
-        enemyHit = transform.GetChild(0).GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
 
@@ -87,8 +81,6 @@ public class AI_movement : MonoBehaviour
         enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealthScript>();
-        playerCollider = player.GetComponent<Collider>();
-        playerHit = player.GetComponent<AudioSource>();
         payload = GameObject.FindGameObjectWithTag("NewPayload");
         //payloadRayCastHelper = payload.transform.FindChild("RaycastHelper").transform;
         payLoadHealthScript = payload.transform.GetChild(5).GetComponent<PayLoadHealthScript>();
@@ -129,14 +121,6 @@ public class AI_movement : MonoBehaviour
         } while (hit && initialIndex  != randomIndex);
 
         return randomPoint;
-    }
-
-    public void PlayEnemyHitSound()
-    {
-        if (!enemyHealth.IsKilled)
-        {
-            enemyHit.Play();
-        }
     }
     void Update()
     {
@@ -180,8 +164,6 @@ public class AI_movement : MonoBehaviour
     {
         if(targetTransform.tag == "Player")
         {
-            playerHit.Play();
-
             playerHealth.PlayerDamage(damage, 0.07f, gameObject.name);
 
             hitRadial = Instantiate(hitRadialPrefab);
@@ -191,18 +173,13 @@ public class AI_movement : MonoBehaviour
         }
         else if(targetTransform.tag == "NewPayload")
         {
-            payLoadHealthScript.PayLoadDamage();
+            payLoadHealthScript.PayLoadDamage(gameObject.tag);
         }
     }
     
     public void Detection(Transform transformToLookAt)
     {
-        if ((isSoundNecessary % 2 == 0))
-        {
-            detectionSound.Play();
-        }
-        isSoundNecessary++;
-
+        SoundManager3D.Instance.intruderAlert.Play();
         //transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);

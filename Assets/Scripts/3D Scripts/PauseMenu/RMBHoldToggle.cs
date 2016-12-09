@@ -8,7 +8,7 @@ public class RMBHoldToggle : MonoBehaviour {
     string[] messages;
     void Start()
     {
-        messages = new string[] { "HOLD RMB for BULLET TIME", "TOGGLE RMB for BULLET TIME" };
+        messages = new string[] { "Hold RMB for Bullet Time", "Toggle RMB for Bullet Time" };
         timeSlowScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas").FindChild("BulletTime").GetComponent<TimeSlow>();
         timeSlowScript.isRMBHoldType = true;
         labelText = transform.GetChild(0).GetComponent<Text>();

@@ -54,6 +54,8 @@ public class MapScript : MonoBehaviour
     public Text EndText;
     bool targetReached;
     bool targetDetected;
+    private Color targetColor;
+    private Color targetSelectedColor;
 
     public Player2D player2D;
     public List<Vector3> playerPosList;
@@ -112,8 +114,8 @@ public class MapScript : MonoBehaviour
         batteryPickups.Clear();
         batteryPickupsCount = GameManager.Instance.batteryPickupsCount;
         batteryPickupsCount.Clear();
-        batteryColor = Color.white;
-        batterySelectedColor = Color.green;
+        batteryColor = new Color(1, 1, 1, 0.25f);//Color.white;
+        batterySelectedColor = new Color(1, 1, 1, 1f);//Color.blue;
         batteryDetected = false;
 
         LowBattery = Instantiate(LowBatteryPrefab) as Transform;
@@ -129,6 +131,8 @@ public class MapScript : MonoBehaviour
 
         targetSprite = Target.GetComponent<SpriteRenderer>();
         targetReached = false;
+        targetColor = Color.white;
+        targetSelectedColor = Color.cyan;
 
         playerShadowPrefabList = new Stack<Object>();
         Instantiate(PlayerShadowPrefab, prevShadowPos, Quaternion.identity);
@@ -145,8 +149,8 @@ public class MapScript : MonoBehaviour
         batteryLayerMask = 1 << 14;
         targetLayerMask = 1 << 15;
         pickupLayerMask = ammoLayerMask | batteryLayerMask | targetLayerMask;
-        ammoColor = Color.white;
-        ammoSelectedColor = Color.yellow;
+        ammoColor = new Color(1, 1, 1, 0.25f); //Color.white;
+        ammoSelectedColor = new Color(1, 1, 1, 1f);//Color.blue;
         ammoDetected = false;
         targetDetected = false;
         cross = Instantiate(CrossPrefab) as Transform;
@@ -222,7 +226,7 @@ public class MapScript : MonoBehaviour
         }
 
         if(!targetReached)
-            targetSprite.color = Color.white;
+            targetSprite.color = targetColor;
 
         if ((countObjects(mousePos, wallLayerMask, out hits1) == 0))                                        //green
         {
@@ -296,7 +300,7 @@ public class MapScript : MonoBehaviour
                         targetDetected = true;
                         SoundManager.TargetHover();
                     }
-                    targetSprite.color = Color.green;
+                    targetSprite.color = targetSelectedColor;
                 }
                 else
                     targetDetected = false;
@@ -371,7 +375,7 @@ public class MapScript : MonoBehaviour
                 if (countObjects(worldPos, targetLayerMask, out hits) > 0)                                              //Target Detection
                 {
                     SoundManager.TargetReached();
-                    targetSprite.color = Color.green;
+                    targetSprite.color = targetSelectedColor;
                     EndText.gameObject.SetActive(true);
                     GameManager.Instance.playAvailable = true;
                     targetReached = true;
@@ -415,7 +419,7 @@ public class MapScript : MonoBehaviour
     private void UndoPrevMove()
     {
         {
-            targetSprite.color = Color.white;
+            targetSprite.color = targetColor;
             EndText.gameObject.SetActive(false);
             targetReached = false;
             GameManager.Instance.playAvailable = false;

@@ -11,11 +11,11 @@ public class CountdownTimerScript : MonoBehaviour {
     Text countdownText;
     int countdown;
     float initialTime;
-    AudioSource backgroundMusic;
+
 
     void Start ()
     {
-        backgroundMusic = GetComponentInParent<AudioSource>();
+
         countdownStarted = false;
         countdown = 3;
         gunCamera = transform.parent.GetComponent<Canvas>().worldCamera;
@@ -41,9 +41,7 @@ public class CountdownTimerScript : MonoBehaviour {
                 Time.timeScale = 1.0f;
                 countdownStarted = false;
                 GameObject.Find("FPSPlayer").GetComponent<wasdMovement>().countDownDone = true;
-                GameManager.Instance.countDownDone = true;
-                backgroundMusic.Play();
-
+GameManager.Instance.countDownDone = true;SoundManager3D.Instance.backgroundMusic.Play();
             }
         }
     }

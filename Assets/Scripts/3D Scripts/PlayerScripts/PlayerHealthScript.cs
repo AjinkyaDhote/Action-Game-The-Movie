@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class PlayerHealthScript : MonoBehaviour
 {
-	public float initialHealth;
+    public float initialHealth;
     Slider healthSlider;
     Image barColorImage;
     Material glitchMaterial;
     bool isGlitchEffectResetNeeded = true;
 
     void Start()
-    {       
+    {
         healthSlider = transform.FindChild("Main Camera").transform.FindChild("Gun Camera").transform.FindChild("FPS UI Canvas").FindChild("HealthSlider").GetComponent<Slider>();
         healthSlider.minValue = 0;
         healthSlider.maxValue = initialHealth;
@@ -23,10 +23,10 @@ public class PlayerHealthScript : MonoBehaviour
 
     public void PlayerRegenerate(float health)
     {
-        if(isGlitchEffectResetNeeded)
+        if (isGlitchEffectResetNeeded)
         {
             glitchMaterial.SetFloat("_Magnitude", 0.0f);
-        }     
+        }
         healthSlider.value += health;
 
         if (healthSlider.value >= (initialHealth / 2))
@@ -41,6 +41,10 @@ public class PlayerHealthScript : MonoBehaviour
 
     public void PlayerDamage(float damage, float glitchIntensity, string id = null)
     {
+        if (id != null)
+        {
+            SoundManager3D.Instance.onHitByEnemyPlayer.Play();
+        }
         if (id != null)
         {
             isGlitchEffectResetNeeded = false;
