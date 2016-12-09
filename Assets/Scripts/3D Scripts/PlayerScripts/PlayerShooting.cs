@@ -19,7 +19,8 @@ public class PlayerShooting : MonoBehaviour
     private const float WALL_HIT_PREFAB_POSITIONAL_OFFSET = 0.1f;
 
     //public ParticleSystem muzzleFlash;
-    //private Animator pistolAnim;
+    private Animator pistolAnim;
+    private Animator shotGunAnim;
     //public ParticleSystem[] impacts;
 
     [SerializeField]
@@ -81,7 +82,8 @@ public class PlayerShooting : MonoBehaviour
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
         AmmoAnimation = transform.FindChild("FPS UI Canvas").FindChild("AmmoAnimateText").GetComponent<Animation>();
         AmmoAnimation.gameObject.SetActive(false);
-        //pistolAnim = transform.GetChild(1).GetComponent<Animator>();
+        pistolAnim = transform.GetChild(1).GetComponent<Animator>();
+        shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
     }
     void FixedUpdate()
     {
@@ -100,6 +102,7 @@ public class PlayerShooting : MonoBehaviour
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
+                        shotGunAnim.SetTrigger("ShotGunShoot");
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
@@ -131,7 +134,7 @@ public class PlayerShooting : MonoBehaviour
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
-                    //pistolAnim.SetTrigger("NewGunAnimation");
+                    pistolAnim.SetTrigger("NewGunAnimation");                    
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
                     {

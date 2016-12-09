@@ -7,6 +7,7 @@ public class Tutorial3D : MonoBehaviour
     private InfoDialogue infoDialogue;
     bool startTriggerDone = false;
     bool batteryBotTrigger = false;
+    bool enemyIntroTrigger = false;
 
     void Awake()
     {
@@ -31,6 +32,14 @@ public class Tutorial3D : MonoBehaviour
             {
                 batteryBotTrigger = true;
                 infoDialogue.playInfo("When you are in low charge your visuals get corrupted. And the Battery robot cicle changes to YELLOW and then RED");
+            }
+        }
+        else if (GameManager.Instance.countDownDone && other.transform.name == "FPSPlayer")
+        {
+            if (!enemyIntroTrigger && gameObject.transform.name == "enemyIntro")
+            {
+                enemyIntroTrigger = true;
+                infoDialogue.playInfo("Be cautious enemy sentinels may be around. Try to aim at their heads.");
             }
         }
     }
