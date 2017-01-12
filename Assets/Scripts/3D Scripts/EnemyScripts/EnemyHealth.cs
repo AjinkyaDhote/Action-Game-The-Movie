@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
     //private bool isPlayerDead;
-    private NavMeshAgent agent;
+    private UnityEngine.AI.NavMeshAgent agent;
     public int currentHealth;
     //AI_movement aiMovementScript;
     
@@ -23,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     {
         //aiMovementScript = transform.GetComponentInParent<AI_movement>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        agent = GetComponent<NavMeshAgent>();        
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
             currentHealth = 5;
         else
