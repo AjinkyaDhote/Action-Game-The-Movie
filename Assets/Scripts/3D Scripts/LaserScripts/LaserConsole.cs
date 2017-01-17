@@ -5,14 +5,19 @@ public class LaserConsole : MonoBehaviour {
 
     public GameObject[] lasers;
     public float _health;
+    public Material accessGrantedMaterial;
 
     Transform ConsoleText;
     BoxCollider boxCollider;
+    Renderer ren;
+    bool hasAccessCard;
     
 	void Start ()
     {
         ConsoleText = gameObject.transform.GetChild(0);
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
+        ren = GetComponent<Renderer>();
+        hasAccessCard = true;
     }
 	
     void Update()
@@ -21,17 +26,15 @@ public class LaserConsole : MonoBehaviour {
         {
             gameObject.transform.parent.gameObject.SetActive(false);
         }
-
     }
 
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 17  )
+       if(other.gameObject.layer == 17  )
         {
             _health -= 1f;
         }
-
     }    
         	    	
 
@@ -39,20 +42,23 @@ public class LaserConsole : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            ConsoleText.gameObject.SetActive(true);
-            if(Input.GetKeyDown(KeyCode.E))
+            if(hasAccessCard)
             {
-                for(int i = 0; i < lasers.Length; i++)
+                ConsoleText.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    lasers[i].SetActive(false);
-                }
+                    ren.material = accessGrantedMaterial;
 
-                boxCollider.enabled = false;                                
-            }
+                    for (int i = 0; i < lasers.Length; i++)
+                    {
+                        lasers[i].SetActive(false);
+                    }
+
+                    boxCollider.enabled = false;
+                }
+            }            
         }
     }
-
-
 
 
     void OnTriggerExit(Collider other)
