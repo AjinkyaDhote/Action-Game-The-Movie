@@ -6,26 +6,17 @@ public class PayLoadHealthScript : MonoBehaviour
 {
     const int NUMBER_OF_PARTS_FOR_HEALTH = 5;
     const float STOP_PAYLOAD_MOVEMENT_TIME = 3.0f;
-
     public int payLoadHealth;
-
     int initialPayLoadHealth;
-
     TextMesh payLoadHealthText;
     StringBuilder payLoadHealthString;
     int numberOfLs = 0;
-
     int resetPayloadSpeedValue;
     PayLoadMovementScript payLoadMovementScript;
     float resetPayloadSpeedTime;
-
     Transform playerTransform;
-
-    AudioSource hitAudioSource;
-    static int isSoundNecessary = 0;
     void Start()
     {
-        hitAudioSource = GetComponent<AudioSource>();
         payLoadMovementScript = transform.parent.gameObject.GetComponent<PayLoadMovementScript>();
         resetPayloadSpeedValue = payLoadMovementScript.payLoadSpeed;
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -56,17 +47,20 @@ public class PayLoadHealthScript : MonoBehaviour
         }
     }
 
-    public void PayLoadDamage()
+    public void PayLoadDamage(string tag)
     {
-        if (isSoundNecessary % 2 == 0)
-        {
-            hitAudioSource.Play();
-        }      
-        isSoundNecessary++;
+        SoundManager3D.Instance.onHitByEnemyPayload.Play();
         resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
         payLoadMovementScript.payLoadSpeed = 0;
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;
-        numberOfLs--;
+        if (tag == "SmallEnemy")
+        {
+            numberOfLs--;
+        }
+        else if(tag == "LaserTrap")
+        {
+            numberOfLs -= 6;
+        }
         payLoadHealthString.Length = 0;
         payLoadHealthString = payLoadHealthString.Append('l', numberOfLs);
         payLoadHealthText.text = payLoadHealthString.ToString();

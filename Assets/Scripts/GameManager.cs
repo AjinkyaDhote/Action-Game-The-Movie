@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
     public enum MenuState { MAIN_MENU, LEVEL_MENU, IN_GAME_MENU, SCORE_BOARD };
 
+    public bool countDownDone = false;
+    public bool infoDialogue = false;
+
     public bool playAvailable;
 
     public MenuState currentMenuState;
@@ -29,15 +32,18 @@ public class GameManager : MonoBehaviour
     //Score Board..................................................
     public int headShots;
     public int totalEnemiesKilled;
+    public int accuracy;
     public int remainingHealth;
     public int totalDistance;
     public int TotalScore;
     //........................................................
     public int batteryCount;
 
+    public int shotsFired;
+    public int hitcount;
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = true;
+    private const bool _GOD_MODE = false;
 
     public bool GOD_MODE
     {
@@ -84,6 +90,7 @@ public class GameManager : MonoBehaviour
     {
         headShots = 0;
         totalEnemiesKilled = 0;
+        accuracy = 0;
         remainingHealth = 0;
         totalDistance = 0;
         TotalScore = 0;
@@ -92,6 +99,8 @@ public class GameManager : MonoBehaviour
 
         playAvailable = false;
 
+        shotsFired = 0;
+        hitcount = 0;
         if (_GOD_MODE)
         {
             playAvailable = true;

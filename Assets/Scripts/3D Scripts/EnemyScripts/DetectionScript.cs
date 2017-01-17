@@ -14,10 +14,15 @@ public class DetectionScript : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("NewPayload"))
         {
-            if (aiMovementScript != null)// && !aiMovementScript.isChasingPayload)
+            if (aiMovementScript != null)
             {
-                aiMovementScript.Detection(other.transform);
-            }          
+                //RaycastHit hit;
+                //Physics.Raycast(aiMovementScript.transform.position, (other.transform.position - aiMovementScript.transform.position).normalized, out hit, Mathf.Infinity);
+                //if (hit.transform.CompareTag("Player") || hit.transform.CompareTag("NewPayload"))
+                //{
+                    aiMovementScript.Detection(other.transform);
+                //}
+            }
         }
     }
 }
