@@ -10,7 +10,7 @@ public class AI_movement : MonoBehaviour
     PayLoadHealthScript payLoadHealthScript;
     GameObject hitRadialPrefab;
     GameObject hitRadial;
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
     //bool isPlayerInRange;
     //Vector3 resetPositionForInRange;
     [HideInInspector]
@@ -75,7 +75,7 @@ public class AI_movement : MonoBehaviour
         IsPlayerPayloadSeen = false;
 
 
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //anim = GetComponent<Animator>();		
         enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
         enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();

@@ -8,13 +8,13 @@ public class MenuZombie : MonoBehaviour
     int target;
     Animator anim;
 
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
 
     void Start()
     {
         target = 0;
 
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GetComponent<Animator>();
 
         agent.autoBraking = false;

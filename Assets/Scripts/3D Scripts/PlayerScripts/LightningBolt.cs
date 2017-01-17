@@ -54,7 +54,7 @@ public class LightningBolt : MonoBehaviour
 
             particles[i].position = position;
             particles[i].startColor = Color.white;
-            particles[i].lifetime = 1f;
+            particles[i].remainingLifetime = 1f;
         }
 
         myParticleSystem.SetParticles(particles, numberOfParticles);
