@@ -11,16 +11,21 @@ public class WinTrigger : MonoBehaviour {
     public bool hasPayloadReached = false;
 
     private Animator doorAnimationController;
+    
     void Start()
     {
-        doorAnimationController = transform.GetChild(1).GetComponent<Animator>();
-       
+        doorAnimationController = transform.GetChild(1).GetComponent<Animator>();        
     }
     void Update()
-    {      
-        if (hasPlayerReached  && hasPayloadReached)
-        {
-            doorAnimationController.SetBool("Open",true);  
+    {             
+    }   
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == ("WinTriggerDetectionCollider"))
+        {            
+            doorAnimationController.SetBool("Open", true);
         }
-    } 
+    }
 }

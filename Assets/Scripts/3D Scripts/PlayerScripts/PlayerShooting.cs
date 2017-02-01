@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     private const int AMMO_PICK_UP = 10;
-    private const int INITIAL_NUMBER_OF_BULLETS = 400;
+    public int INITIAL_NUMBER_OF_BULLETS = 400;
 
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
@@ -19,7 +19,8 @@ public class PlayerShooting : MonoBehaviour
     private const float WALL_HIT_PREFAB_POSITIONAL_OFFSET = 0.1f;
 
     //public ParticleSystem muzzleFlash;
-    //public Animator anim;
+    private Animator pistolAnim;
+    private Animator shotGunAnim;
     //public ParticleSystem[] impacts;
 
     [SerializeField]
@@ -35,18 +36,17 @@ public class PlayerShooting : MonoBehaviour
             _bulletForce = value;
         }
     }
+
+    public int bulletCount;
+
     private TimeSlow timeSlowScript;
-    private AudioSource noBullets;
-    [HideInInspector]
-    public AudioSource currentGunAudio;
     //private EnemyThrow enemyThrowScript;
     private float nextFire = 0.0f;
     private WeaponSystem weaponSystemScript;
     private PauseMenu pauseMenuScript;
     private CountdownTimerScript countdownTimer;
 
-    private RaycastHit hit;
-    private int bulletCount = INITIAL_NUMBER_OF_BULLETS;
+    private RaycastHit hit;    
     private GameObject bulletPrefab;
     private List<GameObject> bullets;
     private int bulletInUse = 0;
@@ -75,7 +75,6 @@ public class PlayerShooting : MonoBehaviour
             bullets[i].SetActive(false);
         }
         shotgunBulletRB = new Rigidbody[NUMBER_OF_SHOTGUN_BULLETS];
-        noBullets = GetComponent<AudioSource>();
         weaponSystemScript = GetComponent<WeaponSystem>();
         AmmoText = transform.FindChild("FPS UI Canvas").FindChild("AmmoText").GetComponent<Text>();
         AmmoText.text = " " + bulletCount;
@@ -85,16 +84,19 @@ public class PlayerShooting : MonoBehaviour
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
         AmmoAnimation = transform.FindChild("FPS UI Canvas").FindChild("AmmoAnimateText").GetComponent<Animation>();
         AmmoAnimation.gameObject.SetActive(false);
-    }
-    void Update()
-    {  
-             
+        pistolAnim = transform.GetChild(1).GetComponent<Animator>();
+        shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
+
+        GameManager.Instance.headShots = 0;
+        GameManager.Instance.totalEnemiesKilled = 0;
+        GameManager.Instance.shotsFired = 0;
+        GameManager.Instance.hitcount = 0;
     }
     void FixedUpdate()
     {
         if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.realtimeSinceStartup > nextFire) && (countdownTimer.hasGameStarted))
         {
-
+            GameManager.Instance.shotsFired++;
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
             {
                 if (bulletCount >= NUMBER_OF_SHOTGUN_BULLETS)
@@ -107,6 +109,7 @@ public class PlayerShooting : MonoBehaviour
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
+                        shotGunAnim.SetTrigger("ShotGunShoot");
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
@@ -118,14 +121,14 @@ public class PlayerShooting : MonoBehaviour
                         }
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
-                        currentGunAudio.Play();
+                        SoundManager3D.Instance.shotgun.Play();
                         weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = true;
                         StartCoroutine(MuzzleEffect());
                     }
                 }
                 else
                 {
-                    noBullets.Play();
+                    SoundManager3D.Instance.gunEmpty.Play();
                 }
             }
             else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
@@ -138,6 +141,7 @@ public class PlayerShooting : MonoBehaviour
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
+                    pistolAnim.SetTrigger("NewGunAnimation");                    
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
                     {
@@ -149,13 +153,13 @@ public class PlayerShooting : MonoBehaviour
                     }
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;
-                    currentGunAudio.Play();
+                    SoundManager3D.Instance.pistol.Play();
                     weaponSystemScript.currentWeaponInfo.muzzleMesh.enabled = true;
                     StartCoroutine(MuzzleEffect());
                 }
                 else
                 {
-                    noBullets.Play();
+                    SoundManager3D.Instance.gunEmpty.Play();
                 }
             }
             AmmoText.text = bulletCount.ToString();
@@ -186,7 +190,6 @@ public class PlayerShooting : MonoBehaviour
     }
     public void DisplayWallHitPreFab(Vector3 hitPoint, Vector3 hitNormal)
     {
-        //print("Hit point" + hitPoint);
         GameObject wallhit = Instantiate(wallHitPrefab, hitPoint + (WALL_HIT_PREFAB_POSITIONAL_OFFSET * hitNormal), Quaternion.LookRotation(hitNormal)) as GameObject;
         Destroy(wallhit, WALL_HIT_PREFAB_DESTROY_DELAY);
     }

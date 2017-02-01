@@ -3,20 +3,29 @@ using System.Collections;
 
 public class EndScreen : MonoBehaviour {
 
-    Scoring Score;
+    public Transform endState;
+    
+    GameObject payload;    
+    bool isDoorOpen;
 
     // Use this for initialization
     void Start ()
-    {
-        Score = GetComponent<Scoring>();
+    {        
+        payload = GameObject.FindGameObjectWithTag("NewPayload");        
+        isDoorOpen = false;
     }
-
-    public void ShowEndScreen()
+   
+    void Update()
     {
-        Score.Score();
-        GameManager.Instance.win_Lose = true;
-        GameManager.Instance.win_Lose_Message = "Target Reached!";
-        GameManager.Instance.currentMenuState = GameManager.MenuState.SCORE_BOARD;
-        GameManager.Instance.GoToWinLoseScene();
+        if(isDoorOpen)
+        {
+            payload.transform.forward = Vector3.Lerp(payload.transform.forward, (endState.transform.position - payload.transform.position), Time.deltaTime * 0.2f);             
+            payload.transform.Translate((endState.transform.position - payload.transform.position).normalized * 5f * Time.deltaTime, Space.World);
+        }
+    }  
+
+    public void SetDoorOpen()
+    {
+        isDoorOpen = true;
     }
 }

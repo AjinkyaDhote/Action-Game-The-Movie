@@ -10,14 +10,14 @@ public class AI_movement : MonoBehaviour
     PayLoadHealthScript payLoadHealthScript;
     GameObject hitRadialPrefab;
     GameObject hitRadial;
-    NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent;
     //bool isPlayerInRange;
-    Vector3 resetPositionForInRange;
+    //Vector3 resetPositionForInRange;
     [HideInInspector]
     public Animator anim;
     Vector3 initialPos;
     Vector3[] randomVectors;
-    Collider enemyBodyCollider, playerCollider, enemyHeadCollider;
+    Collider enemyBodyCollider, enemyHeadCollider;
     bool _isPlayer_Payload_Seen = false;
     GameObject arrow_sprite;
     Renderer arrow_renderer;
@@ -28,10 +28,6 @@ public class AI_movement : MonoBehaviour
     //public bool isChasingPlayer = false;
     GameObject payload;
     EnemyHealth enemyHealth;
-    AudioSource detectionSound;
-    static int isSoundNecessary = 0;
-    AudioSource enemyHit;
-    AudioSource playerHit;
     //RaycastHit raycastHit;
     //[HideInInspector]
     //public Transform enemyRayCastHelper;
@@ -56,8 +52,6 @@ public class AI_movement : MonoBehaviour
     void Start()
     {
         //enemyRayCastHelper = transform.FindChild("RaycastHelper").transform;
-        detectionSound = GetComponent<AudioSource>();
-        enemyHit = transform.GetChild(0).GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
 
@@ -81,14 +75,12 @@ public class AI_movement : MonoBehaviour
         IsPlayerPayloadSeen = false;
 
 
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         //anim = GetComponent<Animator>();		
         enemyHeadCollider = transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Collider>();
         enemyBodyCollider = transform.GetChild(0).GetChild(2).GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealthScript>();
-        playerCollider = player.GetComponent<Collider>();
-        playerHit = player.GetComponent<AudioSource>();
         payload = GameObject.FindGameObjectWithTag("NewPayload");
         //payloadRayCastHelper = payload.transform.FindChild("RaycastHelper").transform;
         payLoadHealthScript = payload.transform.GetChild(5).GetComponent<PayLoadHealthScript>();
@@ -130,36 +122,27 @@ public class AI_movement : MonoBehaviour
 
         return randomPoint;
     }
-
-    public void PlayEnemyHitSound()
-    {
-        if (!enemyHealth.IsKilled)
-        {
-            enemyHit.Play();
-        }
-    }
     void Update()
     {
         if (!enemyHealth.IsKilled)
         {
             if (_isPlayer_Payload_Seen)
             {
-                transform.LookAt(targetTransform);
+                //transform.LookAt(targetTransform);
                 if (anim.GetBool("isPlayer_PayloadInRange") && engaged)
                 {
                     agent.speed = 0;
                     anim.SetBool("isPunch1", true);
-                    transform.position = resetPositionForInRange;
-                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
+                    //transform.position = resetPositionForInRange;
                 }
                 else
                 {
                     agent.speed = enemyRunSpeed;
                     anim.SetBool("isPlayer_PayloadInRange", false);
                     anim.SetBool("isPunch1", false);
-                    transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
                     agent.destination = targetTransform.position;
                 }
+                transform.localRotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
             }
             else
             {
@@ -181,8 +164,6 @@ public class AI_movement : MonoBehaviour
     {
         if(targetTransform.tag == "Player")
         {
-            playerHit.Play();
-
             playerHealth.PlayerDamage(damage, 0.07f, gameObject.name);
 
             hitRadial = Instantiate(hitRadialPrefab);
@@ -192,19 +173,17 @@ public class AI_movement : MonoBehaviour
         }
         else if(targetTransform.tag == "NewPayload")
         {
-            payLoadHealthScript.PayLoadDamage();
+            payLoadHealthScript.PayLoadDamage(gameObject.tag);
         }
     }
     
     public void Detection(Transform transformToLookAt)
     {
-        if ((isSoundNecessary % 2 == 0))
+        if (!SoundManager3D.Instance.intruderAlert.audioSource.isPlaying)
         {
-            detectionSound.Play();
+            SoundManager3D.Instance.intruderAlert.Play();
         }
-        isSoundNecessary++;
-
-        transform.LookAt(transformToLookAt);
+        //transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
         anim.SetBool("isPlayer_PayloadSeen", true);
         arrow_renderer.enabled = true;
@@ -216,7 +195,7 @@ public class AI_movement : MonoBehaviour
         engaged = true;
 
         transform.LookAt(transformToLookAt);
-        resetPositionForInRange = transform.position;
+        //resetPositionForInRange = transform.position;
         anim.SetBool("isPlayer_PayloadInRange", true);
 
         targetTransform = transformToLookAt;
