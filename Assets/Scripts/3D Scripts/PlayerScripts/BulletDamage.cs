@@ -15,7 +15,7 @@ public class BulletDamage : MonoBehaviour
     const int SHOT_DAMAGE = 1;
     float timeToDestroyBullet;
     bool _isFired = false;
-    ParticleSystem enemyHitParticleEffect;
+    //ParticleSystem enemyHitParticleEffect;
     //--------------------------------Friendly Fire ON--------------------------------------------------------
     //PayLoadHealthScript payLoadHealthScript;
     //--------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ public class BulletDamage : MonoBehaviour
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
                 GameManager.Instance.hitcount++;
-                PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
+                //PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
                 if (other.collider.CompareTag("HeadCollider"))
                     enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
                 else
@@ -94,11 +94,11 @@ public class BulletDamage : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)
-    {
-        enemyHitParticleEffect = enemyHealthScript.gameObject.transform.FindChild("EnemyHitParticleEffect").GetComponent<ParticleSystem>();
-        enemyHitParticleEffect.transform.position = hitPoint;
-        enemyHitParticleEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
-        enemyHitParticleEffect.Play();
-    }
+    //private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)
+    //{
+    //    enemyHitParticleEffect = enemyHealthScript.gameObject.transform.FindChild("EnemyHitParticleEffect").GetComponent<ParticleSystem>();
+    //    enemyHitParticleEffect.transform.position = hitPoint;
+    //    enemyHitParticleEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
+    //    enemyHitParticleEffect.Play();
+    //}
 }
