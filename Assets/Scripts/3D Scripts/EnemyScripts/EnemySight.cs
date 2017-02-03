@@ -3,69 +3,88 @@ using System.Collections;
 
 public class EnemySight : MonoBehaviour
 {
-    public bool isPlayerSeen;
-    private Camera enemyCamera;
+    //public bool isPlayerSeen;
+    //private Camera enemyCamera;
     //RaycastHit[] hit;
     float MaxDistance;
     //Ray[] ray;
     RaycastHit hit;
     Ray ray;
-    int rayCount;
+    //int rayCountHor;
+    //int rayCountVer;
     AI_movement aiMovementScript;
     GameObject player;
     GameObject payload;
+    GameObject[] playerList;
+    //Renderer playerRenderer;
+    //Renderer payloadRenderer;
     // Use this for initialization
     void Start()
     {
-        isPlayerSeen = false;
+        //isPlayerSeen = false;
         //ray = new Ray[8];
         //hit = new RaycastHit[4];
-        rayCount = 4;
+        //rayCountHor = 4;
+        //rayCountVer = 4;
         MaxDistance = 20;
 
-        enemyCamera = GetComponentInChildren<Camera>();
-        aiMovementScript = transform.GetComponentInParent<AI_movement>();
+        //enemyCamera = GetComponentInChildren<Camera>();
+        aiMovementScript = transform.root.GetComponentInChildren<AI_movement>();
         player = GameObject.FindGameObjectWithTag("Player");
         payload = GameObject.FindGameObjectWithTag("NewPayload");
+        playerList = new GameObject[] { payload, player };
+
+        //playerRenderer = player.GetComponentInChildren<Renderer>();
+        //payloadRenderer = payload.GetComponentInChildren<Renderer>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < rayCount; i++)
+        foreach (GameObject Target in playerList)
         {
-            ray = enemyCamera.ViewportPointToRay(new Vector3(i * (1 / (float)rayCount), 0.5f, 0));
-
-            if (Physics.Raycast(ray, out hit, MaxDistance))
+            float angle = Vector3.Angle(Target.transform.position - transform.position, transform.forward);
+            if (angle < 45)
             {
-                //Debug.Log(hit.collider.name);
-
-                Debug.DrawRay(ray.origin, ray.direction * (hit.distance),Color.red);
-                if ((hit.collider.tag == "Player") || (hit.collider.tag == "NewPayload"))
+                //Debug.DrawRay(transform.position, (Target.transform.position - transform.position).normalized * MaxDistance, Color.red);
+                if (Physics.Raycast(transform.position, (Target.transform.position - transform.position).normalized, out hit, MaxDistance))
                 {
-                    if (aiMovementScript != null)// && !aiMovementScript.isChasingPayload)
+                    //Debug.Log(hit.transform.tag + "--" + Target.tag + " " + (hit.transform.tag == Target.tag));
+                    if ((hit.transform.tag == Target.tag))// || (hit.collider.tag == "NewPayload"))
                     {
-                        aiMovementScript.Detection(hit.transform);
+                        if (aiMovementScript != null)// && !aiMovementScript.isChasingPayload)
+                        {
+                            aiMovementScript.Detection(hit.transform);
+                        }
                     }
                 }
             }
-            //Debug.DrawRay(ray.origin, ray.direction * rayMaxDistance);
         }
 
-        //----------------------------------------------------------------
-        //float angle = Vector3.Angle(player.transform.position - transform.position, transform.forward);
-        //if(angle < 45)
-        //{
-        //    //if((player.transform.position - transform.position).sqrMagnitude < (MaxDistance* MaxDistance))
-        //    {
-        //        if (Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, out hit, MaxDistance))
-        //        {
+        //    //for (int i = 0; i < rayCountHor; i++)
+        //    //{
+        //    //    for (int j = 2; j < rayCountVer; j++)
+        //    //    {
+        //    //        ray = enemyCamera.ViewportPointToRay(new Vector3(i * (1 / (float)rayCountHor), j * (1 / (float)rayCountVer)/*0.5f*/, 0));
 
-        //        }
-        //    }
-        //}
+        //    //        if (Physics.Raycast(ray, out hit, MaxDistance))
+        //    //        {
+        //    //            //Debug.Log(hit.collider.name);
 
+        //    //            //Debug.DrawRay(ray.origin, ray.direction * (hit.distance), Color.red);
+        //    //            if ((hit.collider.tag == "Player") || (hit.collider.tag == "NewPayload"))
+        //    //            {
+        //    //                if (aiMovementScript != null)// && !aiMovementScript.isChasingPayload)
+        //    //                {
+        //    //                    aiMovementScript.Detection(hit.transform);
+        //    //                }
+        //    //            }
+        //    //        }
+        //    //        //Debug.DrawRay(ray.origin, ray.direction * rayMaxDistance);
+        //    //    }
+        //    //}
+        //
 
     }
 }
