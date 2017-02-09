@@ -38,14 +38,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4170925139207654}
   - component: {fileID: 195632894492739052}
-  - component: {fileID: 114677032535116482}
+  - component: {fileID: 114869391699300824}
   m_Layer: 0
   m_Name: DronePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4170925139207654
 Transform:
   m_ObjectHideFlags: 1
@@ -111,7 +111,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1453041427865712}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114677032535116482
+--- !u!114 &114869391699300824
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1493868364951494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e75ed607d378c764894192713683213c, type: 3}
+  m_Script: {fileID: 11500000, guid: d8180e97b53b6eb47aa2250921e18095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneSpeed: 5
+  droneSpeed: 0
 --- !u!135 &135283416827363142
 SphereCollider:
   m_ObjectHideFlags: 1

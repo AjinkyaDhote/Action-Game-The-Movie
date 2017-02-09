@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     public int hitcount;
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = false;
+    private const bool _GOD_MODE = true;
 
     public bool GOD_MODE
     {
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     // private variables
     private static GameManager _instance = null;
-    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose, Scene2D_tut, Scene3D_tut };
+    private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose, Scene2D_tut, Scene3D_tut, Scene2D_3, Scene3D_3 };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentGameState = GameStates.MENU;
     
@@ -209,6 +209,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene((int)Levels.Scene3D_2);
         }
+        // Level 2
+        else if (currentLevel == 3)
+        {
+            SceneManager.LoadScene((int)Levels.Scene3D_3);
+        }
     }
 
     public void PlanGame()
@@ -226,6 +231,10 @@ public class GameManager : MonoBehaviour
         else if ( currentLevel == 2 )
         {
             SceneManager.LoadScene((int)Levels.Scene2D_2);
+        }
+        else if (currentLevel == 3)
+        {
+            SceneManager.LoadScene((int)Levels.Scene2D_3);
         }
     }
 
