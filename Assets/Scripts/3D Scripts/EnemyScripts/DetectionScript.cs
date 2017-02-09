@@ -24,8 +24,8 @@ public class DetectionScript : MonoBehaviour
                 RaycastHit hit;
                 if(Physics.Raycast(enemyCenter, (other.transform.position - enemyCenter).normalized, out hit, (other.transform.position - enemyCenter).magnitude))
                 {
-                    Debug.DrawRay(enemyCenter, (other.transform.position - enemyCenter), Color.white);
-                    Debug.Log(hit.transform.name);
+                    //Debug.DrawRay(enemyCenter, (other.transform.position - enemyCenter), Color.white);
+                    //Debug.Log(hit.transform.name);
                     if (hit.transform.CompareTag("Player") || hit.transform.CompareTag("NewPayload"))
                     {
                         aiMovementScript.Detection(other.transform);
