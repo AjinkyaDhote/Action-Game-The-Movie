@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AccessGranted
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION
+  m_Name: consel_Access_denied
+  m_Shader: {fileID: 4800000, guid: f2dff7bbeddad1d4190dd3eb5748b7f3, type: 3}
+  m_ShaderKeywords: _EMISSION _NORMALMAP
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 180dcfdfad20215449372d5c771b1581, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -42,13 +42,19 @@ Material:
     - first:
         name: _EmissionMap
       second:
-        m_Texture: {fileID: 2800000, guid: be815227b869b104f9fe526c7ba33af4, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Illum
+      second:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: e3cc1aad37bd46e4baf9a886debc8b9e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8f24b4d8418bb9747973ad876dec5077, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -83,6 +89,9 @@ Material:
         name: _DstBlend
       second: 0
     - first:
+        name: _Emission
+      second: 1
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
@@ -104,6 +113,12 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _PulseSpeed
+      second: 1
+    - first:
+        name: _RimPower
+      second: 1.33
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -121,7 +136,13 @@ Material:
     m_Colors:
     - first:
         name: _Color
+      second: {r: 0.53460205, g: 0.6917074, b: 0.7058823, a: 1}
+    - first:
+        name: _ColorTint
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 1, g: 1, b: 1, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _RimColor
+      second: {r: 0, g: 1, b: 1, a: 1}
