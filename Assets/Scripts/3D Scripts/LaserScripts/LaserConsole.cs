@@ -10,21 +10,25 @@ public class LaserConsole : MonoBehaviour {
     Transform ConsoleText;
     BoxCollider boxCollider;
     Renderer ren;
+    Transform brokenLaserConsole;
     bool hasAccessCard;
     
 	void Start ()
     {
         ConsoleText = gameObject.transform.GetChild(0);
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
+        brokenLaserConsole = transform.parent.GetChild(6);
         ren = GetComponent<Renderer>();
         hasAccessCard = true;
     }
 	
     void Update()
     {
-        if(_health == 0)
+        if(_health <= 0)
         {
             gameObject.transform.parent.gameObject.SetActive(false);
+            brokenLaserConsole.parent = null;
+            brokenLaserConsole.gameObject.SetActive(true);
         }
     }
 
@@ -54,7 +58,7 @@ public class LaserConsole : MonoBehaviour {
                         lasers[i].SetActive(false);
                     }
 
-                    boxCollider.enabled = false;
+                    boxCollider.enabled = false;                    
                 }
             }            
         }
