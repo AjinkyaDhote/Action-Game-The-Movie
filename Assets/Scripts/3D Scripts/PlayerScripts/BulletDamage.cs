@@ -68,12 +68,24 @@ public class BulletDamage : MonoBehaviour
             enemyHealthScript = other.transform.GetComponentInParent<EnemyHealth>();
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
-                GameManager.Instance.hitcount++;
                 //PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
                 if (other.collider.CompareTag("HeadCollider"))
+                {
+                    GameManager.Instance.headShots++;
                     enemyHealthScript.Damage(HEAD_SHOT_DAMAGE);
+                }
                 else
+                {
+                    if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+                    {
+                        GameManager.Instance.bodyShots += 1 / (float)PlayerShooting.NUMBER_OF_SHOTGUN_BULLETS;
+                    }
+                    else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
+                    {
+                        GameManager.Instance.bodyShots++;
+                    }
                     enemyHealthScript.Damage(SHOT_DAMAGE);
+                }
             }
         }
 
