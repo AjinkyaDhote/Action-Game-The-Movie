@@ -40,10 +40,10 @@ public class GameManager : MonoBehaviour
     public int batteryCount;
 
     public int shotsFired;
-    public int hitcount;
+    public float bodyShots;
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = true;
+    private const bool _GOD_MODE = false;
 
     public bool GOD_MODE
     {
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         playAvailable = false;
 
         shotsFired = 0;
-        hitcount = 0;
+        bodyShots = 0;
         if (_GOD_MODE)
         {
             playAvailable = true;

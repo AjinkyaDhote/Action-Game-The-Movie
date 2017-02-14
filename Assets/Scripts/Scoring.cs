@@ -9,8 +9,9 @@ public class Scoring : MonoBehaviour {
     public int totalBattery;
     public int totalBatteryValue;
     public int batteryUsed;
-    
-    
+
+    int WeightHS = 2;
+    int WeightBS = 1;
     private int initialBattery;
 
     // Use this for initialization
@@ -45,9 +46,15 @@ public class Scoring : MonoBehaviour {
         }
         GameManager.Instance.remainingHealth = GameObject.FindGameObjectWithTag("NewPayload").transform.FindChild("PayLoadHealthBar").GetComponent<PayLoadHealthScript>().payLoadHealth;
 
-        GameManager.Instance.accuracy = (int)(((float)GameManager.Instance.totalEnemiesKilled/ GameManager.Instance.shotsFired) * 100) + (int)(((float)GameManager.Instance.headShots/ GameManager.Instance.shotsFired) * 2 * 100);
-        
-        GameManager.Instance.TotalScore = (GameManager.Instance.headShots)*100 + (GameManager.Instance.totalEnemiesKilled)*100 + (GameManager.Instance.accuracy) * 10 + (GameManager.Instance.remainingHealth)*50 - (GameManager.Instance.totalDistance);
+        //GameManager.Instance.accuracy = (int)(((float)GameManager.Instance.totalEnemiesKilled/ GameManager.Instance.shotsFired) * 100) + (int)(((float)GameManager.Instance.headShots/ GameManager.Instance.shotsFired) * 2 * 100);
+        Debug.Log("headShots" + GameManager.Instance.headShots);
+        Debug.Log("hitcount" + GameManager.Instance.bodyShots);
+        Debug.Log("shotsFired" + GameManager.Instance.shotsFired);
+
+
+        GameManager.Instance.accuracy = (int)((((GameManager.Instance.headShots * WeightHS) + (GameManager.Instance.bodyShots * WeightBS)) / (GameManager.Instance.shotsFired * WeightHS)) * 100);
+
+        GameManager.Instance.TotalScore = (GameManager.Instance.headShots)*100 + (GameManager.Instance.totalEnemiesKilled)*100 + (GameManager.Instance.accuracy) * 50 + (GameManager.Instance.remainingHealth)*50 - (GameManager.Instance.totalDistance)*5;
         
     }
 }

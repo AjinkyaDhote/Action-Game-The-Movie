@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
-            currentHealth = 5;
+            currentHealth = 8;
         else
             currentHealth = 60;
         anim = transform.GetComponent<Animator>();
@@ -38,6 +38,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         transform.LookAt(playerTransform);
+        //Debug.Log("Hit");
         if (currentHealth <= 0)
         {
             agent.speed = 0.0f;
@@ -50,10 +51,10 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
-            if (currentHealth < -900)
-            {
-                GameManager.Instance.headShots++;
-            }
+            //if (currentHealth < -900)
+            //{
+            //    GameManager.Instance.headShots++;
+            //}
             SoundManager3D.Instance.enemyDeath.Play();
             //Debug.Log("Killed");
             _isKilled = true;
