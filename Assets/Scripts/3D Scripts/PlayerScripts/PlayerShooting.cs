@@ -10,8 +10,8 @@ public class PlayerShooting : MonoBehaviour
 
     private const float PISTOL_RANGE = 5.0f;
     private const int BULLET_COLLISION_LAYER_MASK = 1 << 16;
-
-    private const int NUMBER_OF_SHOTGUN_BULLETS = 8;
+    
+    public const int NUMBER_OF_SHOTGUN_BULLETS = 8;
     private const float SPARY_ANGLE = 1.0f;
     private const float MUZZLE_EFFECT_DISPLAY_TIME = 0.02f;
 
@@ -90,13 +90,14 @@ public class PlayerShooting : MonoBehaviour
         GameManager.Instance.headShots = 0;
         GameManager.Instance.totalEnemiesKilled = 0;
         GameManager.Instance.shotsFired = 0;
-        GameManager.Instance.hitcount = 0;
+        GameManager.Instance.bodyShots = 0;
     }
     void FixedUpdate()
     {
         if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.realtimeSinceStartup > nextFire) && (countdownTimer.hasGameStarted))
         {
             GameManager.Instance.shotsFired++;
+            //Debug.Log(GameManager.Instance.hitcount);
             if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
             {
                 if (bulletCount >= NUMBER_OF_SHOTGUN_BULLETS)
@@ -114,10 +115,12 @@ public class PlayerShooting : MonoBehaviour
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
                             shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime));
+                            Debug.Log("shot");
                         }
                         else
                         {
                             shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
+                            Debug.Log("shot");
                         }
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
