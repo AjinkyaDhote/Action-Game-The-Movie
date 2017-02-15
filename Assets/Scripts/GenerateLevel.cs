@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GenerateLevel : MonoBehaviour {
 
-    public GameObject wall;
+    public GameObject wall_internal;
+    public GameObject wall_external;
     int elementsInRow = 201;
     int elementsInColumn = 201;
     int x_center_adjust = 100;
@@ -38,12 +39,33 @@ public class GenerateLevel : MonoBehaviour {
 
                 GameObject t;
                 
-               t = (GameObject)(Instantiate(wall, new Vector3(x_center_adjust - column , 5.5f, y_center_adjust - row), Quaternion.identity));
-                /*if (rotationValues[i] == '1')
+               t = (GameObject)(Instantiate(wall_internal, new Vector3(x_center_adjust - column , 5.5f, y_center_adjust - row), Quaternion.identity));
+                if (rotationValues[i] == '1')
                 {
 
-                   // t.transform.eulerAngles = new Vector3(0, 90, 0);
-                }*/
+                    t.transform.eulerAngles = new Vector3(0, 90, 0);
+                }
+
+            }
+
+            if (s[i] == '2')
+
+            {
+
+                int column, row;
+
+                column = i % elementsInRow;
+
+                row = i / elementsInColumn;
+
+                GameObject t;
+
+                t = (GameObject)(Instantiate(wall_external, new Vector3(x_center_adjust - column, 5.5f, y_center_adjust - row), Quaternion.identity));
+                if (rotationValues[i] == '1')
+                {
+
+                    t.transform.eulerAngles = new Vector3(0, 90, 0);
+                }
 
             }
 
