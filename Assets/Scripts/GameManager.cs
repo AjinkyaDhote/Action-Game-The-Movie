@@ -25,22 +25,33 @@ public class GameManager : MonoBehaviour
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
-    
+    [HideInInspector]
     public int battery = 100;
+
+    [HideInInspector]
     public int batteryDepletionRate = 5;
 
     //Score Board..................................................
+    [HideInInspector]
     public int headShots;
+    [HideInInspector]
     public int totalEnemiesKilled;
+    [HideInInspector]
     public int accuracy;
+    [HideInInspector]
     public int remainingHealth;
+    [HideInInspector]
     public int totalDistance;
+    [HideInInspector]
     public int TotalScore;
     //........................................................
+    [HideInInspector]
     public int batteryCount;
-
+    [HideInInspector]
     public int shotsFired;
+    [HideInInspector]
     public float bodyShots;
+    [HideInInspector]
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
     private const bool _GOD_MODE = false;
