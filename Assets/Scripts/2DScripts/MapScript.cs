@@ -42,6 +42,23 @@ public class MapScript : MonoBehaviour
     private Color ammoSelectedColor;
     private bool ammoDetected;
 
+    private Stack<GameObject> lockList;
+    private Stack<int> lockPickupsCount;
+    private GameObject[] allLocks;
+    private GameObject[] locklistarray;
+    private Color lockColor;
+    private Color lockSelectedColorUnlocked;
+    private Color lockSelectedColorLocked;
+    private bool lockDetected;
+
+    private Stack<GameObject>   keyList;
+    private Stack<int>      keyPickupsCount;
+    private GameObject[]    allKeys;
+    private GameObject[]    keylistarray;
+    private Color           keyColor;
+    private Color           keySelectedColor;
+    private bool            keyDetected;
+
     private Texture2D cursorGreen;
     private Texture2D cursorRed;
     private Vector2 cursorGreenHotspot, cursorRedHotspot;
@@ -71,6 +88,8 @@ public class MapScript : MonoBehaviour
 
     private LayerMask wallLayerMask;
     private LayerMask ammoLayerMask;
+    private LayerMask lockLayerMask;
+    private LayerMask keyLayerMask;
     private LayerMask batteryLayerMask;
     private LayerMask targetLayerMask;
     private LayerMask pickupLayerMask;
@@ -143,15 +162,30 @@ public class MapScript : MonoBehaviour
         ammoList = new Stack<GameObject>();
         ammoPickupsCount = new Stack<int>();
         allAmmos = GameObject.FindGameObjectsWithTag("Ammo");
+        lockList = new Stack<GameObject>();
+        lockPickupsCount = new Stack<int>();
+        allLocks = GameObject.FindGameObjectsWithTag("Lock");
+        keyList = new Stack<GameObject>();
+        keyPickupsCount = new Stack<int>();
+        allKeys = GameObject.FindGameObjectsWithTag("Key");
         allBatteries = GameObject.FindGameObjectsWithTag("Battery");
         wallLayerMask = 1 << 12;
         ammoLayerMask = 1 << 13;
+        lockLayerMask = 1 << 20;
+        keyLayerMask = 1 << 21;
         batteryLayerMask = 1 << 14;
         targetLayerMask = 1 << 15;
-        pickupLayerMask = ammoLayerMask | batteryLayerMask | targetLayerMask;
+        pickupLayerMask = ammoLayerMask | batteryLayerMask | targetLayerMask | lockLayerMask | keyLayerMask;
         ammoColor = new Color(1, 1, 1, 0.25f); //Color.white;
         ammoSelectedColor = new Color(1, 1, 1, 1f);//Color.blue;
         ammoDetected = false;
+        lockColor = new Color(1, 1, 1, 0.25f); //Color.white;
+        lockSelectedColorUnlocked = new Color(1, 1, 1, 1f);//Color.blue;
+        lockSelectedColorLocked = new Color(1, 0.5f, 0.5f, 1f);
+        lockDetected = false;
+        keyColor = new Color(1, 1, 1, 0.25f); //Color.white;
+        keySelectedColor = new Color(1, 1, 1, 1f);//Color.blue;
+        keyDetected = false;
         targetDetected = false;
         cross = Instantiate(CrossPrefab) as Transform;
         cross.gameObject.SetActive(false);
@@ -224,7 +258,29 @@ public class MapScript : MonoBehaviour
             ammolistarray[i].GetComponent<SpriteRenderer>().color = ammoSelectedColor;
         }
 
-        if(!targetReached)
+        for (int i = 0; i < allLocks.Length; i++)                                                               //set all lock false
+        {
+            allLocks[i].GetComponent<SpriteRenderer>().color = lockColor;
+        }
+
+        locklistarray = lockList.ToArray();
+        for (int i = 0; i < lockList.Count; i++)                                                               //set true selected lock
+        {
+            locklistarray[i].GetComponent<SpriteRenderer>().color = lockSelectedColorUnlocked;
+        }
+
+        for (int i = 0; i < allKeys.Length; i++)                                                               //set all key false
+        {
+            allKeys[i].GetComponent<SpriteRenderer>().color = keyColor;
+        }
+
+        keylistarray = keyList.ToArray();
+        for (int i = 0; i < keyList.Count; i++)                                                               //set true selected key
+        {
+            keylistarray[i].GetComponent<SpriteRenderer>().color = keySelectedColor;
+        }
+
+        if (!targetReached)
             targetSprite.color = targetColor;
 
         if ((countObjects(mousePos, wallLayerMask, out hits1) == 0))                                        //green
@@ -291,6 +347,36 @@ public class MapScript : MonoBehaviour
                 }
                 else
                     ammoDetected = false;
+
+                if (countObjects(mousePos, lockLayerMask, out hitsEveryFrame) > 0)                                      //lock vicinity detection
+                {
+                    if (!lockDetected)
+                    {
+                        lockDetected = true;
+                        SoundManager.PickupHover();
+                    }
+                    for (int i = 0; i < hitsEveryFrame.Length; i++)
+                    {
+                        hitsEveryFrame[i].transform.GetComponent<SpriteRenderer>().color = lockSelectedColorUnlocked;
+                    }
+                }
+                else
+                    lockDetected = false;
+
+                if (countObjects(mousePos, keyLayerMask, out hitsEveryFrame) > 0)                                      //key vicinity detection
+                {
+                    if (!keyDetected)
+                    {
+                        keyDetected = true;
+                        SoundManager.PickupHover();
+                    }
+                    for (int i = 0; i < hitsEveryFrame.Length; i++)
+                    {
+                        hitsEveryFrame[i].transform.GetComponent<SpriteRenderer>().color = keySelectedColor;
+                    }
+                }
+                else
+                    keyDetected = false;
 
                 if (countObjects(mousePos, targetLayerMask, out hitsEveryFrame) > 0)                                              //Target Detection
                 {
@@ -371,6 +457,30 @@ public class MapScript : MonoBehaviour
                 }
                 ammoPickupsCount.Push(hits.Length);
 
+                if (countObjects(worldPos, lockLayerMask, out hits) > 0)                                                //lock vicinity detection
+                {
+                    //SoundManager.LockPickup();
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        lockList.Push(hits[i].transform.gameObject);
+                        hits[i].transform.GetComponent<SpriteRenderer>().color = lockSelectedColorUnlocked;
+                        hits[i].collider.enabled = false;
+                    }
+                }
+                lockPickupsCount.Push(hits.Length);
+
+                if (countObjects(worldPos, keyLayerMask, out hits) > 0)                                                //key vicinity detection
+                {
+                    //SoundManager.KeyPickup();
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        keyList.Push(hits[i].transform.gameObject);
+                        hits[i].transform.GetComponent<SpriteRenderer>().color = keySelectedColor;
+                        hits[i].collider.enabled = false;
+                    }
+                }
+                keyPickupsCount.Push(hits.Length);
+
                 if (countObjects(worldPos, targetLayerMask, out hits) > 0)                                              //Target Detection
                 {
                     SoundManager.TargetReached();
@@ -438,6 +548,10 @@ public class MapScript : MonoBehaviour
 
             UndoAmmo();
 
+            UndoLock();
+
+            UndoKey();
+
             playerPosList.RemoveAt(playerPosList.Count - 1);
             prevShadowPos = playerPosList[playerPosList.Count - 1];
 
@@ -489,6 +603,34 @@ public class MapScript : MonoBehaviour
                 GameObject ammoPoped = ammoList.Pop();
                 ammoPoped.GetComponent<SpriteRenderer>().color = Color.white;
                 ammoPoped.GetComponent<Collider2D>().enabled = true;
+            }
+        }
+    }
+
+    private void UndoLock()
+    {
+        if (lockList.Count > 0)
+        {
+            int locksToRemove = lockPickupsCount.Pop();
+            for (int i = 0; i < locksToRemove; i++)
+            {
+                GameObject lockPoped = lockList.Pop();
+                lockPoped.GetComponent<SpriteRenderer>().color = Color.white;
+                lockPoped.GetComponent<Collider2D>().enabled = true;
+            }
+        }
+    }
+
+    private void UndoKey()
+    {
+        if (keyList.Count > 0)
+        {
+            int keysToRemove = keyPickupsCount.Pop();
+            for (int i = 0; i < keysToRemove; i++)
+            {
+                GameObject keyPoped = keyList.Pop();
+                keyPoped.GetComponent<SpriteRenderer>().color = Color.white;
+                keyPoped.GetComponent<Collider2D>().enabled = true;
             }
         }
     }
