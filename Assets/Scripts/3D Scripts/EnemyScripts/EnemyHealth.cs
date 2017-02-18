@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     private Animator anim;
     private Transform playerTransform;
+    //private DroneMovement droneMovementScript;
     [SerializeField]
     private bool _isKilled = false;
     public bool IsKilled
@@ -21,13 +22,13 @@ public class EnemyHealth : MonoBehaviour
     
     void Start()
     {
-        //aiMovementScript = transform.GetComponentInParent<AI_movement>();
+        //droneMovementScript = GameObject.Find transform.GetComponentInParent<DroneMovement>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();        
         if (transform.CompareTag("SmallEnemy"))
-            currentHealth = 8;
-        else
-            currentHealth = 60;
+            currentHealth = 5;
+        else if (transform.CompareTag("DroneEnemy"))
+            currentHealth = 3;
         anim = transform.GetComponent<Animator>();
         //isPlayerDead = false;
         _isKilled = false;
@@ -38,7 +39,6 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         transform.LookAt(playerTransform);
-        //Debug.Log("Hit");
         if (currentHealth <= 0)
         {
             agent.speed = 0.0f;
@@ -51,20 +51,30 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
-            //if (currentHealth < -900)
-            //{
-            //    GameManager.Instance.headShots++;
-            //}
+            if (currentHealth < -900)
+            {
+                GameManager.Instance.headShots++;
+            }
             SoundManager3D.Instance.enemyDeath.Play();
-            //Debug.Log("Killed");
+            Debug.Log("Killed");
             _isKilled = true;
-            anim.SetBool("isPunch1", false);
-            anim.SetBool("isEnemyDead", true);
-            transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-            // enemyHead.HeadFall();
-            //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
+            if(gameObject.tag == "SmallEnemy")
+            {
+                anim.SetBool("isPunch1", false);
+                anim.SetBool("isEnemyDead", true);
+                transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+            }
+            if (gameObject.tag == "DroneEnemy")
+            {
+               
+            }
 
-            GameManager.Instance.totalEnemiesKilled++;
+
+
+                // enemyHead.HeadFall();
+                //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
+
+                GameManager.Instance.totalEnemiesKilled++;
         }
         //AudioSource.PlayClipAtPoint(ZombieDeath, new Vector3(transform.position.x, transform.position.y, transform.position.z));
 

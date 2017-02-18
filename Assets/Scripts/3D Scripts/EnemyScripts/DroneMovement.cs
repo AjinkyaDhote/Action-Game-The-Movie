@@ -4,36 +4,43 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class DroneMovement : MonoBehaviour
-{    
-    public float droneSpeed;
-    public float followSpeed;
-    public float hoverSpeed = 10.0f;
+{
+
+    public float droneSpeed = 3.0f;
+    public float hoverSpeed = 0.0f;
     public Vector3 hoverPosition;
-    public bool _isPlayer_Payload_Seen = false;
-    public bool isPlayerInRange;
+    public bool isPlayer_PayloadSeen;
+    public bool isPlayerSeen;
+    public bool isPayloadSeen;
+    EnemyHealth enemyHealth;
+    public bool isPlayerOutOfRange;
+    public Rigidbody rb;
     Vector3[] randomVectors;
     Vector3 initialPosition;
-    private Transform player;    
-    private Transform targetTransform;
-    private GameObject sight;
+    private Transform player;
+    private Transform payload;
+    private Transform droneChild;
+    public Vector3 startHoverPosition;
 
     NavMeshAgent agent;
     private GameObject bulletEmitter;
-    private GameObject bulletPrefab;
+    private GameObject bullet;
     private float bulletForce;
     private bool bulletShot;
-    private bool engaged;
+    GameObject bulletGameObject;
     void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
-        droneSpeed = 3.0f;        
+       enemyHealth= GetComponent<EnemyHealth>();
+        droneSpeed = 3.0f;
+        hoverSpeed = 5.0f;
         bulletShot = false;
-        engaged = false;
         agent.speed = droneSpeed;
         hoverPosition = transform.position;
         randomVectors = new Vector3[8];
         player = GameObject.Find("FPSPlayer").GetComponent<Transform>();
-        //droneChild = GameObject.Find("DroneChild").GetComponent<Transform>();
+        payload = GameObject.Find("PayLoad").GetComponent<Transform>();
+        droneChild = GameObject.Find("DroneChild").GetComponent<Transform>();
         randomVectors[0] = new Vector3(1.0f, 1.0f, 0.0f);
         randomVectors[1] = new Vector3(1.0f, 1.0f, 1.0f);
         randomVectors[2] = new Vector3(0.0f, 1.0f, 1.0f);
@@ -42,69 +49,93 @@ public class DroneMovement : MonoBehaviour
         randomVectors[5] = new Vector3(-1.0f, 1.0f, -1.0f);
         randomVectors[6] = new Vector3(0.0f, 1.0f, -1.0f);
         randomVectors[7] = new Vector3(1.0f, 1.0f, -1.0f);
-        bulletForce = 200;
+        bulletForce = 500;
         initialPosition = gameObject.transform.position;
-        sight = transform.GetChild(0).gameObject;
-        //isPlayerSeen = isPlayerOutOfRange =false;
-        //Physics.IgnoreCollision(player.GetComponent<Collider>(), droneChild.GetComponent<Collider>());
+        isPlayer_PayloadSeen = isPlayerSeen = isPayloadSeen = isPlayerOutOfRange =false;
+        Physics.IgnoreCollision(player.GetComponent<Collider>(), droneChild.GetComponent<Collider>());
+        //rb = GetComponent<Rigidbody>();
+        //rb.detectCollisions = false;
+
       
         bulletEmitter = GameObject.Find("Nose");
-        bulletPrefab = Resources.Load("Bullet Prefab/Bullet") as GameObject;
+        bullet = Resources.Load("Bullet Prefab/DroneBullet") as GameObject;
         
         Patrol();
     }
 	
 	
 	void Update ()
-    {        
-        if (_isPlayer_Payload_Seen)
+    {
+        if (!enemyHealth.IsKilled)
         {
-            agent.speed = 0;
-            transform.LookAt(player);
-
-            if (!bulletShot)
+            
+            Physics.IgnoreCollision(player.transform.GetComponent<Collider>(), transform.GetComponent<Collider>());
+            if (agent.remainingDistance < 0.5f)
             {
-                bulletShot = true;
-                //StartCoroutine(WaitToShoot());
+                Patrol();
+            }
+            if (isPlayer_PayloadSeen)
+            {
+                if (isPayloadSeen == true)
+                {
+                    transform.LookAt(payload);
+                }
+
+                else if (isPlayerSeen == true)
+                {
+                    transform.LookAt(player);
+                }
+
+
+                if (Vector3.Distance(player.transform.position, transform.position) > 6)
+                {
+                    isPlayerOutOfRange = true;
+
+                    if (isPlayerOutOfRange)
+                    {
+                        if (isPlayerSeen == true)
+                        {
+                            FollowPlayer();
+                            isPayloadSeen = false;
+                        }
+
+                        if (!bulletShot)
+                        {
+                            bulletShot = true;
+                            StartCoroutine(WaitToShoot());
+                        }
+                    }
+
+                }
+
+                else if (Vector3.Distance(player.transform.position, transform.position) < 10)
+                {
+                    isPlayerOutOfRange = false;
+                    //if (!isPlayerOutOfRange && (Vector3.Distance(player.transform.position, transform.position) < 5))
+                    {
+                      
+                        Hover();
+                        if (!bulletShot)
+                        {
+                            bulletShot = true;
+                            StartCoroutine(WaitToShoot());
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+        else
+        {
+           // if ((transform.position.y > 0.0f))
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime * 70.0f, transform.position.z);
             }
 
         }
-        else if(engaged)
-        {
-            agent.speed = followSpeed;
-            agent.destination = targetTransform.position;
-        }
 
-        else if (agent.remainingDistance < 0.5f && !engaged)
-        {
-            Patrol();
-        }
-        // //if (Vector3.Distance(targetTransform.position, transform.position) > 15)
-        //// {
-        //     //isPlayerOutOfRange = true;
-
-        //     //if (isPlayerOutOfRange)
-        //     {
-        //         //FollowPlayer();
-        //        // if (!bulletShot)
-        //        // {
-        //        //     bulletShot = true;
-        //        //     StartCoroutine(WaitToShoot());
-        //        // }
-
-        //         //WaitToShoot();
-        //     }
-
-        //// }
-
-        //else if (Vector3.Distance(targetTransform.position, transform.position) < 12)
-        //{
-        //   // isPlayerOutOfRange = false;
-        //    //if (!isPlayerOutOfRange && (Vector3.Distance(player.transform.position, transform.position) < 5))
-        //    {
-        //        Hover();
-        //    }
-        //}
 
     }
 
@@ -133,12 +164,20 @@ public class DroneMovement : MonoBehaviour
 
     void Patrol()
     {
-        agent.destination = GetRandomVector();        
+        agent.destination = GetRandomVector();
+        
     }
 
     void Hover()
     {
-        transform.position.Set(transform.position.x, Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed), transform.position.z); 
+       // Debug.Log(Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed));
+        agent.speed = 0;
+        Vector3 Hover;
+        //hoverSpeed += 0.001f;
+       // Debug.Log(startHoverPosition);
+       // Hover = new Vector3(startHoverPosition.x + 10 *Mathf.Sin( hoverSpeed*Mathf.Deg2Rad), startHoverPosition.y + 10* Mathf.Sin(hoverSpeed * Mathf.Deg2Rad) * Mathf.Cos(hoverSpeed * Mathf.Deg2Rad));
+        Hover = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed), transform.position.z);
+        transform.position = Hover;
     }
 
     void FollowPlayer()
@@ -146,41 +185,22 @@ public class DroneMovement : MonoBehaviour
         //transform.position += player.position * droneSpeed * Time.deltaTime;
         agent.speed = 7;
         agent.destination = player.transform.position;
-  
     }
 
 
     IEnumerator WaitToShoot()
     {
-        Shooting();
-        yield return new WaitForSeconds(2);               
+        yield return new WaitForSeconds(2);
+       Shooting();
     }
     void Shooting()
-    {        
-    //    bulletPrefab = Instantiate(bulletPrefab, bulletEmitter.transform.position,Quaternion.identity) as GameObject;
-       
-    //    Rigidbody bulletRB;
-    //    bulletRB = bulletPrefab.GetComponent<Rigidbody>();
-    //    bulletRB.AddForce(transform.forward * bulletForce);
-    //    bulletShot = false;        
-    }   
-
-    public void Detection(Transform transformToLookAt)
-    {        
-        _isPlayer_Payload_Seen = true;
-       //agent.destination = transformToLookAt.position;
-        //sight.transform.LookAt(transformToLookAt);        
-    }
-
-    public void InRange(Transform other)
     {
-        isPlayerInRange = true;
-    }
+        GameObject bulletGameObject;
+        bulletGameObject = Instantiate(bullet, bulletEmitter.transform.position,Quaternion.identity) as GameObject;
+        Rigidbody bulletRB;
+        bulletRB = bulletGameObject.GetComponent<Rigidbody>();
+        bulletRB.AddForce(transform.forward * bulletForce);
+        bulletShot = false;
 
-    public void OutOfRange(Transform transformToFollow)
-    {
-        _isPlayer_Payload_Seen = false;
-        engaged = true;
-        targetTransform = transformToFollow;
-    }
+    }       
 }
