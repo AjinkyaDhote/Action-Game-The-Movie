@@ -15,7 +15,6 @@ public class CountdownTimerScript : MonoBehaviour {
 
     void Start ()
     {
-
         countdownStarted = false;
         countdown = 3;
         gunCamera = transform.parent.GetComponent<Canvas>().worldCamera;
@@ -23,6 +22,7 @@ public class CountdownTimerScript : MonoBehaviour {
         Time.timeScale = 0.0f;
         countdownText = GetComponent<Text>();
     }
+
 	void Update ()
     {
         if (countdownStarted)
