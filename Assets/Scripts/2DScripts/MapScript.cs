@@ -343,6 +343,7 @@ public class MapScript : MonoBehaviour
                     for (int i = 0; i < hitsEveryFrame.Length; i++)
                     {
                         hitsEveryFrame[i].transform.GetComponent<SpriteRenderer>().color = ammoSelectedColor;
+                        //hitsEveryFrame[i].transform.GetChild(0).gameObject.SetActive(true);
                     }
                 }
                 else
