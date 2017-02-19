@@ -3,9 +3,10 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public Transform MainMount, LevelMount, InGameMount, ScoreMount;
+    public Transform NetworkMount, MainMount, LevelMount, InGameMount, ScoreMount, LeaderboardMount;
     public Camera cam;
     public Button playButton;
+    public InputField loginInputField;
 
     public Text HeadShots, EnemiesKilled, Accuracy, Health, DistanceCoverd, Total;
 
@@ -20,7 +21,7 @@ public class MenuManager : MonoBehaviour
             }
             else if (GameManager.Instance.currentMenuState == GameManager.MenuState.LEVEL_MENU)
             {
-                cam.GetComponent<MainMenuCamControl>().setMount(MainMount);
+                cam.GetComponent<MainMenuCamControl>().setMount(NetworkMount);
                 setMenuStateToMainMenu();
             }
         }
@@ -37,13 +38,13 @@ public class MenuManager : MonoBehaviour
 
         MainMenuCamControl mainMenuCamControl = cam.GetComponent<MainMenuCamControl>();
 
-        if ( GameManager.Instance.currentMenuState == GameManager.MenuState.MAIN_MENU )
+        if (GameManager.Instance.currentMenuState == GameManager.MenuState.MAIN_MENU)
         {
-            mainMenuCamControl.setMount( MainMount );
+            mainMenuCamControl.setMount(NetworkMount);
         }
         else if (GameManager.Instance.currentMenuState == GameManager.MenuState.LEVEL_MENU)
         {
-            mainMenuCamControl.setMount( LevelMount );
+            mainMenuCamControl.setMount(LevelMount);
         }
         else if (GameManager.Instance.currentMenuState == GameManager.MenuState.IN_GAME_MENU)
         {
@@ -64,11 +65,11 @@ public class MenuManager : MonoBehaviour
 
         if (GameManager.Instance.playAvailable == true)
         {
-			playButton.interactable  = true;
+            playButton.interactable = true;
         }
         else
         {
-			playButton.interactable  = false;
+            playButton.interactable = false;
         }
     }
 
@@ -87,14 +88,14 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.ExitGame();
     }
 
-    public void setLevel( int level )
+    public void setLevel(int level)
     {
         GameManager.Instance.currentMenuState = GameManager.MenuState.IN_GAME_MENU;
         GameManager.Instance.setCurrentLevel(level);
         GameManager.Instance.playAvailable = false;
-		playButton.interactable = false;
+        playButton.interactable = false;
 
-        if ( GameManager.Instance.GOD_MODE )
+        if (GameManager.Instance.GOD_MODE)
         {
             playButton.interactable = true;
         }
@@ -108,6 +109,7 @@ public class MenuManager : MonoBehaviour
     public void setMenuStateToMainMenu()
     {
         GameManager.Instance.currentMenuState = GameManager.MenuState.MAIN_MENU;
+        loginInputField.readOnly = false;
     }
 
     public void ShowLevelMenu()
