@@ -65,8 +65,8 @@ public class EnemyHealth : MonoBehaviour
                 transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
             }
             if (gameObject.tag == "DroneEnemy")
-            {
-               
+            {                
+                Destroy(gameObject,1f);
             }
 
 

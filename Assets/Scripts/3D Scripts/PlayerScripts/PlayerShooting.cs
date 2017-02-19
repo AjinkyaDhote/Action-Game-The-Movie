@@ -115,12 +115,12 @@ public class PlayerShooting : MonoBehaviour
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
                             shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime));
-                            Debug.Log("shot");
+                            //Debug.Log("shot");
                         }
                         else
                         {
                             shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
-                            Debug.Log("shot");
+                            //Debug.Log("shot");
                         }
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                         bulletInUse++;
