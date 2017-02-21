@@ -17,7 +17,9 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
-
+[include]
+	path = /GameSparks/Plugins/**/*.dll
+	path = /GameSparks/Plugins/*.dll
 
 # Unity3D generated meta files
 *.pidb.meta
