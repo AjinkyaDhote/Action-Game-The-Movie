@@ -56,7 +56,7 @@ public class EnemyHealth : MonoBehaviour
                 GameManager.Instance.headShots++;
             }
             SoundManager3D.Instance.enemyDeath.Play();
-            Debug.Log("Killed");
+            //Debug.Log("Killed");
             _isKilled = true;
             if(gameObject.tag == "SmallEnemy")
             {

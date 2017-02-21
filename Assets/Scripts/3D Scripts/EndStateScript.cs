@@ -28,16 +28,16 @@ public class EndStateScript : MonoBehaviour
     {
         if (!GS.Available && !GS.Authenticated)
         {
-            Debug.Log("Score not updated on the server as user not logged in");
+            //Debug.Log("Score not updated on the server as user not logged in");
             return;
         }
-        Debug.Log("Posting Score To Leaderboard...");
+        //Debug.Log("Posting Score To Leaderboard...");
         new GameSparks.Api.Requests.LogEventRequest()
             .SetEventKey("SubmitScore")
             .SetEventAttribute("cpscore", GameManager.Instance.TotalScore)
             .Send((response) =>
             {
-                Debug.Log(!response.HasErrors ? "Score Posted Sucessfully..." : "Error Posting Score...");
+                //Debug.Log(!response.HasErrors ? "Score Posted Sucessfully..." : "Error Posting Score...");
             });
     }
 
