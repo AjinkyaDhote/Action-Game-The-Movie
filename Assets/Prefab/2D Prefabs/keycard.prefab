@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4785052336947636}
   - component: {fileID: 212697450922467220}
-  - component: {fileID: 61768112814888614}
+  - component: {fileID: 58486555016724774}
   m_Layer: 21
   m_Name: keycard
   m_TagString: Key
@@ -35,14 +35,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1321666566344158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6799998, y: 1.1200001, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
+  m_LocalPosition: {x: -7.27, y: -0.67, z: 0}
+  m_LocalScale: {x: 0.1299993, y: 0.14132124, z: 0.1299996}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61768112814888614
-BoxCollider2D:
+--- !u!58 &58486555016724774
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -50,11 +50,11 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 5.1199994, y: 3.5999997}
+  m_Radius: 6
 --- !u!212 &212697450922467220
 SpriteRenderer:
   m_ObjectHideFlags: 1
