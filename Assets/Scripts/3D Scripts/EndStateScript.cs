@@ -31,13 +31,21 @@ public class EndStateScript : MonoBehaviour
             Debug.Log("Score not updated on the server as user not logged in");
             return;
         }
-        Debug.Log("Posting Score To Leaderboard...");
+        Debug.Log("Posting High Score To Leaderboard...");
         new GameSparks.Api.Requests.LogEventRequest()
-            .SetEventKey("SubmitScore")
-            .SetEventAttribute("cpscore", GameManager.Instance.TotalScore)
+            .SetEventKey(GameManager.Instance.EventKeyShortCode)
+            .SetEventAttribute(GameManager.Instance.EventAttributeShortCodeHighScore, GameManager.Instance.TotalScore)
             .Send((response) =>
             {
-                Debug.Log(!response.HasErrors ? "Score Posted Sucessfully..." : "Error Posting Score...");
+                Debug.Log(!response.HasErrors ? "High Score Posted Sucessfully..." : "Error Posting High Score...");        
+            });
+        Debug.Log("Posting Current Score To Leaderboard...");
+        new GameSparks.Api.Requests.LogEventRequest()
+            .SetEventKey(GameManager.Instance.EventKeyShortCode)
+            .SetEventAttribute(GameManager.Instance.EventAttributeShortCodeCurrentScore, GameManager.Instance.TotalScore)
+            .Send((response) =>
+            {
+                Debug.Log(!response.HasErrors ? "Current Score Posted Sucessfully..." : "Error Posting Current Score...");
             });
     }
 
