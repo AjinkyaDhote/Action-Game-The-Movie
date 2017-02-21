@@ -61,6 +61,10 @@ public class PayLoadHealthScript : MonoBehaviour
         {
             numberOfLs -= 6;
         }
+        else if(tag == "DroneBullet")
+        {
+            numberOfLs--;
+        }
         payLoadHealthString.Length = 0;
         payLoadHealthString = payLoadHealthString.Append('l', numberOfLs);
         payLoadHealthText.text = payLoadHealthString.ToString();

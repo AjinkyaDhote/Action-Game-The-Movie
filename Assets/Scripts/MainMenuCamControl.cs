@@ -23,6 +23,7 @@ public class MainMenuCamControl : MonoBehaviour
     public Transform franziLt, franziRt;
     public Transform vikramLt, vikramRt;
     public Transform MenuMount;
+    public Transform NetworkMount;
 
     public GameObject canvas;
 

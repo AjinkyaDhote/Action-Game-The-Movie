@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = false;
+    private const bool _GOD_MODE = true;
 
     public bool GOD_MODE
     {
@@ -84,7 +84,10 @@ public class GameManager : MonoBehaviour
     private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose, Scene2D_tut, Scene3D_tut, Scene2D_3, Scene3D_3 };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentGameState = GameStates.MENU;
-    
+    [HideInInspector] public string LeaderBoardShortCode = "";
+    [HideInInspector] public string EventKeyShortCode = "";
+    [HideInInspector] public string EventAttributeShortCodeHighScore = "";
+    [HideInInspector]public string EventAttributeShortCodeCurrentScore = "";
     public static GameManager Instance
     {
         get
@@ -284,6 +287,43 @@ public class GameManager : MonoBehaviour
                     batteryCount += batteryPickupsCount[i];
                 }
             }
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.buildIndex)
+        {
+            case (int)Levels.Scene3D_1:
+                LeaderBoardShortCode = "wwlb1";
+                EventKeyShortCode = "SubmitScore1";
+                EventAttributeShortCodeHighScore = "cpscore1";
+                EventAttributeShortCodeCurrentScore = "cpscore11";
+                break;
+            case (int)Levels.Scene3D_2:
+                LeaderBoardShortCode = "wwlb2";
+                EventKeyShortCode = "SubmitScore2";
+                EventAttributeShortCodeHighScore = "cpscore2";
+                EventAttributeShortCodeCurrentScore = "cpscore22";
+                break;
+            case (int) Levels.Scene3D_3:
+                LeaderBoardShortCode = "wwlb3";
+                EventKeyShortCode = "SubmitScore3";
+                EventAttributeShortCodeHighScore = "cpscore3";
+                EventAttributeShortCodeCurrentScore = "cpscore33";
+                break;
+            default:
+                break;
         }
     }
 }
