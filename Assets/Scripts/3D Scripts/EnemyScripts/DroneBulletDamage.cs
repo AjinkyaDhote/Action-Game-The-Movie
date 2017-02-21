@@ -5,7 +5,8 @@ public class DroneBulletDamage : MonoBehaviour
 {
     PlayerHealthScript playerHealthScript;
     PayLoadHealthScript payloadHealthScript;
-    private float playerDamage;
+    public float playerDamage;
+    public float payLoadDamage;
     private Rigidbody rb;
     private void Start()
     {
@@ -18,14 +19,12 @@ public class DroneBulletDamage : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {        
         if (other.collider.CompareTag("Player"))
-        {
-        
+        {        
             if ((playerHealthScript != null))
             {
                 playerHealthScript.PlayerDamage(playerDamage, 0.3f);
             }
-
-             rb.isKinematic = true;
+             //rb.isKinematic = true;
              Destroy(transform.gameObject);
         }
 
@@ -33,15 +32,23 @@ public class DroneBulletDamage : MonoBehaviour
         {
             if ((payloadHealthScript != null))
             {
-                payloadHealthScript.PayLoadDamage(other.collider.tag);
+                payloadHealthScript.PayLoadDamage(gameObject.tag);
             }
-            rb.isKinematic = true;
+            //rb.isKinematic = true;
             Destroy(transform.gameObject);
         }
 
         else if (other.collider.CompareTag("Wall"))
         {
             Destroy(transform.gameObject);
-        }       
+        }
+
+        Destroy(transform.gameObject, 3f);
     } 
+
+    void OnBecameInvisible()
+    {
+        Destroy(transform.gameObject);
+    }
+
 }

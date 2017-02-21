@@ -319,19 +319,20 @@ public class DroneMovement : MonoBehaviour
                 if (_isPlayer_Payload_Seen)
                 {
                     transform.LookAt(targetTransform);
-                    //agent.speed = 0;                    
+                    agent.speed = 0;     
+                    
                     if (!bulletShot)
                     {
                         bulletShot = true;
-                        //StartCoroutine(WaitToShoot());
+                        StartCoroutine(WaitToShoot());
                     }
 
-                    Hover();
+                    //Hover();
                 }
 
                 else
                 {
-                    agent.speed = followSpeed;                  
+                    agent.speed = followSpeed;                    
                     agent.destination = targetTransform.position;  //follow
 
                 }
@@ -379,8 +380,8 @@ public class DroneMovement : MonoBehaviour
         theta += 1f;
         //Debug.Log(startHoverPosition);
         transform.localPosition = new Vector3(startHoverPosition.x + hoverSpeed * Mathf.Sin(theta * Mathf.Deg2Rad), startHoverPosition.y + hoverSpeed * Mathf.Sin(theta * Mathf.Deg2Rad) * Mathf.Cos(theta * Mathf.Deg2Rad), startHoverPosition.z);
-        //Hover = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed), transform.position.z);
-      
+        //Hover = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed), transform.position.z);     
+         
     }
 
 
@@ -393,7 +394,7 @@ public class DroneMovement : MonoBehaviour
         _isPlayer_Payload_Seen = true;
         startHoverPosition = transform.localPosition;
         engaged = true;
-        agent.stoppingDistance = 0;
+        //agent.stoppingDistance = 5;
         targetTransform = transformToLookAt;
        
     }

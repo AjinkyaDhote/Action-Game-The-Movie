@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droneSpeed: 3
   hoverSpeed: 1
-  bulletForce: 500
+  bulletForce: 100
   engaged: 0
 --- !u!135 &135343694398431732
 SphereCollider:
@@ -279,7 +279,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.6760244
+  m_Radius: 6
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!135 &135836440693377180
 SphereCollider:
