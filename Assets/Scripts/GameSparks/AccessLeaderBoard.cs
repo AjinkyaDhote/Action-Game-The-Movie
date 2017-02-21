@@ -27,7 +27,7 @@ public class AccessLeaderBoard : MonoBehaviour
             new LeaderboardDataRequest()
                 .SetEntryCount(10)
                 .SetIncludeFirst(10)
-                .SetLeaderboardShortCode("wwlb")
+                .SetLeaderboardShortCode(GameManager.Instance.LeaderBoardShortCode)
                 .Send((response) =>
                 {
                     if (!response.HasErrors)
@@ -40,7 +40,7 @@ public class AccessLeaderBoard : MonoBehaviour
                         int i = 0;
                         foreach (LeaderboardDataResponse._LeaderboardData entry in response.Data)
                         {
-                            textslots[i].text = (entry.Rank ?? 0) + " : " + entry.UserName + "'s Score: " + entry.JSONData["cpscore"].ToString();
+                            textslots[i].text = (entry.Rank ?? 0) + " : " + entry.UserName + "'s Score: " + entry.JSONData[GameManager.Instance.EventAttributeShortCodeHighScore].ToString();
                             i++;
                         }
                     }
@@ -50,23 +50,36 @@ public class AccessLeaderBoard : MonoBehaviour
                     }
                 });
 
-            new LeaderboardsEntriesRequest()
-            .SetLeaderboards(new List<string>() { "wwlb" })
+            new AccountDetailsRequest()
             .Send((response) =>
             {
                 if (!response.HasErrors)
                 {
-                    if (textslots[10] != null)
-                    {
-                        if (response.ScriptData != null)
+                    new GetLeaderboardEntriesRequest()
+                        .SetPlayer(response.UserId)
+                        .SetLeaderboards(new List<string>() { GameManager.Instance.LeaderBoardShortCode })
+                        .Send((response2) =>
                         {
-                            textslots[10].text = response.Results.GetString("rank").ToString() + " : " + response.Results.GetString("userName") + " Score: " + response.Results.GetString("cpscore").ToString();
-                        }
-                    }
+                            if (!response2.HasErrors)
+                            {
+                                if (textslots[10] != null)
+                                {
+                                    var number = response2.BaseData.GetGSData(GameManager.Instance.LeaderBoardShortCode).GetNumber(GameManager.Instance.EventAttributeShortCodeCurrentScore);
+                                    if (number != null)
+                                    {
+                                        textslots[10].text = response.DisplayName + "'s Score: " + number;
+                                    }                             
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Error Retrieving Leaderboard Data...");
+                            }
+                        });
                 }
                 else
                 {
-                    Debug.Log("Error Retrieving Leaderboard Data...");
+                    Debug.Log("Error Retrieving Current Player Data...");
                 }
             });
             hasLeaderBoardBeenAccessed = true;
