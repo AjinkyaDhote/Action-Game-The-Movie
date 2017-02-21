@@ -47,9 +47,9 @@ public class Scoring : MonoBehaviour {
         GameManager.Instance.remainingHealth = GameObject.FindGameObjectWithTag("NewPayload").transform.FindChild("PayLoadHealthBar").GetComponent<PayLoadHealthScript>().payLoadHealth;
 
         //GameManager.Instance.accuracy = (int)(((float)GameManager.Instance.totalEnemiesKilled/ GameManager.Instance.shotsFired) * 100) + (int)(((float)GameManager.Instance.headShots/ GameManager.Instance.shotsFired) * 2 * 100);
-        Debug.Log("headShots" + GameManager.Instance.headShots);
-        Debug.Log("hitcount" + GameManager.Instance.bodyShots);
-        Debug.Log("shotsFired" + GameManager.Instance.shotsFired);
+        //Debug.Log("headShots" + GameManager.Instance.headShots);
+        //Debug.Log("hitcount" + GameManager.Instance.bodyShots);
+        //Debug.Log("shotsFired" + GameManager.Instance.shotsFired);
 
 
         GameManager.Instance.accuracy = (int)((((GameManager.Instance.headShots * WeightHS) + (GameManager.Instance.bodyShots * WeightBS)) / (GameManager.Instance.shotsFired * WeightHS)) * 100);

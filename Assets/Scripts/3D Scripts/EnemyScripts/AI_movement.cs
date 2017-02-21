@@ -11,6 +11,7 @@ public class AI_movement : MonoBehaviour
     GameObject hitRadialPrefab;
     GameObject hitRadial;
     UnityEngine.AI.NavMeshAgent agent;
+    private bool hasPlayed;    
     //bool isPlayerInRange;
     //Vector3 resetPositionForInRange;
     [HideInInspector]
@@ -51,6 +52,7 @@ public class AI_movement : MonoBehaviour
 
     void Start()
     {
+        hasPlayed = false;        
         //enemyRayCastHelper = transform.FindChild("RaycastHelper").transform;
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
@@ -179,9 +181,10 @@ public class AI_movement : MonoBehaviour
     
     public void Detection(Transform transformToLookAt)
     {
-        if (!SoundManager3D.Instance.intruderAlert.audioSource.isPlaying)
+        if (!hasPlayed)
         {
             SoundManager3D.Instance.intruderAlert.Play();
+            hasPlayed = true;
         }
         //transform.LookAt(transformToLookAt);
         _isPlayer_Payload_Seen = true;
