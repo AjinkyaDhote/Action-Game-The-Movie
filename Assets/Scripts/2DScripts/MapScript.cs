@@ -51,13 +51,13 @@ public class MapScript : MonoBehaviour
     private Color lockSelectedColorLocked;
     private bool lockDetected;
 
-    private Stack<GameObject>   keyList;
-    private Stack<int>      keyPickupsCount;
-    private GameObject[]    allKeys;
-    private GameObject[]    keylistarray;
-    private Color           keyColor;
-    private Color           keySelectedColor;
-    private bool            keyDetected;
+    private Stack<GameObject> keyList;
+    private Stack<int> keyPickupsCount;
+    private GameObject[] allKeys;
+    private GameObject[] keylistarray;
+    private Color keyColor;
+    private Color keySelectedColor;
+    private bool keyDetected;
 
     private Texture2D cursorGreen;
     private Texture2D cursorRed;
@@ -119,7 +119,7 @@ public class MapScript : MonoBehaviour
         mapPoints.Add(imagePos);
         playerPosList = new List<Vector3>();
         playerPosList.Add(prevShadowPos);
-        
+
         if (SceneManager.GetActiveScene().buildIndex == 7)
             batteryText.text = "50";
         else
@@ -219,8 +219,43 @@ public class MapScript : MonoBehaviour
         object_vector = mousePos - prevShadowPos;
         //rayLength = object_vector.magnitude;
         rayLength = (thresholdDistance * thresholdDistance < object_vector.sqrMagnitude) ? thresholdDistance : object_vector.magnitude;
-        hit = Physics2D.RaycastAll(prevShadowPos, object_vector.normalized, rayLength, layerMask);
+        RaycastHit2D[] hit1;
+        hit1 = Physics2D.RaycastAll(prevShadowPos, object_vector.normalized, rayLength, layerMask);
+        //foreach (RaycastHit2D h in hit1)
+        //    Debug.Log("Hit " + h.transform.name);
+        if (layerMask == ammoLayerMask)
+        {
+            for (int i = 0; i < hit1.Length; i++)
+            {
+                if (Physics2D.Raycast(hit1[i].point, (Vector2)hit1[i].transform.position - hit1[i].point, ((Vector2)hit1[i].transform.position - hit1[i].point).magnitude, wallLayerMask))
+                {
+                    Debug.DrawRay(hit1[i].point, (Vector2)hit1[i].transform.position - hit1[i].point, Color.black);
+                    hit1 = RemoveElements(hit1, i);
+                }
+            }
+            //foreach (RaycastHit2D h in hit1)
+            //    Debug.Log(h.transform.name);
+        }
+        hit = hit1;
         return hit.Length;
+    }
+
+    private RaycastHit2D[] RemoveElements(RaycastHit2D[] ElementsArray, int RemoveAt)
+    {
+        RaycastHit2D[] newElementsArray = new RaycastHit2D[ElementsArray.Length - 1];
+
+        int i = 0;
+        int j = 0;
+        while (i < ElementsArray.Length)
+        {
+            if (i != RemoveAt)
+            {
+                newElementsArray[j] = ElementsArray[i];
+                j++;
+            }
+            i++;
+        }
+        return newElementsArray;
     }
 
     void Update()
@@ -298,7 +333,7 @@ public class MapScript : MonoBehaviour
             cross.gameObject.SetActive(false);
 
             //update threshold distance dynamically according to batteries in line
-            thresholdDistance = ((currentBattery + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50) / GameManager.Instance.batteryDepletionRate);  
+            thresholdDistance = ((currentBattery + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50) / GameManager.Instance.batteryDepletionRate);
 
             if ((currentBattery - (travelDist * GameManager.Instance.batteryDepletionRate) + countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) * 50) < 0)
             {
@@ -318,7 +353,7 @@ public class MapScript : MonoBehaviour
                 //battery detection
                 if (countObjects(mousePos, batteryLayerMask, out hitsEveryFrame) > 0)                                               //battery detection
                 {
-                    if(!batteryDetected)
+                    if (!batteryDetected)
                     {
                         batteryDetected = true;
                         SoundManager.PickupHover();
@@ -493,7 +528,7 @@ public class MapScript : MonoBehaviour
 
                 //if(countObjects(worldPos, pickupLayerMask, out hits) == 0)
                 //{
-                    
+
                 //}
 
                 // draw the line and shadow
