@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
+    public List<Vector2> keyPosList;
     [HideInInspector]
     public int battery = 100;
 

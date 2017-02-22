@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BatteryLayer: {fileID: 1678255698}
+  KeyLayer: {fileID: 1764738392}
   AmmoLayer: {fileID: 178186065}
   map: {fileID: 1852946442}
 --- !u!4 &209640183
@@ -2891,6 +2892,34 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 439450, guid: 4304009f3319d4247ab430943058caf7, type: 2}
   m_PrefabInternal: {fileID: 1751748860}
+--- !u!1 &1764738392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1764738393}
+  m_Layer: 13
+  m_Name: Keys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1764738393
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1764738392}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalScale: {x: 0.43010768, y: 0.43010768, z: 1.1182799}
+  m_Children: []
+  m_Father: {fileID: 1852946444}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1796930941
 Prefab:
   m_ObjectHideFlags: 0
@@ -3214,6 +3243,7 @@ Transform:
   - {fileID: 178186066}
   - {fileID: 1678255699}
   - {fileID: 451487148}
+  - {fileID: 1764738393}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
