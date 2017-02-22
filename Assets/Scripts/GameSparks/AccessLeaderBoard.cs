@@ -12,6 +12,10 @@ public class AccessLeaderBoard : MonoBehaviour
     private void Awake()
     {
         hasLeaderBoardBeenAccessed = false;
+        if (!GS.Authenticated)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void LoadData()
