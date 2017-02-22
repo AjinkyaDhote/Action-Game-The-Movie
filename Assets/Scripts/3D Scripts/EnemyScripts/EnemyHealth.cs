@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     private Animator anim;
     private Transform playerTransform;
+    
     //private DroneMovement droneMovementScript;
     [SerializeField]
     private bool _isKilled = false;
@@ -65,11 +66,9 @@ public class EnemyHealth : MonoBehaviour
                 transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
             }
             if (gameObject.tag == "DroneEnemy")
-            {                
-                Destroy(gameObject,1f);
+            {                                
+                Destroy(gameObject, 0.05f);
             }
-
-
 
                 // enemyHead.HeadFall();
                 //gameObject.GetComponent<Renderer>().material.SetColor("spec", colorDead);
