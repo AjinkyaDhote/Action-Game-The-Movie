@@ -7,6 +7,7 @@ public class BulletDamage : MonoBehaviour
     const float SCALE = 0.8f;
 
     AI_movement aiMovementScript;
+    DroneMovement droneMovementScript;
     EnemyHealth enemyHealthScript;
     WeaponSystem weaponSystemScript;
     Transform playerTransform;
@@ -39,7 +40,7 @@ public class BulletDamage : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         playerShootingScript = player.GetComponent<Transform>().GetChild(0).GetChild(0).GetComponent<PlayerShooting>();
-        
+                
         //--------------------------------Friendly Fire ON--------------------------------------------------------
         //payLoadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").GetComponent<Transform>().GetChild(2).GetComponent<PayLoadHealthScript>();
         //---------------------------------------------------------------------------------------------------------
@@ -84,6 +85,23 @@ public class BulletDamage : MonoBehaviour
                     {
                         GameManager.Instance.bodyShots++;
                     }
+                    enemyHealthScript.Damage(SHOT_DAMAGE);
+                }
+            }
+        }
+
+        else if(other.collider.CompareTag("DroneEnemy"))
+        {            
+            droneMovementScript = other.transform.GetComponent<DroneMovement>();            
+            droneMovementScript.Detection(playerTransform);
+
+            enemyHealthScript = other.transform.GetComponent<EnemyHealth>();
+            if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
+            {
+                //PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
+                if (other.collider.CompareTag("DroneEnemy"))
+                {
+                    //GameManager.Instance.headShots++;                    
                     enemyHealthScript.Damage(SHOT_DAMAGE);
                 }
             }
