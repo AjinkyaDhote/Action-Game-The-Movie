@@ -7,6 +7,9 @@ public class LevelManager3D : MonoBehaviour
     public Transform AmmoMeshPrefab;
     public Transform KeyMeshPrefab;
 
+    [HideInInspector]
+    public static int accessCardCount;
+
     private float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
     private Vector3 convertPoint(Vector2 relativePoint)
@@ -25,6 +28,7 @@ public class LevelManager3D : MonoBehaviour
         width3DPlane = GameManager.Instance.width3DPlane;
         height3DPlane = GameManager.Instance.height3DPlane;
         Vector3 worldPos;
+        accessCardCount = 0;
 
         // instantiate Ammo
         for ( int i=0; i< GameManager.Instance.ammoPosList.Count; i++ )
@@ -47,7 +51,7 @@ public class LevelManager3D : MonoBehaviour
         {
             worldPos = convertPoint(GameManager.Instance.keyPosList[i]);
             worldPos.y += 0.8f;
-            Instantiate(KeyMeshPrefab, worldPos, Quaternion.Euler(0, 0, 0));
+            Instantiate(KeyMeshPrefab, worldPos, Quaternion.Euler(0, 0, -90));
         }
     }
 }

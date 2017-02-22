@@ -10,16 +10,14 @@ public class LaserConsole : MonoBehaviour {
     Transform ConsoleText;
     BoxCollider boxCollider;
     Renderer ren;
-    Transform brokenLaserConsole;
-    bool hasAccessCard;
+    Transform brokenLaserConsole;    
     
 	void Start ()
     {
         ConsoleText = gameObject.transform.GetChild(0);
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
         brokenLaserConsole = transform.parent.GetChild(6);
-        ren = GetComponent<Renderer>();
-        hasAccessCard = true;
+        ren = GetComponent<Renderer>();        
     }
 	
     void Update()
@@ -30,6 +28,7 @@ public class LaserConsole : MonoBehaviour {
             brokenLaserConsole.parent = null;
             brokenLaserConsole.gameObject.SetActive(true);
         }
+        Debug.Log(LevelManager3D.accessCardCount);
     }
 
 
@@ -46,7 +45,7 @@ public class LaserConsole : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            if(hasAccessCard)
+            if(LevelManager3D.accessCardCount != 0)
             {
                 ConsoleText.gameObject.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
@@ -57,8 +56,8 @@ public class LaserConsole : MonoBehaviour {
                     {
                         lasers[i].SetActive(false);
                     }
-
-                    boxCollider.enabled = false;                    
+                    boxCollider.enabled = false;
+                    LevelManager3D.accessCardCount--;                                      
                 }
             }            
         }
