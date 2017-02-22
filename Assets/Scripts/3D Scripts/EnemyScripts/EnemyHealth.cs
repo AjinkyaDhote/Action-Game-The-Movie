@@ -51,10 +51,10 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!_isKilled)
         {
-            if (currentHealth < -900)
-            {
-                GameManager.Instance.headShots++;
-            }
+            //if (currentHealth < -900)
+            //{
+            //    GameManager.Instance.headShots++;
+            //}
             SoundManager3D.Instance.enemyDeath.Play();
             //Debug.Log("Killed");
             _isKilled = true;
