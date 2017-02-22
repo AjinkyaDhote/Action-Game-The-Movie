@@ -2322,6 +2322,8 @@ MonoBehaviour:
     type: 2}
   AmmoMeshPrefab: {fileID: 4000010492600034, guid: 9ee489f3813488f49ac470dd3140f58a,
     type: 2}
+  KeyMeshPrefab: {fileID: 4447406957536848, guid: 0cd5f6ebe3a18d44b994d64017fa6782,
+    type: 2}
 --- !u!1 &235029337
 GameObject:
   m_ObjectHideFlags: 0
@@ -3766,16 +3768,6 @@ Prefab:
     - target: {fileID: 1327841765545664, guid: 2a5f81bc39ce97a449d0054da6182e59, type: 2}
       propertyPath: m_Name
       value: PayLoad
-      objectReference: {fileID: 0}
-    - target: {fileID: 114273603244139694, guid: 2a5f81bc39ce97a449d0054da6182e59,
-        type: 2}
-      propertyPath: payLoadSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155914919770566, guid: 2a5f81bc39ce97a449d0054da6182e59,
-        type: 2}
-      propertyPath: rateOfHealthDegeneration
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a5f81bc39ce97a449d0054da6182e59, type: 2}
