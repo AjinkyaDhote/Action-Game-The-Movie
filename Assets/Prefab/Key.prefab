@@ -23,8 +23,9 @@ GameObject:
   - component: {fileID: 23864575580814636}
   - component: {fileID: 65652092115933164}
   - component: {fileID: 54124709765423720}
-  - component: {fileID: 114875591073685292}
   - component: {fileID: 114585471036471184}
+  - component: {fileID: 114835926979975300}
+  - component: {fileID: 114062694641746184}
   m_Layer: 0
   m_Name: Key
   m_TagString: AccessCard
@@ -110,6 +111,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07105413, y: 0.0021023198, z: 0.041498583}
   m_Center: {x: -0.0000029299408, y: -0.0000000012223608, z: 0.00000070501113}
+--- !u!114 &114062694641746184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326115571967920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccb3dccb7de9434f84b0f615511dc53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114585471036471184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82026284d286bc459f1defd8405b453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114875591073685292
+--- !u!114 &114835926979975300
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,6 +141,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326115571967920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f6dff71338328458a7c9b25434b40e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3745a98bbcd29b343a69d7c3777ff262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
