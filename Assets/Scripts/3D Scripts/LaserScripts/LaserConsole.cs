@@ -10,23 +10,26 @@ public class LaserConsole : MonoBehaviour {
     Transform ConsoleText;
     BoxCollider boxCollider;
     Renderer ren;
-    Transform brokenLaserConsole;    
+    GameObject brokenLaserConsole;
+    Transform consoleTransform;
     
 	void Start ()
     {
         ConsoleText = gameObject.transform.GetChild(0);
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
-        brokenLaserConsole = transform.parent.GetChild(6);
-        ren = GetComponent<Renderer>();        
+        brokenLaserConsole = Resources.Load<GameObject>("BrokenConsole/BrokenLaserConsole");
+        ren = GetComponent<Renderer>();
+        consoleTransform = gameObject.transform;      
     }
 	
     void Update()
     {
         if(_health <= 0)
         {
-            gameObject.transform.parent.gameObject.SetActive(false);
-            brokenLaserConsole.parent = null;
-            brokenLaserConsole.gameObject.SetActive(true);
+            transform.parent.gameObject.SetActive(false);
+            //brokenLaserConsole.parent = null;
+            Instantiate(brokenLaserConsole, consoleTransform.position - new Vector3(0f, 2f, 0f), consoleTransform.rotation);
+            //brokenLaserConsole.gameObject.SetActive(true);
         }
         Debug.Log(LevelManager3D.accessCardCount);
     }
