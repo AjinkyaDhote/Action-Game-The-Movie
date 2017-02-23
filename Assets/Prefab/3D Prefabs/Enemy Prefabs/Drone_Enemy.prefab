@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 135836440693377180}
   - component: {fileID: 114352111679965590}
   - component: {fileID: 114652626097750712}
+  - component: {fileID: 114480739684148394}
   m_Layer: 16
   m_Name: Drone_Enemy
   m_TagString: DroneEnemy
@@ -84,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4114447119595986}
   - component: {fileID: 135343694398431732}
-  - component: {fileID: 114392539220187896}
+  - component: {fileID: 114792762633399870}
   m_Layer: 0
   m_Name: DetectionCollider
   m_TagString: Untagged
@@ -129,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1570032519401716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.052284, y: 3.6, z: -32.3}
+  m_LocalPosition: {x: -56.1, y: 3.6, z: -40.7}
   m_LocalScale: {x: 1.7080555, y: 1.7080551, z: 1.7080551}
   m_Children:
   - {fileID: 4806100077033544}
@@ -243,15 +244,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isKilled: 0
   currentHealth: 5
---- !u!114 &114392539220187896
+--- !u!114 &114480739684148394
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1722938850168258}
+  m_GameObject: {fileID: 1570032519401716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52f0e2c519b72b45a59d462cf82edf8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8026fffc8778b66479f1c9aa49e5c637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114652626097750712
@@ -269,6 +270,17 @@ MonoBehaviour:
   hoverSpeed: 1
   bulletForce: 100
   engaged: 0
+--- !u!114 &114792762633399870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1722938850168258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52f0e2c519b72b45a59d462cf82edf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135343694398431732
 SphereCollider:
   m_ObjectHideFlags: 1
