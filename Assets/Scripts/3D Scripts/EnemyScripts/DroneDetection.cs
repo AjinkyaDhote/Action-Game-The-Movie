@@ -14,7 +14,7 @@ public class DroneDetection : MonoBehaviour
     {
         player = GameObject.Find("FPSPlayer").GetComponent<Transform>();
         payload = GameObject.Find("PayLoad").GetComponent<Transform>();
-        droneMovementScript = gameObject.GetComponentInParent<DroneMovement>();
+        droneMovementScript = GetComponentInParent<DroneMovement>();
         enemyCenter = Vector3.zero;
     }
 
