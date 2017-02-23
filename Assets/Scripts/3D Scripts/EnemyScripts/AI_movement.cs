@@ -11,7 +11,7 @@ public class AI_movement : MonoBehaviour
     GameObject hitRadialPrefab;
     GameObject hitRadial;
     UnityEngine.AI.NavMeshAgent agent;
-    private bool hasPlayed;    
+    private bool hasPlayed;
     //bool isPlayerInRange;
     //Vector3 resetPositionForInRange;
     [HideInInspector]
@@ -52,7 +52,7 @@ public class AI_movement : MonoBehaviour
 
     void Start()
     {
-        hasPlayed = false;        
+        hasPlayed = false;
         //enemyRayCastHelper = transform.FindChild("RaycastHelper").transform;
         enemyHealth = GetComponent<EnemyHealth>();
         randomVectors = new Vector3[8];
@@ -120,7 +120,7 @@ public class AI_movement : MonoBehaviour
             hit = Physics.Raycast(gameObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f), direction.normalized, direction.magnitude);
             //Debug.DrawRay(gameObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f), direction.normalized, Color.red, 1);
 
-        } while (hit && initialIndex  != randomIndex);
+        } while (hit && initialIndex != randomIndex);
 
         return randomPoint;
     }
@@ -164,7 +164,7 @@ public class AI_movement : MonoBehaviour
     }
     void DamagePlayer(int damage)
     {
-        if(targetTransform.tag == "Player")
+        if (targetTransform.CompareTag("Player"))
         {
             playerHealth.PlayerDamage(damage, 0.07f, gameObject.name);
 
@@ -173,12 +173,12 @@ public class AI_movement : MonoBehaviour
             hitRadial.GetComponent<HitRadial>().StartRotation(transform);
             Destroy(hitRadial, 2.0f);
         }
-        else if(targetTransform.tag == "NewPayload")
+        else if (targetTransform.CompareTag("NewPayload"))
         {
             payLoadHealthScript.PayLoadDamage(gameObject.tag);
         }
     }
-    
+
     public void Detection(Transform transformToLookAt)
     {
         if (!hasPlayed)
@@ -202,6 +202,10 @@ public class AI_movement : MonoBehaviour
         anim.SetBool("isPlayer_PayloadInRange", true);
 
         targetTransform = transformToLookAt;
+        if (targetTransform.CompareTag("NewPayload"))
+        {
+            payLoadHealthScript.StopPayload();
+        }
     }
     public void OutOfRange()
     {

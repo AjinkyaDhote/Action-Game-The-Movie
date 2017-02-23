@@ -19,23 +19,25 @@ class PlayerInRangeOfPayload0 : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             //payLoadRange.circle.SetVertexCount(payLoadRange.circleSize[0]);
             //payLoadRange.circle.SetPositions(payLoadRange.circlePoints[0]);
             payLoadRange.range = PayLoadRangeScript.Range.CompletelyInside;
-            payLoadRange.circle.SetColors(playerInsideColor, playerInsideColor);
+            //payLoadRange.circle.SetColors(playerInsideColor, playerInsideColor);
+            payLoadRange.circle.startColor = payLoadRange.circle.endColor = playerInsideColor;
             animPayload.SetBool("IsPlayerOutOfCircle", false);
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             //payLoadRange.circle.SetVertexCount(payLoadRange.circleSize[1]);
             //payLoadRange.circle.SetPositions(payLoadRange.circlePoints[1]);
             payLoadRange.range = PayLoadRangeScript.Range.OutsideFirstCircle;
-            payLoadRange.circle.SetColors(playerOutsideColor, playerOutsideColor);
+            //payLoadRange.circle.SetColors(playerOutsideColor, playerOutsideColor);
+            payLoadRange.circle.startColor = payLoadRange.circle.endColor = playerOutsideColor;
             //playerHealth.PlayerDamage();
             animPayload.SetBool("IsPlayerOutOfCircle", true);
         }
