@@ -4,7 +4,8 @@ using System.Collections;
 public class LevelManager2D : MonoBehaviour
 {
 	public GameObject BatteryLayer;
-	public GameObject AmmoLayer;
+    public GameObject KeyLayer;
+    public GameObject AmmoLayer;
 	public GameObject map;
 
 	void Awake ()
@@ -28,5 +29,12 @@ public class LevelManager2D : MonoBehaviour
 			GameManager.Instance.batteryPosList.Add( imagePos );
 		}
 
-	}
+        GameManager.Instance.keyPosList.Clear();
+        for (int i = 0; i < KeyLayer.transform.childCount; i++)
+        {
+            Vector3 keyPos = KeyLayer.transform.GetChild(i).position;
+            Vector2 imagePos = mapScript.convertToPixels(keyPos);
+            GameManager.Instance.keyPosList.Add(imagePos);
+        }
+    }
 }
