@@ -3645,16 +3645,6 @@ Prefab:
       propertyPath: m_Name
       value: PayLoad
       objectReference: {fileID: 0}
-    - target: {fileID: 114155914919770566, guid: 2a5f81bc39ce97a449d0054da6182e59,
-        type: 2}
-      propertyPath: rateOfHealthDegeneration
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114273603244139694, guid: 2a5f81bc39ce97a449d0054da6182e59,
-        type: 2}
-      propertyPath: payLoadSpeed
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a5f81bc39ce97a449d0054da6182e59, type: 2}
   m_IsPrefabParent: 0
@@ -6422,9 +6412,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114480739684148394, guid: dc748acc0817c1c488d27d244d430df2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dc748acc0817c1c488d27d244d430df2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &642646901 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1570032519401716, guid: dc748acc0817c1c488d27d244d430df2,
+    type: 2}
+  m_PrefabInternal: {fileID: 642646900}
+--- !u!114 &642646902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 642646901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b4f945bf425d94ea3031e4e218eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &650353408
 GameObject:
   m_ObjectHideFlags: 0
@@ -8422,9 +8429,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114480739684148394, guid: dc748acc0817c1c488d27d244d430df2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dc748acc0817c1c488d27d244d430df2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &848790365 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1570032519401716, guid: dc748acc0817c1c488d27d244d430df2,
+    type: 2}
+  m_PrefabInternal: {fileID: 848790364}
+--- !u!114 &848790366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 848790365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b4f945bf425d94ea3031e4e218eb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &853047486
 Prefab:
   m_ObjectHideFlags: 0
