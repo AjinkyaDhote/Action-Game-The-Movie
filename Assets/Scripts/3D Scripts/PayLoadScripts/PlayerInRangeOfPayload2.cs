@@ -22,7 +22,8 @@ class PlayerInRangeOfPayload2 : MonoBehaviour
             //payLoadRange.circle.SetVertexCount(payLoadRange.circleSize[2]);
             //payLoadRange.circle.SetPositions(payLoadRange.circlePoints[2]);
             payLoadRange.range = PayLoadRangeScript.Range.OutsideSecondCircle;
-            payLoadRange.circle.SetColors(playerInsideColor, playerInsideColor);
+            //payLoadRange.circle.SetColors(playerInsideColor, playerInsideColor);
+            payLoadRange.circle.startColor = payLoadRange.circle.endColor = playerInsideColor;
         }
     }
     void OnTriggerExit(Collider other)
@@ -32,7 +33,8 @@ class PlayerInRangeOfPayload2 : MonoBehaviour
             //payLoadRange.circle.SetVertexCount(payLoadRange.circleSize[3]);
             //payLoadRange.circle.SetPositions(payLoadRange.circlePoints[3]);
             payLoadRange.range = PayLoadRangeScript.Range.OutsideThirdCircle;
-            payLoadRange.circle.SetColors(playerOutsideColor, playerOutsideColor);
+            //payLoadRange.circle.SetColors(playerOutsideColor, playerOutsideColor);
+            payLoadRange.circle.startColor = payLoadRange.circle.endColor = playerOutsideColor;
             //playerHealth.PlayerDamage();
         }
     }
