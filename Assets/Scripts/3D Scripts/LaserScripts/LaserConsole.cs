@@ -41,28 +41,25 @@ public class LaserConsole : MonoBehaviour {
         {
             _health -= 1f;
         }
-    }    
-        	    	
+    }
 
-    void OnTriggerStay(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (!other.gameObject.CompareTag("Player")) return;
+        if (LevelManager3D.accessCardCount == 0) return;
+        ConsoleText.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if(LevelManager3D.accessCardCount != 0)
-            {
-                ConsoleText.gameObject.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    ren.material = accessGrantedMaterial;
+            ren.material = accessGrantedMaterial;
 
-                    for (int i = 0; i < lasers.Length; i++)
-                    {
-                        lasers[i].SetActive(false);
-                    }
-                    boxCollider.enabled = false;
-                    LevelManager3D.accessCardCount--;                                      
-                }
-            }            
+            foreach (GameObject laser in lasers)
+            {
+                laser.SetActive(false);
+            }
+            boxCollider.enabled = false;
+            LevelManager3D.accessCardCount--;
+            AccessCardCanvas.UpdateNumberOfCards();
         }
     }
 
