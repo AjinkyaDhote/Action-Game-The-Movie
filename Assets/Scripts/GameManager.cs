@@ -77,8 +77,8 @@ public class GameManager : MonoBehaviour
     public bool win_Lose = false;
     [HideInInspector]
     public string win_Lose_Message = null;
-    [HideInInspector]
-    //public int totalAmmoCollected;
+
+    [HideInInspector] public bool EnableKeyCardCounter = false;
 
     // private variables
     private static GameManager _instance = null;
@@ -303,6 +303,7 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        EnableKeyCardCounter = scene.buildIndex == (int) Levels.Scene3D_3;
         switch (scene.buildIndex)
         {
             case (int)Levels.Scene3D_1:
