@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public List<Vector2> batteryPosList;
     public List<Vector2> ammoPosList;
+    public List<Vector2> keyPosList;
     [HideInInspector]
     public int battery = 100;
 
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = true;
+    private const bool _GOD_MODE = false;
 
     public bool GOD_MODE
     {
@@ -76,8 +77,8 @@ public class GameManager : MonoBehaviour
     public bool win_Lose = false;
     [HideInInspector]
     public string win_Lose_Message = null;
-    [HideInInspector]
-    //public int totalAmmoCollected;
+
+    [HideInInspector] public bool EnableKeyCardCounter = false;
 
     // private variables
     private static GameManager _instance = null;
@@ -302,6 +303,7 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        EnableKeyCardCounter = scene.buildIndex == (int) Levels.Scene3D_3;
         switch (scene.buildIndex)
         {
             case (int)Levels.Scene3D_1:

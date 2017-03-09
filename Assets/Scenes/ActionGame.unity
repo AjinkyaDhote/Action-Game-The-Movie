@@ -197,6 +197,7 @@ MonoBehaviour:
   batteryPickupsCount: 
   batteryPosList: []
   ammoPosList: []
+  keyPosList: []
   battery: 100
   batteryDepletionRate: 5
   headShots: 0
@@ -214,6 +215,11 @@ MonoBehaviour:
   height3DPlane: 0
   win_Lose: 0
   win_Lose_Message: 
+  EnableKeyCardCounter: 0
+  LeaderBoardShortCode: 
+  EventKeyShortCode: 
+  EventAttributeShortCodeHighScore: 
+  EventAttributeShortCodeCurrentScore: 
 --- !u!114 &1601549639
 MonoBehaviour:
   m_ObjectHideFlags: 0

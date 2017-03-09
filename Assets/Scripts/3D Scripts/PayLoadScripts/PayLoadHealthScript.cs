@@ -50,8 +50,7 @@ public class PayLoadHealthScript : MonoBehaviour
     public void PayLoadDamage(string tag)
     {
         SoundManager3D.Instance.onHitByEnemyPayload.Play();
-        resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
-        payLoadMovementScript.payLoadSpeed = 0;
+        StopPayload();
         payLoadHealth -= NUMBER_OF_PARTS_FOR_HEALTH;
         if (tag == "SmallEnemy")
         {
@@ -85,5 +84,11 @@ public class PayLoadHealthScript : MonoBehaviour
             GameManager.Instance.win_Lose_Message = "Game Over";
             GameManager.Instance.GoToWinLoseScene();
         }
+    }
+
+    public void StopPayload()
+    {
+        resetPayloadSpeedTime = Time.realtimeSinceStartup + STOP_PAYLOAD_MOVEMENT_TIME;
+        payLoadMovementScript.payLoadSpeed = 0;
     }
 }

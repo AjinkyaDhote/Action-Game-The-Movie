@@ -10,26 +10,28 @@ public class LaserConsole : MonoBehaviour {
     Transform ConsoleText;
     BoxCollider boxCollider;
     Renderer ren;
-    Transform brokenLaserConsole;
-    bool hasAccessCard;
+    GameObject brokenLaserConsole;
+    Transform consoleTransform;
     
 	void Start ()
     {
         ConsoleText = gameObject.transform.GetChild(0);
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
-        brokenLaserConsole = transform.parent.GetChild(6);
+        brokenLaserConsole = Resources.Load<GameObject>("BrokenConsole/BrokenLaserConsole");
         ren = GetComponent<Renderer>();
-        hasAccessCard = true;
+        consoleTransform = gameObject.transform;      
     }
 	
     void Update()
     {
         if(_health <= 0)
         {
-            gameObject.transform.parent.gameObject.SetActive(false);
-            brokenLaserConsole.parent = null;
-            brokenLaserConsole.gameObject.SetActive(true);
+            transform.parent.gameObject.SetActive(false);
+            //brokenLaserConsole.parent = null;
+            Instantiate(brokenLaserConsole, consoleTransform.position - new Vector3(0f, 2f, 0f), consoleTransform.rotation);
+            //brokenLaserConsole.gameObject.SetActive(true);
         }
+        Debug.Log(LevelManager3D.accessCardCount);
     }
 
 
@@ -39,28 +41,25 @@ public class LaserConsole : MonoBehaviour {
         {
             _health -= 1f;
         }
-    }    
-        	    	
+    }
 
-    void OnTriggerStay(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (!other.gameObject.CompareTag("Player")) return;
+        if (LevelManager3D.accessCardCount == 0) return;
+        ConsoleText.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if(hasAccessCard)
+            ren.material = accessGrantedMaterial;
+
+            foreach (GameObject laser in lasers)
             {
-                ConsoleText.gameObject.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    ren.material = accessGrantedMaterial;
-
-                    for (int i = 0; i < lasers.Length; i++)
-                    {
-                        lasers[i].SetActive(false);
-                    }
-
-                    boxCollider.enabled = false;                    
-                }
-            }            
+                laser.SetActive(false);
+            }
+            boxCollider.enabled = false;
+            LevelManager3D.accessCardCount--;
+            AccessCardCanvas.UpdateNumberOfCards();
         }
     }
 

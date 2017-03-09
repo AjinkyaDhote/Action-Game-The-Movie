@@ -13,7 +13,7 @@ public class PlayerInRange : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" || other.tag == "NewPayload")
+        if (other.CompareTag("Player") || other.CompareTag("NewPayload"))
         {
             if (aiMovementScript != null)
             {

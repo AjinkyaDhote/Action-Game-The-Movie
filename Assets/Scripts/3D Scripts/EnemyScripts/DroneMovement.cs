@@ -356,7 +356,7 @@ public class DroneMovement : MonoBehaviour
 
     IEnumerator WaitToShoot()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         if(!enemyHealth.IsKilled)
         {
             Shooting();

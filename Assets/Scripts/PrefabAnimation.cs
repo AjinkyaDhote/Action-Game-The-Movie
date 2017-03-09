@@ -18,6 +18,8 @@ public class PrefabAnimation : MonoBehaviour {
                 transform.Rotate(0, 2f, 0f);
             if (gameObject.tag == "Battery")
                 transform.Rotate(transform.right, 2f, Space.World);
+            if(gameObject.tag == "AccessCard")
+                transform.Rotate(2f, 0, 0);
         }
     }
 }
