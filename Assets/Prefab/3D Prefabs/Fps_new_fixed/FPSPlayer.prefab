@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 23000011046501516}
   - component: {fileID: 114000013237285118}
   - component: {fileID: 95000013409854184}
+  - component: {fileID: 111575748133311514}
   m_Layer: 9
   m_Name: Pistol
   m_TagString: Gun
@@ -686,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1036093700070646
 GameObject:
   m_ObjectHideFlags: 1
@@ -873,7 +874,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011595463726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -69.8, y: 4.19, z: -42.02}
+  m_LocalPosition: {x: 3.14, y: 4.16, z: -45.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000012468093828}
@@ -1267,7 +1268,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012880786460}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 2d3be4b01c06faf4e9d69a09e12d7952, type: 3}
   m_Controller: {fileID: 9100000, guid: cf48c869e1f9fb345a413241f483b71a, type: 2}
   m_CullingMode: 0
@@ -1322,6 +1323,21 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 2328e1be360b4fb499314fd4e971c9ee, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 2328e1be360b4fb499314fd4e971c9ee, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!111 &111575748133311514
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012880786460}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b2cb964881241a74ca4123b44121d3ad, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b2cb964881241a74ca4123b44121d3ad, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1796,7 +1812,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013673135568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba2fca786c3ba11499ba9482e547a291, type: 3}
   m_Name: 
@@ -2149,6 +2165,8 @@ MonoBehaviour:
   bulletLifeTime: 20
   crossHair: {fileID: 21300000, guid: 9ac893a432771fa45898eb06342a33bf, type: 3}
   muzzleMesh: {fileID: 23000014045297490}
+  enableShooting: 1
+  animClip: {fileID: 0}
 --- !u!114 &114000013382113396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2351,6 +2369,8 @@ MonoBehaviour:
   bulletLifeTime: 20
   crossHair: {fileID: 21300000, guid: ea74c11938e619740856671557f817d5, type: 3}
   muzzleMesh: {fileID: 23000012980859274}
+  enableShooting: 1
+  animClip: {fileID: 0}
 --- !u!114 &114000014113569266
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,17 +7,15 @@ public class WeaponInfo:MonoBehaviour
     public float bulletLifeTime;
     public Sprite crossHair;
     public MeshRenderer muzzleMesh;
-    public bool enableShooting = true;
 
-    public void SetShooting()
+    public bool enableShooting;
+    private void Awake()
     {
         enableShooting = true;
-        Debug.Log("enabled True");
     }
-
-    public void ResetShooting()
+    public void ToggleShooting()
     {
-        enableShooting = false;
-        Debug.Log("enabled False");
+        enableShooting = !enableShooting;
+        Debug.Log(enableShooting);
     }
 }
