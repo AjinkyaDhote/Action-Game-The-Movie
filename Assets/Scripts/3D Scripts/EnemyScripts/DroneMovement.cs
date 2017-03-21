@@ -367,6 +367,8 @@ public class DroneMovement : MonoBehaviour
     {
         GameObject bulletGameObject;
         bulletGameObject = Instantiate(bullet, bulletEmitter.transform.position, Quaternion.identity) as GameObject;
+        //Play Sound
+        SoundManager3D.Instance.droneBullet.Play();
         Rigidbody bulletRB;
         bulletRB = bulletGameObject.GetComponent<Rigidbody>();
         bulletRB.AddForce((targetTransform.position -  bulletEmitter.transform.position).normalized * bulletForce);
@@ -380,8 +382,7 @@ public class DroneMovement : MonoBehaviour
         theta += 1f;
         //Debug.Log(startHoverPosition);
         transform.localPosition = new Vector3(startHoverPosition.x + hoverSpeed * Mathf.Sin(theta * Mathf.Deg2Rad), startHoverPosition.y + hoverSpeed * Mathf.Sin(theta * Mathf.Deg2Rad) * Mathf.Cos(theta * Mathf.Deg2Rad), startHoverPosition.z);
-        //Hover = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed), transform.position.z);     
-         
+        //Hover = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.realtimeSinceStartup * hoverSpeed), transform.position.z);              
     }
 
 
