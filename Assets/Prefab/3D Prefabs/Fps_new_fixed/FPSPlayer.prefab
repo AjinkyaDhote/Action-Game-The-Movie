@@ -681,13 +681,14 @@ GameObject:
   - component: {fileID: 23000014029225374}
   - component: {fileID: 114000014000669566}
   - component: {fileID: 95000011008322230}
+  - component: {fileID: 111088899626548954}
   m_Layer: 9
   m_Name: ShotGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1036093700070646
 GameObject:
   m_ObjectHideFlags: 1
@@ -1251,7 +1252,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014023764324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 04b6b688e3a2e3a479320a2960848706, type: 2}
   m_CullingMode: 0
@@ -1323,6 +1324,21 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 2328e1be360b4fb499314fd4e971c9ee, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 2328e1be360b4fb499314fd4e971c9ee, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!111 &111088899626548954
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014023764324}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b9a87965984597b4db93f62abe25e4ed, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b9a87965984597b4db93f62abe25e4ed, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1812,7 +1828,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013673135568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba2fca786c3ba11499ba9482e547a291, type: 3}
   m_Name: 
@@ -2166,7 +2182,6 @@ MonoBehaviour:
   crossHair: {fileID: 21300000, guid: 9ac893a432771fa45898eb06342a33bf, type: 3}
   muzzleMesh: {fileID: 23000014045297490}
   enableShooting: 1
-  animClip: {fileID: 0}
 --- !u!114 &114000013382113396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2370,7 +2385,6 @@ MonoBehaviour:
   crossHair: {fileID: 21300000, guid: ea74c11938e619740856671557f817d5, type: 3}
   muzzleMesh: {fileID: 23000012980859274}
   enableShooting: 1
-  animClip: {fileID: 0}
 --- !u!114 &114000014113569266
 MonoBehaviour:
   m_ObjectHideFlags: 1

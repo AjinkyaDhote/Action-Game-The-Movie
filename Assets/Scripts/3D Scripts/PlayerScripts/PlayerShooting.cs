@@ -22,6 +22,7 @@ public class PlayerShooting : MonoBehaviour
     private Animator pistolAnim;
     private Animation pistolAnimation;
     private Animator shotGunAnim;
+    private Animation shotGunAnimation;
     //public ParticleSystem[] impacts;
 
     [SerializeField]
@@ -88,6 +89,7 @@ public class PlayerShooting : MonoBehaviour
         pistolAnim = transform.GetChild(1).GetComponent<Animator>();
         pistolAnimation = transform.GetChild(1).GetComponent<Animation>();
         shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
+        shotGunAnimation = transform.GetChild(0).GetComponent<Animation>();
 
         GameManager.Instance.headShots = 0;
         GameManager.Instance.totalEnemiesKilled = 0;
@@ -112,7 +114,8 @@ public class PlayerShooting : MonoBehaviour
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
-                        shotGunAnim.SetTrigger("ShotGunShoot");
+                        //shotGunAnim.SetTrigger("ShotGunShoot");
+                        shotGunAnimation.Play();
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
