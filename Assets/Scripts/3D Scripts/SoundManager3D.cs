@@ -36,6 +36,7 @@ public class SoundManager3D : MonoBehaviour
     public MyAudioSource intruderAlert;
     public MyAudioSource onEnemyHit;
     public MyAudioSource enemyDeath;
+    public MyAudioSource droneBullet;
    
     [HideInInspector]
     public MyAudioSource[] myAudioSources;
@@ -61,7 +62,7 @@ public class SoundManager3D : MonoBehaviour
     //}
     private void Awake()
     {
-        myAudioSources = new MyAudioSource[] { backgroundMusic, onHitByEnemyPlayer, gunEmpty, shotgun, pistol, onHitByEnemyPayload, intruderAlert, onEnemyHit, enemyDeath };
+        myAudioSources = new MyAudioSource[] { backgroundMusic, onHitByEnemyPlayer, gunEmpty, shotgun, pistol, onHitByEnemyPayload, intruderAlert, onEnemyHit, enemyDeath, droneBullet };
         for (int i = 0; i < myAudioSources.Length; i++)
         {
             MyAudioSource.Initilaize(gameObject, myAudioSources[i]);
