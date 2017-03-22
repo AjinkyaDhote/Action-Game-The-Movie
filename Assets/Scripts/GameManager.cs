@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int batteryCount;
     [HideInInspector]
-    public int shotsFired;
+    public float shotsFired;
     [HideInInspector]
     public float bodyShots;
     [HideInInspector]
