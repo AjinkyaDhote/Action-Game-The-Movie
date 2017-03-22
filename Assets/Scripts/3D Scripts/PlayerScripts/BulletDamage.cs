@@ -58,7 +58,6 @@ public class BulletDamage : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        
         if (other.collider.CompareTag("HeadCollider") || other.collider.CompareTag("BodyCollider"))
         {
             aiMovementScript = other.transform.GetComponentInParent<AI_movement>();
@@ -88,6 +87,7 @@ public class BulletDamage : MonoBehaviour
                     enemyHealthScript.Damage(SHOT_DAMAGE);
                 }
             }
+            Destroy(gameObject);
         }
 
         else if(other.collider.CompareTag("DroneEnemy"))
@@ -99,12 +99,17 @@ public class BulletDamage : MonoBehaviour
             if ((enemyHealthScript != null) && !enemyHealthScript.IsKilled)
             {
                 //PlayEnemyHitParticle(other.contacts[0].point, other.contacts[0].normal);
-                if (other.collider.CompareTag("DroneEnemy"))
+                if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
                 {
-                    //GameManager.Instance.headShots++;                    
-                    enemyHealthScript.Damage(SHOT_DAMAGE);
+                    GameManager.Instance.bodyShots += 1 / (float)PlayerShooting.NUMBER_OF_SHOTGUN_BULLETS;
                 }
+                else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
+                {
+                    GameManager.Instance.bodyShots++;
+                }
+                enemyHealthScript.Damage(SHOT_DAMAGE);
             }
+            Destroy(gameObject);
         }
 
         //--------------------------------Friendly Fire ON--------------------------------------------------------
@@ -119,9 +124,22 @@ public class BulletDamage : MonoBehaviour
         {
             ContactPoint contactPoint = other.contacts[Random.Range(0, other.contacts.Length)];
             playerShootingScript.DisplayWallHitPreFab(contactPoint.point, contactPoint.normal);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        else if (other.collider.CompareTag("LockPanel"))
+        {
+            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            {
+                GameManager.Instance.shotsFired -= 1 / (float)PlayerShooting.NUMBER_OF_SHOTGUN_BULLETS;
+            }
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
+            {
+                GameManager.Instance.shotsFired--;
+            }
+            Destroy(gameObject);
+        }
+        Debug.Log("shots fired" + GameManager.Instance.shotsFired);
     }
 
     //private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)

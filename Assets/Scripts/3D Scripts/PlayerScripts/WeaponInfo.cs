@@ -16,6 +16,6 @@ public class WeaponInfo:MonoBehaviour
     public void ToggleShooting()
     {
         enableShooting = !enableShooting;
-        Debug.Log(enableShooting);
+        //Debug.Log(enableShooting);
     }
 }

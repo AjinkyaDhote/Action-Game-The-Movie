@@ -31,13 +31,13 @@ public class LaserConsole : MonoBehaviour {
             Instantiate(brokenLaserConsole, consoleTransform.position - new Vector3(0f, 2f, 0f), consoleTransform.rotation);
             //brokenLaserConsole.gameObject.SetActive(true);
         }
-        Debug.Log(LevelManager3D.accessCardCount);
+        //Debug.Log(LevelManager3D.accessCardCount);
     }
 
 
     void OnTriggerEnter(Collider other)
     {
-       if(other.gameObject.layer == 17  )
+       if(other.gameObject.layer == 17)
         {
             _health -= 1f;
         }
