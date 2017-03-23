@@ -95,7 +95,7 @@ public class MenuManager : MonoBehaviour
         GameManager.Instance.playAvailable = false;
         playButton.interactable = false;
 
-        if (GameManager.Instance.GOD_MODE)
+        if (GameManager.Instance.GOD_MODE && level == 1)
         {
             playButton.interactable = true;
         }
