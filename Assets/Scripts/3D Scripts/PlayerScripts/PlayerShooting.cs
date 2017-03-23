@@ -114,7 +114,7 @@ public class PlayerShooting : MonoBehaviour
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
-                        //shotGunAnim.SetTrigger("ShotGunShoot");
+                        //shotGunAnim.SetTrigger("ShotGunShoot");                        
                         shotGunAnimation.Play();
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
@@ -149,7 +149,7 @@ public class PlayerShooting : MonoBehaviour
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
-                    //pistolAnim.SetTrigger("NewGunAnimation");
+                    //pistolAnim.SetTrigger("NewGunAnimation");                    
                     pistolAnimation.Play();
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
