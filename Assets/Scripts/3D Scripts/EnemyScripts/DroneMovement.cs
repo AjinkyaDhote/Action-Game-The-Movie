@@ -228,6 +228,9 @@ public class DroneMovement : MonoBehaviour
     EnemyHealth enemyHealth;    
     private Vector3 startHoverPosition;
     Transform targetTransform;
+    GameObject arrow_sprite;
+    Renderer arrow_renderer;
+    
     [HideInInspector]
     public bool engaged;
     public bool IsPlayerPayloadSeen
@@ -279,6 +282,10 @@ public class DroneMovement : MonoBehaviour
         bulletEmitter = transform.FindChild("BulletSpawner").gameObject;
         bullet = Resources.Load("Bullet Prefab/DroneBullet") as GameObject;
 
+        arrow_sprite = transform.FindChild("arrow_detection").gameObject;
+        arrow_renderer = arrow_sprite.GetComponent<Renderer>();
+        arrow_renderer.enabled = false;
+        
         Patrol();
         
     }
@@ -397,7 +404,8 @@ public class DroneMovement : MonoBehaviour
         engaged = true;
         //agent.stoppingDistance = 5;
         targetTransform = transformToLookAt;
-       
+        arrow_renderer.enabled = true;
+
     }
    
     public void OutOfRange()
