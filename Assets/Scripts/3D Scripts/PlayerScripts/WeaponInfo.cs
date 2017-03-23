@@ -11,11 +11,12 @@ public class WeaponInfo:MonoBehaviour
     public bool enableShooting;
     private void Awake()
     {
-        enableShooting = true;
+        enableShooting = true;        
     }
     public void ToggleShooting()
     {
         enableShooting = !enableShooting;
+        WeaponSystem.isShooting = !WeaponSystem.isShooting;
         //Debug.Log(enableShooting);
     }
 }
