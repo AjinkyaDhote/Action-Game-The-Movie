@@ -22,7 +22,8 @@ public class AmmoPickup : MonoBehaviour
 			Destroy(other.gameObject);
 		}*/
 		if (other.tag == "Ammo")
-		{          
+		{
+            SoundManager3D.Instance.ammoPickUp.Play();
             //ammoCollected.gameObject.SetActive(true);
            // ammoCollected.text = "Plus 10 Ammo Collected";
             playerShootingScript.PickupAmmo();

@@ -393,11 +393,7 @@ public class DroneMovement : MonoBehaviour
 
 
     public void Detection(Transform transformToLookAt)
-    {
-        //if (!SoundManager3D.Instance.intruderAlert.audioSource.isPlaying)
-        //{
-        //    SoundManager3D.Instance.intruderAlert.Play();
-        //}
+    {       
         _isPlayer_Payload_Seen = true;
         startHoverPosition = transform.localPosition;
         engaged = true;
