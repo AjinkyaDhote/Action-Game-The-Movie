@@ -286,8 +286,7 @@ public class DroneMovement : MonoBehaviour
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
         arrow_renderer.enabled = false;
         
-        Patrol();
-        
+        Patrol();        
     }
 
     Vector3 GetRandomVector()
