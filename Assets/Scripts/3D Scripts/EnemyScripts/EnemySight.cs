@@ -47,7 +47,7 @@ public class EnemySight : MonoBehaviour
             float angle = Vector3.Angle(Target.transform.position - transform.position, transform.forward);
             if (angle < 45)
             {
-                //Debug.DrawRay(transform.position, (Target.transform.position - transform.position).normalized * MaxDistance, Color.red);
+                Debug.DrawRay(transform.position, (Target.transform.position - transform.position).normalized * MaxDistance, Color.red);
                 if (Physics.Raycast(transform.position, (Target.transform.position - transform.position).normalized, out hit, MaxDistance))
                 {
                     //Debug.Log(hit.transform.tag + "--" + Target.tag + " " + (hit.transform.tag == Target.tag));

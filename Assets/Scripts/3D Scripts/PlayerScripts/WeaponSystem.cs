@@ -12,9 +12,12 @@ public class WeaponSystem : MonoBehaviour
     public LinkedListNode<GameObject> currentWeaponInHand;
     private Image crossHair;
 
+    public static bool isShooting; 
+
     void Start()
     {
         moveForward = false;
+        isShooting = false;
         crossHair = transform.FindChild("FPS UI Canvas").FindChild("CrossHair").GetComponent<Image>();
         GameObject[] weaponsGO = GameObject.FindGameObjectsWithTag("Gun");
         foreach (GameObject weapon in weaponsGO)
@@ -29,12 +32,12 @@ public class WeaponSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetKeyDown(KeyCode.Z))
+        if ((Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetKeyDown(KeyCode.Z)) && (!isShooting))
         {
             moveForward = true;
             UpdateWeaponInHand();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f || Input.GetKeyDown(KeyCode.X))
+        else if ((Input.GetAxis("Mouse ScrollWheel") < 0f || Input.GetKeyDown(KeyCode.X)) && (!isShooting))
         {
             moveForward = false;
             UpdateWeaponInHand();

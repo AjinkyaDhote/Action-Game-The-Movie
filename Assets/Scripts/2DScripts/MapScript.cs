@@ -227,6 +227,7 @@ public class MapScript : MonoBehaviour
         {
             for (int i = 0; i < hit1.Length; i++)
             {
+                //Debug.Log(i + " " + hit1[i].transform.name + " " + hit1.Length);
                 if (Physics2D.Raycast(hit1[i].point, (Vector2)hit1[i].transform.position - hit1[i].point, ((Vector2)hit1[i].transform.position - hit1[i].point).magnitude, wallLayerMask))
                 {
                     Debug.DrawRay(hit1[i].point, (Vector2)hit1[i].transform.position - hit1[i].point, Color.black);

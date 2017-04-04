@@ -20,7 +20,9 @@ public class PlayerShooting : MonoBehaviour
 
     //public ParticleSystem muzzleFlash;
     private Animator pistolAnim;
+    private Animation pistolAnimation;
     private Animator shotGunAnim;
+    private Animation shotGunAnimation;
     //public ParticleSystem[] impacts;
 
     [SerializeField]
@@ -85,16 +87,18 @@ public class PlayerShooting : MonoBehaviour
         AmmoAnimation = transform.FindChild("FPS UI Canvas").FindChild("AmmoAnimateText").GetComponent<Animation>();
         AmmoAnimation.gameObject.SetActive(false);
         pistolAnim = transform.GetChild(1).GetComponent<Animator>();
+        pistolAnimation = transform.GetChild(1).GetComponent<Animation>();
         shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
+        shotGunAnimation = transform.GetChild(0).GetComponent<Animation>();
 
         GameManager.Instance.headShots = 0;
         GameManager.Instance.totalEnemiesKilled = 0;
         GameManager.Instance.shotsFired = 0;
         GameManager.Instance.bodyShots = 0;
     }
-    void FixedUpdate()
+    void Update()
     {
-        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && (Time.realtimeSinceStartup > nextFire) && (countdownTimer.hasGameStarted))
+        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && /*(Time.realtimeSinceStartup > nextFire)*/ (weaponSystemScript.currentWeaponInfo.enableShooting) && (countdownTimer.hasGameStarted))
         {
             GameManager.Instance.shotsFired++;
             //Debug.Log(GameManager.Instance.hitcount);
@@ -110,7 +114,8 @@ public class PlayerShooting : MonoBehaviour
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
                         bullets[bulletInUse].transform.rotation = shotgunBulletSpawnerTrasform.rotation * Quaternion.Euler(0.0f, -90.0f, -90.0f);
                         bullets[bulletInUse].SetActive(true);
-                        shotGunAnim.SetTrigger("ShotGunShoot");
+                        //shotGunAnim.SetTrigger("ShotGunShoot");                        
+                        shotGunAnimation.Play();
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
@@ -144,7 +149,8 @@ public class PlayerShooting : MonoBehaviour
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
-                    pistolAnim.SetTrigger("NewGunAnimation");                    
+                    //pistolAnim.SetTrigger("NewGunAnimation");                    
+                    pistolAnimation.Play();
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
                     {

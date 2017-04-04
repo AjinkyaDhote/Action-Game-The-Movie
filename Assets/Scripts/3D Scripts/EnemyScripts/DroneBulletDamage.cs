@@ -8,12 +8,19 @@ public class DroneBulletDamage : MonoBehaviour
     public float playerDamage;
     public float payLoadDamage;
     private Rigidbody rb;
+    GameObject hitRadialPrefab;
+    GameObject hitRadial;
+    GameObject player;
+
     private void Start()
     {
         playerDamage = 2.0f;
         rb = GetComponent<Rigidbody>();
         playerHealthScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthScript>();
         payloadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").transform.FindChild("PayLoadHealthBar").GetComponent<PayLoadHealthScript>();
+        hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
+        player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     void OnCollisionEnter(Collision other)
@@ -23,6 +30,10 @@ public class DroneBulletDamage : MonoBehaviour
             if ((playerHealthScript != null))
             {
                 playerHealthScript.PlayerDamage(playerDamage, 0.3f);
+                hitRadial = Instantiate(hitRadialPrefab);
+                hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
+                hitRadial.GetComponent<HitRadial>().StartRotation(transform);
+                Destroy(hitRadial, 2.0f);
             }
              //rb.isKinematic = true;
              Destroy(transform.gameObject);
