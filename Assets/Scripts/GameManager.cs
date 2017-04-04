@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using GameSparks.Core;
 
 public class GameManager : MonoBehaviour
 {
@@ -267,7 +268,11 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        if (!Application.isEditor)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+        //Application.Quit();
     }
 
     public void setCurrentLevel( int level )
