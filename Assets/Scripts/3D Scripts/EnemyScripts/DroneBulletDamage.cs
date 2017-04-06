@@ -11,7 +11,8 @@ public class DroneBulletDamage : MonoBehaviour
     GameObject hitRadialPrefab;
     GameObject hitRadial;
     GameObject player;
-
+    public GameObject drone;
+    //Transform dronePosition;
     private void Start()
     {
         playerDamage = 2.0f;
@@ -20,7 +21,7 @@ public class DroneBulletDamage : MonoBehaviour
         payloadHealthScript = GameObject.FindGameObjectWithTag("NewPayload").transform.FindChild("PayLoadHealthBar").GetComponent<PayLoadHealthScript>();
         hitRadialPrefab = Resources.Load("HitRadialPrefab/HitRadial") as GameObject;
         player = GameObject.FindGameObjectWithTag("Player");
-
+        
     }
 
     void OnCollisionEnter(Collision other)
@@ -32,7 +33,7 @@ public class DroneBulletDamage : MonoBehaviour
                 playerHealthScript.PlayerDamage(playerDamage, 0.3f);
                 hitRadial = Instantiate(hitRadialPrefab);
                 hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
-                hitRadial.GetComponent<HitRadial>().StartRotation(transform);
+                hitRadial.GetComponent<HitRadial>().StartRotation(drone.transform);
                 Destroy(hitRadial, 2.0f);
             }
              //rb.isKinematic = true;
