@@ -230,6 +230,8 @@ public class DroneMovement : MonoBehaviour
     Transform targetTransform;
     GameObject arrow_sprite;
     Renderer arrow_renderer;
+    DroneBulletDamage damageScript;
+    
     
     [HideInInspector]
     public bool engaged;
@@ -281,7 +283,7 @@ public class DroneMovement : MonoBehaviour
 
         bulletEmitter = transform.FindChild("BulletSpawner").gameObject;
         bullet = Resources.Load("Bullet Prefab/DroneBullet") as GameObject;
-
+        
         arrow_sprite = transform.FindChild("arrow_detection").gameObject;
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
         arrow_renderer.enabled = false;
@@ -374,6 +376,8 @@ public class DroneMovement : MonoBehaviour
     {
         GameObject bulletGameObject;
         bulletGameObject = Instantiate(bullet, bulletEmitter.transform.position, Quaternion.identity) as GameObject;
+        bulletGameObject.GetComponent<DroneBulletDamage>().drone = this.gameObject;
+
         //Play Sound
         SoundManager3D.Instance.droneBullet.Play();
         Rigidbody bulletRB;
