@@ -25,68 +25,37 @@ public class AccessLeaderBoard : MonoBehaviour
             Debug.Log("Cannot Access Leaderboard as GameSparks not available..");
             return;
         }
-        if (!hasLeaderBoardBeenAccessed)
-        {
-            Text[] textslots = null;
-            new LeaderboardDataRequest()
-                .SetEntryCount(10)
-                .SetIncludeFirst(10)
-                .SetLeaderboardShortCode(GameManager.Instance.LeaderBoardShortCode)
-                .Send((response) =>
-                {
-                    if (!response.HasErrors)
-                    {
-                        textslots =
-                            transform.parent.parent.FindChild("LeaderboardCanvas")
-                                .FindChild("ScoreSlots")
-                                .GetComponentsInChildren<Text>();
-                        Debug.Log("Found Leaderboard Data...");
-                        int i = 0;
-                        foreach (LeaderboardDataResponse._LeaderboardData entry in response.Data)
-                        {
-                            textslots[i].text = (entry.Rank ?? 0) + " : " + entry.UserName + "'s Score: " + entry.JSONData[GameManager.Instance.EventAttributeShortCodeHighScore].ToString();
-                            i++;
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("Error Retrieving Leaderboard Data...");
-                    }
-                });
-
-            new AccountDetailsRequest()
+        if (hasLeaderBoardBeenAccessed) return;
+        Text[] textslots = null;
+        new LeaderboardDataRequest()
+            .SetEntryCount(10)
+            .SetIncludeFirst(10)
+            .SetLeaderboardShortCode(GameManager.Instance.LeaderBoardShortCode)
             .Send((response) =>
             {
                 if (!response.HasErrors)
                 {
-                    new GetLeaderboardEntriesRequest()
-                        .SetPlayer(response.UserId)
-                        .SetLeaderboards(new List<string>() { GameManager.Instance.LeaderBoardShortCode })
-                        .Send((response2) =>
-                        {
-                            if (!response2.HasErrors)
-                            {
-                                if (textslots[10] != null)
-                                {
-                                    var number = response2.BaseData.GetGSData(GameManager.Instance.LeaderBoardShortCode).GetNumber(GameManager.Instance.EventAttributeShortCodeCurrentScore);
-                                    if (number != null)
-                                    {
-                                        textslots[10].text = response.DisplayName + "'s Score: " + number;
-                                    }                             
-                                }
-                            }
-                            else
-                            {
-                                Debug.Log("Error Retrieving Leaderboard Data...");
-                            }
-                        });
+                    textslots =
+                        transform.parent.parent.FindChild("LeaderboardCanvas")
+                            .FindChild("ScoreSlots")
+                            .GetComponentsInChildren<Text>();
+                    Debug.Log("Found Leaderboard Data...");
+                    int i = 0;
+                    foreach (var entry in response.Data)
+                    {
+                        textslots[i].text = (entry.Rank ?? 0) + " : " + entry.UserName + "'s Score: " + entry.JSONData[GameManager.Instance.EventAttributeShortCodeHighScore].ToString();
+                        i++;
+                    }
+                    GSData a = response.ScriptData;
+                    textslots[10].text = GameManager.Instance.CurrentPlayerRank + " : " +
+                                         GameManager.Instance.CurrentPlayerDisplay + "'s Score: " +
+                                         GameManager.Instance.TotalScore;
                 }
                 else
                 {
-                    Debug.Log("Error Retrieving Current Player Data...");
+                    Debug.Log("Error Retrieving Leaderboard Data...");
                 }
             });
-            hasLeaderBoardBeenAccessed = true;
-        }
+        hasLeaderBoardBeenAccessed = true;
     }
 }

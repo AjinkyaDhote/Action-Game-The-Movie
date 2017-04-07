@@ -17,11 +17,10 @@ public class EndScreen : MonoBehaviour {
    
     void Update()
     {
-        if(isDoorOpen)
-        {
-            payload.transform.forward = Vector3.Lerp(payload.transform.forward, (endState.transform.position - payload.transform.position), Time.deltaTime * 0.2f);             
-            payload.transform.Translate((endState.transform.position - payload.transform.position).normalized * 5f * Time.deltaTime, Space.World);
-        }
+        if (!isDoorOpen) return;
+        if (!(Vector3.Distance(payload.transform.position, endState.transform.position) > 0.1f)) return;
+        payload.transform.forward = Vector3.Lerp(payload.transform.forward, (endState.transform.position - payload.transform.position), Time.deltaTime * 0.2f);             
+        payload.transform.Translate((endState.transform.position - payload.transform.position).normalized * 5f * Time.deltaTime, Space.World);
     }  
 
     public void SetDoorOpen()

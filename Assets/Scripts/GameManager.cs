@@ -86,10 +86,13 @@ public class GameManager : MonoBehaviour
     private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose, Scene2D_tut, Scene3D_tut, Scene2D_3, Scene3D_3 };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentGameState = GameStates.MENU;
+    [HideInInspector] public string AchievementCode = "";
     [HideInInspector] public string LeaderBoardShortCode = "";
     [HideInInspector] public string EventKeyShortCode = "";
     [HideInInspector] public string EventAttributeShortCodeHighScore = "";
-    [HideInInspector]public string EventAttributeShortCodeCurrentScore = "";
+    [HideInInspector] public string EventAttributeShortCodeCurrentScore = "";
+    public long CurrentPlayerRank { get; set; }
+    public string CurrentPlayerDisplay { get; set; }
     public static GameManager Instance
     {
         get
@@ -311,19 +314,25 @@ public class GameManager : MonoBehaviour
         EnableKeyCardCounter = scene.buildIndex == (int) Levels.Scene3D_3;
         switch (scene.buildIndex)
         {
+            case (int)Levels.Scene3D_tut:
+                AchievementCode = "tlvlc";
+                break;
             case (int)Levels.Scene3D_1:
+                AchievementCode = "lvl1c";
                 LeaderBoardShortCode = "wwlb1";
                 EventKeyShortCode = "SubmitScore1";
                 EventAttributeShortCodeHighScore = "cpscore1";
                 EventAttributeShortCodeCurrentScore = "cpscore11";
                 break;
             case (int)Levels.Scene3D_2:
+                AchievementCode = "lvl2c";
                 LeaderBoardShortCode = "wwlb2";
                 EventKeyShortCode = "SubmitScore2";
                 EventAttributeShortCodeHighScore = "cpscore2";
                 EventAttributeShortCodeCurrentScore = "cpscore22";
                 break;
             case (int) Levels.Scene3D_3:
+                AchievementCode = "lvl3c";
                 LeaderBoardShortCode = "wwlb3";
                 EventKeyShortCode = "SubmitScore3";
                 EventAttributeShortCodeHighScore = "cpscore3";
