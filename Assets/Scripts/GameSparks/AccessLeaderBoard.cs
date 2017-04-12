@@ -20,7 +20,7 @@ public class AccessLeaderBoard : MonoBehaviour
 
     public void LoadData()
     {
-        if (!GS.Available)
+        if (!GS.Authenticated)
         {
             Debug.Log("Cannot Access Leaderboard as GameSparks not available..");
             return;

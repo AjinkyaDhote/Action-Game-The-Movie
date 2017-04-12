@@ -28,7 +28,7 @@ public class EndStateScript : MonoBehaviour
 
     private void GetPreviousNumberOfHeadshots()
     {
-        if (!GS.Available && !GS.Authenticated)
+        if (/*!GS.Available && */!GS.Authenticated)
         {
             Debug.Log("Achivement not awarded as user not logged in");
             hasPreviousHeadshotValueBeenReceived = true;
@@ -54,7 +54,7 @@ public class EndStateScript : MonoBehaviour
     }
     private void SetCurrentNumberOfHeadshotsAndAwardAchievement()
     {
-        if (!GS.Available && !GS.Authenticated)
+        if (/*!GS.Available &&*/ !GS.Authenticated)
         {
             Debug.Log("Achivement not awarded as user not logged in");
             has100HeadShotsAchivementBeenAwarded = true;
@@ -82,7 +82,7 @@ public class EndStateScript : MonoBehaviour
     }
     private void AwardLevelCompletedAchievement()
     {
-        if (!GS.Available && !GS.Authenticated)
+        if (/*!GS.Available &&*/ !GS.Authenticated)
         {
             Debug.Log("Achivement not awarded as user not logged in");
             hasLevelCompletionAchivementBeenAwarded = true;
@@ -101,7 +101,7 @@ public class EndStateScript : MonoBehaviour
 
     private void SendHighScoreToGs()
     {
-        if (!GS.Available && !GS.Authenticated)
+        if (/*!GS.Available &&*/ !GS.Authenticated)
         {
             Debug.Log("Score not updated on the server as user not logged in");
             hasHighScoreBeenPosted = true;
