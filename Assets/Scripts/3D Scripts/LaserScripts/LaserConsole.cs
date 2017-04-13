@@ -7,6 +7,7 @@ public class LaserConsole : MonoBehaviour {
     public float _health;
     public Material accessGrantedMaterial;
 
+    WeaponSystem weaponSystemScript;
     Transform ConsoleText;
     BoxCollider boxCollider;
     Renderer ren;
@@ -19,7 +20,8 @@ public class LaserConsole : MonoBehaviour {
         boxCollider = gameObject.transform.parent.gameObject.GetComponent<BoxCollider>();
         brokenLaserConsole = Resources.Load<GameObject>("BrokenConsole/BrokenLaserConsole");
         ren = GetComponent<Renderer>();
-        consoleTransform = gameObject.transform;      
+        consoleTransform = gameObject.transform;
+        weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
     }
 	
     void Update()
@@ -37,10 +39,22 @@ public class LaserConsole : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-       if(other.gameObject.layer == 17)
+        if (other.gameObject.layer == 17)
         {
             _health -= 1f;
         }
+
+        if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+        {
+            GameManager.Instance.bodyShots += 1 / (float)PlayerShooting.NUMBER_OF_SHOTGUN_BULLETS;
+        }
+
+        else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
+        {
+            GameManager.Instance.bodyShots++;
+        }
+
+        Destroy(other.gameObject);
     }
 
 
