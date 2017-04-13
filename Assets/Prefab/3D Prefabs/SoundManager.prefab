@@ -131,6 +131,22 @@ MonoBehaviour:
     playOnAwake: 0
     pitch: 1
     audioSource: {fileID: 0}
+  droneBlast:
+    frequencyModifier: 1
+    audioClip: {fileID: 8300000, guid: 3651c60bfd89aa34893232cbf18a5a2f, type: 3}
+    volume: 1
+    loop: 0
+    playOnAwake: 0
+    pitch: 3
+    audioSource: {fileID: 0}
+  ammoPickUp:
+    frequencyModifier: 1
+    audioClip: {fileID: 8300000, guid: 854d9fcb75c486642bf711f8d956c0c0, type: 3}
+    volume: 1
+    loop: 0
+    playOnAwake: 0
+    pitch: 3
+    audioSource: {fileID: 0}
   myAudioSources:
   - frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 46ff56928d6d7c8449a7d85850e62a63, type: 3}
