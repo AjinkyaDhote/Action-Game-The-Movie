@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public Transform NetworkMount, MainMount, LevelMount, InGameMount, ScoreMount, LeaderboardMount;
+    public Transform NetworkMount, MainMount, LevelMount, InGameMount, ScoreMount, LeaderboardMount, AchievementMount;
     public Camera cam;
     public Button playButton;
     public InputField loginInputField;
