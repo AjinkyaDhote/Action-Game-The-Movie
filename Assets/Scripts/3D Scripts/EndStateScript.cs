@@ -152,6 +152,5 @@ public class EndStateScript : MonoBehaviour
         {
             hasPayloadReached = true;
         }
-
     }
 }
