@@ -28,7 +28,9 @@ public class Popup : MonoBehaviour
         GameObject popupInstance = Instantiate(popupPrefab, transform.position, transform.rotation, transform);
         Image achivementImage = popupInstance.GetComponent<Image>();
         Text achivementText = popupInstance.transform.GetChild(0).GetComponent<Text>();
-        achivementImage.color = Color.green;
+        Sprite sprite;
+        GameManager.BadgesAchieved.TryGetValue(message.AchievementShortCode.GetHashCode(), out sprite);
+        if (sprite != null) achivementImage.sprite = sprite;
         achivementText.text = message.AchievementName;
         StartCoroutine(HideMessage());
     }

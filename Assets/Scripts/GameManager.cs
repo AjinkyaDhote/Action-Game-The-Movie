@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using GameSparks.Core;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,18 +79,24 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public string win_Lose_Message = null;
 
-    [HideInInspector] public bool EnableKeyCardCounter = false;
+    [HideInInspector]
+    public bool EnableKeyCardCounter = false;
 
     // private variables
     private static GameManager _instance = null;
     private enum Levels { MENU = 1, Scene2D_1, Scene3D_1, Scene2D_2, Scene3D_2, GameWinLose, Scene2D_tut, Scene3D_tut, Scene2D_3, Scene3D_3 };
     private enum GameStates { MENU, PLAN_GAME, PLAY_GAME, GAME_OVER };
     private GameStates currentGameState = GameStates.MENU;
-    [HideInInspector] public string AchievementCode = "";
-    [HideInInspector] public string LeaderBoardShortCode = "";
-    [HideInInspector] public string EventKeyShortCode = "";
-    [HideInInspector] public string EventAttributeShortCodeHighScore = "";
-    [HideInInspector] public string EventAttributeShortCodeCurrentScore = "";
+    [HideInInspector]
+    public string AchievementCode = "";
+    [HideInInspector]
+    public string LeaderBoardShortCode = "";
+    [HideInInspector]
+    public string EventKeyShortCode = "";
+    [HideInInspector]
+    public string EventAttributeShortCodeHighScore = "";
+    [HideInInspector]
+    public string EventAttributeShortCodeCurrentScore = "";
     public long CurrentPlayerRank { get; set; }
     public string CurrentPlayerDisplay { get; set; }
     public static GameManager Instance
@@ -105,8 +111,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static Dictionary<int, Sprite> BadgesAchieved;
+    public static Dictionary<int, Sprite> BadgesNotAchieved;
     void Start()
     {
+        BadgesAchieved = new Dictionary<int, Sprite>
+        {
+            {"lvl1c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/achievement_level1_completed")},
+            {"lvl2c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/achievement_level2_completed")},
+            {"lvl3c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/achievement_level3_completed")}
+        };
+        BadgesNotAchieved = new Dictionary<int, Sprite>
+        {
+        };
+
         headShots = 0;
         totalEnemiesKilled = 0;
         accuracy = 0;
@@ -204,7 +222,7 @@ public class GameManager : MonoBehaviour
         currentMenuState = MenuState.MAIN_MENU;
 
         DontDestroyOnLoad(gameObject);
-        currentGameState = GameStates.MENU;     
+        currentGameState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
         batteryCount = 0;
     }
@@ -212,14 +230,14 @@ public class GameManager : MonoBehaviour
     public void PlayGame()
     {
         currentGameState = GameStates.PLAY_GAME;
-        
+
         // tutorial level
         if (currentLevel == 0)
         {
             SceneManager.LoadScene((int)Levels.Scene3D_tut);
         }
         // Level 1
-        else if ( currentLevel == 1 )
+        else if (currentLevel == 1)
         {
             SceneManager.LoadScene((int)Levels.Scene3D_1);
         }
@@ -243,11 +261,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene((int)Levels.Scene2D_tut);
         }
-        else if ( currentLevel == 1 )
+        else if (currentLevel == 1)
         {
             SceneManager.LoadScene((int)Levels.Scene2D_1);
         }
-        else if ( currentLevel == 2 )
+        else if (currentLevel == 2)
         {
             SceneManager.LoadScene((int)Levels.Scene2D_2);
         }
@@ -258,13 +276,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void GoToMenu()
-    {       
+    {
         currentGameState = GameStates.MENU;
         SceneManager.LoadScene((int)Levels.MENU);
     }
 
     public void GoToWinLoseScene()
-    {    
+    {
         currentGameState = GameStates.GAME_OVER;
         SceneManager.LoadScene((int)Levels.GameWinLose);
     }
@@ -278,13 +296,13 @@ public class GameManager : MonoBehaviour
         //Application.Quit();
     }
 
-    public void setCurrentLevel( int level )
+    public void setCurrentLevel(int level)
     {
         currentLevel = level;
     }
 
     void Update()
-    { 
+    {
         if (Input.GetKeyDown("q"))
         {
             if (currentGameState != GameStates.MENU && currentGameState != GameStates.PLAY_GAME)
@@ -311,7 +329,7 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        EnableKeyCardCounter = scene.buildIndex == (int) Levels.Scene3D_3;
+        EnableKeyCardCounter = scene.buildIndex == (int)Levels.Scene3D_3;
         switch (scene.buildIndex)
         {
             case (int)Levels.Scene3D_tut:
@@ -331,7 +349,7 @@ public class GameManager : MonoBehaviour
                 EventAttributeShortCodeHighScore = "cpscore2";
                 EventAttributeShortCodeCurrentScore = "cpscore22";
                 break;
-            case (int) Levels.Scene3D_3:
+            case (int)Levels.Scene3D_3:
                 AchievementCode = "lvl3c";
                 LeaderBoardShortCode = "wwlb3";
                 EventKeyShortCode = "SubmitScore3";
