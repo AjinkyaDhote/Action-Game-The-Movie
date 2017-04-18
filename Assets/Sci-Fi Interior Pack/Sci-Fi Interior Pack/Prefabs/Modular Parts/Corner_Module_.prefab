@@ -5,15 +5,15 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 478574}
-  - 33: {fileID: 3345684}
-  - 23: {fileID: 2345786}
-  - 64: {fileID: 6412670}
-  m_Layer: 0
+  - component: {fileID: 478574}
+  - component: {fileID: 3345684}
+  - component: {fileID: 2345786}
+  - component: {fileID: 6412670}
+  m_Layer: 16
   m_Name: Corner_Module_
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -24,13 +24,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117672}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: -3.752037, y: 7.0741673, z: -0.05416286}
-  m_LocalScale: {x: 0.18033127, y: 0.18033127, z: 0.18033127}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalRotation: {x: -0.70480746, y: 0.06919125, z: 0.07604298, w: 0.70190924}
+  m_LocalPosition: {x: 79.1, y: 5.12, z: -47}
+  m_LocalScale: {x: 0.67, y: 0.6500002, z: 0.6500002}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -89.378006, y: -106.72401, z: 118.79101}
 --- !u!23 &2345786
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -45,7 +45,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: aa0b60268ad21ba4fa507ed667280b98, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -53,7 +55,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -77,7 +79,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300050, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
 --- !u!1001 &100100000
 Prefab:
