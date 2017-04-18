@@ -5,6 +5,7 @@ public class Tutorial3D : MonoBehaviour
 {
     public GameObject infoWindow;
     private InfoDialogue infoDialogue;
+
     bool startTriggerDone = false;
     bool batteryBotTrigger = false;
     bool enemyIntroTrigger = false;
@@ -16,7 +17,7 @@ public class Tutorial3D : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.countDownDone && other.transform.name == "FinalPayLoad")
+        if (GameManager.Instance.countDownDone && other.transform.name == "PayloadWithAnimation")
         {
             if (!startTriggerDone && gameObject.transform.name == "StartTrigger")
             {

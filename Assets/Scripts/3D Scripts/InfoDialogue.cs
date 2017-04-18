@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class InfoDialogue : MonoBehaviour
 {
     public GameObject camera;
+    public GameObject pauseMenuGO;
+    private PauseMenu pauseMenu;
     private UnityStandardAssets.ImageEffects.DepthOfField dof;
     private Text infoBox;
 
@@ -15,6 +17,7 @@ public class InfoDialogue : MonoBehaviour
         depthOfField(false);
         infoBox = transform.FindChild("InfoText").GetComponent<Text>();
         infoBox.gameObject.SetActive(false);
+        pauseMenu = pauseMenuGO.GetComponent<PauseMenu>();
     }
 
     public void playInfo(string infoString)
@@ -31,7 +34,7 @@ public class InfoDialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!pauseMenu.isPaused && Input.GetKeyDown(KeyCode.Q))
         {
             infoBox.gameObject.SetActive(false);
             infoBox.text = "";
