@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Tutorial3D : MonoBehaviour
 {
     public GameObject infoWindow;
+
+    public Sprite protectPayload;
+    public Sprite stayInRange;
+    public Sprite followPath;
+
     private InfoDialogue infoDialogue;
 
     bool startTriggerDone = false;
@@ -22,18 +28,19 @@ public class Tutorial3D : MonoBehaviour
             if (!startTriggerDone && gameObject.transform.name == "StartTrigger")
             {
                 startTriggerDone = true;
-                infoDialogue.playInfo("You are now in the 3D level. The path you planned is now shown on the floor. Battery robot will follow the path and collect the battery canisters.");
+                infoDialogue.playInfo("Payload will follow the path and collect the battery canisters.");
             }
             else if (!batteryBotTrigger && gameObject.transform.name == "batteryBotHealthGreen")
             {
                 batteryBotTrigger = true;
-                infoDialogue.playInfo("Health bar on top of the battery robot is it's health. The battery robot's GREEN circle is the zone you need to be in to get charged from battery robot.");
+                //Health bar on top of the battery robot is it's health.
+                infoDialogue.playInfoTwoImage("Stay in range to get charged by the Payload.", stayInRange, protectPayload);
             }
-            else if (!batteryBotTrigger && gameObject.transform.name == "batteryBotHealthRed")
-            {
-                batteryBotTrigger = true;
-                infoDialogue.playInfo("When you are in low charge your visuals get corrupted. And the Battery robot cicle changes to YELLOW and then RED");
-            }
+            //else if (!batteryBotTrigger && gameObject.transform.name == "batteryBotHealthRed")
+            //{
+            //    batteryBotTrigger = true;
+            //    infoDialogue.playInfo("When you are in low charge your visuals get corrupted.");
+            //}
         }
         else if (GameManager.Instance.countDownDone && other.transform.name == "FPSPlayer")
         {
