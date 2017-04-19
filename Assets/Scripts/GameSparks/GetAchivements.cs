@@ -47,7 +47,6 @@ public class GetAchivements : MonoBehaviour
                            int i = 0;
                            foreach (var achievement in response.Achievements)
                            {
-                               //if (!(achievement.Earned ?? true)) continue;
                                achivementTextSlots[i].text = achievement.Name;
 
                                if (achievement.Earned ?? true)
