@@ -15,6 +15,7 @@ public class Tutorial3D : MonoBehaviour
     bool startTriggerDone = false;
     bool batteryBotTrigger = false;
     bool enemyIntroTrigger = false;
+    bool ammoIntroTrigger = false;
 
     void Awake()
     {
@@ -36,11 +37,6 @@ public class Tutorial3D : MonoBehaviour
                 //Health bar on top of the battery robot is it's health.
                 infoDialogue.playInfoTwoImage("Stay in range to get charged by the Payload.", stayInRange, protectPayload);
             }
-            //else if (!batteryBotTrigger && gameObject.transform.name == "batteryBotHealthRed")
-            //{
-            //    batteryBotTrigger = true;
-            //    infoDialogue.playInfo("When you are in low charge your visuals get corrupted.");
-            //}
         }
         else if (GameManager.Instance.countDownDone && other.transform.name == "FPSPlayer")
         {
@@ -48,6 +44,11 @@ public class Tutorial3D : MonoBehaviour
             {
                 enemyIntroTrigger = true;
                 infoDialogue.playInfo("Be cautious enemy sentinels may be around. Try to aim at their heads.");
+            }
+            else if (!ammoIntroTrigger && gameObject.transform.name == "AmmoPickup")
+            {
+                ammoIntroTrigger = true;
+                infoDialogue.playInfo("Dont forget to pick up the ammo.");
             }
         }
     }

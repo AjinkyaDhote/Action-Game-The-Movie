@@ -15288,6 +15288,63 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4be8b4ce6795914d827b3596bac4226, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1931173691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1931173692}
+  - component: {fileID: 1931173694}
+  - component: {fileID: 1931173693}
+  m_Layer: 16
+  m_Name: AmmoPickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1931173692
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1931173691}
+  m_LocalRotation: {x: -0, y: 0.1736828, z: -0, w: 0.9848017}
+  m_LocalPosition: {x: 17, y: 3.32, z: -40.8}
+  m_LocalScale: {x: 7.1335196, y: 1, z: 25.253445}
+  m_Children: []
+  m_Father: {fileID: 2079565792}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 20.004002, z: 0}
+--- !u!114 &1931173693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1931173691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9242c0bd1c39664cabf0a8e39d01521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoWindow: {fileID: 1269190857}
+  protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
+  stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
+  followPath: {fileID: 21300000, guid: 1994aa36c55d1d64fa21999b7f0fb425, type: 3}
+--- !u!65 &1931173694
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1931173691}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7841414, y: 5.061558, z: 0.7636057}
+  m_Center: {x: -0.10792931, y: 0.27834535, z: 0.11819714}
 --- !u!1 &1948402793
 GameObject:
   m_ObjectHideFlags: 0
@@ -15979,6 +16036,7 @@ Transform:
   - {fileID: 1237102295}
   - {fileID: 159205049}
   - {fileID: 904556483}
+  - {fileID: 1931173692}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
