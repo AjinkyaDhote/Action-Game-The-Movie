@@ -117,12 +117,25 @@ public class GameManager : MonoBehaviour
     {
         BadgesAchieved = new Dictionary<int, Sprite>
         {
-            {"lvl1c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/achievement_level1_completed")},
-            {"lvl2c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/achievement_level2_completed")},
-            {"lvl3c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/achievement_level3_completed")}
+            {"hs100".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Headshot_100")},
+            {"lvl1c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Level 1_Complete")},
+            {"wwlb1hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Level 1_Top_Score")},
+            {"lvl2c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Level 2_Complete")},
+            {"wwlb2hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Level 2_Top_Score")},
+            {"lvl3c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Level 3_Complete")},
+            {"wwlb3hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Level 3_Top_Score")},
+            {"tlvlc".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Active/Tutorial_Complete")}
         };
         BadgesNotAchieved = new Dictionary<int, Sprite>
         {
+            {"hs100".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Headshot_100_Inactive")},
+            {"lvl1c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 1_Complete_Inactive")},
+            {"wwlb1hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 1_Top_Score_Inactive")},
+            {"lvl2c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 2_Complete_Inactive")},
+            {"wwlb2hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 2_Top_Score_Inactive")},
+            {"lvl3c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 3_Complete_Inactive")},
+            {"wwlb3hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 3_Top_Score_Inactive")},
+            {"tlvlc".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Tutorial_Complete_Inactive")}
         };
 
         headShots = 0;
