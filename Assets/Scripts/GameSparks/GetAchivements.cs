@@ -47,9 +47,20 @@ public class GetAchivements : MonoBehaviour
                            int i = 0;
                            foreach (var achievement in response.Achievements)
                            {
-                               if (!(achievement.Earned ?? true)) continue;
                                achivementTextSlots[i].text = achievement.Name;
-                               achivementImageSlots[i].color = Color.green;
+
+                               if (achievement.Earned ?? true)
+                               {
+                                   Sprite sprite;
+                                   GameManager.BadgesAchieved.TryGetValue(achievement.ShortCode.GetHashCode(), out sprite);
+                                   if (sprite != null) achivementImageSlots[i].sprite = sprite;
+                               }
+                               else
+                               {
+                                   Sprite sprite;
+                                   GameManager.BadgesNotAchieved.TryGetValue(achievement.ShortCode.GetHashCode(), out sprite);
+                                   if (sprite != null) achivementImageSlots[i].sprite = sprite;
+                               }
                                i++;
                            }
                        }

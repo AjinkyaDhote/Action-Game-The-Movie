@@ -133,6 +133,30 @@ public class DialogManager2DLevel1 : MonoBehaviour
         }
     }
 
+    public void playCutScene6()
+    {
+        robotString.Clear();
+        robotString.Add("Some places are restricted and you will need access card.");
+        robotString.Add("And if you don't have an access card, shoot it with your gun");
+
+        batterString.Clear();
+        batterString.Add("Ok I see an access card ahead. Let me pick that up.");
+        batterString.Add("Got it.");
+
+        totalDialogs = batterString.Count;
+
+        //if (!stringDisplayInProgress)
+        {
+            dialog = 0;
+            stringDisplayInProgress = true;
+            batteryTurn = true;
+            nextBt.gameObject.SetActive(false);
+            conversationsCompleted = 0;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            StartCoroutine(playDialog(robotString[dialog], robotText));
+        }
+    }
+
     public void playCutScene4()
     {
         robotString.Clear();
@@ -161,10 +185,12 @@ public class DialogManager2DLevel1 : MonoBehaviour
         robotString.Clear();
         robotString.Add("Hey!! We are at crossroads again.");
         robotString.Add("Should we take the other side then?");
+        robotString.Add("And I don't have access card. I am gonna light it up.");
 
         batterString.Clear();
         batterString.Add("My sensors are recording heavy meca activity in the violet zone.");
         batterString.Add("Did we take enough ammo. If not we should take the safer route.");
+        batterString.Add("You have my permission to go ahead.");
 
         totalDialogs = batterString.Count;
 

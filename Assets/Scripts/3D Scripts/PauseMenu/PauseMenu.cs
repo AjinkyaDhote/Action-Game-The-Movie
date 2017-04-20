@@ -39,9 +39,12 @@ public class PauseMenu : MonoBehaviour {
             SoundManager3D.Instance.backgroundMusic.audioSource.UnPause();
             gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
             gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
-            Time.timeScale = 1.0f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            if (!GameManager.Instance.infoDialogue)
+            {
+                Time.timeScale = 1.0f;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
     }
     public void GoBackToMainMenu()
