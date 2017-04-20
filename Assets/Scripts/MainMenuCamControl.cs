@@ -22,6 +22,7 @@ public class MainMenuCamControl : MonoBehaviour
     public Transform kaushalLt, kaushalRt;
     public Transform franziLt, franziRt;
     public Transform vikramLt, vikramRt;
+    public Transform extraCreditsLt, extraCreditsRt;
     public Transform MenuMount;
     public Transform NetworkMount;
 
@@ -149,6 +150,15 @@ public class MainMenuCamControl : MonoBehaviour
         currentMount = vikramLt;
         speedFactor = turnFactor;
         yield return new WaitForSeconds(turnTime);
+
+        // extra credit
+        currentMount = extraCreditsRt;
+        speedFactor = moveFactor;
+        yield return new WaitForSeconds(1.6f);
+
+        currentMount = extraCreditsLt;
+        speedFactor = turnFactor;
+        yield return new WaitForSeconds(3.0f);
 
         speedFactor = moveFactor;
         currentMount = MenuMount;
