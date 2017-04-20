@@ -33,6 +33,8 @@ public class InfoDialogue : MonoBehaviour
         twoImage2 = transform.FindChild("twoImage2").GetComponent<Image>();
         twoImage2.transform.gameObject.SetActive(false);
         twoImage2.sprite = null;
+
+        GameManager.Instance.infoDialogue = false;
     }
 
     public void playInfo(string infoString)
