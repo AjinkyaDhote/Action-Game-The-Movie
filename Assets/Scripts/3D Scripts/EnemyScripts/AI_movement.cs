@@ -89,7 +89,7 @@ public class AI_movement : MonoBehaviour
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
         arrow_renderer.enabled = false;
 
-        engaged = false;
+        engaged = false;        
 
         Patrol();
         //mainCamera = Camera.main;
