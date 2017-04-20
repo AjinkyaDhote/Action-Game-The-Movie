@@ -127,7 +127,7 @@ public class BulletDamage : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Debug.Log("shots fired" + GameManager.Instance.shotsFired);
+        //Debug.Log("shots fired" + GameManager.Instance.shotsFired);
 
         //Moved this code to Laser Console Script as it wasn't detecting collision.
 

@@ -42,6 +42,7 @@ public class LaserConsole : MonoBehaviour {
         if (other.gameObject.layer == 17)
         {
             _health -= 1f;
+            Destroy(other.gameObject);
         }
 
         if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
@@ -53,28 +54,31 @@ public class LaserConsole : MonoBehaviour {
         {
             GameManager.Instance.bodyShots++;
         }
-
-        Destroy(other.gameObject);
+                                   
     }
 
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.CompareTag("Player")) return;
-        if (LevelManager3D.accessCardCount == 0) return;
-        ConsoleText.gameObject.SetActive(true);
-        if (Input.GetKeyDown(KeyCode.E))
+        if (other.gameObject.CompareTag("Player"));
         {
-            ren.material = accessGrantedMaterial;
-
-            foreach (GameObject laser in lasers)
+            if (LevelManager3D.accessCardCount > 0)
             {
-                laser.SetActive(false);
-            }
-            boxCollider.enabled = false;
-            LevelManager3D.accessCardCount--;
-            AccessCardCanvas.UpdateNumberOfCards();
-        }
+                ConsoleText.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    ren.material = accessGrantedMaterial;
+
+                    foreach (GameObject laser in lasers)
+                    {
+                        laser.SetActive(false);
+                    }
+                    boxCollider.enabled = false;
+                    LevelManager3D.accessCardCount--;
+                    AccessCardCanvas.UpdateNumberOfCards();
+                }
+            }            
+        }        
     }
 
 
