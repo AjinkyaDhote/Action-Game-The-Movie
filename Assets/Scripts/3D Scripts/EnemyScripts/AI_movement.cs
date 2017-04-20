@@ -70,8 +70,6 @@ public class AI_movement : MonoBehaviour
         Random.InitState(42);
         initialPos = gameObject.transform.position;
 
-
-
         anim = GetComponent<Animator>();
         //isPlayerInRange = false;
         IsPlayerPayloadSeen = false;
