@@ -70,8 +70,6 @@ public class AI_movement : MonoBehaviour
         Random.InitState(42);
         initialPos = gameObject.transform.position;
 
-
-
         anim = GetComponent<Animator>();
         //isPlayerInRange = false;
         IsPlayerPayloadSeen = false;
@@ -91,7 +89,7 @@ public class AI_movement : MonoBehaviour
         arrow_renderer = arrow_sprite.GetComponent<Renderer>();
         arrow_renderer.enabled = false;
 
-        engaged = false;
+        engaged = false;        
 
         Patrol();
         //mainCamera = Camera.main;
