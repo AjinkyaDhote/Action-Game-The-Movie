@@ -329,7 +329,7 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        EnableKeyCardCounter = scene.buildIndex == (int)Levels.Scene3D_3;
+        EnableKeyCardCounter = scene.buildIndex == (int)Levels.Scene3D_3 || scene.buildIndex == (int)Levels.Scene3D_tut;
         switch (scene.buildIndex)
         {
             case (int)Levels.Scene3D_tut:
