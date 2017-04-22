@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameSparksManager : MonoBehaviour
 {
-    private static GameSparksManager _instance = null;
+    private static GameSparksManager _instance;
     private void Awake()
     {
         if (_instance == null)

@@ -24,9 +24,9 @@ public class DroneBulletDamage : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {        
-        if (other.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {        
             if ((playerHealthScript != null))
             {
@@ -40,7 +40,7 @@ public class DroneBulletDamage : MonoBehaviour
              Destroy(transform.gameObject);
         }
 
-        else if (other.collider.CompareTag("NewPayload"))
+        else if (other.CompareTag("NewPayload"))
         {
             if ((payloadHealthScript != null))
             {
@@ -50,7 +50,7 @@ public class DroneBulletDamage : MonoBehaviour
             Destroy(transform.gameObject);
         }
 
-        else if (other.collider.CompareTag("Wall"))
+        else if (other.CompareTag("Wall"))
         {
             Destroy(transform.gameObject);
         }

@@ -119,12 +119,12 @@ public class PlayerShooting : MonoBehaviour
                         shotgunBulletRB[i] = bullets[bulletInUse].GetComponent<Rigidbody>();
                         if (timeSlowScript.isSlowTimeEnabled)
                         {
-                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime));
+                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime), ForceMode.VelocityChange);
                             //Debug.Log("shot");
                         }
                         else
                         {
-                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce);
+                            shotgunBulletRB[i].AddForce(GenerateShotGunSpray(i) * _bulletForce, ForceMode.VelocityChange);
                             //Debug.Log("shot");
                         }
                         bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
@@ -154,11 +154,11 @@ public class PlayerShooting : MonoBehaviour
                     pistolBulletRB = bullets[bulletInUse].GetComponent<Rigidbody>();
                     if (timeSlowScript.isSlowTimeEnabled)
                     {
-                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime));
+                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce * (1.0f / Time.timeScale) * (0.02f / Time.fixedDeltaTime),ForceMode.VelocityChange);
                     }
                     else
                     {
-                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce);
+                        pistolBulletRB.AddForce((hit.point - pistolBulletSpawnerTrasform.position).normalized * _bulletForce, ForceMode.VelocityChange);
                     }
                     bullets[bulletInUse].GetComponent<BulletDamage>().IsFired = true;
                     bulletInUse++;

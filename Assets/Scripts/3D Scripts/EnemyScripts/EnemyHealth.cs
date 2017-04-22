@@ -56,11 +56,12 @@ public class EnemyHealth : MonoBehaviour
             //{
             //    GameManager.Instance.headShots++;
             //}
-            SoundManager3D.Instance.enemyDeath.Play();
+            
             //Debug.Log("Killed");
             _isKilled = true;
             if(gameObject.tag == "SmallEnemy")
             {
+                SoundManager3D.Instance.enemyDeath.Play();
                 anim.SetBool("isPunch1", false);
                 anim.SetBool("isEnemyDead", true);
                 transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;

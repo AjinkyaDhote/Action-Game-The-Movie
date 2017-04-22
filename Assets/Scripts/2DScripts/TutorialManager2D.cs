@@ -9,10 +9,11 @@ public class TutorialManager2D : MonoBehaviour
     public GameObject batteryAmmoLayer;
     public GameObject map;
 
-    public Sprite bg2, bg3, bg4, bg5, bg6;
+    public Sprite bg2, bg3, bg4, bg5, bg6, bg7;
 
     public GameObject secondBattery;
     public GameObject undoBattery;
+    public GameObject accessCard;
     public GameObject ammoInRange;
     public GameObject batteryIsImp;
     public GameObject highLowDensity;
@@ -25,7 +26,7 @@ public class TutorialManager2D : MonoBehaviour
 
     public GameObject dynamicBattery;
 
-    private enum stage { FIRST_STAGE, SECOND_STAGE, THIRD_STAGE, FOURTH_STAGE, FIFTH_STAGE, NO_OP };
+    private enum stage { FIRST_STAGE, SECOND_STAGE, THIRD_STAGE, FOURTH_STAGE, FIFTH_STAGE, SIXTH_STAGE, NO_OP };
 
     private stage currentStage = stage.FIRST_STAGE;
 
@@ -35,6 +36,7 @@ public class TutorialManager2D : MonoBehaviour
 
         GameManager.Instance.ammoPosList.Clear();
         GameManager.Instance.batteryPosList.Clear();
+        GameManager.Instance.keyPosList.Clear();
 
         for (int i = 0; i < batteryAmmoLayer.transform.childCount; i++)
         {
@@ -49,6 +51,12 @@ public class TutorialManager2D : MonoBehaviour
                 Vector3 ammoPos = batteryAmmoLayer.transform.GetChild(i).position;
                 Vector2 imagePos = mapScript.convertToPixels(ammoPos);
                 GameManager.Instance.ammoPosList.Add(imagePos);
+            }
+            else if (batteryAmmoLayer.transform.GetChild(i).tag == "Key")
+            {
+                Vector3 keyPos = batteryAmmoLayer.transform.GetChild(i).position;
+                Vector2 imagePos = mapScript.convertToPixels(keyPos);
+                GameManager.Instance.keyPosList.Add(imagePos);
             }
             else
             {
@@ -66,6 +74,12 @@ public class TutorialManager2D : MonoBehaviour
                         Vector2 imagePos = mapScript.convertToPixels(ammoPos);
                         GameManager.Instance.ammoPosList.Add(imagePos);
                     }
+                    else if (batteryAmmoLayer.transform.GetChild(i).GetChild(j).tag == "Key")
+                    {
+                        Vector3 keyPos = batteryAmmoLayer.transform.GetChild(i).GetChild(j).position;
+                        Vector2 imagePos = mapScript.convertToPixels(keyPos);
+                        GameManager.Instance.keyPosList.Add(imagePos);
+                    }
                 }
             }
         }
@@ -75,6 +89,7 @@ public class TutorialManager2D : MonoBehaviour
     {
         secondBattery.SetActive(false);
         undoBattery.SetActive(false);
+        accessCard.SetActive(false);
         ammoInRange.SetActive(false);
         batteryIsImp.SetActive(false);
         highLowDensity.SetActive(false);
@@ -117,8 +132,8 @@ public class TutorialManager2D : MonoBehaviour
                     if (dynamicBattery.GetComponent<TextMesh>().text.Equals("0") && (player.gameObject.transform.position.x > -9.0f || player.gameObject.transform.position.y > -4.0f))
                     {
                         //print("Entered Second Stage.");
-                        currentStage = stage.THIRD_STAGE;
-                        backgroudSprite.sprite = bg3;
+                        currentStage = stage.SIXTH_STAGE;
+                        backgroudSprite.sprite = bg7;
                         StoryColliders.gameObject.transform.GetChild(1).gameObject.SetActive(false);
                         undoBattery.SetActive(true);
                         player.GetComponent<Player2D>().speed = 6;
@@ -130,6 +145,20 @@ public class TutorialManager2D : MonoBehaviour
                 }
                 break;
 
+            case stage.SIXTH_STAGE:
+                {
+                    if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(2).position) < 0.75f)
+                    {
+                        currentStage = stage.THIRD_STAGE;
+                        backgroudSprite.sprite = bg3;
+                        StoryColliders.gameObject.transform.GetChild(5).gameObject.SetActive(false);
+                        accessCard.SetActive(true);
+                        dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene6();
+                        map.GetComponent<MapScript>().enabled = false;
+                        map.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                }
+                break;
             case stage.THIRD_STAGE:
                 {
                     if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(1).position) < 0.75f)
