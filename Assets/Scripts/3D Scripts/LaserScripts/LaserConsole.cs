@@ -78,6 +78,7 @@ public class LaserConsole : MonoBehaviour {
                     boxCollider.enabled = false;
                     LevelManager3D.accessCardCount--;
                     AccessCardCanvas.UpdateNumberOfCards();
+                    ConsoleText.gameObject.SetActive(false);
                 }
             }            
         }        
