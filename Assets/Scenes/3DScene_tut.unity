@@ -2961,7 +2961,8 @@ MonoBehaviour:
   infoWindow: {fileID: 1269190857}
   protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
-  followPath: {fileID: 21300000, guid: 1994aa36c55d1d64fa21999b7f0fb425, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
 --- !u!65 &159205051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3886,7 +3887,8 @@ MonoBehaviour:
   infoWindow: {fileID: 1269190857}
   protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
-  followPath: {fileID: 21300000, guid: 1994aa36c55d1d64fa21999b7f0fb425, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
 --- !u!1 &506711353
 GameObject:
   m_ObjectHideFlags: 0
@@ -4495,6 +4497,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &760834318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 760834319}
+  - component: {fileID: 760834321}
+  - component: {fileID: 760834320}
+  m_Layer: 16
+  m_Name: AccessCard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &760834319
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 760834318}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 10.19, y: 3.32, z: -15.3}
+  m_LocalScale: {x: 7.1335196, y: 1, z: 22.400354}
+  m_Children: []
+  m_Father: {fileID: 2079565792}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &760834320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 760834318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9242c0bd1c39664cabf0a8e39d01521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoWindow: {fileID: 1269190857}
+  protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
+  stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+--- !u!65 &760834321
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 760834318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7841414, y: 5.061558, z: 0.7636057}
+  m_Center: {x: -0.10792931, y: 0.27834535, z: 0.11819714}
 --- !u!1 &805202752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4889,7 +4949,8 @@ MonoBehaviour:
   infoWindow: {fileID: 1269190857}
   protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
-  followPath: {fileID: 21300000, guid: 1994aa36c55d1d64fa21999b7f0fb425, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
 --- !u!65 &904556485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8630,7 +8691,8 @@ MonoBehaviour:
   infoWindow: {fileID: 1269190857}
   protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
-  followPath: {fileID: 21300000, guid: 1994aa36c55d1d64fa21999b7f0fb425, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
 --- !u!65 &1237102297
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10030,7 +10092,8 @@ MonoBehaviour:
   infoWindow: {fileID: 1269190857}
   protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
-  followPath: {fileID: 21300000, guid: 1994aa36c55d1d64fa21999b7f0fb425, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
 --- !u!65 &1931173694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13551,6 +13614,7 @@ Transform:
   - {fileID: 159205049}
   - {fileID: 904556483}
   - {fileID: 1931173692}
+  - {fileID: 760834319}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
