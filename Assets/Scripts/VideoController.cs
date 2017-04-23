@@ -39,7 +39,7 @@ public class VideoController : MonoBehaviour
         if (_logo.isPlaying)return;
         if (Input.GetKeyDown(KeyCode.Space)) GameManager.Instance.GoToMenu();
         if (_cutscene.isPlaying) return;
-        if(!_cutscene.isPlaying && _loadGame) GameManager.Instance.GoToMenu();
+        if (!_cutscene.isPlaying && _loadGame) GameManager.Instance.GoToMenu();
         _renderer.material.mainTexture = _cutscene;
         _audioSource.clip = _cutscene.audioClip;
 
