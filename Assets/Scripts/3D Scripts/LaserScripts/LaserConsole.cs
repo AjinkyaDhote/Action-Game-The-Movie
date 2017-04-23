@@ -1,4 +1,4 @@
-﻿    using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class LaserConsole : MonoBehaviour {
@@ -26,6 +26,8 @@ public class LaserConsole : MonoBehaviour {
 	
     void Update()
     {
+        //Physics.IgnoreCollision()
+
         if(_health <= 0)
         {
             transform.parent.gameObject.SetActive(false);
