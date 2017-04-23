@@ -44,6 +44,7 @@ public class InfoDialogue : MonoBehaviour
     public void playInfo(string infoString)
     {
         infoBox.gameObject.SetActive(true);
+        //infoBox.gameObject.transform.position = new Vector3(-9, 5, 0);
         background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
         infoBox.text = infoString;
@@ -57,6 +58,7 @@ public class InfoDialogue : MonoBehaviour
     public void playInfoOneImage(string infoString, Sprite i_sprite)
     {
         infoBox.gameObject.SetActive(true);
+        //infoBox.gameObject.transform.position = new Vector3(235, 5, 0);
         background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
         infoBox.text = infoString;
@@ -73,6 +75,7 @@ public class InfoDialogue : MonoBehaviour
     public void playInfoTwoImage(string infoString, Sprite i_sprite1, Sprite i_sprite2)
     {
         infoBox.gameObject.SetActive(true);
+        //infoBox.gameObject.transform.position = new Vector3(19, 5, 0);
         background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
         infoBox.text = infoString;

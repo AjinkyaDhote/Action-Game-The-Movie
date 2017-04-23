@@ -10,6 +10,8 @@ public class Tutorial3D : MonoBehaviour
     public Sprite stayInRange;
     public Sprite accessCard;
     public Sprite collectAmmo;
+    public Sprite enemyWeakSpot;
+    public Sprite shotPanel;
 
     private InfoDialogue infoDialogue;
 
@@ -18,6 +20,7 @@ public class Tutorial3D : MonoBehaviour
     bool enemyIntroTrigger = false;
     bool ammoIntroTrigger = false;
     bool accessCardTrigger = false;
+    bool shotPanelTrigger = false;
 
     void Awake()
     {
@@ -45,7 +48,7 @@ public class Tutorial3D : MonoBehaviour
             if (!enemyIntroTrigger && gameObject.transform.name == "enemyIntro")
             {
                 enemyIntroTrigger = true;
-                infoDialogue.playInfoOneImage("Be cautious enemy sentinels may be around. Try to aim at their heads.", protectPayload);
+                infoDialogue.playInfoTwoImage("Be cautious enemy sentinels may be around. Try to aim at their heads.", protectPayload, enemyWeakSpot);
             }
             else if (!ammoIntroTrigger && gameObject.transform.name == "AmmoPickup")
             {
@@ -56,6 +59,11 @@ public class Tutorial3D : MonoBehaviour
             {
                 accessCardTrigger = true;
                 infoDialogue.playInfoOneImage("Use the access card to unlock traps.", accessCard);
+            }
+            else if (!shotPanelTrigger && gameObject.transform.name == "ShootPanel")
+            {
+                shotPanelTrigger = true;
+                infoDialogue.playInfoOneImage("Use the access card to unlock traps.", shotPanel);
             }
         }
     }
