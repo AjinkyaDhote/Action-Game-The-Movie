@@ -144,7 +144,7 @@ public class BulletDamage : MonoBehaviour
         //    Destroy(gameObject);
         //}
 
-    }
+   }
 
     //private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)
     //{
