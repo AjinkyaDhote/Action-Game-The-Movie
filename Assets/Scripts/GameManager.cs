@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     public static Dictionary<int, Sprite> BadgesAchieved;
     public static Dictionary<int, Sprite> BadgesNotAchieved;
+    public static Dictionary<int, int> AchivementPlaceMap;
     void Start()
     {
         BadgesAchieved = new Dictionary<int, Sprite>
@@ -136,6 +137,18 @@ public class GameManager : MonoBehaviour
             {"lvl3c".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 3_Complete_Inactive")},
             {"wwlb3hs".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Level 3_Top_Score_Inactive")},
             {"tlvlc".GetHashCode(), Resources.Load<Sprite>("Sprites/Achievements/Inactive/Tutorial_Complete_Inactive")}
+        };
+
+        AchivementPlaceMap = new Dictionary<int, int>
+        {
+            {"tlvlc".GetHashCode(),0 },
+            {"lvl1c".GetHashCode(),1 },
+            {"wwlb1hs".GetHashCode(),2 },
+            {"lvl2c".GetHashCode(),3 },
+            {"wwlb2hs".GetHashCode(),4 },
+            {"lvl3c".GetHashCode(),5 },
+            {"wwlb3hs".GetHashCode(),6 },
+            {"hs100".GetHashCode(),7 }
         };
 
         headShots = 0;
@@ -235,8 +248,8 @@ public class GameManager : MonoBehaviour
         currentMenuState = MenuState.MAIN_MENU;
 
         DontDestroyOnLoad(gameObject);
-        currentGameState = GameStates.MENU;
-        SceneManager.LoadScene((int)Levels.MENU);
+        //currentGameState = GameStates.MENU;
+        //SceneManager.LoadScene((int)Levels.MENU);
         batteryCount = 0;
     }
 

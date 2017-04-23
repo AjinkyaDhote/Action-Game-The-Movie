@@ -44,9 +44,11 @@ public class GetAchivements : MonoBehaviour
                                 .FindChild("AchievementSlots")
                                 .FindChild("AchievementImageSlots")
                                 .GetComponentsInChildren<Image>();
-                           int i = 0;
+                          
                            foreach (var achievement in response.Achievements)
                            {
+                               int i;
+                               GameManager.AchivementPlaceMap.TryGetValue(achievement.ShortCode.GetHashCode(), out i);
                                achivementTextSlots[i].text = achievement.Name;
 
                                if (achievement.Earned ?? true)
@@ -61,7 +63,6 @@ public class GetAchivements : MonoBehaviour
                                    GameManager.BadgesNotAchieved.TryGetValue(achievement.ShortCode.GetHashCode(), out sprite);
                                    if (sprite != null) achivementImageSlots[i].sprite = sprite;
                                }
-                               i++;
                            }
                        }
                        else
