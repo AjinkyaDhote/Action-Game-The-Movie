@@ -106,7 +106,7 @@ public class BulletDamage : MonoBehaviour
                 else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
                 {
                     GameManager.Instance.bodyShots++;
-                }
+                }d
                 enemyHealthScript.Damage(SHOT_DAMAGE);
             }
             Destroy(gameObject);
@@ -144,7 +144,7 @@ public class BulletDamage : MonoBehaviour
         //    Destroy(gameObject);
         //}
 
-    }
+   }
 
     //private void PlayEnemyHitParticle(Vector3 hitPoint, Vector3 hitNormal)
     //{
