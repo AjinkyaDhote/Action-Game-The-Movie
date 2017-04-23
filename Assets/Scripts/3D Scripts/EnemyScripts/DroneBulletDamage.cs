@@ -31,10 +31,15 @@ public class DroneBulletDamage : MonoBehaviour
             if ((playerHealthScript != null))
             {
                 playerHealthScript.PlayerDamage(playerDamage, 0.3f);
-                hitRadial = Instantiate(hitRadialPrefab);
-                hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
-                hitRadial.GetComponent<HitRadial>().StartRotation(drone.transform);
-                Destroy(hitRadial, 2.0f);
+
+                if (drone != null)
+                {
+                    hitRadial = Instantiate(hitRadialPrefab);
+                    hitRadial.transform.SetParent(player.transform.GetChild(0).GetChild(0).FindChild("FPS UI Canvas"));
+                    hitRadial.GetComponent<HitRadial>().StartRotation(drone.transform);
+                    Destroy(hitRadial, 2.0f);
+
+                }
             }
              //rb.isKinematic = true;
              Destroy(transform.gameObject);
