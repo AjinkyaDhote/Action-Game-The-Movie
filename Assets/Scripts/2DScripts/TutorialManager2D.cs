@@ -147,7 +147,7 @@ public class TutorialManager2D : MonoBehaviour
 
             case stage.SIXTH_STAGE:
                 {
-                    if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(2).position) < 0.75f)
+                    if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(2).position) < 2.75f)
                     {
                         currentStage = stage.THIRD_STAGE;
                         backgroudSprite.sprite = bg3;

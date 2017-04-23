@@ -10,6 +10,7 @@ public class InfoDialogue : MonoBehaviour
     private PauseMenu pauseMenu;
     private UnityStandardAssets.ImageEffects.DepthOfField dof;
     private Text infoBox;
+    private Image background;
     private Image oneImage;
     private Image twoImage1;
     private Image twoImage2;
@@ -21,6 +22,9 @@ public class InfoDialogue : MonoBehaviour
         infoBox = transform.FindChild("InfoText").GetComponent<Text>();
         infoBox.gameObject.SetActive(false);
         pauseMenu = pauseMenuGO.GetComponent<PauseMenu>();
+
+        background = transform.FindChild("Background").GetComponent<Image>();
+        background.gameObject.SetActive(false);
 
         oneImage = transform.FindChild("oneImage").GetComponent<Image>();
         oneImage.transform.gameObject.SetActive(false);
@@ -40,6 +44,8 @@ public class InfoDialogue : MonoBehaviour
     public void playInfo(string infoString)
     {
         infoBox.gameObject.SetActive(true);
+        //infoBox.gameObject.transform.position = new Vector3(-9, 5, 0);
+        background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
         infoBox.text = infoString;
         Time.timeScale = 0;
@@ -52,6 +58,8 @@ public class InfoDialogue : MonoBehaviour
     public void playInfoOneImage(string infoString, Sprite i_sprite)
     {
         infoBox.gameObject.SetActive(true);
+        //infoBox.gameObject.transform.position = new Vector3(235, 5, 0);
+        background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
         infoBox.text = infoString;
         Time.timeScale = 0;
@@ -67,6 +75,8 @@ public class InfoDialogue : MonoBehaviour
     public void playInfoTwoImage(string infoString, Sprite i_sprite1, Sprite i_sprite2)
     {
         infoBox.gameObject.SetActive(true);
+        //infoBox.gameObject.transform.position = new Vector3(19, 5, 0);
+        background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
         infoBox.text = infoString;
         Time.timeScale = 0;
@@ -87,6 +97,7 @@ public class InfoDialogue : MonoBehaviour
         if (!pauseMenu.isPaused && Input.GetKeyDown(KeyCode.Q))
         {
             infoBox.gameObject.SetActive(false);
+            background.gameObject.SetActive(false);
             infoBox.text = "";
             depthOfField(false);
             Cursor.lockState = CursorLockMode.Locked;

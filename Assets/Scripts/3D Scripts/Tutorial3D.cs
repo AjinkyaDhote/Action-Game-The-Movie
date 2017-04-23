@@ -8,7 +8,10 @@ public class Tutorial3D : MonoBehaviour
 
     public Sprite protectPayload;
     public Sprite stayInRange;
-    public Sprite followPath;
+    public Sprite accessCard;
+    public Sprite collectAmmo;
+    public Sprite enemyWeakSpot;
+    public Sprite shotPanel;
 
     private InfoDialogue infoDialogue;
 
@@ -16,6 +19,8 @@ public class Tutorial3D : MonoBehaviour
     bool batteryBotTrigger = false;
     bool enemyIntroTrigger = false;
     bool ammoIntroTrigger = false;
+    bool accessCardTrigger = false;
+    bool shotPanelTrigger = false;
 
     void Awake()
     {
@@ -35,7 +40,7 @@ public class Tutorial3D : MonoBehaviour
             {
                 batteryBotTrigger = true;
                 //Health bar on top of the battery robot is it's health.
-                infoDialogue.playInfoTwoImage("Stay in range to get charged by the Payload.", stayInRange, protectPayload);
+                infoDialogue.playInfoOneImage("Stay in range to get charged by the Payload.", stayInRange);
             }
         }
         else if (GameManager.Instance.countDownDone && other.transform.name == "FPSPlayer")
@@ -43,12 +48,22 @@ public class Tutorial3D : MonoBehaviour
             if (!enemyIntroTrigger && gameObject.transform.name == "enemyIntro")
             {
                 enemyIntroTrigger = true;
-                infoDialogue.playInfo("Be cautious enemy sentinels may be around. Try to aim at their heads.");
+                infoDialogue.playInfoTwoImage("Be cautious enemy sentinels may be around. Try to aim at their heads.", protectPayload, enemyWeakSpot);
             }
             else if (!ammoIntroTrigger && gameObject.transform.name == "AmmoPickup")
             {
                 ammoIntroTrigger = true;
-                infoDialogue.playInfo("Dont forget to pick up the ammo.");
+                infoDialogue.playInfoOneImage("Dont forget to pick up the ammo.", collectAmmo);
+            }
+            else if (!accessCardTrigger && gameObject.transform.name == "AccessCard")
+            {
+                accessCardTrigger = true;
+                infoDialogue.playInfoOneImage("Use the access card to unlock traps.", accessCard);
+            }
+            else if (!shotPanelTrigger && gameObject.transform.name == "ShootPanel")
+            {
+                shotPanelTrigger = true;
+                infoDialogue.playInfoOneImage("Use the access card to unlock traps.", shotPanel);
             }
         }
     }
