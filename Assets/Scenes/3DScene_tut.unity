@@ -2963,6 +2963,8 @@ MonoBehaviour:
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
   accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
   collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
 --- !u!65 &159205051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3889,6 +3891,8 @@ MonoBehaviour:
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
   accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
   collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
 --- !u!1 &506711353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,7 +3954,7 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 593150385}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3959,7 +3963,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -28}
+  m_AnchoredPosition: {x: 19, y: 5.000263}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593150387
@@ -4039,7 +4043,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.9998951}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 1200, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636917649
 MonoBehaviour:
@@ -4288,6 +4292,26 @@ Prefab:
     - target: {fileID: 1000013677857400, guid: 216f9ea0eae83b54c86b4b3f4d35c2b3, type: 2}
       propertyPath: m_Name
       value: LaserTrap (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 65653817380803948, guid: 216f9ea0eae83b54c86b4b3f4d35c2b3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4.381917
+      objectReference: {fileID: 0}
+    - target: {fileID: 65653817380803948, guid: 216f9ea0eae83b54c86b4b3f4d35c2b3,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.115845434
+      objectReference: {fileID: 0}
+    - target: {fileID: 65653817380803948, guid: 216f9ea0eae83b54c86b4b3f4d35c2b3,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 1.7852124
+      objectReference: {fileID: 0}
+    - target: {fileID: 65653817380803948, guid: 216f9ea0eae83b54c86b4b3f4d35c2b3,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 4.2051764
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 216f9ea0eae83b54c86b4b3f4d35c2b3, type: 2}
@@ -4543,6 +4567,8 @@ MonoBehaviour:
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
   accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
   collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
 --- !u!65 &760834321
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4670,14 +4696,14 @@ RectTransform:
   m_GameObject: {fileID: 825288120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.47202, y: 1.47202, z: 3.2557952}
   m_Children: []
   m_Father: {fileID: 1269190859}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -309, y: 1}
+  m_AnchoredPosition: {x: -244, y: 4}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825288122
@@ -4951,6 +4977,8 @@ MonoBehaviour:
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
   accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
   collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
 --- !u!65 &904556485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5220,7 +5248,7 @@ Transform:
   m_GameObject: {fileID: 988977040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 317.2167, y: 61.65193, z: 0}
+  m_LocalScale: {x: 424.26028, y: 100.58169, z: 0}
   m_Children: []
   m_Father: {fileID: 636917648}
   m_RootOrder: 0
@@ -8060,6 +8088,66 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1013558303}
+--- !u!1 &1023508181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1023508182}
+  - component: {fileID: 1023508184}
+  - component: {fileID: 1023508183}
+  m_Layer: 16
+  m_Name: ShootPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023508182
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1023508181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.78, y: 3.32, z: 27.25}
+  m_LocalScale: {x: 7.1335235, y: 1, z: 22.400368}
+  m_Children: []
+  m_Father: {fileID: 2079565792}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1023508183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1023508181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9242c0bd1c39664cabf0a8e39d01521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoWindow: {fileID: 1269190857}
+  protectPayload: {fileID: 21300000, guid: 709efb295540a2047963f8381ecde745, type: 3}
+  stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
+  accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
+  collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
+--- !u!65 &1023508184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1023508181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9436841, y: 5.061558, z: 1.5255889}
+  m_Center: {x: 0.47184044, y: 0.27834535, z: 0.19307414}
 --- !u!1 &1109787742
 GameObject:
   m_ObjectHideFlags: 0
@@ -8693,6 +8781,8 @@ MonoBehaviour:
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
   accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
   collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
 --- !u!65 &1237102297
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9035,15 +9125,15 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1354363997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9914259, y: 0.9914259, z: 0.9914259}
+  m_LocalPosition: {x: 0, y: 0, z: 153}
+  m_LocalScale: {x: 1.8735001, y: 1.8391021, z: 3.22788}
   m_Children: []
   m_Father: {fileID: 1269190859}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -309, y: 1}
+  m_AnchoredPosition: {x: -387, y: -4}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1354363999
@@ -9344,15 +9434,15 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1558756153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9914259, y: 0.9914259, z: 0.9914259}
+  m_LocalPosition: {x: 0, y: 0, z: 104}
+  m_LocalScale: {x: 1.7125124, y: 1.6842777, z: 0.9914273}
   m_Children: []
   m_Father: {fileID: 1269190859}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 318, y: -1}
+  m_AnchoredPosition: {x: 455, y: -7}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1558756155
@@ -10094,6 +10184,8 @@ MonoBehaviour:
   stayInRange: {fileID: 21300000, guid: c2206de124f5ce54c8913f57ed00f5de, type: 3}
   accessCard: {fileID: 21300000, guid: e3e22daea3170cd498624726a457c6c7, type: 3}
   collectAmmo: {fileID: 21300000, guid: 8ed1710b8ea0e864d9075c19b965bdd3, type: 3}
+  enemyWeakSpot: {fileID: 21300000, guid: 1abe5466215a1d64580d1a7a514a69a3, type: 3}
+  shotPanel: {fileID: 21300000, guid: 9bd22549e5f36a648b7a796405e43586, type: 3}
 --- !u!65 &1931173694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13615,6 +13707,7 @@ Transform:
   - {fileID: 904556483}
   - {fileID: 1931173692}
   - {fileID: 760834319}
+  - {fileID: 1023508182}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
