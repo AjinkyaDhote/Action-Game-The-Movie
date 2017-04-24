@@ -37,14 +37,16 @@ public class PauseMenu : MonoBehaviour {
         else
         {
             SoundManager3D.Instance.backgroundMusic.audioSource.UnPause();
-            gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
-            gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
+            
             if (!GameManager.Instance.infoDialogue)
             {
                 Time.timeScale = 1.0f;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+
+            gunCamera.cullingMask = gunCamera.cullingMask | 0x220;
+            gunCamera.cullingMask = gunCamera.cullingMask & 0xbff;
         }
     }
     public void GoBackToMainMenu()
