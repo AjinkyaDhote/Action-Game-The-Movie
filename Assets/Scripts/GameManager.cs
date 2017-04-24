@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
-    private const bool _GOD_MODE = true;
+    private const bool _GOD_MODE = false;
 
     public bool GOD_MODE
     {
@@ -143,12 +143,12 @@ public class GameManager : MonoBehaviour
         {
             {"tlvlc".GetHashCode(),0 },
             {"lvl1c".GetHashCode(),1 },
-            {"wwlb1hs".GetHashCode(),2 },
-            {"lvl2c".GetHashCode(),3 },
-            {"wwlb2hs".GetHashCode(),4 },
-            {"lvl3c".GetHashCode(),5 },
-            {"wwlb3hs".GetHashCode(),6 },
-            {"hs100".GetHashCode(),7 }
+            {"lvl2c".GetHashCode(),2 },
+            {"lvl3c".GetHashCode(),3 },
+            {"hs100".GetHashCode(),4 },
+            {"wwlb1hs".GetHashCode(),5 },    
+            {"wwlb2hs".GetHashCode(),6 },       
+            {"wwlb3hs".GetHashCode(),7 }            
         };
 
         headShots = 0;
