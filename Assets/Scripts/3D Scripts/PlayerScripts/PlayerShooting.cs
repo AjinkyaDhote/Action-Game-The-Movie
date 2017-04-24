@@ -98,7 +98,7 @@ public class PlayerShooting : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && /*(Time.realtimeSinceStartup > nextFire)*/ (weaponSystemScript.currentWeaponInfo.enableShooting) && (countdownTimer.hasGameStarted))
+        if (Input.GetButtonDown("Fire1") && (!pauseMenuScript.isPaused) && /*(Time.realtimeSinceStartup > nextFire)*/ (weaponSystemScript.currentWeaponInfo.enableShooting) && (countdownTimer.hasGameStarted) && (!GameManager.Instance.infoDialogue))
         {
             GameManager.Instance.shotsFired++;
             //Debug.Log(GameManager.Instance.hitcount);
