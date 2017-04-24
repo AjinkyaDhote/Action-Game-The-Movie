@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
 
+    
     [HideInInspector] public bool isTutotialLevel;
 
     private const bool _GOD_MODE = false;
@@ -332,7 +333,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown(KeyCode.Escape) || (playAvailable && Input.GetKeyDown(KeyCode.Q)))
         {
             if (currentGameState != GameStates.MENU && currentGameState != GameStates.PLAY_GAME)
             {
