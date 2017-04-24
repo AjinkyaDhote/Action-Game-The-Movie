@@ -20,7 +20,7 @@ public class wasdMovement : MonoBehaviour
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();        isMoving = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
