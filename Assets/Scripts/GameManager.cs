@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -55,6 +56,9 @@ public class GameManager : MonoBehaviour
     public float bodyShots;
     [HideInInspector]
     public float width2DPlane, width3DPlane, height2DPlane, height3DPlane;
+
+    
+    [HideInInspector] public bool isTutotialLevel;
 
     private const bool _GOD_MODE = false;
 
@@ -143,12 +147,12 @@ public class GameManager : MonoBehaviour
         {
             {"tlvlc".GetHashCode(),0 },
             {"lvl1c".GetHashCode(),1 },
-            {"wwlb1hs".GetHashCode(),2 },
-            {"lvl2c".GetHashCode(),3 },
-            {"wwlb2hs".GetHashCode(),4 },
-            {"lvl3c".GetHashCode(),5 },
-            {"wwlb3hs".GetHashCode(),6 },
-            {"hs100".GetHashCode(),7 }
+            {"lvl2c".GetHashCode(),2 },
+            {"lvl3c".GetHashCode(),3 },
+            {"hs100".GetHashCode(),4 },
+            {"wwlb1hs".GetHashCode(),5 },    
+            {"wwlb2hs".GetHashCode(),6 },       
+            {"wwlb3hs".GetHashCode(),7 }            
         };
 
         headShots = 0;
@@ -360,6 +364,7 @@ public class GameManager : MonoBehaviour
         {
             case (int)Levels.Scene3D_tut:
                 AchievementCode = "tlvlc";
+                isTutotialLevel = true;
                 break;
             case (int)Levels.Scene3D_1:
                 AchievementCode = "lvl1c";
@@ -367,6 +372,7 @@ public class GameManager : MonoBehaviour
                 EventKeyShortCode = "SubmitScore1";
                 EventAttributeShortCodeHighScore = "cpscore1";
                 EventAttributeShortCodeCurrentScore = "cpscore11";
+                isTutotialLevel = false;
                 break;
             case (int)Levels.Scene3D_2:
                 AchievementCode = "lvl2c";
@@ -374,6 +380,7 @@ public class GameManager : MonoBehaviour
                 EventKeyShortCode = "SubmitScore2";
                 EventAttributeShortCodeHighScore = "cpscore2";
                 EventAttributeShortCodeCurrentScore = "cpscore22";
+                isTutotialLevel = false;
                 break;
             case (int)Levels.Scene3D_3:
                 AchievementCode = "lvl3c";
@@ -381,6 +388,7 @@ public class GameManager : MonoBehaviour
                 EventKeyShortCode = "SubmitScore3";
                 EventAttributeShortCodeHighScore = "cpscore3";
                 EventAttributeShortCodeCurrentScore = "cpscore33";
+                isTutotialLevel = false;
                 break;
             default:
                 break;

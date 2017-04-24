@@ -15,10 +15,8 @@ public class AccessLeaderBoard : MonoBehaviour
     private void Awake()
     {
         hasLeaderBoardBeenAccessed = false;
-        if (!GS.Authenticated)
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(GS.Authenticated);
+        gameObject.SetActive(!GameManager.Instance.isTutotialLevel);
     }
 
     public void LoadData()
@@ -54,7 +52,7 @@ public class AccessLeaderBoard : MonoBehaviour
                         rankPlayerNameSlots[i].text = (entry.Rank ?? 0) + ". " + entry.UserName;
                         scoreSlots[i].text =
                             entry.JSONData[GameManager.Instance.EventAttributeShortCodeHighScore].ToString();
-                        
+
                         if (entry.UserName == GameManager.Instance.CurrentPlayerDisplay)
                         {
                             rankPlayerNameSlots[i].color = CurrentPlayerColorInLeaderBoard;
