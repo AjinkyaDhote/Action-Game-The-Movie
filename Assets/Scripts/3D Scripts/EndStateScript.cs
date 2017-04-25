@@ -107,6 +107,7 @@ public class EndStateScript : MonoBehaviour
             hasHighScoreBeenPosted = true;
             return;
         }
+        if(GameManager.Instance.isTutotialLevel)return;
         new LogEventRequest()
             .SetEventKey(GameManager.Instance.EventKeyShortCode)
             .SetEventAttribute(GameManager.Instance.EventAttributeShortCodeHighScore, GameManager.Instance.TotalScore)

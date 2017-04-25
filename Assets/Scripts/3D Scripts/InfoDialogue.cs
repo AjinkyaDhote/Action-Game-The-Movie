@@ -9,7 +9,12 @@ public class InfoDialogue : MonoBehaviour
     public GameObject pauseMenuGO;
     private PauseMenu pauseMenu;
     private UnityStandardAssets.ImageEffects.DepthOfField dof;
-    private Text infoBox;
+    private Text infoBox1;
+    private Text infoBox2;
+    private Text infoBox3;
+    private Text title1;
+    private Text title2;
+    private Text title3;
     private Image background;
     private Image oneImage;
     private Image twoImage1;
@@ -19,8 +24,21 @@ public class InfoDialogue : MonoBehaviour
     {
         dof = camera.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
         depthOfField(false);
-        infoBox = transform.FindChild("InfoText").GetComponent<Text>();
-        infoBox.gameObject.SetActive(false);
+
+        infoBox1 = transform.FindChild("InfoText1").GetComponent<Text>();
+        infoBox1.gameObject.SetActive(false);
+        infoBox2 = transform.FindChild("InfoText2").GetComponent<Text>();
+        infoBox2.gameObject.SetActive(false);
+        infoBox3 = transform.FindChild("InfoText3").GetComponent<Text>();
+        infoBox3.gameObject.SetActive(false);
+
+        title1 = transform.FindChild("title1").GetComponent<Text>();
+        title1.gameObject.SetActive(false);
+        title2 = transform.FindChild("title2").GetComponent<Text>();
+        title2.gameObject.SetActive(false);
+        title3 = transform.FindChild("title3").GetComponent<Text>();
+        title3.gameObject.SetActive(false);
+
         pauseMenu = pauseMenuGO.GetComponent<PauseMenu>();
 
         background = transform.FindChild("Background").GetComponent<Image>();
@@ -43,25 +61,27 @@ public class InfoDialogue : MonoBehaviour
 
     public void playInfo(string infoString)
     {
-        infoBox.gameObject.SetActive(true);
-        //infoBox.gameObject.transform.position = new Vector3(-9, 5, 0);
+        infoBox1.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
-        infoBox.text = infoString;
+        infoBox1.text = infoString;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.infoDialogue = true;
         //Cursor.visible = true;
         depthOfField(true);
+
+
     }
 
-    public void playInfoOneImage(string infoString, Sprite i_sprite)
+    public void playInfoOneImage(string infoString, Sprite i_sprite, string titleText)
     {
-        infoBox.gameObject.SetActive(true);
-        //infoBox.gameObject.transform.position = new Vector3(235, 5, 0);
+        infoBox2.gameObject.SetActive(true);
+        title1.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
-        infoBox.text = infoString;
+        infoBox2.text = infoString;
+        title1.text = titleText;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.infoDialogue = true;
@@ -72,13 +92,12 @@ public class InfoDialogue : MonoBehaviour
         oneImage.sprite = i_sprite;
     }
 
-    public void playInfoTwoImage(string infoString, Sprite i_sprite1, Sprite i_sprite2)
+    public void playInfoTwoImage(string infoString, Sprite i_sprite1, string titleText1, Sprite i_sprite2, string titleText2)
     {
-        infoBox.gameObject.SetActive(true);
-        //infoBox.gameObject.transform.position = new Vector3(19, 5, 0);
+        infoBox3.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
         infoString += "\n\nPress Q to continue";
-        infoBox.text = infoString;
+        infoBox3.text = infoString;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.infoDialogue = true;
@@ -88,17 +107,38 @@ public class InfoDialogue : MonoBehaviour
         twoImage1.transform.gameObject.SetActive(true);
         twoImage1.sprite = i_sprite1;
 
+        title2.gameObject.SetActive(true);
+        title2.text = titleText1;
+
         twoImage2.transform.gameObject.SetActive(true);
         twoImage2.sprite = i_sprite2;
+
+        title3.gameObject.SetActive(true);
+        title3.text = titleText2;
     }
 
     void Update()
     {
         if (!pauseMenu.isPaused && Input.GetKeyDown(KeyCode.Q))
         {
-            infoBox.gameObject.SetActive(false);
+            infoBox1.gameObject.SetActive(false);
+            infoBox2.gameObject.SetActive(false);
+            infoBox3.gameObject.SetActive(false);
+
+            title1.gameObject.SetActive(false);
+            title2.gameObject.SetActive(false);
+            title3.gameObject.SetActive(false);
+
             background.gameObject.SetActive(false);
-            infoBox.text = "";
+
+            infoBox1.text = "";
+            infoBox2.text = "";
+            infoBox3.text = "";
+
+            title1.text = "";
+            title2.text = "";
+            title3.text = "";
+
             depthOfField(false);
             Cursor.lockState = CursorLockMode.Locked;
             GameManager.Instance.infoDialogue = false;
