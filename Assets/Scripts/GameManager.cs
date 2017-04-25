@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using System.Diagnostics;
 
 public class GameManager : MonoBehaviour
 {
@@ -321,7 +320,7 @@ public class GameManager : MonoBehaviour
     {
         if (!Application.isEditor)
         {
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Process.GetCurrentProcess().Kill();
         }
         //Application.Quit();
     }

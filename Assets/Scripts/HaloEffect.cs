@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class HaloEffect : MonoBehaviour {
+public class HaloEffect : MonoBehaviour
+{
 
     private int frameCount;
     private int activeHalo = 0;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         frameCount = 0;
         foreach (Transform t in transform)
         {
@@ -39,16 +40,18 @@ public class HaloEffect : MonoBehaviour {
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         frameCount++;
 
         if (frameCount % 30 == 0)
         {
 
             activeHalo++;
-            if (activeHalo%4 == 0) {
+            if (activeHalo % 4 == 0)
+            {
                 foreach (Transform t in transform)
                 {
                     if (t.name == "sub 1")
@@ -78,7 +81,8 @@ public class HaloEffect : MonoBehaviour {
 
 
                 }
-            } else if (activeHalo%4 == 1)
+            }
+            else if (activeHalo % 4 == 1)
             {
                 foreach (Transform t in transform)
                 {
@@ -171,11 +175,8 @@ public class HaloEffect : MonoBehaviour {
                         Component halo = t.GetComponent("Halo");
                         halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
                     }
-
-
                 }
             }
-
         }
-	}
+    }
 }

@@ -14,9 +14,8 @@ public class AccessLeaderBoard : MonoBehaviour
 
     private void Awake()
     {
-        hasLeaderBoardBeenAccessed = false;
-        gameObject.SetActive(GS.Authenticated);
-        gameObject.SetActive(!GameManager.Instance.isTutotialLevel);
+        hasLeaderBoardBeenAccessed = false;     
+        gameObject.SetActive(GS.Authenticated && !GameManager.Instance.isTutotialLevel);
     }
 
     public void LoadData()
