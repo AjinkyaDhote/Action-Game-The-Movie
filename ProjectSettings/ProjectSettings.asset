@@ -61,8 +61,8 @@ PlayerSettings:
   iosAppInBackgroundBehavior: 0
   displayResolutionDialog: 1
   iosAllowHTTPDownload: 1
-  allowedAutorotateToPortrait: 1
-  allowedAutorotateToPortraitUpsideDown: 1
+  allowedAutorotateToPortrait: 0
+  allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
@@ -462,19 +462,101 @@ PlayerSettings:
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Action Strategy Escort FPS
-  wsaImages: {}
+  wsaImages:
+    65636: Assets/Sprites/RobrosIconsWindows/Icon_Robros_50x50.png
+    65661: Assets/Sprites/RobrosIconsWindows/Icon_Robros_63x63.png
+    65676: Assets/Sprites/RobrosIconsWindows/Icon_Robros_70x70.png
+    65686: Assets/Sprites/RobrosIconsWindows/Icon_Robros_75x75.png
+    65716: Assets/Sprites/RobrosIconsWindows/Icon_Robros_90x90.png
+    65736: Assets/Sprites/RobrosIconsWindows/Icon_Robros_100x100.png
+    65776: Assets/Sprites/RobrosIconsWindows/Icon_Robros_120x120.png
+    65936: Assets/Sprites/RobrosIconsWindows/Icon_Robros_200x200.png
+    131172: Assets/Sprites/RobrosIconsWindows/Icon_Robros_620x300.png
+    131197: Assets/Sprites/RobrosIconsWindows/Icon_Robros_775x375.png
+    131212: Assets/Sprites/RobrosIconsWindows/Icon_Robros_868x420.png
+    131222: Assets/Sprites/RobrosIconsWindows/Icon_Robros_930x450.png
+    131252: Assets/Sprites/RobrosIconsWindows/Icon_Robros_1116x540.png
+    131272: Assets/Sprites/RobrosIconsWindows/Icon_Robros_1240x600.png
+    131472: Assets/Sprites/RobrosIconsWindows/Icon_Robros_2480x1200.png
+    720976: Assets/Sprites/RobrosIconsWindows/Icon_Robros_120x120.png
+    720996: Assets/Sprites/RobrosIconsWindows/Icon_Robros_150x150.png
+    721036: Assets/Sprites/RobrosIconsWindows/Icon_Robros_210x210.png
+    721076: Assets/Sprites/RobrosIconsWindows/Icon_Robros_270x270.png
+    786512: Assets/Sprites/RobrosIconsWindows/Icon_Robros_248x120.png
+    786532: Assets/Sprites/RobrosIconsWindows/Icon_Robros_310x150.png
+    786572: Assets/Sprites/RobrosIconsWindows/Icon_Robros_434x210.png
+    786612: Assets/Sprites/RobrosIconsWindows/Icon_Robros_558x270.png
+    851984: Assets/Sprites/RobrosIconsWindows/Icon_Robros_16x16.png
+    852000: Assets/Sprites/RobrosIconsWindows/Icon_Robros_32x32.png
+    852016: Assets/Sprites/RobrosIconsWindows/Icon_Robros_48x48.png
+    852048: Assets/Sprites/RobrosIconsWindows/Icon_Robros_24x24.png
+    852068: Assets/Sprites/RobrosIconsWindows/Icon_Robros_30x30.png
+    852108: Assets/Sprites/RobrosIconsWindows/Icon_Robros_42x42.png
+    852148: Assets/Sprites/RobrosIconsWindows/Icon_Robros_54x54.png
+    852224: Assets/Sprites/RobrosIconsWindows/Icon_Robros_256x256.png
+    917584: Assets/Sprites/RobrosIconsWindows/Icon_Robros_56x56.png
+    917604: Assets/Sprites/RobrosIconsWindows/Icon_Robros_70x70.png
+    917644: Assets/Sprites/RobrosIconsWindows/Icon_Robros_98x98.png
+    917684: Assets/Sprites/RobrosIconsWindows/Icon_Robros_126x126.png
+    983120: Assets/Sprites/RobrosIconsWindows/Icon_Robros_248x248.png
+    983140: Assets/Sprites/RobrosIconsWindows/Icon_Robros_310x310.png
+    983180: Assets/Sprites/RobrosIconsWindows/Icon_Robros_434x434.png
+    983220: Assets/Sprites/RobrosIconsWindows/Icon_Robros_558x558.png
+    1376356: Assets/Sprites/RobrosIconsWindows/Icon_Robros_44x44.png
+    1376396: Assets/Sprites/RobrosIconsWindows/Icon_Robros_62x62.png
+    1376496: Assets/Sprites/RobrosIconsWindows/Icon_Robros_106x106.png
+    1441892: Assets/Sprites/RobrosIconsWindows/Icon_Robros_71x71.png
+    1441932: Assets/Sprites/RobrosIconsWindows/Icon_Robros_99x99.png
+    1442032: Assets/Sprites/RobrosIconsWindows/Icon_Robros_170x170.png
+    1507428: Assets/Sprites/RobrosIconsWindows/Icon_Robros_150x150.png
+    1507468: Assets/Sprites/RobrosIconsWindows/Icon_Robros_210x210.png
+    1507568: Assets/Sprites/RobrosIconsWindows/Icon_Robros_360x360.png
+    1572964: Assets/Sprites/RobrosIconsWindows/Icon_Robros_310x150.png
+    1573004: Assets/Sprites/RobrosIconsWindows/Icon_Robros_434x210.png
+    1573104: Assets/Sprites/RobrosIconsWindows/Icon_Robros_744x360.png
+    1638500: Assets/Sprites/RobrosIconsWindows/Icon_Robros_480x800.png
+    1638540: Assets/Sprites/RobrosIconsWindows/Icon_Robros_672x1120.png
+    1638640: Assets/Sprites/RobrosIconsWindows/Icon_Robros_1152x1920.png
+    2031632: Assets/Sprites/RobrosIconsWindows/Icon_Robros_16x16.png
+    2031640: Assets/Sprites/RobrosIconsWindows/Icon_Robros_24x24.png
+    2031664: Assets/Sprites/RobrosIconsWindows/Icon_Robros_48x48.png
+    2031716: Assets/Sprites/RobrosIconsWindows/Icon_Robros_44x44.png
+    2031741: Assets/Sprites/RobrosIconsWindows/Icon_Robros_55x55.png
+    2031766: Assets/Sprites/RobrosIconsWindows/Icon_Robros_66x66.png
+    2031816: Assets/Sprites/RobrosIconsWindows/Icon_Robros_88x88.png
+    2031872: Assets/Sprites/RobrosIconsWindows/Icon_Robros_256x256.png
+    2032016: Assets/Sprites/RobrosIconsWindows/Icon_Robros_176x176.png
+    2097252: Assets/Sprites/RobrosIconsWindows/Icon_Robros_71x71.png
+    2097277: Assets/Sprites/RobrosIconsWindows/Icon_Robros_89x89.png
+    2097302: Assets/Sprites/RobrosIconsWindows/Icon_Robros_107x107.png
+    2097352: Assets/Sprites/RobrosIconsWindows/Icon_Robros_142x142.png
+    2097552: Assets/Sprites/RobrosIconsWindows/Icon_Robros_284x284.png
+    2162788: Assets/Sprites/RobrosIconsWindows/Icon_Robros_150x150.png
+    2162813: Assets/Sprites/RobrosIconsWindows/Icon_Robros_188x188.png
+    2162838: Assets/Sprites/RobrosIconsWindows/Icon_Robros_225x225.png
+    2162888: Assets/Sprites/RobrosIconsWindows/Icon_Robros_300x300.png
+    2163088: Assets/Sprites/RobrosIconsWindows/Icon_Robros_600x600.png
+    2228324: Assets/Sprites/RobrosIconsWindows/Icon_Robros_310x310.png
+    2228349: Assets/Sprites/RobrosIconsWindows/Icon_Robros_388x388.png
+    2228374: Assets/Sprites/RobrosIconsWindows/Icon_Robros_465x465.png
+    2228424: Assets/Sprites/RobrosIconsWindows/Icon_Robros_620x620.png
+    2228624: Assets/Sprites/RobrosIconsWindows/Icon_Robros_1240x1240.png
+    2293860: Assets/Sprites/RobrosIconsWindows/Icon_Robros_310x150.png
+    2293885: Assets/Sprites/RobrosIconsWindows/Icon_Robros_388x188.png
+    2293910: Assets/Sprites/RobrosIconsWindows/Icon_Robros_465x225.png
+    2293960: Assets/Sprites/RobrosIconsWindows/Icon_Robros_620x300.png
+    2294160: Assets/Sprites/RobrosIconsWindows/Icon_Robros_1240x600.png
   metroTileShortName: RoBros
   metroCommandLineArgsFile: 
   metroTileShowName: 0
-  metroMediumTileShowName: 0
-  metroLargeTileShowName: 0
-  metroWideTileShowName: 0
+  metroMediumTileShowName: 1
+  metroLargeTileShowName: 1
+  metroWideTileShowName: 1
   metroDefaultTileSize: 1
   metroTileForegroundText: 1
-  metroTileBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21568628, a: 0}
-  metroSplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21568628,
-    a: 1}
-  metroSplashScreenUseBackgroundColor: 1
+  metroTileBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  metroSplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  metroSplashScreenUseBackgroundColor: 0
   platformCapabilities:
     WindowsStoreApps:
       AllJoyn: False
