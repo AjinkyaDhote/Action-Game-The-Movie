@@ -45,7 +45,7 @@ public class Tutorial3D : MonoBehaviour
             else if (!shotPanelTrigger && gameObject.transform.name == "ShootPanel")
             {
                 shotPanelTrigger = true;
-                infoDialogue.playInfoOneImage("Use the access card to unlock traps.", shotPanel, "Shoot Panel");
+                infoDialogue.playInfoOneImage("You can shoot the Laser Console to disable traps.", shotPanel, "Shoot Panel");
             }
         }
         else if (GameManager.Instance.countDownDone && other.transform.name == "FPSPlayer")
@@ -68,7 +68,7 @@ public class Tutorial3D : MonoBehaviour
             else if (!shotPanelTrigger && gameObject.transform.name == "ShootPanel")
             {
                 shotPanelTrigger = true;
-                infoDialogue.playInfoOneImage("You can shoot to diable traps.", shotPanel, "Shoot Panel");
+                infoDialogue.playInfoOneImage("You can shoot Laser Console to disable traps.", shotPanel, "Shoot Panel");
             }
         }
     }
