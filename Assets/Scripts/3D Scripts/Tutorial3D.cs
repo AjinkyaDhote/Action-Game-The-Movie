@@ -15,7 +15,7 @@ public class Tutorial3D : MonoBehaviour
 
     private InfoDialogue infoDialogue;
 
-    bool startTriggerDone = false;
+    //bool startTriggerDone = false;
     bool batteryBotTrigger = false;
     bool enemyIntroTrigger = false;
     bool ammoIntroTrigger = false;
@@ -31,12 +31,12 @@ public class Tutorial3D : MonoBehaviour
     {
         if (GameManager.Instance.countDownDone && other.transform.name == "PayloadWithAnimation")
         {
-            if (!startTriggerDone && gameObject.transform.name == "StartTrigger")
-            {
-                startTriggerDone = true;
-                infoDialogue.playInfo("Payload will follow the path and collect the batteries.");
-            }
-            else if (!batteryBotTrigger && gameObject.transform.name == "batteryBotHealthGreen")
+            //if (!startTriggerDone && gameObject.transform.name == "StartTrigger")
+            //{
+            //    startTriggerDone = true;
+            //    infoDialogue.playInfo("Payload will follow the path and collect the batteries.");
+            //}
+            if (!batteryBotTrigger && gameObject.transform.name == "batteryBotHealthGreen")
             {
                 batteryBotTrigger = true;
                 //Health bar on top of the battery robot is it's health.
