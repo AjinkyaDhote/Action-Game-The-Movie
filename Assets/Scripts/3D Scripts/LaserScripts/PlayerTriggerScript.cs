@@ -6,14 +6,14 @@ public class PlayerTriggerScript : MonoBehaviour
 {
     public GameObject[] lasers;
     Transform ConsoleText;
-    WeaponSystem weaponSystemScript;
+    //WeaponSystem weaponSystemScript;
     BoxCollider boxCollider;
     Renderer ren;
     public Material accessGrantedMaterial;
            
     void Start()
     {        
-        weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
+       // weaponSystemScript = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<WeaponSystem>();
         ConsoleText = gameObject.transform.parent.GetChild(0);
         boxCollider = transform.parent.parent.GetComponent<BoxCollider>();
         ren = transform.parent.GetComponent<Renderer>();              

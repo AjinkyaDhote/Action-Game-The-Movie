@@ -20,24 +20,28 @@ public class wasdMovement : MonoBehaviour
         countdownTimer = GameObject.FindWithTag("InstructionsCanvas").transform.GetChild(0).GetComponent<CountdownTimerScript>();        isMoving = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
             ResetVelocities();
             isMoving = false;
         }
-        else if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
         {
             isMoving = true;
         }
-        playerRigidBody.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
-        playerRigidBody.velocity = Vector3.ClampMagnitude(playerRigidBody.velocity, MAX_VELOCITY);
 
         if (!pauseMenuScript.isPaused && countDownDone && !GameManager.Instance.infoDialogue)
         {
             mouseLook.LookRotation(transform, mainCamera.transform);
         }
+    }
+
+    void FixedUpdate()
+    {        
+        playerRigidBody.AddRelativeForce(Input.GetAxis("Horizontal") * playerAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * playerAcceleration * Time.deltaTime, ForceMode.VelocityChange);
+        playerRigidBody.velocity = Vector3.ClampMagnitude(playerRigidBody.velocity, MAX_VELOCITY);               
     }
     void ResetVelocities()
     {
