@@ -19,9 +19,9 @@ public class PlayerShooting : MonoBehaviour
     private const float WALL_HIT_PREFAB_POSITIONAL_OFFSET = 0.1f;
 
     //public ParticleSystem muzzleFlash;
-    private Animator pistolAnim;
+    //private Animator pistolAnim;
     private Animation pistolAnimation;
-    private Animator shotGunAnim;
+    //private Animator shotGunAnim;
     private Animation shotGunAnimation;
     //public ParticleSystem[] impacts;
 
@@ -43,7 +43,7 @@ public class PlayerShooting : MonoBehaviour
 
     private TimeSlow timeSlowScript;
     //private EnemyThrow enemyThrowScript;
-    private float nextFire = 0.0f;
+    //private float nextFire = 0.0f;
     private WeaponSystem weaponSystemScript;
     private PauseMenu pauseMenuScript;
     private CountdownTimerScript countdownTimer;
@@ -86,9 +86,9 @@ public class PlayerShooting : MonoBehaviour
         bulletOverText = transform.FindChild("FPS UI Canvas").FindChild("BulletOverText").GetComponent<Text>();
         AmmoAnimation = transform.FindChild("FPS UI Canvas").FindChild("AmmoAnimateText").GetComponent<Animation>();
         AmmoAnimation.gameObject.SetActive(false);
-        pistolAnim = transform.GetChild(1).GetComponent<Animator>();
+       // pistolAnim = transform.GetChild(1).GetComponent<Animator>();
         pistolAnimation = transform.GetChild(1).GetComponent<Animation>();
-        shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
+       // shotGunAnim = transform.GetChild(0).GetComponent<Animator>();
         shotGunAnimation = transform.GetChild(0).GetComponent<Animation>();
 
         GameManager.Instance.headShots = 0;
@@ -108,7 +108,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);
                     bulletCount -= NUMBER_OF_SHOTGUN_BULLETS;
-                    nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
+                    //nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     for (int i = 0; i < NUMBER_OF_SHOTGUN_BULLETS; i++)
                     {
                         bullets[bulletInUse].transform.position = shotgunBulletSpawnerTrasform.position;
@@ -145,7 +145,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, BULLET_COLLISION_LAYER_MASK);
                     bulletCount--;
-                    nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
+                    //nextFire = Time.realtimeSinceStartup + weaponSystemScript.currentWeaponInfo.coolDownTimer;
                     bullets[bulletInUse].transform.position = pistolBulletSpawnerTrasform.position;
                     bullets[bulletInUse].transform.rotation = pistolBulletSpawnerTrasform.rotation;
                     bullets[bulletInUse].SetActive(true);
