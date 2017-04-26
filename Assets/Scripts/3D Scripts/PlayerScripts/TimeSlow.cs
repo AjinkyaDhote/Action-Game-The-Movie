@@ -60,7 +60,7 @@ public class TimeSlow : MonoBehaviour
                 ResetBulletTime();
             }
         }
-        if(countdownTimer.hasGameStarted && !pauseMenuScript.isPaused)
+        if(countdownTimer.hasGameStarted && !pauseMenuScript.isPaused && !GameManager.Instance.infoDialogue)
         {
             if (isRMBHoldType)
             {
