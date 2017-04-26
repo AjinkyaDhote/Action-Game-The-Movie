@@ -230,7 +230,7 @@ public class DroneMovement : MonoBehaviour
     Transform targetTransform;
     GameObject arrow_sprite;
     Renderer arrow_renderer;
-    DroneBulletDamage damageScript;
+    //DroneBulletDamage damageScript;
     
     
     [HideInInspector]
