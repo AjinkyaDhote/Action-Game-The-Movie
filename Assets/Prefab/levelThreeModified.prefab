@@ -2464,8 +2464,7 @@ GameObject:
   - component: {fileID: 4911913817050106}
   - component: {fileID: 33917494244930262}
   - component: {fileID: 23619120699449180}
-  - component: {fileID: 114608496189439084}
-  - component: {fileID: 65609689280796436}
+  - component: {fileID: 64677417742688688}
   m_Layer: 16
   m_Name: LaserConsole
   m_TagString: LockPanel
@@ -7285,6 +7284,23 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &1555131573516452
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4031619176034902}
+  - component: {fileID: 65975940219333476}
+  - component: {fileID: 114347992069740194}
+  m_Layer: 16
+  m_Name: PlayerConsoleTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1555758634666160
 GameObject:
@@ -13784,6 +13800,19 @@ Transform:
   m_Father: {fileID: 4386614387571214}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!4 &4031619176034902
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555131573516452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4911913817050106}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4032661509422688
 Transform:
   m_ObjectHideFlags: 1
@@ -14255,7 +14284,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180777973354034}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -6.18, y: -1.2340002, z: -1.04}
+  m_LocalPosition: {x: -6.18, y: -1.2340002, z: -1.33}
   m_LocalScale: {x: 1.5773758, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4974671040884774}
@@ -19296,7 +19325,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1784665544119692}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -6.29, y: -1.2340002, z: -1.12}
+  m_LocalPosition: {x: -6.29, y: -1.2340002, z: -1.56}
   m_LocalScale: {x: 1.5773758, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4637660038108674}
@@ -19587,7 +19616,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1740883368991002}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 11.7, y: -1.2340002, z: -1.12}
+  m_LocalPosition: {x: 11.7, y: -1.2340002, z: -1.337}
   m_LocalScale: {x: 1.5773758, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4297509178313816}
@@ -23563,11 +23592,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1185918884894942}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -7.36, y: -1.2340002, z: -1.4}
+  m_LocalPosition: {x: -6.61, y: -1.2340002, z: -2.39}
   m_LocalScale: {x: 1.5773758, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4941751250126714}
   - {fileID: 4149492848622996}
+  - {fileID: 4031619176034902}
   m_Father: {fileID: 4531097536097158}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -44430,7 +44460,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
@@ -44472,7 +44502,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
@@ -45786,9 +45816,9 @@ MeshCollider:
   m_GameObject: {fileID: 1604001007987028}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
@@ -46306,7 +46336,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2a60b7822f964c4449b39f5eb89e6ca5, type: 3}
@@ -46320,7 +46350,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
@@ -46502,7 +46532,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2a60b7822f964c4449b39f5eb89e6ca5, type: 3}
@@ -47752,6 +47782,20 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
+--- !u!64 &64677417742688688
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185918884894942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: e8d090f7003c50a42b1e4aeddefc0944, type: 3}
 --- !u!64 &64677607920519252
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -47916,7 +47960,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2a60b7822f964c4449b39f5eb89e6ca5, type: 3}
@@ -47942,9 +47986,9 @@ MeshCollider:
   m_GameObject: {fileID: 1931710115175718}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
@@ -48418,9 +48462,9 @@ MeshCollider:
   m_GameObject: {fileID: 1253286965855424}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 2a60b7822f964c4449b39f5eb89e6ca5, type: 3}
@@ -48672,7 +48716,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300148, guid: 8d468549643aa6c4799d143c2dbc0c62, type: 3}
@@ -50190,18 +50234,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 16.8, y: 5.5764074, z: 0.33847734}
   m_Center: {x: 2.4, y: -1.596252, z: 0.009622572}
---- !u!65 &65609689280796436
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185918884894942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.87, y: 1.7867317, z: 2.8313096}
-  m_Center: {x: -0.034824383, y: -0.03273201, z: 1.13}
 --- !u!65 &65612720574487228
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -50262,6 +50294,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 16.8, y: 5.5764074, z: 0.33847734}
   m_Center: {x: 2.4, y: -1.596252, z: 0.009622572}
+--- !u!65 &65975940219333476
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555131573516452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.87, y: 1.7867317, z: 2.8313096}
+  m_Center: {x: -0.034824383, y: -0.03273201, z: 1.13}
 --- !u!95 &95030031435930948
 Animator:
   serializedVersion: 3
@@ -51104,15 +51148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1827835053540566}
-  - {fileID: 1201623933298932}
-  - {fileID: 1517378404471256}
-  - {fileID: 1158767646382016}
-  - {fileID: 1787046319408940}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
 --- !u!114 &114174679268007836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51146,15 +51181,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114347992069740194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555131573516452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b31702e075f58a041bfd8f007db4df4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   lasers:
-  - {fileID: 1704437021828674}
-  - {fileID: 1504790242609106}
-  - {fileID: 1737476837784782}
-  - {fileID: 1374384713399292}
-  - {fileID: 1852100852442046}
-  _health: 3
+  - {fileID: 1232721361635962}
+  - {fileID: 1534386133320682}
+  - {fileID: 1387610987902248}
+  - {fileID: 1836905372831098}
+  - {fileID: 1419063521697506}
   accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
     type: 2}
+  _health: 3
 --- !u!114 &114350637276875456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51166,15 +51212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1232721361635962}
-  - {fileID: 1534386133320682}
-  - {fileID: 1387610987902248}
-  - {fileID: 1836905372831098}
-  - {fileID: 1419063521697506}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
 --- !u!114 &114492021319779508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51186,15 +51223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1888379158948428}
-  - {fileID: 1552141951784582}
-  - {fileID: 1602034743148408}
-  - {fileID: 1228513399111082}
-  - {fileID: 1362935799607842}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
 --- !u!114 &114505453047381178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51206,35 +51234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1888379158948428}
-  - {fileID: 1552141951784582}
-  - {fileID: 1602034743148408}
-  - {fileID: 1228513399111082}
-  - {fileID: 1362935799607842}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
---- !u!114 &114608496189439084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185918884894942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1232721361635962}
-  - {fileID: 1534386133320682}
-  - {fileID: 1387610987902248}
-  - {fileID: 1836905372831098}
-  - {fileID: 1419063521697506}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
 --- !u!114 &114675381512338192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51268,15 +51267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1827835053540566}
-  - {fileID: 1201623933298932}
-  - {fileID: 1517378404471256}
-  - {fileID: 1158767646382016}
-  - {fileID: 1787046319408940}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
 --- !u!114 &114866378699394800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51299,15 +51289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e4392eb999fc546b691b51854a46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lasers:
-  - {fileID: 1704437021828674}
-  - {fileID: 1504790242609106}
-  - {fileID: 1737476837784782}
-  - {fileID: 1374384713399292}
-  - {fileID: 1852100852442046}
-  _health: 3
-  accessGrantedMaterial: {fileID: 2100000, guid: fb7030252f8b4904385211acf3931a3b,
-    type: 2}
 --- !u!212 &212081854607777456
 SpriteRenderer:
   m_ObjectHideFlags: 1

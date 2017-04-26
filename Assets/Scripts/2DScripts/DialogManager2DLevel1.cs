@@ -38,16 +38,16 @@ public class DialogManager2DLevel1 : MonoBehaviour
     public void playCutScene0()
     {
         robotString.Clear();
-        robotString.Add("Do you have any plans ?");
-        robotString.Add("Excellent. I will try to plan a path. You stick to it.");
-        robotString.Add("The same goes with me. Dont worry I will take care of that.");
+        robotString.Add("Do you have any plan?");
+        robotString.Add("Excellent. I will try to plan a path.");
+        robotString.Add("The same goes with me.");
         robotString.Add("Ok. Lets move.");
 
         batterString.Clear();
         batterString.Add("I have an overhead layout of the current area.");
         batterString.Add("Sure!! Keep in mind that I am battery hungry.");
-        batterString.Add("It appears there is a battery in that section. Lets pick that up.");
-        batterString.Add("Stay close to me. You are also powered on my battery.");
+        batterString.Add("It appears there is a battery in that section. Lets pick it up.");
+        batterString.Add("Stay close to me.");
 
         totalDialogs = batterString.Count;
 
@@ -93,7 +93,7 @@ public class DialogManager2DLevel1 : MonoBehaviour
 
         batterString.Clear();
         batterString.Add("My system tells me that I will run out of battery if we take this path.");
-        batterString.Add("Cool....  Undo using Right Mouse Button");
+        batterString.Add("Undo using Right Mouse Button");
 
         totalDialogs = batterString.Count;
 
@@ -113,10 +113,10 @@ public class DialogManager2DLevel1 : MonoBehaviour
     {
         robotString.Clear();
         robotString.Add("Hey I see some ammo.");
-        robotString.Add("Thats awesome. I will remember to pick them up.");
+        robotString.Add("That's awesome. I will remember to pick them up.");
 
         batterString.Clear();
-        batterString.Add("Yes. My system tells me that the yellow boxes are near our planned path.");
+        batterString.Add("Yes. My system tells me the ammo is near our planned path.");
         batterString.Add("Great.");
 
         totalDialogs = batterString.Count;
@@ -136,11 +136,11 @@ public class DialogManager2DLevel1 : MonoBehaviour
     public void playCutScene6()
     {
         robotString.Clear();
-        robotString.Add("Some places are restricted and you will need access card.");
-        robotString.Add("And if you don't have an access card, shoot it with your gun");
+        robotString.Add("There is a Laser ahead. We might need an access card.");
+        robotString.Add("After you pick it up I will try to deactivate it using the console.");
 
         batterString.Clear();
-        batterString.Add("Ok I see an access card ahead. Let me pick that up.");
+        batterString.Add("I see an access card. Plan the path such that I can pick it up.");
         batterString.Add("Got it.");
 
         totalDialogs = batterString.Count;
@@ -185,12 +185,12 @@ public class DialogManager2DLevel1 : MonoBehaviour
         robotString.Clear();
         robotString.Add("Hey!! We are at crossroads again.");
         robotString.Add("Should we take the other side then?");
-        robotString.Add("And I don't have access card. I am gonna light it up.");
+        robotString.Add("I see one more Laser. But we are short on access cards.");
 
         batterString.Clear();
         batterString.Add("My sensors are recording heavy meca activity in the violet zone.");
-        batterString.Add("Did we take enough ammo. If not we should take the safer route.");
-        batterString.Add("You have my permission to go ahead.");
+        batterString.Add("Did we take enough ammo? If not we should take the safer route.");
+        batterString.Add("Try shooting the console when we reach there.");
 
         totalDialogs = batterString.Count;
 
