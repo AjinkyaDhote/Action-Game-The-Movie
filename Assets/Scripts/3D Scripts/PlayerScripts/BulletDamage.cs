@@ -127,22 +127,22 @@ public class BulletDamage : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Debug.Log("shots fired" + GameManager.Instance.shotsFired);
+        //Debug.Log("shots fired" + GameManager.Instance.shotsFired);        
 
-        //Moved this code to Laser Console Script as it wasn't detecting collision.
+        else if (other.collider.CompareTag("LockPanel"))
+        {
+            other.gameObject.GetComponent<LaserConsole>()._health -= 1;
 
-        //else if (other.collider.CompareTag("LockPanel"))
-        //{
-        //    if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
-        //    {
-        //        GameManager.Instance.shotsFired -= 1 / (float)PlayerShooting.NUMBER_OF_SHOTGUN_BULLETS;
-        //    }
-        //    else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
-        //    {
-        //        GameManager.Instance.shotsFired--;
-        //    }
-        //    Destroy(gameObject);
-        //}
+            if (weaponSystemScript.currentWeaponInHand.Value.name == "ShotGun")
+            {
+                GameManager.Instance.shotsFired -= 1 / (float)PlayerShooting.NUMBER_OF_SHOTGUN_BULLETS;
+            }
+            else if (weaponSystemScript.currentWeaponInHand.Value.name == "Pistol")
+            {
+                GameManager.Instance.shotsFired--;
+            }
+            Destroy(gameObject);
+        }
 
    }
 
