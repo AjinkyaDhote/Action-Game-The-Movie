@@ -9,7 +9,7 @@ public class EnemySight : MonoBehaviour
     float MaxDistance;
     //Ray[] ray;
     RaycastHit hit;
-    Ray ray;
+    //Ray ray;
     //int rayCountHor;
     //int rayCountVer;
     AI_movement aiMovementScript;
