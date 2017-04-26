@@ -70,8 +70,6 @@ public class InfoDialogue : MonoBehaviour
         GameManager.Instance.infoDialogue = true;
         //Cursor.visible = true;
         depthOfField(true);
-
-
     }
 
     public void playInfoOneImage(string infoString, Sprite i_sprite, string titleText)
