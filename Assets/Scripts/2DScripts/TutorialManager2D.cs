@@ -30,6 +30,9 @@ public class TutorialManager2D : MonoBehaviour
 
     private stage currentStage = stage.FIRST_STAGE;
 
+    private Texture2D cursorWhite;
+    private Vector2 cursorWhiteHotspot, cursorGreenHotspot;
+
     void Awake()
     {
         MapScript mapScript = map.GetComponent<MapScript>();
@@ -95,6 +98,10 @@ public class TutorialManager2D : MonoBehaviour
         highLowDensity.SetActive(false);
         target.SetActive(false);
 
+
+        cursorWhite = Resources.Load("Sprites/Robot_white") as Texture2D;
+        cursorWhiteHotspot.x = cursorWhite.width / 2;
+        cursorWhiteHotspot.y = cursorWhite.height / 2;
         //dialogueBox.GetComponent<DialogManager2DLevel1>().playCutScene0();
         //map.GetComponent<MapScript>().enabled = false;
         //map.GetComponent<BoxCollider2D>().enabled = false;
@@ -112,6 +119,7 @@ public class TutorialManager2D : MonoBehaviour
         {
             case stage.FIRST_STAGE:
                 {
+                    Cursor.SetCursor(cursorWhite, cursorWhiteHotspot, CursorMode.Auto);
                     if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(0).position) < 0.75f)
                     {
                         //print("First Step completed.");
@@ -129,6 +137,7 @@ public class TutorialManager2D : MonoBehaviour
                 break;
             case stage.SECOND_STAGE:
                 {
+                    Cursor.SetCursor(cursorWhite, cursorWhiteHotspot, CursorMode.Auto);
                     if (dynamicBattery.GetComponent<TextMesh>().text.Equals("0") && (player.gameObject.transform.position.x > -9.0f || player.gameObject.transform.position.y > -4.0f))
                     {
                         //print("Entered Second Stage.");
@@ -147,6 +156,7 @@ public class TutorialManager2D : MonoBehaviour
 
             case stage.SIXTH_STAGE:
                 {
+                    Cursor.SetCursor(cursorWhite, cursorWhiteHotspot, CursorMode.Auto);
                     if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(2).position) < 2.75f)
                     {
                         currentStage = stage.THIRD_STAGE;
@@ -161,6 +171,7 @@ public class TutorialManager2D : MonoBehaviour
                 break;
             case stage.THIRD_STAGE:
                 {
+                    Cursor.SetCursor(cursorWhite, cursorWhiteHotspot, CursorMode.Auto);
                     if (Vector3.Distance(player.transform.position, StopPoints.transform.GetChild(1).position) < 0.75f)
                     {
                         currentStage = stage.FOURTH_STAGE;
@@ -178,6 +189,7 @@ public class TutorialManager2D : MonoBehaviour
 
             case stage.FOURTH_STAGE:
                 {
+                    Cursor.SetCursor(cursorWhite, cursorWhiteHotspot, CursorMode.Auto);
                     if (player.gameObject.transform.position.x > 10.0f && player.gameObject.transform.position.y > -8.0f)
                     {
                         currentStage = stage.FIFTH_STAGE;
@@ -195,6 +207,7 @@ public class TutorialManager2D : MonoBehaviour
 
             case stage.FIFTH_STAGE:
                 {
+                    Cursor.SetCursor(cursorWhite, cursorWhiteHotspot, CursorMode.Auto);
                     if (player.gameObject.transform.position.y > 5.0f)
                     {
                         currentStage = stage.NO_OP;
@@ -215,6 +228,7 @@ public class TutorialManager2D : MonoBehaviour
 
                 }
                 break;
+
         }
     }
 
