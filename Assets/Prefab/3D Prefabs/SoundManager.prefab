@@ -54,7 +54,7 @@ MonoBehaviour:
   backgroundMusic:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: d2bee054545919e4ba5cd246df154584, type: 3}
-    volume: 0.8
+    volume: 0.1
     loop: 1
     playOnAwake: 0
     pitch: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
   onHitByEnemyPlayer:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: aa0cff5b16874bd46b9b7c9d00f9f676, type: 3}
-    volume: 0.5
+    volume: 0.2
     loop: 0
     playOnAwake: 0
     pitch: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   gunEmpty:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: a97f68a4c262f474394d49b92fdab877, type: 3}
-    volume: 1
+    volume: 0.7
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -78,7 +78,7 @@ MonoBehaviour:
   shotgun:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 8fa74a313a5434b4c82b45c8948d2b4e, type: 3}
-    volume: 1
+    volume: 0.25
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
   pistol:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: eb784da492ec45e4583869eb2e78d403, type: 3}
-    volume: 1
+    volume: 0.25
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   onHitByEnemyPayload:
     frequencyModifier: 4
     audioClip: {fileID: 8300000, guid: 8e78748aad168f4429896b5b00bd4de6, type: 3}
-    volume: 1
+    volume: 0.5
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -102,7 +102,7 @@ MonoBehaviour:
   intruderAlert:
     frequencyModifier: 2
     audioClip: {fileID: 8300000, guid: f87f0ca8a8402f948b584dc4b44c550f, type: 3}
-    volume: 1
+    volume: 0.1
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
   onEnemyHit:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 08c020be992121c4da2afd748a889c6e, type: 3}
-    volume: 1
+    volume: 0.1
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
   enemyDeath:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: dd1d6a1da9bd83f4abde48a0a3b90170, type: 3}
-    volume: 1
+    volume: 0.25
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -126,7 +126,7 @@ MonoBehaviour:
   droneBullet:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 2eb7cee628daa704e9c1991edaae47f1, type: 3}
-    volume: 1
+    volume: 0.5
     loop: 0
     playOnAwake: 0
     pitch: 1
@@ -134,18 +134,18 @@ MonoBehaviour:
   droneBlast:
     frequencyModifier: 1
     audioClip: {fileID: 8300000, guid: 3651c60bfd89aa34893232cbf18a5a2f, type: 3}
-    volume: 1
+    volume: 0.5
     loop: 0
     playOnAwake: 0
     pitch: 3
     audioSource: {fileID: 0}
   ammoPickUp:
     frequencyModifier: 1
-    audioClip: {fileID: 8300000, guid: ffe76887718ec9e4691d7ca6a81d0892, type: 3}
+    audioClip: {fileID: 8300000, guid: f8a04410063aab84c8377ad8075b3e51, type: 3}
     volume: 1
     loop: 0
     playOnAwake: 0
-    pitch: 3
+    pitch: 2
     audioSource: {fileID: 0}
   myAudioSources:
   - frequencyModifier: 1
